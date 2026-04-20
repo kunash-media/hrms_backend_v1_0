@@ -1,0 +1,67 @@
+2026-04-20T12:39:01.754+05:30  INFO 20964 --- [HRMS-System] [restartedMain] com.hrms.HrmsSystemApplication           : Starting HrmsSystemApplication using Java 24.0.2 with PID 20964 (C:\HRMS_Project\hrms_backend_v1.0\target\classes started by admim in C:\HRMS_Project\hrms_backend_v1.0)
+2026-04-20T12:39:01.785+05:30  INFO 20964 --- [HRMS-System] [restartedMain] com.hrms.HrmsSystemApplication           : No active profile set, falling back to 1 default profile: "default"
+2026-04-20T12:39:01.971+05:30  INFO 20964 --- [HRMS-System] [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\admim\.m2\repository\io\github\cdimascio\java-dotenv\5.2.2\java-dotenv-5.2.2.jar referenced one or more files that do not exist: file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-1.4.0.jar,file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-common-1.4.0.jar,file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/annotations-13.0.jar
+2026-04-20T12:39:01.973+05:30  INFO 20964 --- [HRMS-System] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-20T12:39:01.974+05:30  INFO 20964 --- [HRMS-System] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-20T12:39:04.664+05:30  INFO 20964 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-20T12:39:04.666+05:30  INFO 20964 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2026-04-20T12:39:04.763+05:30  INFO 20964 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AdminRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-04-20T12:39:04.766+05:30  INFO 20964 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-04-20T12:39:04.773+05:30  INFO 20964 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 90 ms. Found 0 JDBC repository interfaces.
+2026-04-20T12:39:04.823+05:30  INFO 20964 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-20T12:39:04.828+05:30  INFO 20964 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-20T12:39:05.002+05:30  INFO 20964 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 147 ms. Found 2 JPA repository interfaces.
+2026-04-20T12:39:06.945+05:30  INFO 20964 --- [HRMS-System] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8086 (http)
+2026-04-20T12:39:07.003+05:30  INFO 20964 --- [HRMS-System] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-20T12:39:07.004+05:30  INFO 20964 --- [HRMS-System] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-20T12:39:07.117+05:30  INFO 20964 --- [HRMS-System] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 5141 ms
+2026-04-20T12:39:07.538+05:30  INFO 20964 --- [HRMS-System] [restartedMain] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-20T12:39:07.721+05:30  INFO 20964 --- [HRMS-System] [restartedMain] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-20T12:39:09.987+05:30  INFO 20964 --- [HRMS-System] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-20T12:39:10.048+05:30  INFO 20964 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-20T12:39:10.439+05:30  INFO 20964 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@47c5255d
+2026-04-20T12:39:10.441+05:30  INFO 20964 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-20T12:39:10.590+05:30  INFO 20964 --- [HRMS-System] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/hrms_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&allowPublicKeyRetrieval=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.41
+	Default catalog/schema: hrms_db/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-20T12:39:12.765+05:30  INFO 20964 --- [HRMS-System] [restartedMain] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-20T12:39:12.882+05:30  INFO 20964 --- [HRMS-System] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20T12:39:13.165+05:30  INFO 20964 --- [HRMS-System] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-20T12:39:14.730+05:30  INFO 20964 --- [HRMS-System] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8086 (http) with context path '/'
+2026-04-20T12:39:14.787+05:30  WARN 20964 --- [HRMS-System] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-20T12:39:15.231+05:30 DEBUG 20964 --- [HRMS-System] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 17 mappings in 'requestMappingHandlerMapping'
+2026-04-20T12:39:15.308+05:30 DEBUG 20964 --- [HRMS-System] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2026-04-20T12:39:15.323+05:30  INFO 20964 --- [HRMS-System] [restartedMain] com.hrms.HrmsSystemApplication           : Started HrmsSystemApplication in 15.607 seconds (process running for 18.505)
+2026-04-20T12:39:22.312+05:30  INFO 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-20T12:39:22.314+05:30  INFO 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-20T12:39:22.324+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2026-04-20T12:39:22.330+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2026-04-20T12:39:22.459+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 2 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-04-20T12:39:22.695+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-04-20T12:39:22.722+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@15a55ff5
+2026-04-20T12:39:22.733+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@40946efa
+2026-04-20T12:39:22.737+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2026-04-20T12:39:22.738+05:30  INFO 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 423 ms
+2026-04-20T12:39:22.862+05:30  INFO 20964 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.security.SecurityConfig         : SecurityConfig bean initialized with JwtFilter and UserDetailsService
+2026-04-20T12:39:22.962+05:30  INFO 20964 --- [HRMS-System] [http-nio-8086-exec-2] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-04-20T12:39:22.963+05:30  WARN 20964 --- [HRMS-System] [http-nio-8086-exec-2] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-04-20T12:39:23.199+05:30  INFO 20964 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.security.SecurityConfig         : Configuring SecurityFilterChain - stateless JWT with cookie support
+2026-04-20T12:39:23.227+05:30  INFO 20964 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.security.SecurityConfig         : Authorization rules: /api/admin/auth/** → permitAll, /api/admin/** → authenticated, others → permitAll
+2026-04-20T12:39:23.231+05:30  INFO 20964 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.security.SecurityConfig         : SecurityFilterChain configuration completed successfully
+2026-04-20T12:39:23.333+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : POST "/api/admin/bootstrap", parameters={}
+2026-04-20T12:39:23.464+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.AdminController#bootstrap(Map)
+2026-04-20T12:39:23.891+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{mobile=8317289305, password=123456, firstName=Super, lastName=Admin}]
+2026-04-20T12:39:23.906+05:30  WARN 20964 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.controller.AdminController      : Bootstrap endpoint called — checking if SUPER_ADMIN already exists
+2026-04-20T12:39:25.916+05:30  INFO 20964 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.controller.AdminController      : Bootstrap complete — SUPER_ADMIN created with ID: ADM6762
+2026-04-20T12:39:25.941+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-20T12:39:25.941+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{mobile=8317289305, adminId=ADM6762, message=SUPER_ADMIN created successfully. This endpoint is now  (truncated)...]
+2026-04-20T12:39:26.146+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 201 CREATED
