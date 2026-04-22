@@ -1,27 +1,29 @@
-2026-04-20T12:39:01.754+05:30  INFO 20964 --- [HRMS-System] [restartedMain] com.hrms.HrmsSystemApplication           : Starting HrmsSystemApplication using Java 24.0.2 with PID 20964 (C:\HRMS_Project\hrms_backend_v1.0\target\classes started by admim in C:\HRMS_Project\hrms_backend_v1.0)
-2026-04-20T12:39:01.785+05:30  INFO 20964 --- [HRMS-System] [restartedMain] com.hrms.HrmsSystemApplication           : No active profile set, falling back to 1 default profile: "default"
-2026-04-20T12:39:01.971+05:30  INFO 20964 --- [HRMS-System] [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\admim\.m2\repository\io\github\cdimascio\java-dotenv\5.2.2\java-dotenv-5.2.2.jar referenced one or more files that do not exist: file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-1.4.0.jar,file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-common-1.4.0.jar,file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/annotations-13.0.jar
-2026-04-20T12:39:01.973+05:30  INFO 20964 --- [HRMS-System] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-04-20T12:39:01.974+05:30  INFO 20964 --- [HRMS-System] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-04-20T12:39:04.664+05:30  INFO 20964 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2026-04-20T12:39:04.666+05:30  INFO 20964 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2026-04-20T12:39:04.763+05:30  INFO 20964 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AdminRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2026-04-20T12:39:04.766+05:30  INFO 20964 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2026-04-20T12:39:04.773+05:30  INFO 20964 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 90 ms. Found 0 JDBC repository interfaces.
-2026-04-20T12:39:04.823+05:30  INFO 20964 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2026-04-20T12:39:04.828+05:30  INFO 20964 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-20T12:39:05.002+05:30  INFO 20964 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 147 ms. Found 2 JPA repository interfaces.
-2026-04-20T12:39:06.945+05:30  INFO 20964 --- [HRMS-System] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8086 (http)
-2026-04-20T12:39:07.003+05:30  INFO 20964 --- [HRMS-System] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-04-20T12:39:07.004+05:30  INFO 20964 --- [HRMS-System] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
-2026-04-20T12:39:07.117+05:30  INFO 20964 --- [HRMS-System] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 5141 ms
-2026-04-20T12:39:07.538+05:30  INFO 20964 --- [HRMS-System] [restartedMain] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-04-20T12:39:07.721+05:30  INFO 20964 --- [HRMS-System] [restartedMain] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
-2026-04-20T12:39:09.987+05:30  INFO 20964 --- [HRMS-System] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-20T12:39:10.048+05:30  INFO 20964 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-04-20T12:39:10.439+05:30  INFO 20964 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@47c5255d
-2026-04-20T12:39:10.441+05:30  INFO 20964 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-04-20T12:39:10.590+05:30  INFO 20964 --- [HRMS-System] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-04-23T00:00:01.150+05:30  INFO 9472 --- [HRMS-System] [restartedMain] com.hrms.HrmsSystemApplication           : Starting HrmsSystemApplication using Java 24.0.2 with PID 9472 (C:\HRMS_Project\hrms_backend_v1.0\target\classes started by admim in C:\HRMS_Project\hrms_backend_v1.0)
+2026-04-23T00:00:01.168+05:30  INFO 9472 --- [HRMS-System] [restartedMain] com.hrms.HrmsSystemApplication           : No active profile set, falling back to 1 default profile: "default"
+2026-04-23T00:00:01.321+05:30  INFO 9472 --- [HRMS-System] [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\admim\.m2\repository\io\github\cdimascio\java-dotenv\5.2.2\java-dotenv-5.2.2.jar referenced one or more files that do not exist: file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-1.4.0.jar,file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-common-1.4.0.jar,file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/annotations-13.0.jar
+2026-04-23T00:00:01.324+05:30  INFO 9472 --- [HRMS-System] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-23T00:00:01.325+05:30  INFO 9472 --- [HRMS-System] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-23T00:00:03.628+05:30  INFO 9472 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23T00:00:03.631+05:30  INFO 9472 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2026-04-23T00:00:03.753+05:30  INFO 9472 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AdminRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-04-23T00:00:03.758+05:30  INFO 9472 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AttendanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-04-23T00:00:03.767+05:30  INFO 9472 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.EmployeeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-04-23T00:00:03.772+05:30  INFO 9472 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-04-23T00:00:03.774+05:30  INFO 9472 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 124 ms. Found 0 JDBC repository interfaces.
+2026-04-23T00:00:03.811+05:30  INFO 9472 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23T00:00:03.814+05:30  INFO 9472 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23T00:00:03.931+05:30  INFO 9472 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 103 ms. Found 4 JPA repository interfaces.
+2026-04-23T00:00:05.729+05:30  INFO 9472 --- [HRMS-System] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8086 (http)
+2026-04-23T00:00:05.767+05:30  INFO 9472 --- [HRMS-System] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-23T00:00:05.768+05:30  INFO 9472 --- [HRMS-System] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23T00:00:05.896+05:30  INFO 9472 --- [HRMS-System] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 4570 ms
+2026-04-23T00:00:06.312+05:30  INFO 9472 --- [HRMS-System] [restartedMain] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23T00:00:06.448+05:30  INFO 9472 --- [HRMS-System] [restartedMain] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23T00:00:07.749+05:30  INFO 9472 --- [HRMS-System] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23T00:00:07.826+05:30  INFO 9472 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-23T00:00:08.317+05:30  INFO 9472 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4c5d28f8
+2026-04-23T00:00:08.322+05:30  INFO 9472 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-23T00:00:08.527+05:30  INFO 9472 --- [HRMS-System] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [jdbc:mysql://localhost:3306/hrms_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&allowPublicKeyRetrieval=true]
 	Database driver: MySQL Connector/J
 	Database dialect: MySQLDialect
@@ -33,35 +35,564 @@
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-04-20T12:39:12.765+05:30  INFO 20964 --- [HRMS-System] [restartedMain] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-20T12:39:12.882+05:30  INFO 20964 --- [HRMS-System] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-20T12:39:13.165+05:30  INFO 20964 --- [HRMS-System] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-04-20T12:39:14.730+05:30  INFO 20964 --- [HRMS-System] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8086 (http) with context path '/'
-2026-04-20T12:39:14.787+05:30  WARN 20964 --- [HRMS-System] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-20T12:39:15.231+05:30 DEBUG 20964 --- [HRMS-System] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 17 mappings in 'requestMappingHandlerMapping'
-2026-04-20T12:39:15.308+05:30 DEBUG 20964 --- [HRMS-System] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2026-04-20T12:39:15.323+05:30  INFO 20964 --- [HRMS-System] [restartedMain] com.hrms.HrmsSystemApplication           : Started HrmsSystemApplication in 15.607 seconds (process running for 18.505)
-2026-04-20T12:39:22.312+05:30  INFO 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-20T12:39:22.314+05:30  INFO 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-04-20T12:39:22.324+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
-2026-04-20T12:39:22.330+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
-2026-04-20T12:39:22.459+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 2 RequestBodyAdvice, 1 ResponseBodyAdvice
-2026-04-20T12:39:22.695+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
-2026-04-20T12:39:22.722+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@15a55ff5
-2026-04-20T12:39:22.733+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@40946efa
-2026-04-20T12:39:22.737+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
-2026-04-20T12:39:22.738+05:30  INFO 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 423 ms
-2026-04-20T12:39:22.862+05:30  INFO 20964 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.security.SecurityConfig         : SecurityConfig bean initialized with JwtFilter and UserDetailsService
-2026-04-20T12:39:22.962+05:30  INFO 20964 --- [HRMS-System] [http-nio-8086-exec-2] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
-2026-04-20T12:39:22.963+05:30  WARN 20964 --- [HRMS-System] [http-nio-8086-exec-2] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
-2026-04-20T12:39:23.199+05:30  INFO 20964 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.security.SecurityConfig         : Configuring SecurityFilterChain - stateless JWT with cookie support
-2026-04-20T12:39:23.227+05:30  INFO 20964 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.security.SecurityConfig         : Authorization rules: /api/admin/auth/** → permitAll, /api/admin/** → authenticated, others → permitAll
-2026-04-20T12:39:23.231+05:30  INFO 20964 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.security.SecurityConfig         : SecurityFilterChain configuration completed successfully
-2026-04-20T12:39:23.333+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : POST "/api/admin/bootstrap", parameters={}
-2026-04-20T12:39:23.464+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.AdminController#bootstrap(Map)
-2026-04-20T12:39:23.891+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{mobile=8317289305, password=123456, firstName=Super, lastName=Admin}]
-2026-04-20T12:39:23.906+05:30  WARN 20964 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.controller.AdminController      : Bootstrap endpoint called — checking if SUPER_ADMIN already exists
-2026-04-20T12:39:25.916+05:30  INFO 20964 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.controller.AdminController      : Bootstrap complete — SUPER_ADMIN created with ID: ADM6762
-2026-04-20T12:39:25.941+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-04-20T12:39:25.941+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{mobile=8317289305, adminId=ADM6762, message=SUPER_ADMIN created successfully. This endpoint is now  (truncated)...]
-2026-04-20T12:39:26.146+05:30 DEBUG 20964 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 201 CREATED
+2026-04-23T00:01:32.745+05:30  INFO 22404 --- [HRMS-System] [restartedMain] com.hrms.HrmsSystemApplication           : Starting HrmsSystemApplication using Java 24.0.2 with PID 22404 (C:\HRMS_Project\hrms_backend_v1.0\target\classes started by admim in C:\HRMS_Project\hrms_backend_v1.0)
+2026-04-23T00:01:32.773+05:30  INFO 22404 --- [HRMS-System] [restartedMain] com.hrms.HrmsSystemApplication           : No active profile set, falling back to 1 default profile: "default"
+2026-04-23T00:01:33.070+05:30  INFO 22404 --- [HRMS-System] [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\admim\.m2\repository\io\github\cdimascio\java-dotenv\5.2.2\java-dotenv-5.2.2.jar referenced one or more files that do not exist: file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-1.4.0.jar,file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-common-1.4.0.jar,file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/annotations-13.0.jar
+2026-04-23T00:01:33.071+05:30  INFO 22404 --- [HRMS-System] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-23T00:01:33.072+05:30  INFO 22404 --- [HRMS-System] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-23T00:01:35.940+05:30  INFO 22404 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23T00:01:35.944+05:30  INFO 22404 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2026-04-23T00:01:36.056+05:30  INFO 22404 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AdminRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-04-23T00:01:36.060+05:30  INFO 22404 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AttendanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-04-23T00:01:36.064+05:30  INFO 22404 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.EmployeeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-04-23T00:01:36.068+05:30  INFO 22404 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-04-23T00:01:36.070+05:30  INFO 22404 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 105 ms. Found 0 JDBC repository interfaces.
+2026-04-23T00:01:36.100+05:30  INFO 22404 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23T00:01:36.102+05:30  INFO 22404 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23T00:01:36.216+05:30  INFO 22404 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 97 ms. Found 4 JPA repository interfaces.
+2026-04-23T00:01:37.956+05:30  INFO 22404 --- [HRMS-System] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8086 (http)
+2026-04-23T00:01:37.998+05:30  INFO 22404 --- [HRMS-System] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-23T00:01:37.999+05:30  INFO 22404 --- [HRMS-System] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23T00:01:38.128+05:30  INFO 22404 --- [HRMS-System] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 5051 ms
+2026-04-23T00:01:38.541+05:30  INFO 22404 --- [HRMS-System] [restartedMain] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23T00:01:38.688+05:30  INFO 22404 --- [HRMS-System] [restartedMain] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23T00:01:39.942+05:30  INFO 22404 --- [HRMS-System] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23T00:01:40.010+05:30  INFO 22404 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-23T00:01:40.364+05:30  INFO 22404 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4968215a
+2026-04-23T00:01:40.368+05:30  INFO 22404 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-23T00:01:40.507+05:30  INFO 22404 --- [HRMS-System] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/hrms_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&allowPublicKeyRetrieval=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.41
+	Default catalog/schema: hrms_db/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23T00:01:43.138+05:30  INFO 22404 --- [HRMS-System] [restartedMain] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23T00:01:43.311+05:30  INFO 22404 --- [HRMS-System] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23T00:01:43.479+05:30  INFO 22404 --- [HRMS-System] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23T00:01:46.168+05:30  INFO 22404 --- [HRMS-System] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8086 (http) with context path '/'
+2026-04-23T00:01:46.209+05:30  WARN 22404 --- [HRMS-System] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-23T00:01:46.731+05:30 DEBUG 22404 --- [HRMS-System] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 41 mappings in 'requestMappingHandlerMapping'
+2026-04-23T00:01:46.846+05:30 DEBUG 22404 --- [HRMS-System] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2026-04-23T00:01:46.854+05:30  INFO 22404 --- [HRMS-System] [restartedMain] com.hrms.HrmsSystemApplication           : Started HrmsSystemApplication in 15.327 seconds (process running for 16.571)
+2026-04-23T00:02:05.334+05:30  INFO 22404 --- [HRMS-System] [http-nio-8086-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-23T00:02:05.335+05:30  INFO 22404 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-23T00:02:05.340+05:30 DEBUG 22404 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2026-04-23T00:02:05.343+05:30 DEBUG 22404 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2026-04-23T00:02:05.409+05:30 DEBUG 22404 --- [HRMS-System] [http-nio-8086-exec-1] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 2 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-04-23T00:02:05.530+05:30 DEBUG 22404 --- [HRMS-System] [http-nio-8086-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-04-23T00:02:05.543+05:30 DEBUG 22404 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@47bf84a8
+2026-04-23T00:02:05.549+05:30 DEBUG 22404 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@54ef1076
+2026-04-23T00:02:05.551+05:30 DEBUG 22404 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2026-04-23T00:02:05.551+05:30  INFO 22404 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 216 ms
+2026-04-23T00:02:05.634+05:30  INFO 22404 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.security.SecurityConfig         : SecurityConfig bean initialized with JwtFilter and UserDetailsService
+2026-04-23T00:02:05.723+05:30  INFO 22404 --- [HRMS-System] [http-nio-8086-exec-1] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-04-23T00:02:05.724+05:30  WARN 22404 --- [HRMS-System] [http-nio-8086-exec-1] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-04-23T00:02:06.023+05:30  INFO 22404 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.security.SecurityConfig         : Configuring SecurityFilterChain - stateless JWT with cookie support
+2026-04-23T00:02:06.056+05:30  INFO 22404 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.security.SecurityConfig         : Authorization rules: /api/admin/auth/** → permitAll, /api/admin/** → authenticated, others → permitAll
+2026-04-23T00:02:06.060+05:30  INFO 22404 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.security.SecurityConfig         : SecurityFilterChain configuration completed successfully
+2026-04-23T00:02:06.932+05:30  WARN 22404 --- [HRMS-System] [http-nio-8086-exec-1] c.hrms.security.JwtAuthenticationFilter  : Authentication failed for user 8317289305 on path /api/employees/get-employee/1: Admin not found with mobile: 8317289305
+
+org.springframework.security.core.userdetails.UsernameNotFoundException: Admin not found with mobile: 8317289305
+	at com.hrms.security.AdminUserDetailsService.lambda$loadUserByUsername$0(AdminUserDetailsService.java:26) ~[classes/:na]
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403) ~[na:na]
+	at com.hrms.security.AdminUserDetailsService.loadUserByUsername(AdminUserDetailsService.java:26) ~[classes/:na]
+	at com.hrms.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:68) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317) ~[spring-security-config-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at java.base/java.lang.Thread.run(Thread.java:1447) ~[na:na]
+
+2026-04-23T00:02:06.959+05:30 DEBUG 22404 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/get-employee/1?page=0&size=10", parameters={masked}
+2026-04-23T00:02:07.069+05:30 DEBUG 22404 --- [HRMS-System] [http-nio-8086-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getEmployeeById(Long)
+2026-04-23T00:02:07.320+05:30 DEBUG 22404 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-23T00:02:07.323+05:30 DEBUG 22404 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{data=com.hrms.dto.response.EmployeeResponseDTO@79160fb9, success=true}]
+2026-04-23T00:02:07.500+05:30 DEBUG 22404 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-04-23T00:04:42.104+05:30  INFO 22404 --- [HRMS-System] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-23T00:04:42.123+05:30  INFO 22404 --- [HRMS-System] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-04-23T00:04:42.133+05:30  INFO 22404 --- [HRMS-System] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23T00:04:42.151+05:30  INFO 22404 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-04-23T00:04:42.182+05:30  INFO 22404 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-04-23T00:04:54.101+05:30  INFO 9772 --- [HRMS-System] [restartedMain] com.hrms.HrmsSystemApplication           : Starting HrmsSystemApplication using Java 24.0.2 with PID 9772 (C:\HRMS_Project\hrms_backend_v1.0\target\classes started by admim in C:\HRMS_Project\hrms_backend_v1.0)
+2026-04-23T00:04:54.112+05:30  INFO 9772 --- [HRMS-System] [restartedMain] com.hrms.HrmsSystemApplication           : No active profile set, falling back to 1 default profile: "default"
+2026-04-23T00:04:54.282+05:30  INFO 9772 --- [HRMS-System] [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\admim\.m2\repository\io\github\cdimascio\java-dotenv\5.2.2\java-dotenv-5.2.2.jar referenced one or more files that do not exist: file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-1.4.0.jar,file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-common-1.4.0.jar,file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/annotations-13.0.jar
+2026-04-23T00:04:54.283+05:30  INFO 9772 --- [HRMS-System] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-23T00:04:54.285+05:30  INFO 9772 --- [HRMS-System] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-23T00:04:56.754+05:30  INFO 9772 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23T00:04:56.757+05:30  INFO 9772 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2026-04-23T00:04:56.836+05:30  INFO 9772 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AdminRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-04-23T00:04:56.839+05:30  INFO 9772 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AttendanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-04-23T00:04:56.841+05:30  INFO 9772 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.EmployeeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-04-23T00:04:56.844+05:30  INFO 9772 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-04-23T00:04:56.845+05:30  INFO 9772 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 73 ms. Found 0 JDBC repository interfaces.
+2026-04-23T00:04:56.870+05:30  INFO 9772 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23T00:04:56.872+05:30  INFO 9772 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23T00:04:56.960+05:30  INFO 9772 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 74 ms. Found 4 JPA repository interfaces.
+2026-04-23T00:04:58.689+05:30  INFO 9772 --- [HRMS-System] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8086 (http)
+2026-04-23T00:04:58.745+05:30  INFO 9772 --- [HRMS-System] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-23T00:04:58.746+05:30  INFO 9772 --- [HRMS-System] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23T00:04:58.858+05:30  INFO 9772 --- [HRMS-System] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 4572 ms
+2026-04-23T00:04:59.254+05:30  INFO 9772 --- [HRMS-System] [restartedMain] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23T00:04:59.376+05:30  INFO 9772 --- [HRMS-System] [restartedMain] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23T00:05:00.496+05:30  INFO 9772 --- [HRMS-System] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23T00:05:00.566+05:30  INFO 9772 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-23T00:05:00.990+05:30  INFO 9772 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@442c7ae3
+2026-04-23T00:05:00.994+05:30  INFO 9772 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-23T00:05:01.150+05:30  INFO 9772 --- [HRMS-System] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/hrms_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&allowPublicKeyRetrieval=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.41
+	Default catalog/schema: hrms_db/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23T00:05:03.765+05:30  INFO 9772 --- [HRMS-System] [restartedMain] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23T00:05:03.975+05:30  INFO 9772 --- [HRMS-System] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23T00:05:04.192+05:30  INFO 9772 --- [HRMS-System] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23T00:05:07.522+05:30  INFO 9772 --- [HRMS-System] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8086 (http) with context path '/'
+2026-04-23T00:05:07.565+05:30  WARN 9772 --- [HRMS-System] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-23T00:05:08.096+05:30 DEBUG 9772 --- [HRMS-System] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 41 mappings in 'requestMappingHandlerMapping'
+2026-04-23T00:05:08.227+05:30 DEBUG 9772 --- [HRMS-System] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2026-04-23T00:05:08.239+05:30  INFO 9772 --- [HRMS-System] [restartedMain] com.hrms.HrmsSystemApplication           : Started HrmsSystemApplication in 15.547 seconds (process running for 17.217)
+2026-04-23T00:06:07.201+05:30  INFO 9772 --- [HRMS-System] [http-nio-8086-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-23T00:06:07.203+05:30  INFO 9772 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-23T00:06:07.210+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2026-04-23T00:06:07.214+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2026-04-23T00:06:07.321+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-1] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 2 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-04-23T00:06:07.498+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-04-23T00:06:07.529+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@6cb9cd3f
+2026-04-23T00:06:07.545+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@4519e392
+2026-04-23T00:06:07.545+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2026-04-23T00:06:07.545+05:30  INFO 9772 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 341 ms
+2026-04-23T00:06:07.660+05:30  INFO 9772 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.security.SecurityConfig         : SecurityConfig bean initialized with JwtFilter and UserDetailsService
+2026-04-23T00:06:07.768+05:30  INFO 9772 --- [HRMS-System] [http-nio-8086-exec-1] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-04-23T00:06:07.770+05:30  WARN 9772 --- [HRMS-System] [http-nio-8086-exec-1] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-04-23T00:06:08.126+05:30  INFO 9772 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.security.SecurityConfig         : Configuring SecurityFilterChain - stateless JWT with cookie support
+2026-04-23T00:06:08.169+05:30  INFO 9772 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.security.SecurityConfig         : Authorization rules: /api/admin/auth/** → permitAll, /api/admin/** → authenticated, others → permitAll
+2026-04-23T00:06:08.178+05:30  INFO 9772 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.security.SecurityConfig         : SecurityFilterChain configuration completed successfully
+2026-04-23T00:06:09.434+05:30  WARN 9772 --- [HRMS-System] [http-nio-8086-exec-1] c.hrms.security.JwtAuthenticationFilter  : Authentication failed for user 8317289305 on path /api/attendance/check-in: Admin not found with mobile: 8317289305
+
+org.springframework.security.core.userdetails.UsernameNotFoundException: Admin not found with mobile: 8317289305
+	at com.hrms.security.AdminUserDetailsService.lambda$loadUserByUsername$0(AdminUserDetailsService.java:26) ~[classes/:na]
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403) ~[na:na]
+	at com.hrms.security.AdminUserDetailsService.loadUserByUsername(AdminUserDetailsService.java:26) ~[classes/:na]
+	at com.hrms.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:68) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317) ~[spring-security-config-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at java.base/java.lang.Thread.run(Thread.java:1447) ~[na:na]
+
+2026-04-23T00:06:09.468+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/attendance/check-in", parameters={}
+2026-04-23T00:06:09.514+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.AttendanceController#markAttendance(AttendanceRequest)
+2026-04-23T00:06:09.820+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.hrms.dto.request.AttendanceRequest@381a9473]
+2026-04-23T00:06:09.833+05:30  INFO 9772 --- [HRMS-System] [http-nio-8086-exec-1] c.hrms.controller.AttendanceController   : 📥 Received attendance mark request for employee: 1
+2026-04-23T00:06:09.833+05:30  INFO 9772 --- [HRMS-System] [http-nio-8086-exec-1] c.h.s.serviceImpl.AttendanceServiceImpl  : 🟢 Marking attendance for employee: 1, Date: 2025-04-23
+2026-04-23T00:06:10.217+05:30  INFO 9772 --- [HRMS-System] [http-nio-8086-exec-1] c.h.s.serviceImpl.AttendanceServiceImpl  : ✅ Attendance marked successfully. Employee: Priya, Date: 2025-04-23, Status: Present
+2026-04-23T00:06:10.217+05:30  INFO 9772 --- [HRMS-System] [http-nio-8086-exec-1] c.hrms.controller.AttendanceController   : ✅ Attendance marked successfully for employee: 1
+2026-04-23T00:06:10.250+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-23T00:06:10.250+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.AttendanceResponse@2fd9959e]
+2026-04-23T00:06:10.343+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-04-23T00:08:21.167+05:30  WARN 9772 --- [HRMS-System] [http-nio-8086-exec-5] c.hrms.security.JwtAuthenticationFilter  : Authentication failed for user 8317289305 on path /api/attendance/employee/1: Admin not found with mobile: 8317289305
+
+org.springframework.security.core.userdetails.UsernameNotFoundException: Admin not found with mobile: 8317289305
+	at com.hrms.security.AdminUserDetailsService.lambda$loadUserByUsername$0(AdminUserDetailsService.java:26) ~[classes/:na]
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403) ~[na:na]
+	at com.hrms.security.AdminUserDetailsService.loadUserByUsername(AdminUserDetailsService.java:26) ~[classes/:na]
+	at com.hrms.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:68) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317) ~[spring-security-config-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at java.base/java.lang.Thread.run(Thread.java:1447) ~[na:na]
+
+2026-04-23T00:08:21.172+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/attendance/employee/1", parameters={}
+2026-04-23T00:08:21.174+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.AttendanceController#getEmployeeAttendance(Long, LocalDate, LocalDate)
+2026-04-23T00:08:21.186+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.method.HandlerMethod             : Could not resolve parameter [1] in public org.springframework.http.ResponseEntity<java.util.List<com.hrms.dto.response.AttendanceResponse>> com.hrms.controller.AttendanceController.getEmployeeAttendance(java.lang.Long,java.time.LocalDate,java.time.LocalDate): Required request parameter 'startDate' for method parameter type LocalDate is not present
+2026-04-23T00:08:21.197+05:30  WARN 9772 --- [HRMS-System] [http-nio-8086-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'startDate' for method parameter type LocalDate is not present]
+2026-04-23T00:08:21.199+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 400 BAD_REQUEST
+2026-04-23T00:08:21.213+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for GET "/error", parameters={}
+2026-04-23T00:08:21.227+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.webmvc.autoconfigure.error.BasicErrorController#error(HttpServletRequest)
+2026-04-23T00:08:21.250+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-23T00:08:21.250+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Thu Apr 23 00:08:21 IST 2026, status=400, error=Bad Request, trace=org.springframework.we (truncated)...]
+2026-04-23T00:08:21.280+05:30 DEBUG 9772 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 400
+2026-04-23T00:17:56.756+05:30  INFO 9772 --- [HRMS-System] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-23T00:17:56.777+05:30  INFO 9772 --- [HRMS-System] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-04-23T00:17:56.797+05:30  INFO 9772 --- [HRMS-System] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23T00:17:56.817+05:30  INFO 9772 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-04-23T00:17:56.860+05:30  INFO 9772 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-04-23T00:18:10.323+05:30  INFO 11596 --- [HRMS-System] [restartedMain] com.hrms.HrmsSystemApplication           : Starting HrmsSystemApplication using Java 24.0.2 with PID 11596 (C:\HRMS_Project\hrms_backend_v1.0\target\classes started by admim in C:\HRMS_Project\hrms_backend_v1.0)
+2026-04-23T00:18:10.330+05:30  INFO 11596 --- [HRMS-System] [restartedMain] com.hrms.HrmsSystemApplication           : No active profile set, falling back to 1 default profile: "default"
+2026-04-23T00:18:10.462+05:30  INFO 11596 --- [HRMS-System] [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\admim\.m2\repository\io\github\cdimascio\java-dotenv\5.2.2\java-dotenv-5.2.2.jar referenced one or more files that do not exist: file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-1.4.0.jar,file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-common-1.4.0.jar,file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/annotations-13.0.jar
+2026-04-23T00:18:10.463+05:30  INFO 11596 --- [HRMS-System] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-23T00:18:10.463+05:30  INFO 11596 --- [HRMS-System] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-23T00:18:12.997+05:30  INFO 11596 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23T00:18:13.000+05:30  INFO 11596 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2026-04-23T00:18:13.090+05:30  INFO 11596 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AdminRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-04-23T00:18:13.092+05:30  INFO 11596 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AttendanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-04-23T00:18:13.095+05:30  INFO 11596 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.EmployeeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-04-23T00:18:13.097+05:30  INFO 11596 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-04-23T00:18:13.098+05:30  INFO 11596 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 74 ms. Found 0 JDBC repository interfaces.
+2026-04-23T00:18:13.120+05:30  INFO 11596 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23T00:18:13.121+05:30  INFO 11596 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23T00:18:13.243+05:30  INFO 11596 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 113 ms. Found 4 JPA repository interfaces.
+2026-04-23T00:18:15.616+05:30  INFO 11596 --- [HRMS-System] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8086 (http)
+2026-04-23T00:18:15.679+05:30  INFO 11596 --- [HRMS-System] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-23T00:18:15.679+05:30  INFO 11596 --- [HRMS-System] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23T00:18:15.877+05:30  INFO 11596 --- [HRMS-System] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 5412 ms
+2026-04-23T00:18:16.470+05:30  INFO 11596 --- [HRMS-System] [restartedMain] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23T00:18:16.716+05:30  INFO 11596 --- [HRMS-System] [restartedMain] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23T00:18:18.665+05:30  INFO 11596 --- [HRMS-System] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23T00:18:18.760+05:30  INFO 11596 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-23T00:18:19.326+05:30  INFO 11596 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@223a97a0
+2026-04-23T00:18:19.343+05:30  INFO 11596 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-23T00:18:19.547+05:30  INFO 11596 --- [HRMS-System] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/hrms_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&allowPublicKeyRetrieval=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.41
+	Default catalog/schema: hrms_db/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23T00:18:22.515+05:30  INFO 11596 --- [HRMS-System] [restartedMain] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23T00:18:22.707+05:30  INFO 11596 --- [HRMS-System] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23T00:18:22.984+05:30  INFO 11596 --- [HRMS-System] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23T00:18:25.797+05:30  INFO 11596 --- [HRMS-System] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8086 (http) with context path '/'
+2026-04-23T00:18:25.842+05:30  WARN 11596 --- [HRMS-System] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-23T00:18:26.311+05:30 DEBUG 11596 --- [HRMS-System] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 42 mappings in 'requestMappingHandlerMapping'
+2026-04-23T00:18:26.393+05:30 DEBUG 11596 --- [HRMS-System] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2026-04-23T00:18:26.403+05:30  INFO 11596 --- [HRMS-System] [restartedMain] com.hrms.HrmsSystemApplication           : Started HrmsSystemApplication in 17.463 seconds (process running for 19.694)
+2026-04-23T00:19:01.782+05:30  INFO 11596 --- [HRMS-System] [http-nio-8086-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-23T00:19:01.785+05:30  INFO 11596 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-23T00:19:01.800+05:30 DEBUG 11596 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2026-04-23T00:19:01.808+05:30 DEBUG 11596 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2026-04-23T00:19:01.981+05:30 DEBUG 11596 --- [HRMS-System] [http-nio-8086-exec-2] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 2 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-04-23T00:19:02.116+05:30 DEBUG 11596 --- [HRMS-System] [http-nio-8086-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-04-23T00:19:02.127+05:30 DEBUG 11596 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@31ce37d8
+2026-04-23T00:19:02.132+05:30 DEBUG 11596 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@25398f99
+2026-04-23T00:19:02.133+05:30 DEBUG 11596 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2026-04-23T00:19:02.134+05:30  INFO 11596 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 348 ms
+2026-04-23T00:19:02.180+05:30  INFO 11596 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.security.SecurityConfig         : SecurityConfig bean initialized with JwtFilter and UserDetailsService
+2026-04-23T00:19:02.239+05:30  INFO 11596 --- [HRMS-System] [http-nio-8086-exec-2] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-04-23T00:19:02.239+05:30  WARN 11596 --- [HRMS-System] [http-nio-8086-exec-2] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-04-23T00:19:02.425+05:30  INFO 11596 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.security.SecurityConfig         : Configuring SecurityFilterChain - stateless JWT with cookie support
+2026-04-23T00:19:02.446+05:30  INFO 11596 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.security.SecurityConfig         : Authorization rules: /api/admin/auth/** → permitAll, /api/admin/** → authenticated, others → permitAll
+2026-04-23T00:19:02.449+05:30  INFO 11596 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.security.SecurityConfig         : SecurityFilterChain configuration completed successfully
+2026-04-23T00:19:03.147+05:30  WARN 11596 --- [HRMS-System] [http-nio-8086-exec-2] c.hrms.security.JwtAuthenticationFilter  : Authentication failed for user 8317289305 on path /api/attendance/all-attendance-employee/1: Admin not found with mobile: 8317289305
+
+org.springframework.security.core.userdetails.UsernameNotFoundException: Admin not found with mobile: 8317289305
+	at com.hrms.security.AdminUserDetailsService.lambda$loadUserByUsername$0(AdminUserDetailsService.java:26) ~[classes/:na]
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403) ~[na:na]
+	at com.hrms.security.AdminUserDetailsService.loadUserByUsername(AdminUserDetailsService.java:26) ~[classes/:na]
+	at com.hrms.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:68) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317) ~[spring-security-config-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at java.base/java.lang.Thread.run(Thread.java:1447) ~[na:na]
+
+2026-04-23T00:19:03.171+05:30 DEBUG 11596 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/attendance/all-attendance-employee/1?page=0&size=10", parameters={masked}
+2026-04-23T00:19:03.199+05:30 DEBUG 11596 --- [HRMS-System] [http-nio-8086-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.AttendanceController#getAllAttendanceByEmployeePrimeId(Long, int, int, String, String)
+2026-04-23T00:19:03.269+05:30  INFO 11596 --- [HRMS-System] [http-nio-8086-exec-2] c.hrms.controller.AttendanceController   : 📥 Getting all attendance for employee: 1, Page: 0, Size: 10, SortBy: attendanceDate, SortDir: desc
+2026-04-23T00:19:03.273+05:30  INFO 11596 --- [HRMS-System] [http-nio-8086-exec-2] c.h.s.serviceImpl.AttendanceServiceImpl  : 🟢 Getting all attendance for employee: 1, Page: 0, Size: 10, SortBy: attendanceDate, SortDir: desc
+2026-04-23T00:19:03.558+05:30  INFO 11596 --- [HRMS-System] [http-nio-8086-exec-2] c.h.s.serviceImpl.AttendanceServiceImpl  : ✅ Found 1 total attendance records for employee: 1 (Page 1/1)
+2026-04-23T00:19:03.619+05:30  INFO 11596 --- [HRMS-System] [http-nio-8086-exec-2] c.hrms.controller.AttendanceController   : ✅ Returning page 1/1 with 1 records for employee: 1
+2026-04-23T00:19:03.636+05:30 DEBUG 11596 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-23T00:19:03.638+05:30 DEBUG 11596 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{pageSize=10, totalPages=1, isLast=true, totalRecords=1, content=[com.hrms.dto.response.AttendanceRe (truncated)...]
+2026-04-23T00:19:03.820+05:30 DEBUG 11596 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-04-23T00:19:41.868+05:30  WARN 11596 --- [HRMS-System] [http-nio-8086-exec-3] c.hrms.security.JwtAuthenticationFilter  : Authentication failed for user 8317289305 on path /api/attendance/all-attendance-employee/1: Admin not found with mobile: 8317289305
+
+org.springframework.security.core.userdetails.UsernameNotFoundException: Admin not found with mobile: 8317289305
+	at com.hrms.security.AdminUserDetailsService.lambda$loadUserByUsername$0(AdminUserDetailsService.java:26) ~[classes/:na]
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403) ~[na:na]
+	at com.hrms.security.AdminUserDetailsService.loadUserByUsername(AdminUserDetailsService.java:26) ~[classes/:na]
+	at com.hrms.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:68) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195) ~[spring-security-web-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317) ~[spring-security-config-7.0.4.jar:7.0.4]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at java.base/java.lang.Thread.run(Thread.java:1447) ~[na:na]
+
+2026-04-23T00:19:41.870+05:30 DEBUG 11596 --- [HRMS-System] [http-nio-8086-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/attendance/all-attendance-employee/1?page=0&size=10", parameters={masked}
+2026-04-23T00:19:41.871+05:30 DEBUG 11596 --- [HRMS-System] [http-nio-8086-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.AttendanceController#getAllAttendanceByEmployeePrimeId(Long, int, int, String, String)
+2026-04-23T00:19:41.873+05:30  INFO 11596 --- [HRMS-System] [http-nio-8086-exec-3] c.hrms.controller.AttendanceController   : 📥 Getting all attendance for employee: 1, Page: 0, Size: 10, SortBy: attendanceDate, SortDir: desc
+2026-04-23T00:19:41.873+05:30  INFO 11596 --- [HRMS-System] [http-nio-8086-exec-3] c.h.s.serviceImpl.AttendanceServiceImpl  : 🟢 Getting all attendance for employee: 1, Page: 0, Size: 10, SortBy: attendanceDate, SortDir: desc
+2026-04-23T00:19:41.887+05:30  INFO 11596 --- [HRMS-System] [http-nio-8086-exec-3] c.h.s.serviceImpl.AttendanceServiceImpl  : ✅ Found 1 total attendance records for employee: 1 (Page 1/1)
+2026-04-23T00:19:41.895+05:30  INFO 11596 --- [HRMS-System] [http-nio-8086-exec-3] c.hrms.controller.AttendanceController   : ✅ Returning page 1/1 with 1 records for employee: 1
+2026-04-23T00:19:41.897+05:30 DEBUG 11596 --- [HRMS-System] [http-nio-8086-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-23T00:19:41.897+05:30 DEBUG 11596 --- [HRMS-System] [http-nio-8086-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{pageSize=10, totalPages=1, isLast=true, totalRecords=1, content=[com.hrms.dto.response.AttendanceRe (truncated)...]
+2026-04-23T00:19:41.901+05:30 DEBUG 11596 --- [HRMS-System] [http-nio-8086-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-04-23T00:19:55.638+05:30  INFO 11596 --- [HRMS-System] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-23T00:19:55.657+05:30  INFO 11596 --- [HRMS-System] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-04-23T00:19:55.674+05:30  INFO 11596 --- [HRMS-System] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23T00:19:55.692+05:30  INFO 11596 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-04-23T00:19:55.729+05:30  INFO 11596 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

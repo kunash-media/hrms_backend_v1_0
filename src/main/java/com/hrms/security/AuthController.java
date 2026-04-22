@@ -114,7 +114,9 @@ public class AuthController {
                     "message", "Login successful",
                     "mobile",  mobile,
                     "adminId", adminDetails.getAdminId() != null ? adminDetails.getAdminId() : "",
-                    "role",    adminDetails.getRole()    != null ? adminDetails.getRole()    : ""
+                    "role",    adminDetails.getRole()    != null ? adminDetails.getRole()    : "",
+                    "firstName", adminDetails.getAdminEntity().getAdminFirstName(),
+                    "lastName", adminDetails.getAdminEntity().getAdminLastName()
             ));
 
         } catch (BadCredentialsException e) {

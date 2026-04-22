@@ -39,7 +39,7 @@ public class AdminController {
     //                  CREATE ADMIN
     //  CHANGED: restricted to SUPER_ADMIN role only
     // ────────────────────────────────────────────────
-    @PreAuthorize("hasRole('SUPER_ADMIN')")   // only SUPER_ADMIN can create new admins
+    @PreAuthorize("hasRole('SUPER_ADMIN')")      // only SUPER_ADMIN can create new admins
     @PostMapping("/create-admin")
     public ResponseEntity<String> createAdmin(@RequestBody AdminRequestDto requestDto) {
         logger.info("POST /api/admin → Creating new admin: {}", requestDto.getAdminFirstName());
