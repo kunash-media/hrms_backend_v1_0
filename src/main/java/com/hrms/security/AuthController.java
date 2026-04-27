@@ -57,8 +57,8 @@ public class AuthController {
     private ResponseCookie buildCookie(String name, String value, String path, long maxAgeMs) {
         return ResponseCookie.from(name, value)
                 .httpOnly(true)
-                .secure(cookieSecure)
-                .sameSite(cookieSecure ? "Strict" : "Lax")
+                .secure(false)
+                .sameSite("Lax")
                 .path(path)
                 .maxAge(Duration.ofMillis(maxAgeMs))
                 .build();
@@ -67,8 +67,8 @@ public class AuthController {
     private ResponseCookie clearCookie(String name, String path) {
         return ResponseCookie.from(name, "")
                 .httpOnly(true)
-                .secure(cookieSecure)
-                .sameSite(cookieSecure ? "Strict" : "Lax")
+                .secure(false)
+                .sameSite("Lax")
                 .path(path)
                 .maxAge(0)
                 .build();

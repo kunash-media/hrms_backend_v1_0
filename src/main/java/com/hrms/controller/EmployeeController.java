@@ -2,13 +2,20 @@ package com.hrms.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hrms.dto.request.EmployeeRequestDTO;
+import com.hrms.dto.response.EmployeeForPayrollDTO;
 import com.hrms.dto.response.EmployeeResponseDTO;
+import com.hrms.dto.response.EmployeeSummaryDTO;
+import com.hrms.entity.EmployeeEntity;
+import com.hrms.repository.EmployeeRepository;
 import com.hrms.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.hrms.utils.ApiResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,13 +27,20 @@ import java.util.Map;
 @RequestMapping("/api/employees")
 public class EmployeeController {
 
-    @Autowired
-    private EmployeeService employeeService;
-
-    // ✅ Create ObjectMapper manually (No @Autowired)
+    // Direct ObjectMapper create karo (No @Autowired)
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
-    // ========== 1. CREATE EMPLOYEE (JSON + FILES) ==========
+    private final EmployeeService employeeService;
+    private final EmployeeRepository employeeRepository;
+
+    public EmployeeController(EmployeeService employeeService, EmployeeRepository employeeRepository) {
+        this.employeeService = employeeService;
+        this.employeeRepository = employeeRepository;
+    }
+
+
+    // ✅ CREATE Employee
     @PostMapping(value = "/create-employee", consumes = {"multipart/form-data"})
     public ResponseEntity<Map<String, Object>> createEmployee(
             @RequestPart("employee") String employeeJson,
@@ -38,10 +52,8 @@ public class EmployeeController {
             @RequestPart(value = "profilePhoto", required = false) MultipartFile profilePhoto) {
 
         try {
-            // Convert JSON to DTO
             EmployeeRequestDTO dto = objectMapper.readValue(employeeJson, EmployeeRequestDTO.class);
 
-            // Set files in DTO
             dto.setAadhaarDocument(aadhaarDocument);
             dto.setPanDocument(panDocument);
             dto.setDegreeDocument(degreeDocument);
@@ -58,7 +70,6 @@ public class EmployeeController {
             return new ResponseEntity<>(response, HttpStatus.CREATED);
 
         } catch (Exception e) {
-            e.printStackTrace();
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", e.getMessage());
@@ -66,10 +77,10 @@ public class EmployeeController {
         }
     }
 
-    // ========== 2. UPDATE EMPLOYEE (JSON + FILES) ==========
-    @PutMapping(value = "/update-employee/{employeePrimeId}", consumes = {"multipart/form-data"})
+    // ✅ UPDATE Employee
+    @PutMapping(value = "/update-employee/{id}", consumes = {"multipart/form-data"})
     public ResponseEntity<Map<String, Object>> updateEmployee(
-            @PathVariable Long employeePrimeId,
+            @PathVariable Long id,
             @RequestPart("employee") String employeeJson,
             @RequestPart(value = "aadhaarDocument", required = false) MultipartFile aadhaarDocument,
             @RequestPart(value = "panDocument", required = false) MultipartFile panDocument,
@@ -88,7 +99,7 @@ public class EmployeeController {
             dto.setOfferLetter(offerLetter);
             dto.setProfilePhoto(profilePhoto);
 
-            EmployeeResponseDTO employee = employeeService.updateEmployee(employeePrimeId, dto);
+            EmployeeResponseDTO employee = employeeService.updateEmployee(id, dto);
 
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
@@ -97,7 +108,6 @@ public class EmployeeController {
             return ResponseEntity.ok(response);
 
         } catch (Exception e) {
-            e.printStackTrace();
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", e.getMessage());
@@ -105,14 +115,14 @@ public class EmployeeController {
         }
     }
 
-    // ========== 3. GET ALL EMPLOYEES (PAGINATED) ==========
+    // ✅ GET All Employees
     @GetMapping("/get-all-employees")
     public ResponseEntity<Map<String, Object>> getAllEmployees(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
 
         Page<EmployeeResponseDTO> employees = employeeService.getAllEmployees(
-                PageRequest.of(page, size, Sort.by("employeePrimeId").descending()));
+                PageRequest.of(page, size, Sort.by("id").descending()));
 
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
@@ -120,31 +130,38 @@ public class EmployeeController {
         response.put("totalPages", employees.getTotalPages());
         response.put("totalElements", employees.getTotalElements());
         response.put("currentPage", page);
-        response.put("pageSize", size);
         return ResponseEntity.ok(response);
     }
 
-    // ========== 4. GET EMPLOYEE BY employeePrimeId ==========
-    @GetMapping("/get-employee/{employeePrimeId}")
-    public ResponseEntity<Map<String, Object>> getEmployeeById(@PathVariable Long employeePrimeId) {
-        EmployeeResponseDTO employee = employeeService.getEmployeeById(employeePrimeId);
+
+    //== get all employess ====//
+    @GetMapping("/all-employees")
+    public ResponseEntity<List<EmployeeSummaryDTO>> getAllEmployees() {
+        List<EmployeeSummaryDTO> employees = employeeService.getAllEmployees();
+        return ResponseEntity.ok(employees);
+    }
+
+    // ✅ GET Employee by ID
+    @GetMapping("/get-employee-by-id/{id}")
+    public ResponseEntity<Map<String, Object>> getEmployeeById(@PathVariable Long id) {
+        EmployeeResponseDTO employee = employeeService.getEmployeeById(id);
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
         response.put("data", employee);
         return ResponseEntity.ok(response);
     }
 
-    // ========== 5. GET EMPLOYEE BY EMPLOYEE string employeeId (EMP001) ==========
-    @GetMapping("/get-by-employeeId/{employeeId}")
-    public ResponseEntity<Map<String, Object>> getEmployeeByEmployeeId(@PathVariable String employeeId) {
-        EmployeeResponseDTO employee = employeeService.getEmployeeByEmployeeId(employeeId);
+    // ✅ GET Employee by Employee Prime ID (EMP001)
+    @GetMapping("/get-employee-by-employee-prime-id/{employeePrimeId}")
+    public ResponseEntity<Map<String, Object>> getEmployeeByEmployeePrimeId(@PathVariable String employeePrimeId) {
+        EmployeeResponseDTO employee = employeeService.getEmployeeByEmployeePrimeId(employeePrimeId);
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
         response.put("data", employee);
         return ResponseEntity.ok(response);
     }
 
-    // ========== 6. GET EMPLOYEE BY EMAIL ==========
+    // ✅ GET Employee by Email
     @GetMapping("/get-employee-by-email/{email}")
     public ResponseEntity<Map<String, Object>> getEmployeeByEmail(@PathVariable String email) {
         EmployeeResponseDTO employee = employeeService.getEmployeeByEmail(email);
@@ -154,24 +171,22 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
 
-    // ========== 7. SEARCH EMPLOYEES ==========
-    @GetMapping("/search-employees")
-    public ResponseEntity<Map<String, Object>> searchEmployees(
-            @RequestParam String keyword,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+    // ✅ SEARCH Employees
+//    @GetMapping("/search-employees")
+//    public ResponseEntity<Map<String, Object>> searchEmployees(
+//            @RequestParam String keyword,
+//            @RequestParam(defaultValue = "0") int page,
+//            @RequestParam(defaultValue = "10") int size) {
+//
+//        Page<EmployeeResponseDTO> employees = employeeService.searchEmployees(keyword, PageRequest.of(page, size));
+//        Map<String, Object> response = new HashMap<>();
+//        response.put("success", true);
+//        response.put("data", employees.getContent());
+//        response.put("totalElements", employees.getTotalElements());
+//        return ResponseEntity.ok(response);
+//    }
 
-        Page<EmployeeResponseDTO> employees = employeeService.searchEmployees(keyword, PageRequest.of(page, size));
-        Map<String, Object> response = new HashMap<>();
-        response.put("success", true);
-        response.put("data", employees.getContent());
-        response.put("totalElements", employees.getTotalElements());
-        response.put("currentPage", page);
-        response.put("keyword", keyword);
-        return ResponseEntity.ok(response);
-    }
-
-    // ========== 8. GET EMPLOYEES BY DEPARTMENT ==========
+    // ✅ GET by Department
     @GetMapping("/get-employees-by-department/{department}")
     public ResponseEntity<Map<String, Object>> getEmployeesByDepartment(
             @PathVariable String department,
@@ -182,12 +197,10 @@ public class EmployeeController {
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
         response.put("data", employees.getContent());
-        response.put("totalElements", employees.getTotalElements());
-        response.put("department", department);
         return ResponseEntity.ok(response);
     }
 
-    // ========== 9. GET EMPLOYEES BY STATUS ==========
+    // ✅ GET by Status
     @GetMapping("/get-employees-by-status/{status}")
     public ResponseEntity<Map<String, Object>> getEmployeesByStatus(
             @PathVariable String status,
@@ -198,18 +211,16 @@ public class EmployeeController {
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
         response.put("data", employees.getContent());
-        response.put("totalElements", employees.getTotalElements());
-        response.put("status", status);
         return ResponseEntity.ok(response);
     }
 
-    // ========== 10. UPDATE EMPLOYEE STATUS ==========
-    @PatchMapping("/update-employee-status/{employeePrimeId}")
+    // ✅ UPDATE Status
+    @PatchMapping("/update-employee-status/{id}")
     public ResponseEntity<Map<String, Object>> updateEmployeeStatus(
-            @PathVariable Long employeePrimeId,
+            @PathVariable Long id,
             @RequestParam String status) {
 
-        EmployeeResponseDTO employee = employeeService.updateEmployeeStatus(employeePrimeId, status);
+        EmployeeResponseDTO employee = employeeService.updateEmployeeStatus(id, status);
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
         response.put("message", "Status updated to: " + status);
@@ -217,17 +228,17 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
 
-    // ========== 11. DELETE EMPLOYEE (SOFT DELETE) ==========
-    @DeleteMapping("/delete-employee/{employeePrimeId}")
-    public ResponseEntity<Map<String, Object>> deleteEmployee(@PathVariable Long employeePrimeId) {
-        employeeService.deleteEmployee(employeePrimeId);
+    // ✅ DELETE Employee
+    @DeleteMapping("/delete-employee/{id}")
+    public ResponseEntity<Map<String, Object>> deleteEmployee(@PathVariable Long id) {
+        employeeService.deleteEmployee(id);
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
         response.put("message", "Employee deleted successfully");
         return ResponseEntity.ok(response);
     }
 
-    // ========== 12. GET TOTAL EMPLOYEE COUNT ==========
+    // ✅ GET Total Count
     @GetMapping("/get-total-count")
     public ResponseEntity<Map<String, Object>> getTotalCount() {
         long count = employeeService.getTotalCount();
@@ -237,7 +248,7 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
 
-    // ========== 13. BULK DELETE EMPLOYEES ==========
+    // ✅ BULK DELETE
     @DeleteMapping("/bulk-delete")
     public ResponseEntity<Map<String, Object>> bulkDeleteEmployees(@RequestBody Map<String, List<Long>> request) {
         List<Long> ids = request.get("ids");
@@ -245,11 +256,10 @@ public class EmployeeController {
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
         response.put("message", ids.size() + " employees deleted successfully");
-        response.put("deletedIds", ids);
         return ResponseEntity.ok(response);
     }
 
-    // ========== 14. EXPORT ALL EMPLOYEES ==========
+    // ✅ EXPORT Employees
     @GetMapping("/export-employees")
     public ResponseEntity<Map<String, Object>> exportEmployees() {
         List<EmployeeResponseDTO> employees = employeeService.getAllEmployeesList();
@@ -257,7 +267,90 @@ public class EmployeeController {
         response.put("success", true);
         response.put("data", employees);
         response.put("totalCount", employees.size());
-        response.put("message", "Employees data exported successfully");
         return ResponseEntity.ok(response);
+    }
+
+    // ========== IMAGE SERVING ENDPOINTS ==========
+
+    @GetMapping(value = "/{employeeId}/aadhaar-image", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
+    public ResponseEntity<byte[]> getAadhaarImage(@PathVariable String employeeId) {
+        EmployeeEntity employee = employeeRepository.findByEmployeeId(employeeId)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+        byte[] imageData = employee.getAadhaarDocumentImage();
+        if (imageData == null || imageData.length == 0) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(imageData);
+    }
+
+    @GetMapping(value = "/{employeeId}/pan-image", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
+    public ResponseEntity<byte[]> getPanImage(@PathVariable String employeeId) {
+        EmployeeEntity employee = employeeRepository.findByEmployeeId(employeeId)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+        byte[] imageData = employee.getPanDocumentImage();
+        if (imageData == null || imageData.length == 0) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(imageData);
+    }
+
+    @GetMapping(value = "/{employeeId}/profile-photo", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
+    public ResponseEntity<byte[]> getProfilePhoto(@PathVariable String employeeId) {
+        EmployeeEntity employee = employeeRepository.findByEmployeeId(employeeId)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+        byte[] imageData = employee.getProfilePhotoImage();
+        if (imageData == null || imageData.length == 0) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(imageData);
+    }
+
+    @GetMapping(value = "/{employeePrimeId}/degree-image", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
+    public ResponseEntity<byte[]> getDegreeImage(@PathVariable String employeeId) {
+        EmployeeEntity employee = employeeRepository.findByEmployeeId(employeeId)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+        byte[] imageData = employee.getDegreeDocumentImage();
+        if (imageData == null || imageData.length == 0) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(imageData);
+    }
+
+    @GetMapping(value = "/{employeePrimeId}/experience-image", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
+    public ResponseEntity<byte[]> getExperienceImage(@PathVariable String employeeId) {
+        EmployeeEntity employee = employeeRepository.findByEmployeeId(employeeId)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+        byte[] imageData = employee.getExperienceDocumentImage();
+        if (imageData == null || imageData.length == 0) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(imageData);
+    }
+
+    @GetMapping(value = "/{employeeId}/offer-letter", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE, "application/pdf"})
+    public ResponseEntity<byte[]> getOfferLetter(@PathVariable String employeeId) {
+        EmployeeEntity employee = employeeRepository.findByEmployeeId(employeeId)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+        byte[] imageData = employee.getOfferLetterImage();
+        if (imageData == null || imageData.length == 0) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(imageData);
+    }
+
+
+    @GetMapping("/payroll-list")
+    public ResponseEntity<ApiResponse<List<EmployeeForPayrollDTO>>> getEmployeesForPayroll(
+            @RequestParam(defaultValue = "all") String department) {
+
+        logger.info("[Employee][GET] Payroll list → dept={}", department);
+
+        List<EmployeeForPayrollDTO> list = employeeService.getEmployeesForPayroll(department);
+
+        String message = list.isEmpty()
+                ? "No active employees found for department: " + department
+                : "Found " + list.size() + " active employee(s).";
+
+        return ResponseEntity.ok(ApiResponse.success(message, list));
     }
 }

@@ -42,4 +42,16 @@ public interface AttendanceRepository extends JpaRepository<AttendanceEntity, Lo
 
     Page<AttendanceEntity> findByEmployeeEmployeePrimeId(Long employeePrimeId, Pageable pageable);
 
+
+    @Query("SELECT a.status, COUNT(a) FROM AttendanceEntity a WHERE a.attendanceDate = :date GROUP BY a.status")
+    List<Object[]> countByStatusForDate(@Param("date") LocalDate date);
+
+    @Query("SELECT e.department, a.status, COUNT(a) FROM AttendanceEntity a JOIN a.employee e WHERE a.attendanceDate = :date GROUP BY e.department, a.status")
+    List<Object[]> countByDeptAndStatusForDate(@Param("date") LocalDate date);
+
+    @Query("SELECT a FROM AttendanceEntity a WHERE a.attendanceDate BETWEEN :from AND :to AND a.employee.department = :dept")
+    List<AttendanceEntity> findByDateRangeAndDept(@Param("from") LocalDate from, @Param("to") LocalDate to, @Param("dept") String dept);
+
+    @Query("SELECT a FROM AttendanceEntity a WHERE a.attendanceDate BETWEEN :from AND :to")
+    List<AttendanceEntity> findByDateRange(@Param("from") LocalDate from, @Param("to") LocalDate to);
 }

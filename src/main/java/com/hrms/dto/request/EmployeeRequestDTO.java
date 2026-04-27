@@ -8,8 +8,6 @@ public class EmployeeRequestDTO {
     private String firstName;
     private String middleName;
     private String lastName;
-
-    // ✅ Change LocalDate to String
     private String dateOfBirth;
     private String gender;
     private String maritalStatus;
@@ -21,7 +19,7 @@ public class EmployeeRequestDTO {
     private String linkedinProfile;
     private String fatherSpouseName;
 
-    // PWD Details
+    // PWD
     private Boolean isPhysicallyChallenged;
     private String disabilityType;
     private Integer disabilityPercentage;
@@ -33,11 +31,8 @@ public class EmployeeRequestDTO {
     private String designation;
     private String employeeGrade;
     private String employmentType;
-
-    // ✅ Change LocalDate to String
     private String joiningDate;
     private String probationEndDate;
-
     private String reportingManager;
     private String hrBusinessPartner;
     private String workLocation;
@@ -45,7 +40,7 @@ public class EmployeeRequestDTO {
     private String shift;
     private String costCentre;
 
-    // Bank Details
+    // Bank
     private String bankName;
     private String accountNumber;
     private String ifscCode;
@@ -86,10 +81,11 @@ public class EmployeeRequestDTO {
     private MultipartFile offerLetter;
     private MultipartFile profilePhoto;
 
-    // Constructors
+    // Constructor
     public EmployeeRequestDTO() {}
 
-    // Getters and Setters (All fields)
+    // ========== GETTERS AND SETTERS ==========
+
     public String getFirstName() { return firstName; }
     public void setFirstName(String firstName) { this.firstName = firstName; }
 
@@ -249,7 +245,6 @@ public class EmployeeRequestDTO {
     public String getWorkExperience() { return workExperience; }
     public void setWorkExperience(String workExperience) { this.workExperience = workExperience; }
 
-    // File Getters/Setters
     public MultipartFile getAadhaarDocument() { return aadhaarDocument; }
     public void setAadhaarDocument(MultipartFile aadhaarDocument) { this.aadhaarDocument = aadhaarDocument; }
 

@@ -7,7 +7,7 @@ public class EmployeeResponseDTO {
     private Long employeePrimeId;
     private String employeeId;
 
-    // ========== STEP 0: PERSONAL INFO ==========
+    // Personal Info
     private String firstName;
     private String middleName;
     private String lastName;
@@ -23,13 +23,13 @@ public class EmployeeResponseDTO {
     private String linkedinProfile;
     private String fatherSpouseName;
 
-    // ========== PWD DETAILS ==========
+    // PWD
     private Boolean isPhysicallyChallenged;
     private String disabilityType;
     private Integer disabilityPercentage;
     private String certificateNumber;
 
-    // ========== STEP 1: JOB DETAILS ==========
+    // Job Details
     private String department;
     private String subDepartment;
     private String designation;
@@ -45,42 +45,40 @@ public class EmployeeResponseDTO {
     private String costCentre;
     private String status;
 
-    // ========== BANK DETAILS ==========
+    // Bank
     private String bankName;
     private String accountNumber;
     private String ifscCode;
 
-    // ========== STEP 2: CONTACT & ADDRESS ==========
+    // Contact
     private String personalEmail;
     private String workEmail;
     private String mobileNumber;
     private String alternateNumber;
 
-    // Current Address
+    // Address
     private String currentStreet;
     private String currentCity;
     private String currentState;
     private String currentPincode;
     private String currentCountry;
-
-    // Permanent Address
     private String permanentStreet;
     private String permanentCity;
     private String permanentState;
     private String permanentPincode;
     private String permanentCountry;
 
-    // Emergency Contact
+    // Emergency
     private String emergencyName;
     private String emergencyRelationship;
     private String emergencyPhone;
 
-    // ========== STEP 3: EDUCATION & FAMILY & EXPERIENCE ==========
+    // JSON strings
     private String education;
     private String family;
     private String workExperience;
 
-    // ========== STEP 4: DOCUMENTS (URLs) ==========
+    // Image URLs (not Base64)
     private String aadhaarDocumentUrl;
     private String panDocumentUrl;
     private String degreeDocumentUrl;
@@ -88,7 +86,6 @@ public class EmployeeResponseDTO {
     private String offerLetterUrl;
     private String profilePhotoUrl;
 
-    // ========== METADATA ==========
     private LocalDate createdAt;
     private LocalDate updatedAt;
 
@@ -97,11 +94,22 @@ public class EmployeeResponseDTO {
 
     // ========== GETTERS AND SETTERS ==========
 
-    public Long getId() { return employeePrimeId; }
-    public void setId(Long employeePrimeId) { this.employeePrimeId = employeePrimeId; }
 
-    public String getEmployeeId() { return employeeId; }
-    public void setEmployeeId(String employeeId) { this.employeeId = employeeId; }
+    public Long getEmployeePrimeId() {
+        return employeePrimeId;
+    }
+
+    public void setEmployeePrimeId(Long employeePrimeId) {
+        this.employeePrimeId = employeePrimeId;
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
+    }
 
     public String getFirstName() { return firstName; }
     public void setFirstName(String firstName) { this.firstName = firstName; }
@@ -268,6 +276,7 @@ public class EmployeeResponseDTO {
     public String getWorkExperience() { return workExperience; }
     public void setWorkExperience(String workExperience) { this.workExperience = workExperience; }
 
+    // Image URL Getters/Setters
     public String getAadhaarDocumentUrl() { return aadhaarDocumentUrl; }
     public void setAadhaarDocumentUrl(String aadhaarDocumentUrl) { this.aadhaarDocumentUrl = aadhaarDocumentUrl; }
 

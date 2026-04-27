@@ -92,23 +92,29 @@ public class EmployeeEntity {
     private String certificateNumber;
 
     // ✅ DOCUMENT URLS (String fields - store URLs)
-    @Column(length = 500)
-    private String aadhaarDocumentUrl;
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] aadhaarDocumentImage;
 
-    @Column(length = 500)
-    private String panDocumentUrl;
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] panDocumentImage;
 
-    @Column(length = 500)
-    private String degreeDocumentUrl;
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] degreeDocumentImage;
 
-    @Column(length = 500)
-    private String experienceDocumentUrl;
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] experienceDocumentImage;
 
-    @Column(length = 500)
-    private String offerLetterUrl;
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] offerLetterImage;
 
-    @Column(length = 500)
-    private String profilePhotoUrl;
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] profilePhotoImage;
 
     // JSON strings for lists
     @Column(columnDefinition = "TEXT")
@@ -127,9 +133,7 @@ public class EmployeeEntity {
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AttendanceEntity> attendanceRecords = new ArrayList<>();
 
-
-    // Getters and Setters (Sabke getters/setters dalo)
-
+    // Getters and Setters
 
     public Long getEmployeePrimeId() {
         return employeePrimeId;
@@ -299,23 +303,55 @@ public class EmployeeEntity {
     public void setCertificateNumber(String certificateNumber) { this.certificateNumber = certificateNumber; }
 
     // ✅ Document URL Getters/Setters
-    public String getAadhaarDocumentUrl() { return aadhaarDocumentUrl; }
-    public void setAadhaarDocumentUrl(String aadhaarDocumentUrl) { this.aadhaarDocumentUrl = aadhaarDocumentUrl; }
 
-    public String getPanDocumentUrl() { return panDocumentUrl; }
-    public void setPanDocumentUrl(String panDocumentUrl) { this.panDocumentUrl = panDocumentUrl; }
 
-    public String getDegreeDocumentUrl() { return degreeDocumentUrl; }
-    public void setDegreeDocumentUrl(String degreeDocumentUrl) { this.degreeDocumentUrl = degreeDocumentUrl; }
+    public byte[] getAadhaarDocumentImage() {
+        return aadhaarDocumentImage;
+    }
 
-    public String getExperienceDocumentUrl() { return experienceDocumentUrl; }
-    public void setExperienceDocumentUrl(String experienceDocumentUrl) { this.experienceDocumentUrl = experienceDocumentUrl; }
+    public void setAadhaarDocumentImage(byte[] aadhaarDocumentImage) {
+        this.aadhaarDocumentImage = aadhaarDocumentImage;
+    }
 
-    public String getOfferLetterUrl() { return offerLetterUrl; }
-    public void setOfferLetterUrl(String offerLetterUrl) { this.offerLetterUrl = offerLetterUrl; }
+    public byte[] getPanDocumentImage() {
+        return panDocumentImage;
+    }
 
-    public String getProfilePhotoUrl() { return profilePhotoUrl; }
-    public void setProfilePhotoUrl(String profilePhotoUrl) { this.profilePhotoUrl = profilePhotoUrl; }
+    public void setPanDocumentImage(byte[] panDocumentImage) {
+        this.panDocumentImage = panDocumentImage;
+    }
+
+    public byte[] getDegreeDocumentImage() {
+        return degreeDocumentImage;
+    }
+
+    public void setDegreeDocumentImage(byte[] degreeDocumentImage) {
+        this.degreeDocumentImage = degreeDocumentImage;
+    }
+
+    public byte[] getExperienceDocumentImage() {
+        return experienceDocumentImage;
+    }
+
+    public void setExperienceDocumentImage(byte[] experienceDocumentImage) {
+        this.experienceDocumentImage = experienceDocumentImage;
+    }
+
+    public byte[] getOfferLetterImage() {
+        return offerLetterImage;
+    }
+
+    public void setOfferLetterImage(byte[] offerLetterImage) {
+        this.offerLetterImage = offerLetterImage;
+    }
+
+    public byte[] getProfilePhotoImage() {
+        return profilePhotoImage;
+    }
+
+    public void setProfilePhotoImage(byte[] profilePhotoImage) {
+        this.profilePhotoImage = profilePhotoImage;
+    }
 
     public String getEducation() { return education; }
     public void setEducation(String education) { this.education = education; }
