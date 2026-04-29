@@ -19,6 +19,9 @@ public class EmployeeRequestDTO {
     private String linkedinProfile;
     private String fatherSpouseName;
 
+    //employee login password
+    private String password;
+
     // PWD
     private Boolean isPhysicallyChallenged;
     private String disabilityType;
@@ -262,4 +265,12 @@ public class EmployeeRequestDTO {
 
     public MultipartFile getProfilePhoto() { return profilePhoto; }
     public void setProfilePhoto(MultipartFile profilePhoto) { this.profilePhoto = profilePhoto; }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

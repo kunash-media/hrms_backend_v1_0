@@ -1,5 +1,6 @@
 package com.hrms.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -75,6 +76,9 @@ public class EmployeeEntity {
     private String permanentPincode;
     private String permanentCountry;
 
+    //employee login password
+    private String password;
+
     // Emergency Contact
     private String emergencyName;
     private String emergencyRelationship;
@@ -131,6 +135,7 @@ public class EmployeeEntity {
 
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<AttendanceEntity> attendanceRecords = new ArrayList<>();
 
     // Getters and Setters
@@ -375,6 +380,14 @@ public class EmployeeEntity {
 
     public void setAttendanceRecords(List<AttendanceEntity> attendanceRecords) {
         this.attendanceRecords = attendanceRecords;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
 

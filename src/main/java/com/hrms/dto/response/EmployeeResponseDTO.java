@@ -23,6 +23,9 @@ public class EmployeeResponseDTO {
     private String linkedinProfile;
     private String fatherSpouseName;
 
+    //employee login password
+    private String password;
+
     // PWD
     private Boolean isPhysicallyChallenged;
     private String disabilityType;
@@ -300,4 +303,12 @@ public class EmployeeResponseDTO {
 
     public LocalDate getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(LocalDate updatedAt) { this.updatedAt = updatedAt; }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

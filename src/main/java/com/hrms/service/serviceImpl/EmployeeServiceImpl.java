@@ -1,8 +1,10 @@
 package com.hrms.service.serviceImpl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hrms.config.BcryptEncoderConfig;
 import com.hrms.dto.request.EmployeeRequestDTO;
 import com.hrms.dto.response.EmployeeForPayrollDTO;
+import com.hrms.dto.response.EmployeeLoginResponseDto;
 import com.hrms.dto.response.EmployeeResponseDTO;
 import com.hrms.dto.response.EmployeeSummaryDTO;
 import com.hrms.entity.EmployeeEntity;
@@ -26,8 +28,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private static final Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
+    private final  EmployeeRepository employeeRepository;
+        private final BcryptEncoderConfig passwordEncoder;
+
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, BcryptEncoderConfig passwordEncoder) {
+        this.employeeRepository = employeeRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -96,6 +103,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setReligion(dto.getReligion());
         employee.setLinkedinProfile(dto.getLinkedinProfile());
         employee.setFatherSpouseName(dto.getFatherSpouseName());
+
+        employee.setPassword(passwordEncoder.encode(dto.getPassword()));
+
 
         // PWD Details
         employee.setIsPhysicallyChallenged(dto.getIsPhysicallyChallenged());
@@ -292,10 +302,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findByStatus(status, pageable).map(this::convertToResponseDTO);
     }
 
-//    @Override
-//    public Page<EmployeeResponseDTO> searchEmployees(String search, Pageable pageable) {
-//        return employeeRepository.searchEmployees(search, pageable).map(this::convertToResponseDTO);
-//    }
 
     @Override
     public List<EmployeeResponseDTO> getAllEmployeesList() {
@@ -468,4 +474,38 @@ public class EmployeeServiceImpl implements EmployeeService {
                 e.getBasicSalary()
         )).collect(Collectors.toList());
     }
+
+
+    public EmployeeLoginResponseDto login(String employeeId, String password) {
+        EmployeeEntity employee = employeeRepository.findByEmployeeId(employeeId)
+                .orElseThrow(() -> new RuntimeException("Employee not found with ID: " + employeeId));
+
+        if (!passwordEncoder.matches(password, employee.getPassword())) {
+            throw new RuntimeException("Invalid credentials");
+        }
+
+        return new EmployeeLoginResponseDto(
+                employee.getEmployeePrimeId(),
+                employee.getEmployeeId(),
+                employee.getFirstName(),
+                employee.getLastName(),
+                employee.getDepartment(),
+                employee.getDesignation(),
+                employee.getWorkEmail()
+        );
+    }
+
+    public void updatePassword(String employeeId, String oldPassword, String newPassword) {
+        EmployeeEntity employee = employeeRepository.findByEmployeeId(employeeId)
+                .orElseThrow(() -> new RuntimeException("No employee found with ID: " + employeeId));
+
+        if (!passwordEncoder.matches(oldPassword, employee.getPassword())) {
+            throw new RuntimeException("Old password does not match");
+        }
+
+        employee.setPassword(passwordEncoder.encode(newPassword));
+        employeeRepository.save(employee);
+    }
+
+
 }

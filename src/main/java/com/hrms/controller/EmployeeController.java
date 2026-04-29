@@ -3,6 +3,7 @@ package com.hrms.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hrms.dto.request.EmployeeRequestDTO;
 import com.hrms.dto.response.EmployeeForPayrollDTO;
+import com.hrms.dto.response.EmployeeLoginResponseDto;
 import com.hrms.dto.response.EmployeeResponseDTO;
 import com.hrms.dto.response.EmployeeSummaryDTO;
 import com.hrms.entity.EmployeeEntity;
@@ -78,9 +79,9 @@ public class EmployeeController {
     }
 
     // ✅ UPDATE Employee
-    @PutMapping(value = "/update-employee/{id}", consumes = {"multipart/form-data"})
+    @PutMapping(value = "/update-employee/{employeePrimeId}", consumes = {"multipart/form-data"})
     public ResponseEntity<Map<String, Object>> updateEmployee(
-            @PathVariable Long id,
+            @PathVariable Long employeePrimeId,
             @RequestPart("employee") String employeeJson,
             @RequestPart(value = "aadhaarDocument", required = false) MultipartFile aadhaarDocument,
             @RequestPart(value = "panDocument", required = false) MultipartFile panDocument,
@@ -99,7 +100,7 @@ public class EmployeeController {
             dto.setOfferLetter(offerLetter);
             dto.setProfilePhoto(profilePhoto);
 
-            EmployeeResponseDTO employee = employeeService.updateEmployee(id, dto);
+            EmployeeResponseDTO employee = employeeService.updateEmployee(employeePrimeId, dto);
 
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
@@ -122,7 +123,7 @@ public class EmployeeController {
             @RequestParam(defaultValue = "10") int size) {
 
         Page<EmployeeResponseDTO> employees = employeeService.getAllEmployees(
-                PageRequest.of(page, size, Sort.by("id").descending()));
+                PageRequest.of(page, size, Sort.by("employeePrimeId").descending()));
 
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
@@ -141,20 +142,20 @@ public class EmployeeController {
         return ResponseEntity.ok(employees);
     }
 
-    // ✅ GET Employee by ID
-    @GetMapping("/get-employee-by-id/{id}")
-    public ResponseEntity<Map<String, Object>> getEmployeeById(@PathVariable Long id) {
-        EmployeeResponseDTO employee = employeeService.getEmployeeById(id);
+    // ✅ GET Employee by employeePrimeId
+    @GetMapping("/get-employee-by-employeePrimeId/{employeePrimeId}")
+    public ResponseEntity<Map<String, Object>> getEmployeeById(@PathVariable Long employeePrimeId) {
+        EmployeeResponseDTO employee = employeeService.getEmployeeById(employeePrimeId);
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
         response.put("data", employee);
         return ResponseEntity.ok(response);
     }
 
-    // ✅ GET Employee by Employee Prime ID (EMP001)
-    @GetMapping("/get-employee-by-employee-prime-id/{employeePrimeId}")
-    public ResponseEntity<Map<String, Object>> getEmployeeByEmployeePrimeId(@PathVariable String employeePrimeId) {
-        EmployeeResponseDTO employee = employeeService.getEmployeeByEmployeePrimeId(employeePrimeId);
+    // ✅ GET Employee by Employee Prime employeePrimeId (EMP001)
+    @GetMapping("/get-employee-by-employeeId/{employeeId}")
+    public ResponseEntity<Map<String, Object>> getEmployeeByEmployeePrimeId(@PathVariable String employeeId) {
+        EmployeeResponseDTO employee = employeeService.getEmployeeByEmployeePrimeId(employeeId);
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
         response.put("data", employee);
@@ -215,12 +216,12 @@ public class EmployeeController {
     }
 
     // ✅ UPDATE Status
-    @PatchMapping("/update-employee-status/{id}")
+    @PatchMapping("/update-employee-status/{employeePrimeId}")
     public ResponseEntity<Map<String, Object>> updateEmployeeStatus(
-            @PathVariable Long id,
+            @PathVariable Long employeePrimeId,
             @RequestParam String status) {
 
-        EmployeeResponseDTO employee = employeeService.updateEmployeeStatus(id, status);
+        EmployeeResponseDTO employee = employeeService.updateEmployeeStatus(employeePrimeId, status);
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
         response.put("message", "Status updated to: " + status);
@@ -229,9 +230,9 @@ public class EmployeeController {
     }
 
     // ✅ DELETE Employee
-    @DeleteMapping("/delete-employee/{id}")
-    public ResponseEntity<Map<String, Object>> deleteEmployee(@PathVariable Long id) {
-        employeeService.deleteEmployee(id);
+    @DeleteMapping("/delete-employee/{employeePrimeId}")
+    public ResponseEntity<Map<String, Object>> deleteEmployee(@PathVariable Long employeePrimeId) {
+        employeeService.deleteEmployee(employeePrimeId);
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
         response.put("message", "Employee deleted successfully");
@@ -294,7 +295,7 @@ public class EmployeeController {
         return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(imageData);
     }
 
-    @GetMapping(value = "/{employeeId}/profile-photo", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
+    @GetMapping(value = "/{employeeId}/profile-image", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
     public ResponseEntity<byte[]> getProfilePhoto(@PathVariable String employeeId) {
         EmployeeEntity employee = employeeRepository.findByEmployeeId(employeeId)
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
@@ -305,7 +306,7 @@ public class EmployeeController {
         return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(imageData);
     }
 
-    @GetMapping(value = "/{employeePrimeId}/degree-image", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
+    @GetMapping(value = "/{employeeId}/degree-image", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
     public ResponseEntity<byte[]> getDegreeImage(@PathVariable String employeeId) {
         EmployeeEntity employee = employeeRepository.findByEmployeeId(employeeId)
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
@@ -316,7 +317,7 @@ public class EmployeeController {
         return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(imageData);
     }
 
-    @GetMapping(value = "/{employeePrimeId}/experience-image", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
+    @GetMapping(value = "/{employeeId}/experience-image", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
     public ResponseEntity<byte[]> getExperienceImage(@PathVariable String employeeId) {
         EmployeeEntity employee = employeeRepository.findByEmployeeId(employeeId)
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
@@ -327,7 +328,7 @@ public class EmployeeController {
         return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(imageData);
     }
 
-    @GetMapping(value = "/{employeeId}/offer-letter", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE, "application/pdf"})
+    @GetMapping(value = "/{employeeId}/offer-image", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE, "application/pdf"})
     public ResponseEntity<byte[]> getOfferLetter(@PathVariable String employeeId) {
         EmployeeEntity employee = employeeRepository.findByEmployeeId(employeeId)
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
@@ -352,5 +353,25 @@ public class EmployeeController {
                 : "Found " + list.size() + " active employee(s).";
 
         return ResponseEntity.ok(ApiResponse.success(message, list));
+    }
+
+    @GetMapping("/employee-login")
+    public ResponseEntity<EmployeeLoginResponseDto> login(
+            @RequestParam String employeeId,
+            @RequestParam String password) {
+        return ResponseEntity.ok(employeeService.login(employeeId, password));
+    }
+
+    @PatchMapping("/employee-update-password")
+    public ResponseEntity<String> updatePassword(
+            @RequestParam String employeeId,
+            @RequestParam String oldPassword,
+            @RequestParam String newPassword) {
+        try {
+            employeeService.updatePassword(employeeId, oldPassword, newPassword);
+            return ResponseEntity.ok("Password updated successfully");
+        } catch (RuntimeException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
     }
 }
