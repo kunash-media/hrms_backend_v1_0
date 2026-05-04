@@ -1,10 +1,8 @@
 package com.hrms.service;
 
 import com.hrms.dto.request.EmployeeRequestDTO;
-import com.hrms.dto.response.EmployeeForPayrollDTO;
-import com.hrms.dto.response.EmployeeLoginResponseDto;
-import com.hrms.dto.response.EmployeeResponseDTO;
-import com.hrms.dto.response.EmployeeSummaryDTO;
+import com.hrms.dto.request.RegisterEmployeeRequestDTO;
+import com.hrms.dto.response.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
@@ -50,4 +48,6 @@ public interface EmployeeService {
     EmployeeLoginResponseDto login(String employeeId, String password);
 
     void updatePassword(String employeeId, String oldPassword, String newPassword);
+
+    public RegisteredEmployeeResponseDTO registerEmployee(RegisterEmployeeRequestDTO dto);
 }

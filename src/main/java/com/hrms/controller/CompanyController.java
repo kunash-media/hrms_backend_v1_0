@@ -8,6 +8,7 @@ import com.hrms.repository.CompanyRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,73 +29,86 @@ public class CompanyController {
     }
 
     @PostMapping("/profile")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<CompanyResponseDTO.ApiResponse> saveCompany(@RequestBody CompanyRequestDTO request) {
-        try {
-            System.out.println("=== SAVE CompanyEntity ===");
-            System.out.println("Request ID: " + request.getId());
-            System.out.println("CompanyEntity Name: " + request.getCompanyName());
+        return saveOrUpdateCompany(request);
+    }
 
-            CompanyEntity CompanyEntity;
+    @PutMapping("/profile")
+    @PreAuthorize("permitAll()")
+    public ResponseEntity<CompanyResponseDTO.ApiResponse> updateCompany(@RequestBody CompanyRequestDTO request) {
+        return saveOrUpdateCompany(request);
+    }
+
+    private ResponseEntity<CompanyResponseDTO.ApiResponse> saveOrUpdateCompany(CompanyRequestDTO request) {
+        try {
+            System.out.println("=== SAVE/UPDATE CompanyEntity ===");
+            System.out.println("Request ID: " + request.getId());
+            System.out.println("Company Name: " + request.getCompanyName());
+            System.out.println("Departments JSON: " + request.getDepartments());
+            System.out.println("Designations JSON: " + request.getDesignations());
+
+            CompanyEntity companyEntity;
 
             if (request.getId() != null && request.getId() > 0) {
-                CompanyEntity = companyRepository.findById(request.getId()).orElse(new CompanyEntity());
+                // UPDATE path: fetch the existing managed entity — single fetch only
+                companyEntity = companyRepository.findById(request.getId())
+                        .orElseThrow(() -> new RuntimeException("CompanyEntity not found with id: " + request.getId()));
                 System.out.println("Updating existing CompanyEntity with ID: " + request.getId());
-
-                // Preserve existing logo if not uploading new
-                CompanyEntity existing = companyRepository.findById(request.getId()).orElse(null);
-                if (existing != null && existing.getLogo() != null) {
-                    CompanyEntity.setLogo(existing.getLogo());
-                    CompanyEntity.setLogoContentType(existing.getLogoContentType());
-                    System.out.println("Preserved existing logo, size: " + existing.getLogo().length);
-                }
+                // Logo is already loaded on companyEntity — no need to fetch again
+                // It will be preserved because we only set logo fields in the logo upload endpoint
             } else {
-                CompanyEntity = new CompanyEntity();
+                // INSERT path
+                companyEntity = new CompanyEntity();
                 System.out.println("Creating new CompanyEntity");
             }
 
             // Set basic fields
-            CompanyEntity.setCompanyName(request.getCompanyName());
-            CompanyEntity.setGstNumber(request.getGstNumber());
-            CompanyEntity.setPanNumber(request.getPanNumber());
-            CompanyEntity.setCinNumber(request.getCinNumber());
-            CompanyEntity.setRegistrationNumber(request.getRegistrationNumber());
-            CompanyEntity.setEmail(request.getEmail());
-            CompanyEntity.setPhone(request.getPhone());
-            CompanyEntity.setWebsite(request.getWebsite());
-            CompanyEntity.setEstablishedYear(request.getEstablishedYear());
-            CompanyEntity.setEmployeeCount(request.getEmployeeCount());
-            CompanyEntity.setCompanyType(request.getCompanyType());
-            CompanyEntity.setIndustryType(request.getIndustryType());
-            CompanyEntity.setAddress(request.getAddress());
-            CompanyEntity.setDescription(request.getDescription());
+            companyEntity.setCompanyName(request.getCompanyName());
+            companyEntity.setGstNumber(request.getGstNumber());
+            companyEntity.setPanNumber(request.getPanNumber());
+            companyEntity.setCinNumber(request.getCinNumber());
+            companyEntity.setRegistrationNumber(request.getRegistrationNumber());
+            companyEntity.setEmail(request.getEmail());
+            companyEntity.setPhone(request.getPhone());
+            companyEntity.setWebsite(request.getWebsite());
+            companyEntity.setEstablishedYear(request.getEstablishedYear());
+            companyEntity.setEmployeeCount(request.getEmployeeCount());
+            companyEntity.setCompanyType(request.getCompanyType());
+            companyEntity.setIndustryType(request.getIndustryType());
+            companyEntity.setAddress(request.getAddress());
+            companyEntity.setDescription(request.getDescription());
 
-            // Set JSON fields (directly as strings)
+            // Set JSON fields — always overwrite so edits are persisted
             if (request.getWorkingDays() != null && !request.getWorkingDays().isEmpty()) {
-                CompanyEntity.setWorkingDaysJson(request.getWorkingDays());
+                companyEntity.setWorkingDaysJson(request.getWorkingDays());
+                System.out.println("WorkingDays JSON set: " + request.getWorkingDays());
             }
             if (request.getBreakTimings() != null && !request.getBreakTimings().isEmpty()) {
-                CompanyEntity.setBreakTimingsJson(request.getBreakTimings());
+                companyEntity.setBreakTimingsJson(request.getBreakTimings());
             }
             if (request.getHolidays() != null && !request.getHolidays().isEmpty()) {
-                CompanyEntity.setHolidaysJson(request.getHolidays());
+                companyEntity.setHolidaysJson(request.getHolidays());
             }
             if (request.getDepartments() != null && !request.getDepartments().isEmpty()) {
-                CompanyEntity.setDepartmentsJson(request.getDepartments());
+                companyEntity.setDepartmentsJson(request.getDepartments());
+                System.out.println("Departments JSON set: " + request.getDepartments());
             }
             if (request.getDesignations() != null && !request.getDesignations().isEmpty()) {
-                CompanyEntity.setDesignationsJson(request.getDesignations());
+                companyEntity.setDesignationsJson(request.getDesignations());
+                System.out.println("Designations JSON set: " + request.getDesignations());
             }
             if (request.getSocialMedia() != null && !request.getSocialMedia().isEmpty()) {
-                CompanyEntity.setSocialMediaJson(request.getSocialMedia());
+                companyEntity.setSocialMediaJson(request.getSocialMedia());
             }
             if (request.getContactPersons() != null && !request.getContactPersons().isEmpty()) {
-                CompanyEntity.setContactPersonsJson(request.getContactPersons());
+                companyEntity.setContactPersonsJson(request.getContactPersons());
             }
             if (request.getBankDetails() != null && !request.getBankDetails().isEmpty()) {
-                CompanyEntity.setBankDetailsJson(request.getBankDetails());
+                companyEntity.setBankDetailsJson(request.getBankDetails());
             }
 
-            CompanyEntity saved = companyRepository.save(CompanyEntity);
+            CompanyEntity saved = companyRepository.save(companyEntity);
             System.out.println("CompanyEntity saved with ID: " + saved.getId());
 
             return ResponseEntity.ok(CompanyResponseDTO.ApiResponse.success("CompanyEntity saved successfully", convertToResponse(saved)));
@@ -106,6 +120,7 @@ public class CompanyController {
     }
 
     @PostMapping("/logo/{id}")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<CompanyResponseDTO.ApiResponse> uploadLogo(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
         try {
             System.out.println("=== UPLOAD LOGO ===");
@@ -114,7 +129,7 @@ public class CompanyController {
             System.out.println("File size: " + file.getSize() + " bytes");
             System.out.println("Content type: " + file.getContentType());
 
-            CompanyEntity CompanyEntity = companyRepository.findById(id)
+            CompanyEntity companyEntity = companyRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("CompanyEntity not found with id: " + id));
 
             if (file.isEmpty()) {
@@ -135,11 +150,11 @@ public class CompanyController {
             System.out.println("Read " + logoBytes.length + " bytes from file");
 
             // Set logo
-            CompanyEntity.setLogo(logoBytes);
-            CompanyEntity.setLogoContentType(contentType);
+            companyEntity.setLogo(logoBytes);
+            companyEntity.setLogoContentType(contentType);
 
             // Save to database
-            CompanyEntity saved = companyRepository.save(CompanyEntity);
+            CompanyEntity saved = companyRepository.save(companyEntity);
             System.out.println("Saved to database. Logo in saved entity: " + (saved.getLogo() != null ? saved.getLogo().length + " bytes" : "NULL"));
 
             // Return relative logo URL
@@ -156,19 +171,20 @@ public class CompanyController {
     }
 
     @GetMapping("/profile/{id}")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<CompanyResponseDTO.ApiResponse> getCompany(@PathVariable Long id) {
         try {
             System.out.println("=== GET CompanyEntity ===");
             System.out.println("CompanyEntity ID: " + id);
 
-            CompanyEntity CompanyEntity = companyRepository.findById(id)
+            CompanyEntity companyEntity = companyRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("CompanyEntity not found with id: " + id));
 
-            System.out.println("CompanyEntity found: " + CompanyEntity.getCompanyName());
-            System.out.println("Logo in entity: " + (CompanyEntity.getLogo() != null ? CompanyEntity.getLogo().length + " bytes" : "NULL"));
-            System.out.println("Logo content type: " + CompanyEntity.getLogoContentType());
+            System.out.println("CompanyEntity found: " + companyEntity.getCompanyName());
+            System.out.println("Logo in entity: " + (companyEntity.getLogo() != null ? companyEntity.getLogo().length + " bytes" : "NULL"));
+            System.out.println("Logo content type: " + companyEntity.getLogoContentType());
 
-            return ResponseEntity.ok(CompanyResponseDTO.ApiResponse.success("CompanyEntity retrieved successfully", convertToResponse(CompanyEntity)));
+            return ResponseEntity.ok(CompanyResponseDTO.ApiResponse.success("CompanyEntity retrieved successfully", convertToResponse(companyEntity)));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body(CompanyResponseDTO.ApiResponse.error(e.getMessage()));
@@ -176,25 +192,26 @@ public class CompanyController {
     }
 
     @GetMapping(value = "/logo/{id}", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE})
+    @PreAuthorize("permitAll()")
     public ResponseEntity<byte[]> getLogoImage(@PathVariable Long id) {
         try {
             System.out.println("=== GET LOGO IMAGE ===");
             System.out.println("CompanyEntity ID: " + id);
 
-            CompanyEntity CompanyEntity = companyRepository.findById(id)
+            CompanyEntity companyEntity = companyRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("CompanyEntity not found with id: " + id));
 
-            if (CompanyEntity.getLogo() == null || CompanyEntity.getLogo().length == 0) {
+            if (companyEntity.getLogo() == null || companyEntity.getLogo().length == 0) {
                 System.out.println("No logo found for CompanyEntity ID: " + id);
                 return ResponseEntity.notFound().build();
             }
 
-            System.out.println("Returning logo, size: " + CompanyEntity.getLogo().length + " bytes");
-            String contentType = CompanyEntity.getLogoContentType() != null ? CompanyEntity.getLogoContentType() : "image/png";
+            System.out.println("Returning logo, size: " + companyEntity.getLogo().length + " bytes");
+            String contentType = companyEntity.getLogoContentType() != null ? companyEntity.getLogoContentType() : "image/png";
 
             return ResponseEntity.ok()
                     .contentType(MediaType.parseMediaType(contentType))
-                    .body(CompanyEntity.getLogo());
+                    .body(companyEntity.getLogo());
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -202,19 +219,25 @@ public class CompanyController {
     }
 
     @DeleteMapping("/profile/{id}")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<CompanyResponseDTO.ApiResponse> deleteCompany(@PathVariable Long id) {
         try {
+            System.out.println("=== DELETE CompanyEntity ===");
+            System.out.println("CompanyEntity ID: " + id);
             if (!companyRepository.existsById(id)) {
                 throw new RuntimeException("CompanyEntity not found with id: " + id);
             }
             companyRepository.deleteById(id);
+            System.out.println("CompanyEntity deleted with ID: " + id);
             return ResponseEntity.ok(CompanyResponseDTO.ApiResponse.success("CompanyEntity deleted successfully", null));
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.badRequest().body(CompanyResponseDTO.ApiResponse.error(e.getMessage()));
         }
     }
 
     @GetMapping("/profiles")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<CompanyResponseDTO.ApiResponse> getAllCompanies() {
         try {
             List<CompanyEntity> companies = companyRepository.findAll();
@@ -227,41 +250,44 @@ public class CompanyController {
         }
     }
 
-    private CompanyResponseDTO convertToResponse(CompanyEntity CompanyEntity) {
+    private CompanyResponseDTO convertToResponse(CompanyEntity companyEntity) {
         CompanyResponseDTO response = new CompanyResponseDTO();
-        response.setId(CompanyEntity.getId());
-        response.setCompanyName(CompanyEntity.getCompanyName());
-        response.setGstNumber(CompanyEntity.getGstNumber());
-        response.setPanNumber(CompanyEntity.getPanNumber());
-        response.setCinNumber(CompanyEntity.getCinNumber());
-        response.setRegistrationNumber(CompanyEntity.getRegistrationNumber());
-        response.setEmail(CompanyEntity.getEmail());
-        response.setPhone(CompanyEntity.getPhone());
-        response.setWebsite(CompanyEntity.getWebsite());
-        response.setEstablishedYear(CompanyEntity.getEstablishedYear());
-        response.setEmployeeCount(CompanyEntity.getEmployeeCount());
-        response.setCompanyType(CompanyEntity.getCompanyType());
-        response.setIndustryType(CompanyEntity.getIndustryType());
-        response.setAddress(CompanyEntity.getAddress());
-        response.setDescription(CompanyEntity.getDescription());
+        response.setId(companyEntity.getId());
+        response.setCompanyName(companyEntity.getCompanyName());
+        response.setGstNumber(companyEntity.getGstNumber());
+        response.setPanNumber(companyEntity.getPanNumber());
+        response.setCinNumber(companyEntity.getCinNumber());
+        response.setRegistrationNumber(companyEntity.getRegistrationNumber());
+        response.setEmail(companyEntity.getEmail());
+        response.setPhone(companyEntity.getPhone());
+        response.setWebsite(companyEntity.getWebsite());
+        response.setEstablishedYear(companyEntity.getEstablishedYear());
+        response.setEmployeeCount(companyEntity.getEmployeeCount());
+        response.setCompanyType(companyEntity.getCompanyType());
+        response.setIndustryType(companyEntity.getIndustryType());
+        response.setAddress(companyEntity.getAddress());
+        response.setDescription(companyEntity.getDescription());
 
         // Generate relative logo URL (without base URL)
-        if (CompanyEntity.getLogo() != null && CompanyEntity.getLogo().length > 0) {
-            String logoUrl = "/api/CompanyEntity/logo/" + CompanyEntity.getId();
+        if (companyEntity.getLogo() != null && companyEntity.getLogo().length > 0) {
+            String logoUrl = "/api/CompanyEntity/logo/" + companyEntity.getId();
             response.setLogoUrl(logoUrl);
-            response.setLogoContentType(CompanyEntity.getLogoContentType());
+            response.setLogoContentType(companyEntity.getLogoContentType());
         }
 
-        response.setWorkingDaysJson(CompanyEntity.getWorkingDaysJson());
-        response.setBreakTimingsJson(CompanyEntity.getBreakTimingsJson());
-        response.setHolidaysJson(CompanyEntity.getHolidaysJson());
-        response.setDepartmentsJson(CompanyEntity.getDepartmentsJson());
-        response.setDesignationsJson(CompanyEntity.getDesignationsJson());
-        response.setSocialMediaJson(CompanyEntity.getSocialMediaJson());
-        response.setContactPersonsJson(CompanyEntity.getContactPersonsJson());
-        response.setBankDetailsJson(CompanyEntity.getBankDetailsJson());
-        response.setCreatedAt(CompanyEntity.getCreatedAt());
-        response.setUpdatedAt(CompanyEntity.getUpdatedAt());
+        response.setWorkingDaysJson(companyEntity.getWorkingDaysJson());
+        response.setBreakTimingsJson(companyEntity.getBreakTimingsJson());
+        response.setHolidaysJson(companyEntity.getHolidaysJson());
+        response.setDepartmentsJson(companyEntity.getDepartmentsJson());
+        response.setDesignationsJson(companyEntity.getDesignationsJson());
+        response.setSocialMediaJson(companyEntity.getSocialMediaJson());
+        response.setContactPersonsJson(companyEntity.getContactPersonsJson());
+        response.setBankDetailsJson(companyEntity.getBankDetailsJson());
+        response.setCreatedAt(companyEntity.getCreatedAt());
+        response.setUpdatedAt(companyEntity.getUpdatedAt());
         return response;
     }
 }
+
+
+

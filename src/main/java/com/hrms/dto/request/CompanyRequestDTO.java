@@ -1,6 +1,5 @@
 package com.hrms.dto.request;
 
-
 public class CompanyRequestDTO {
     private Long id;
     private String companyName;
@@ -17,18 +16,48 @@ public class CompanyRequestDTO {
     private String industryType;
     private String address;
     private String description;
-
-    // Working Hours - Store as String (JSON)
     private String workingDays;
     private String breakTimings;
-
-    // Lists as String (JSON)
     private String holidays;
     private String departments;
     private String designations;
     private String socialMedia;
     private String contactPersons;
     private String bankDetails;
+
+    // Constructors
+    public CompanyRequestDTO() {}
+
+    public CompanyRequestDTO(Long id, String companyName, String gstNumber, String panNumber, String cinNumber,
+                             String registrationNumber, String email, String phone, String website,
+                             Integer establishedYear, Integer employeeCount, String companyType, String industryType,
+                             String address, String description, String workingDays, String breakTimings,
+                             String holidays, String departments, String designations, String socialMedia,
+                             String contactPersons, String bankDetails) {
+        this.id = id;
+        this.companyName = companyName;
+        this.gstNumber = gstNumber;
+        this.panNumber = panNumber;
+        this.cinNumber = cinNumber;
+        this.registrationNumber = registrationNumber;
+        this.email = email;
+        this.phone = phone;
+        this.website = website;
+        this.establishedYear = establishedYear;
+        this.employeeCount = employeeCount;
+        this.companyType = companyType;
+        this.industryType = industryType;
+        this.address = address;
+        this.description = description;
+        this.workingDays = workingDays;
+        this.breakTimings = breakTimings;
+        this.holidays = holidays;
+        this.departments = departments;
+        this.designations = designations;
+        this.socialMedia = socialMedia;
+        this.contactPersons = contactPersons;
+        this.bankDetails = bankDetails;
+    }
 
     // Getters and Setters
     public Long getId() { return id; }
@@ -98,6 +127,6 @@ public class CompanyRequestDTO {
     public void setContactPersons(String contactPersons) { this.contactPersons = contactPersons; }
 
     public String getBankDetails() { return bankDetails; }
-    public void seatBankDetails(String bankDetails) { this.bankDetails = bankDetails; }
+    public void setBankDetails(String bankDetails) { this.bankDetails = bankDetails; }
 }
 

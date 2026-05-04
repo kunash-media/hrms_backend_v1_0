@@ -3,10 +3,8 @@ package com.hrms.service.serviceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hrms.config.BcryptEncoderConfig;
 import com.hrms.dto.request.EmployeeRequestDTO;
-import com.hrms.dto.response.EmployeeForPayrollDTO;
-import com.hrms.dto.response.EmployeeLoginResponseDto;
-import com.hrms.dto.response.EmployeeResponseDTO;
-import com.hrms.dto.response.EmployeeSummaryDTO;
+import com.hrms.dto.request.RegisterEmployeeRequestDTO;
+import com.hrms.dto.response.*;
 import com.hrms.entity.EmployeeEntity;
 import com.hrms.repository.EmployeeRepository;
 import com.hrms.service.EmployeeService;
@@ -80,7 +78,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         // Generate Employee Prime employeePrimeId
         long count = employeeRepository.count() + 1;
-        String employeeId = String.format("EMP%03d", count);
+        String employeeId = String.format("EMP%04d", count);
 
         EmployeeEntity employee = new EmployeeEntity();
 
@@ -506,6 +504,39 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employee.setPassword(passwordEncoder.encode(newPassword));
         employeeRepository.save(employee);
+    }
+
+
+    //=========================================================//
+    //           register employee  for portal credentials     //
+    //=========================================================//
+
+    public RegisteredEmployeeResponseDTO registerEmployee(RegisterEmployeeRequestDTO dto) {
+
+        // Auto-generate employeeId like EMP0001, EMP0002...
+        long count = employeeRepository.count();
+        String employeeId = String.format("EMP%04d", count + 1);
+
+        EmployeeEntity employee = new EmployeeEntity();
+
+        employee.setEmployeeId(employeeId);
+        employee.setFirstName(dto.getFirstName());
+        employee.setLastName(dto.getLastName());
+        employee.setFullName(dto.getFirstName() + " " + dto.getLastName());
+        employee.setPassword(passwordEncoder.encode(dto.getPassword()));
+        employee.setStatus("INCOMPLETE");   // flag to know profile isn't complete
+        employee.setCreatedAt(LocalDate.now());
+        employee.setUpdatedAt(LocalDate.now());
+
+        EmployeeEntity saved = employeeRepository.save(employee);
+
+        return new RegisteredEmployeeResponseDTO(
+                saved.getEmployeePrimeId(),
+                saved.getEmployeeId(),
+                saved.getFirstName(),
+                saved.getLastName(),
+                saved.getStatus()
+        );
     }
 
 

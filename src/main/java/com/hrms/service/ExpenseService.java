@@ -1,6 +1,7 @@
 package com.hrms.service;
 
 import com.hrms.dto.request.ExpenseRequestDto;
+import com.hrms.dto.request.RegisterEmployeeRequestDTO;
 import com.hrms.dto.response.ExpenseResponseDto;
 import java.time.LocalDate;
 import java.util.List;
@@ -32,4 +33,5 @@ public interface ExpenseService {
     Double getTotalExpensesByMonth(Integer month, Integer year);
 
     byte[] getReceiptData(Long expenseId, Integer receiptIndex);
+
 }

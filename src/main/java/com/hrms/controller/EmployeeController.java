@@ -2,10 +2,8 @@ package com.hrms.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hrms.dto.request.EmployeeRequestDTO;
-import com.hrms.dto.response.EmployeeForPayrollDTO;
-import com.hrms.dto.response.EmployeeLoginResponseDto;
-import com.hrms.dto.response.EmployeeResponseDTO;
-import com.hrms.dto.response.EmployeeSummaryDTO;
+import com.hrms.dto.request.RegisterEmployeeRequestDTO;
+import com.hrms.dto.response.*;
 import com.hrms.entity.EmployeeEntity;
 import com.hrms.repository.EmployeeRepository;
 import com.hrms.service.EmployeeService;
@@ -77,6 +75,9 @@ public class EmployeeController {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
+
+
+
 
     // ✅ UPDATE Employee
     @PutMapping(value = "/update-employee/{employeePrimeId}", consumes = {"multipart/form-data"})
@@ -373,5 +374,17 @@ public class EmployeeController {
         } catch (RuntimeException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
+    }
+
+    //======================================================//
+    //       register employee for portal credentials       //
+    //======================================================//
+
+    @PostMapping("/register")
+    public ResponseEntity<RegisteredEmployeeResponseDTO> registerEmployeeForPortal(
+            @RequestBody RegisterEmployeeRequestDTO dto) {
+
+        RegisteredEmployeeResponseDTO response = employeeService.registerEmployee(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }
