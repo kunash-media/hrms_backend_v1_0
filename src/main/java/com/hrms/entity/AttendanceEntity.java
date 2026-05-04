@@ -34,7 +34,7 @@ public class AttendanceEntity {
     private Double totalHours;
 
     @Column(name = "status", nullable = false)
-    private String status; // PRESENT, ABSENT, HALF_DAY, LEAVE, NOT_MARKED
+    private String status;
 
     @Column(name = "notes")
     private String notes;

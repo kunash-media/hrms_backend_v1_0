@@ -29,7 +29,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private static final Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
     private final  EmployeeRepository employeeRepository;
-        private final BcryptEncoderConfig passwordEncoder;
+    private final BcryptEncoderConfig passwordEncoder;
 
     public EmployeeServiceImpl(EmployeeRepository employeeRepository, BcryptEncoderConfig passwordEncoder) {
         this.employeeRepository = employeeRepository;
@@ -465,6 +465,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         logger.info("[Employee] Found {} active employee(s) for dept={}", employees.size(), department);
 
         return employees.stream().map(e -> new EmployeeForPayrollDTO(
+                e.getEmployeePrimeId(),
                 e.getEmployeeId(),
                 e.getFullName() != null
                         ? e.getFullName()

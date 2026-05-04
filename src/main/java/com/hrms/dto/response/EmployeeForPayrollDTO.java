@@ -6,6 +6,7 @@ package com.hrms.dto.response;
  */
 public class EmployeeForPayrollDTO {
 
+    private Long employeePrimeId;
     private String employeeId;
     private String fullName;
     private String designation;
@@ -14,14 +15,23 @@ public class EmployeeForPayrollDTO {
 
     public EmployeeForPayrollDTO() {}
 
-    public EmployeeForPayrollDTO(String employeeId, String fullName,
+    public EmployeeForPayrollDTO(Long employeePrimeId, String employeeId, String fullName,
                                  String designation, String department,
                                  Double basicSalary) {
+        this.employeePrimeId = employeePrimeId;
         this.employeeId  = employeeId;
         this.fullName    = fullName;
         this.designation = designation;
         this.department  = department;
         this.basicSalary = basicSalary;
+    }
+
+    public Long getEmployeePrimeId() {
+        return employeePrimeId;
+    }
+
+    public void setEmployeePrimeId(Long employeePrimeId) {
+        this.employeePrimeId = employeePrimeId;
     }
 
     public String getEmployeeId()  { return employeeId; }
