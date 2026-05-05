@@ -48,6 +48,8 @@ public class EmployeeResponseDTO {
     private String costCentre;
     private String status;
 
+    private String profileStatus;
+
     // Bank
     private String bankName;
     private String accountNumber;
@@ -310,5 +312,14 @@ public class EmployeeResponseDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    public String getProfileStatus() {
+        return profileStatus;
+    }
+
+    public void setProfileStatus(String profileStatus) {
+        this.profileStatus = profileStatus;
     }
 }

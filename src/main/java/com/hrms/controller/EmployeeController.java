@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -307,37 +308,58 @@ public class EmployeeController {
         return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(imageData);
     }
 
-    @GetMapping(value = "/{employeeId}/degree-image", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
+    // ── Utility: detect content type from byte magic bytes ──────────────────
+    private MediaType detectMediaType(byte[] data) {
+        if (data == null || data.length < 4) return MediaType.APPLICATION_OCTET_STREAM;
+        // PDF magic: %PDF → 0x25 0x50 0x44 0x46
+        if (data[0] == 0x25 && data[1] == 0x50 && data[2] == 0x44 && data[3] == 0x46) {
+            return MediaType.APPLICATION_PDF;
+        }
+        // JPEG magic: 0xFF 0xD8
+        if ((data[0] & 0xFF) == 0xFF && (data[1] & 0xFF) == 0xD8) {
+            return MediaType.IMAGE_JPEG;
+        }
+        // PNG magic: 0x89 0x50 0x4E 0x47
+        if ((data[0] & 0xFF) == 0x89 && data[1] == 0x50 && data[2] == 0x4E && data[3] == 0x47) {
+            return MediaType.IMAGE_PNG;
+        }
+        return MediaType.APPLICATION_OCTET_STREAM;
+    }
+
+    @GetMapping("/{employeeId}/degree-image")
     public ResponseEntity<byte[]> getDegreeImage(@PathVariable String employeeId) {
-        EmployeeEntity employee = employeeRepository.findByEmployeeId(employeeId)
+        EmployeeEntity emp = employeeRepository.findByEmployeeId(employeeId)
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
-        byte[] imageData = employee.getDegreeDocumentImage();
-        if (imageData == null || imageData.length == 0) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(imageData);
+        byte[] data = emp.getDegreeDocumentImage();
+        if (data == null || data.length == 0) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok()
+                .contentType(detectMediaType(data))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"degree\"")
+                .body(data);
     }
 
-    @GetMapping(value = "/{employeeId}/experience-image", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
+    @GetMapping("/{employeeId}/experience-image")
     public ResponseEntity<byte[]> getExperienceImage(@PathVariable String employeeId) {
-        EmployeeEntity employee = employeeRepository.findByEmployeeId(employeeId)
+        EmployeeEntity emp = employeeRepository.findByEmployeeId(employeeId)
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
-        byte[] imageData = employee.getExperienceDocumentImage();
-        if (imageData == null || imageData.length == 0) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(imageData);
+        byte[] data = emp.getExperienceDocumentImage();
+        if (data == null || data.length == 0) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok()
+                .contentType(detectMediaType(data))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"experience\"")
+                .body(data);
     }
 
-    @GetMapping(value = "/{employeeId}/offer-image", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE, "application/pdf"})
+    @GetMapping("/{employeeId}/offer-image")
     public ResponseEntity<byte[]> getOfferLetter(@PathVariable String employeeId) {
-        EmployeeEntity employee = employeeRepository.findByEmployeeId(employeeId)
+        EmployeeEntity emp = employeeRepository.findByEmployeeId(employeeId)
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
-        byte[] imageData = employee.getOfferLetterImage();
-        if (imageData == null || imageData.length == 0) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok().body(imageData);
+        byte[] data = emp.getOfferLetterImage();
+        if (data == null || data.length == 0) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok()
+                .contentType(detectMediaType(data))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"offer-letter\"")
+                .body(data);
     }
 
 

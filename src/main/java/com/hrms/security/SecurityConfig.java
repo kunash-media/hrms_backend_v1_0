@@ -99,34 +99,13 @@ public class SecurityConfig {
                 // ── NEW: wire CORS bean into Spring Security filter chain ──
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
-//                .csrf(csrf -> {
-//                    CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
-//                    csrf
-//                            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-//                            .csrfTokenRequestHandler(requestHandler)
-//                            .ignoringRequestMatchers(
-//                                    "/api/admin/auth/login",
-//                                    "/api/admin/auth/refresh",
-//                                    "/api/admin/bootstrap",
-//                                    "/api/orders/**",
-//                                    "/api/users/**",
-//                                    "/api/v1/custom-categories/**",
-//                                    "/api/inventory/**",
-//                                    "/api/products/**",
-//                                    "/api/v1/cart/**",
-//                                    "/api/v1/wishlist/**",
-//                                    "/api/otp/**",
-//                                    "/api/shipping-addresses/**",
-//                                    "/api/recent-users/**",
-//                                    "/api/coupons/**",
-//                                    "/api/reviews/**",
-//                                    "/api/banners/**"
-//                            );
-//                    logger.debug("CSRF protection enabled with CookieCsrfTokenRepository");
-//                })
-
                 // ── Uncomment for quick Apidog/Postman testing, comment for production ──
                  .csrf(csrf -> csrf.disable())
+
+                // ✅ ADD THIS - Disable frame options for development
+                .headers(headers -> headers
+                        .frameOptions(frameOptions -> frameOptions.disable())
+                )
 
                 .authorizeHttpRequests(auth -> {
                     auth

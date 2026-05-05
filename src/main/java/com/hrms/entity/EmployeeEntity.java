@@ -57,6 +57,8 @@ public class EmployeeEntity {
     private String costCentre;
     private String status;
 
+    private String profileStatus;
+
     // Contact
     private String personalEmail;
     private String workEmail;
@@ -388,6 +390,14 @@ public class EmployeeEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getProfileStatus() {
+        return profileStatus;
+    }
+
+    public void setProfileStatus(String profileStatus) {
+        this.profileStatus = profileStatus;
     }
 }
 

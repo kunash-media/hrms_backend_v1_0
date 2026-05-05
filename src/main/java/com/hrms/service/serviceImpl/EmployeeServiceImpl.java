@@ -126,6 +126,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setShift(dto.getShift());
         employee.setCostCentre(dto.getCostCentre());
         employee.setStatus("Active");
+        employee.setProfileStatus(dto.getProfileStatus());
 
         // Bank Details
         employee.setBankName(dto.getBankName());
@@ -237,6 +238,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setEducation(dto.getEducation());
         employee.setFamily(dto.getFamily());
         employee.setWorkExperience(dto.getWorkExperience());
+
+        //profile status
+        employee.setProfileStatus(dto.getProfileStatus());
 
         // Update images if new files provided
         if (dto.getAadhaarDocument() != null && !dto.getAadhaarDocument().isEmpty()) {
@@ -406,6 +410,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         dto.setFamily(emp.getFamily());
         dto.setWorkExperience(emp.getWorkExperience());
 
+        dto.setProfileStatus(emp.getProfileStatus());
+
         // Set Image URLs (not Base64)
         if (emp.getEmployeeId() != null) {
             dto.setAadhaarDocumentUrl(generateImageUrl(emp.getEmployeeId(), "aadhaar"));
@@ -515,7 +521,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         // Auto-generate employeeId like EMP0001, EMP0002...
         long count = employeeRepository.count();
+
         String employeeId = String.format("EMP%04d", count + 1);
+
 
         EmployeeEntity employee = new EmployeeEntity();
 
@@ -524,9 +532,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setLastName(dto.getLastName());
         employee.setFullName(dto.getFirstName() + " " + dto.getLastName());
         employee.setPassword(passwordEncoder.encode(dto.getPassword()));
-        employee.setStatus("INCOMPLETE");   // flag to know profile isn't complete
+        employee.setProfileStatus("INCOMPLETE");
         employee.setCreatedAt(LocalDate.now());
         employee.setUpdatedAt(LocalDate.now());
+        employee.setDepartment(dto.getDepartment());
+        employee.setDesignation(dto.getDesignation());
 
         EmployeeEntity saved = employeeRepository.save(employee);
 
@@ -535,7 +545,9 @@ public class EmployeeServiceImpl implements EmployeeService {
                 saved.getEmployeeId(),
                 saved.getFirstName(),
                 saved.getLastName(),
-                saved.getStatus()
+                saved.getStatus(),
+                saved.getDepartment(),
+                saved.getDesignation()
         );
     }
 

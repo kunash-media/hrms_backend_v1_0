@@ -21,6 +21,7 @@ public class EmployeeRequestDTO {
 
     //employee login password
     private String password;
+    private String ProfileStatus;
 
     // PWD
     private Boolean isPhysicallyChallenged;
@@ -272,5 +273,13 @@ public class EmployeeRequestDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getProfileStatus() {
+        return ProfileStatus;
+    }
+
+    public void setProfileStatus(String profileStatus) {
+        ProfileStatus = profileStatus;
     }
 }
