@@ -27,7 +27,7 @@ import java.util.Map;
 @RequestMapping("/api/employees")
 public class EmployeeController {
 
-    // Direct ObjectMapper create karo (No @Autowired)
+
     private final ObjectMapper objectMapper = new ObjectMapper();
     private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
