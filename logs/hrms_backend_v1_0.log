@@ -7804,3 +7804,554 @@ org.springframework.web.servlet.resource.NoResourceFoundException: No static res
 2026-05-08T16:42:30.353+05:30  INFO 8600 --- [HRMS-System] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2026-05-08T16:42:30.374+05:30  INFO 8600 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2026-05-08T16:42:30.404+05:30  INFO 8600 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-08T17:00:09.907+05:30  INFO 1 --- [HRMS-System] [main] com.hrms.HrmsSystemApplication           : Starting HrmsSystemApplication v0.0.1-SNAPSHOT using Java 21.0.11 with PID 1 (/app/app.jar started by root in /app)
+2026-05-08T17:00:09.919+05:30  INFO 1 --- [HRMS-System] [main] com.hrms.HrmsSystemApplication           : No active profile set, falling back to 1 default profile: "default"
+2026-05-08T17:00:12.150+05:30  INFO 1 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-08T17:00:12.154+05:30  INFO 1 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2026-05-08T17:00:12.231+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AdminRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:00:12.235+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AssetRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:00:12.239+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AttendanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:00:12.244+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.CompanyRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:00:12.249+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.EmployeeLeaveBalanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:00:12.253+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.EmployeeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:00:12.258+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.ExitRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:00:12.261+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.ExpenseRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:00:12.266+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveRequestRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:00:12.269+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveRuleRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:00:12.274+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveTypeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:00:12.277+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.OnboardingRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:00:12.283+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.PayrollRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:00:12.287+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.PromotionRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:00:12.290+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:00:12.292+05:30  INFO 1 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 125 ms. Found 0 JDBC repository interfaces.
+2026-05-08T17:00:12.319+05:30  INFO 1 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-08T17:00:12.323+05:30  INFO 1 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-08T17:00:12.459+05:30  INFO 1 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 118 ms. Found 15 JPA repository interfaces.
+2026-05-08T17:00:14.126+05:30  INFO 1 --- [HRMS-System] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8086 (http)
+2026-05-08T17:00:14.173+05:30  INFO 1 --- [HRMS-System] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-08T17:00:14.175+05:30  INFO 1 --- [HRMS-System] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-05-08T17:00:14.259+05:30  INFO 1 --- [HRMS-System] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 4154 ms
+2026-05-08T17:00:14.695+05:30  INFO 1 --- [HRMS-System] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-08T17:00:14.949+05:30  INFO 1 --- [HRMS-System] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-05-08T17:00:16.378+05:30  INFO 1 --- [HRMS-System] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-08T17:00:16.441+05:30  INFO 1 --- [HRMS-System] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-08T17:00:17.150+05:30  INFO 1 --- [HRMS-System] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1987807b
+2026-05-08T17:00:17.160+05:30  INFO 1 --- [HRMS-System] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-08T17:00:17.340+05:30  INFO 1 --- [HRMS-System] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://mysql:3306/hrms_db?useSSL=false&serverTimezone=Asia/Kolkata&allowPublicKeyRetrieval=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.45
+	Default catalog/schema: hrms_db/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-08T17:00:23.182+05:30  INFO 1 --- [HRMS-System] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-08T17:00:28.238+05:30  INFO 1 --- [HRMS-System] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08T17:00:28.618+05:30  INFO 1 --- [HRMS-System] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-08T17:00:36.500+05:30  INFO 1 --- [HRMS-System] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8086 (http) with context path '/'
+2026-05-08T17:00:36.550+05:30  WARN 1 --- [HRMS-System] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-08T17:00:37.297+05:30 DEBUG 1 --- [HRMS-System] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 163 mappings in 'requestMappingHandlerMapping'
+2026-05-08T17:00:37.361+05:30 DEBUG 1 --- [HRMS-System] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2026-05-08T17:00:37.384+05:30  INFO 1 --- [HRMS-System] [main] com.hrms.HrmsSystemApplication           : Started HrmsSystemApplication in 28.975 seconds (process running for 31.686)
+2026-05-08T17:01:11.378+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-08T17:01:11.379+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-05-08T17:01:11.386+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2026-05-08T17:01:11.391+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2026-05-08T17:01:11.469+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 2 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-05-08T17:01:11.598+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-05-08T17:01:11.611+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@1651f4f0
+2026-05-08T17:01:11.619+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@5e5b6a31
+2026-05-08T17:01:11.620+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2026-05-08T17:01:11.621+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 241 ms
+2026-05-08T17:01:11.674+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.security.SecurityConfig         : SecurityConfig initialized
+2026-05-08T17:01:11.735+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-1] eAuthenticationProviderManagerConfigurer : Found 2 AuthenticationProvider beans, with names [adminAuthenticationProvider, employeeAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
+2026-05-08T17:01:11.737+05:30  WARN 1 --- [HRMS-System] [http-nio-8086-exec-1] r$InitializeUserDetailsManagerConfigurer : Found 2 UserDetailsService beans, with names [adminUserDetailsService, employeeUserDetailsService]. Global Authentication Manager will not use a UserDetailsService for username/password login. Consider publishing a single UserDetailsService bean.
+2026-05-08T17:01:11.982+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.security.SecurityConfig         : Configuring SecurityFilterChain
+2026-05-08T17:01:12.071+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.security.SecurityConfig         : SecurityFilterChain configured successfully
+2026-05-08T17:01:12.232+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
+2026-05-08T17:01:12.347+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
+2026-05-08T17:01:12.406+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-1] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
+2026-05-08T17:01:12.666+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-08T17:01:12.669+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@761639d2]
+2026-05-08T17:01:12.811+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-05-08T17:01:12.820+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
+2026-05-08T17:01:12.823+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
+2026-05-08T17:01:12.825+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-2] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
+2026-05-08T17:01:12.833+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-08T17:01:12.835+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@6b361b1b]
+2026-05-08T17:01:12.839+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-05-08T17:02:11.080+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
+2026-05-08T17:02:11.091+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
+2026-05-08T17:02:11.100+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-3] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
+2026-05-08T17:02:11.119+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-08T17:02:11.122+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@b6b88a2]
+2026-05-08T17:02:11.133+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-05-08T17:02:11.148+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
+2026-05-08T17:02:11.155+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
+2026-05-08T17:02:11.157+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-4] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
+2026-05-08T17:02:11.166+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-08T17:02:11.167+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@1c150be]
+2026-05-08T17:02:11.171+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-05-08T17:02:57.162+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
+2026-05-08T17:02:57.192+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
+2026-05-08T17:02:57.216+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-5] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
+2026-05-08T17:02:57.282+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-08T17:02:57.284+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@462aa914]
+2026-05-08T17:02:57.297+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-05-08T17:02:57.304+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
+2026-05-08T17:02:57.315+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
+2026-05-08T17:02:57.331+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-6] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
+2026-05-08T17:02:57.345+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-08T17:02:57.347+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@71e547e8]
+2026-05-08T17:02:57.352+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-05-08T17:03:01.054+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
+2026-05-08T17:03:01.059+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
+2026-05-08T17:03:01.063+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-7] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
+2026-05-08T17:03:01.074+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-08T17:03:01.077+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@691ab79d]
+2026-05-08T17:03:01.081+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-05-08T17:03:06.051+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
+2026-05-08T17:03:06.054+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
+2026-05-08T17:03:06.059+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-8] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
+2026-05-08T17:03:06.074+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-08T17:03:06.076+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@291413b0]
+2026-05-08T17:03:06.082+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-05-08T17:03:11.065+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
+2026-05-08T17:03:11.072+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
+2026-05-08T17:03:11.080+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-9] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
+2026-05-08T17:03:11.118+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-08T17:03:11.122+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@29e46a1e]
+2026-05-08T17:03:11.139+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-05-08T17:03:11.162+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
+2026-05-08T17:03:11.168+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
+2026-05-08T17:03:11.172+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-10] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
+2026-05-08T17:03:11.185+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-08T17:03:11.187+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@648c512b]
+2026-05-08T17:03:11.193+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-05-08T17:03:16.050+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
+2026-05-08T17:03:16.056+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
+2026-05-08T17:03:16.060+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-1] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
+2026-05-08T17:03:16.076+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-08T17:03:16.079+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@365376f0]
+2026-05-08T17:03:16.089+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-05-08T17:03:19.601+05:30  INFO 1 --- [HRMS-System] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-08T17:03:19.607+05:30  INFO 1 --- [HRMS-System] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-05-08T17:03:19.617+05:30  INFO 1 --- [HRMS-System] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08T17:03:19.624+05:30  INFO 1 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-08T17:03:19.633+05:30  INFO 1 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-08T17:05:16.448+05:30  INFO 1 --- [HRMS-System] [main] com.hrms.HrmsSystemApplication           : Starting HrmsSystemApplication v0.0.1-SNAPSHOT using Java 21.0.11 with PID 1 (/app/app.jar started by root in /app)
+2026-05-08T17:05:16.467+05:30  INFO 1 --- [HRMS-System] [main] com.hrms.HrmsSystemApplication           : No active profile set, falling back to 1 default profile: "default"
+2026-05-08T17:05:19.128+05:30  INFO 1 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-08T17:05:19.131+05:30  INFO 1 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2026-05-08T17:05:19.198+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AdminRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:05:19.201+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AssetRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:05:19.206+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AttendanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:05:19.210+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.CompanyRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:05:19.214+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.EmployeeLeaveBalanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:05:19.219+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.EmployeeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:05:19.224+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.ExitRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:05:19.227+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.ExpenseRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:05:19.230+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveRequestRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:05:19.233+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveRuleRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:05:19.236+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveTypeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:05:19.240+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.OnboardingRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:05:19.244+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.PayrollRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:05:19.247+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.PromotionRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:05:19.250+05:30  INFO 1 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:05:19.253+05:30  INFO 1 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 110 ms. Found 0 JDBC repository interfaces.
+2026-05-08T17:05:19.280+05:30  INFO 1 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-08T17:05:19.282+05:30  INFO 1 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-08T17:05:19.401+05:30  INFO 1 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 106 ms. Found 15 JPA repository interfaces.
+2026-05-08T17:05:20.799+05:30  INFO 1 --- [HRMS-System] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8086 (http)
+2026-05-08T17:05:20.832+05:30  INFO 1 --- [HRMS-System] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-08T17:05:20.833+05:30  INFO 1 --- [HRMS-System] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-05-08T17:05:20.919+05:30  INFO 1 --- [HRMS-System] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 4206 ms
+2026-05-08T17:05:21.283+05:30  INFO 1 --- [HRMS-System] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-08T17:05:21.452+05:30  INFO 1 --- [HRMS-System] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-05-08T17:05:22.913+05:30  INFO 1 --- [HRMS-System] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-08T17:05:23.035+05:30  INFO 1 --- [HRMS-System] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-08T17:05:23.887+05:30  INFO 1 --- [HRMS-System] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@65a2755e
+2026-05-08T17:05:23.900+05:30  INFO 1 --- [HRMS-System] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-08T17:05:24.250+05:30  INFO 1 --- [HRMS-System] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://mysql:3306/hrms_db?useSSL=false&serverTimezone=Asia/Kolkata&allowPublicKeyRetrieval=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.45
+	Default catalog/schema: hrms_db/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-08T17:05:28.983+05:30  INFO 1 --- [HRMS-System] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-08T17:05:36.518+05:30  INFO 1 --- [HRMS-System] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08T17:05:36.702+05:30  INFO 1 --- [HRMS-System] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-08T17:05:42.649+05:30  INFO 1 --- [HRMS-System] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8086 (http) with context path '/'
+2026-05-08T17:05:42.699+05:30  WARN 1 --- [HRMS-System] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-08T17:05:43.202+05:30 DEBUG 1 --- [HRMS-System] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 163 mappings in 'requestMappingHandlerMapping'
+2026-05-08T17:05:43.272+05:30 DEBUG 1 --- [HRMS-System] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2026-05-08T17:05:43.290+05:30  INFO 1 --- [HRMS-System] [main] com.hrms.HrmsSystemApplication           : Started HrmsSystemApplication in 28.657 seconds (process running for 30.487)
+2026-05-08T17:06:11.560+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-08T17:06:11.566+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-05-08T17:06:11.575+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2026-05-08T17:06:11.580+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2026-05-08T17:06:11.651+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 2 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-05-08T17:06:11.745+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-05-08T17:06:11.756+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@18715af4
+2026-05-08T17:06:11.763+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@7c73b4f0
+2026-05-08T17:06:11.765+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2026-05-08T17:06:11.766+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 198 ms
+2026-05-08T17:06:11.825+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.security.SecurityConfig         : SecurityConfig initialized
+2026-05-08T17:06:11.882+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-1] eAuthenticationProviderManagerConfigurer : Found 2 AuthenticationProvider beans, with names [adminAuthenticationProvider, employeeAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
+2026-05-08T17:06:11.884+05:30  WARN 1 --- [HRMS-System] [http-nio-8086-exec-1] r$InitializeUserDetailsManagerConfigurer : Found 2 UserDetailsService beans, with names [adminUserDetailsService, employeeUserDetailsService]. Global Authentication Manager will not use a UserDetailsService for username/password login. Consider publishing a single UserDetailsService bean.
+2026-05-08T17:06:12.183+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.security.SecurityConfig         : Configuring SecurityFilterChain
+2026-05-08T17:06:12.241+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.security.SecurityConfig         : SecurityFilterChain configured successfully
+2026-05-08T17:06:12.411+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
+2026-05-08T17:06:12.527+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
+2026-05-08T17:06:12.573+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-1] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
+2026-05-08T17:06:12.843+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-08T17:06:12.846+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@4af3b465]
+2026-05-08T17:06:13.008+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-05-08T17:06:13.035+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
+2026-05-08T17:06:13.041+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
+2026-05-08T17:06:13.046+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-2] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
+2026-05-08T17:06:13.058+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-08T17:06:13.060+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@2c2fcafa]
+2026-05-08T17:06:13.070+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-05-08T17:07:11.074+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
+2026-05-08T17:07:11.086+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
+2026-05-08T17:07:11.096+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-3] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
+2026-05-08T17:07:11.130+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-08T17:07:11.135+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@1c150be]
+2026-05-08T17:07:11.146+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-05-08T17:07:11.172+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
+2026-05-08T17:07:11.181+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
+2026-05-08T17:07:11.189+05:30  INFO 1 --- [HRMS-System] [http-nio-8086-exec-4] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
+2026-05-08T17:07:11.215+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-08T17:07:11.218+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@462aa914]
+2026-05-08T17:07:11.230+05:30 DEBUG 1 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-05-08T17:08:08.975+05:30  INFO 1 --- [HRMS-System] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-08T17:08:09.000+05:30  INFO 1 --- [HRMS-System] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-05-08T17:08:09.034+05:30  INFO 1 --- [HRMS-System] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08T17:08:09.057+05:30  INFO 1 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-08T17:08:09.082+05:30  INFO 1 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-08T17:20:34.306+05:30  INFO 7 --- [HRMS-System] [main] com.hrms.HrmsSystemApplication           : Starting HrmsSystemApplication v0.0.1-SNAPSHOT using Java 21.0.11 with PID 7 (/app/app.jar started by root in /app)
+2026-05-08T17:20:34.315+05:30  INFO 7 --- [HRMS-System] [main] com.hrms.HrmsSystemApplication           : No active profile set, falling back to 1 default profile: "default"
+2026-05-08T17:20:36.859+05:30  INFO 7 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-08T17:20:36.866+05:30  INFO 7 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2026-05-08T17:20:37.006+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AdminRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:20:37.010+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AssetRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:20:37.014+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AttendanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:20:37.022+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.CompanyRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:20:37.030+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.EmployeeLeaveBalanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:20:37.035+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.EmployeeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:20:37.040+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.ExitRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:20:37.044+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.ExpenseRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:20:37.047+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveRequestRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:20:37.050+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveRuleRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:20:37.053+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveTypeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:20:37.057+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.OnboardingRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:20:37.063+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.PayrollRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:20:37.067+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.PromotionRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:20:37.070+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:20:37.073+05:30  INFO 7 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 188 ms. Found 0 JDBC repository interfaces.
+2026-05-08T17:20:37.097+05:30  INFO 7 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-08T17:20:37.100+05:30  INFO 7 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-08T17:20:37.204+05:30  INFO 7 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 93 ms. Found 15 JPA repository interfaces.
+2026-05-08T17:20:38.778+05:30  INFO 7 --- [HRMS-System] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8086 (http)
+2026-05-08T17:20:38.807+05:30  INFO 7 --- [HRMS-System] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-08T17:20:38.809+05:30  INFO 7 --- [HRMS-System] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-05-08T17:20:38.883+05:30  INFO 7 --- [HRMS-System] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 4402 ms
+2026-05-08T17:20:39.277+05:30  INFO 7 --- [HRMS-System] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-08T17:20:39.417+05:30  INFO 7 --- [HRMS-System] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-05-08T17:20:41.067+05:30  INFO 7 --- [HRMS-System] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-08T17:20:41.152+05:30  INFO 7 --- [HRMS-System] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-08T17:20:41.860+05:30  INFO 7 --- [HRMS-System] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1a77eb6
+2026-05-08T17:20:41.868+05:30  INFO 7 --- [HRMS-System] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-08T17:20:42.160+05:30  INFO 7 --- [HRMS-System] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://mysql:3306/hrms_db?useSSL=false&serverTimezone=Asia/Kolkata&allowPublicKeyRetrieval=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.45
+	Default catalog/schema: hrms_db/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-08T17:20:46.537+05:30  INFO 7 --- [HRMS-System] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-08T17:20:52.840+05:30  INFO 7 --- [HRMS-System] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08T17:20:53.099+05:30  INFO 7 --- [HRMS-System] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-08T17:20:58.835+05:30  INFO 7 --- [HRMS-System] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8086 (http) with context path '/'
+2026-05-08T17:20:58.925+05:30  WARN 7 --- [HRMS-System] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-08T17:20:59.581+05:30 DEBUG 7 --- [HRMS-System] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 163 mappings in 'requestMappingHandlerMapping'
+2026-05-08T17:20:59.645+05:30 DEBUG 7 --- [HRMS-System] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2026-05-08T17:20:59.664+05:30  INFO 7 --- [HRMS-System] [main] com.hrms.HrmsSystemApplication           : Started HrmsSystemApplication in 26.707 seconds (process running for 28.461)
+2026-05-08T17:23:05.760+05:30  INFO 6212 --- [HRMS-System] [main] com.hrms.HrmsSystemApplicationTests      : Starting HrmsSystemApplicationTests using Java 24.0.2 with PID 6212 (started by admim in C:\HRMS_Project\hrms_backend_v1.0)
+2026-05-08T17:23:05.765+05:30  INFO 6212 --- [HRMS-System] [main] com.hrms.HrmsSystemApplicationTests      : No active profile set, falling back to 1 default profile: "default"
+2026-05-08T17:23:05.874+05:30 DEBUG 6212 --- [HRMS-System] [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@537c8c7e
+2026-05-08T17:23:10.251+05:30  INFO 6212 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-08T17:23:10.254+05:30  INFO 6212 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2026-05-08T17:23:10.372+05:30  INFO 6212 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AdminRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:23:10.377+05:30  INFO 6212 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AssetRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:23:10.381+05:30  INFO 6212 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AttendanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:23:10.388+05:30  INFO 6212 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.CompanyRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:23:10.396+05:30  INFO 6212 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.EmployeeLeaveBalanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:23:10.403+05:30  INFO 6212 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.EmployeeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:23:10.440+05:30  INFO 6212 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.ExitRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:23:10.451+05:30  INFO 6212 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.ExpenseRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:23:10.457+05:30  INFO 6212 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveRequestRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:23:10.462+05:30  INFO 6212 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveRuleRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:23:10.467+05:30  INFO 6212 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveTypeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:23:10.478+05:30  INFO 6212 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.OnboardingRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:23:10.496+05:30  INFO 6212 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.PayrollRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:23:10.501+05:30  INFO 6212 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.PromotionRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:23:10.506+05:30  INFO 6212 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:23:10.510+05:30  INFO 6212 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 217 ms. Found 0 JDBC repository interfaces.
+2026-05-08T17:23:10.591+05:30  INFO 6212 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-08T17:23:10.597+05:30  INFO 6212 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-08T17:23:10.897+05:30  INFO 6212 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 265 ms. Found 15 JPA repository interfaces.
+2026-05-08T17:23:12.852+05:30  INFO 6212 --- [HRMS-System] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-08T17:23:13.071+05:30  INFO 6212 --- [HRMS-System] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-05-08T17:23:15.053+05:30  INFO 6212 --- [HRMS-System] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-08T17:23:15.183+05:30  INFO 6212 --- [HRMS-System] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-08T17:23:15.764+05:30  INFO 6212 --- [HRMS-System] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3fc2e100
+2026-05-08T17:23:15.769+05:30  INFO 6212 --- [HRMS-System] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-08T17:23:16.036+05:30  INFO 6212 --- [HRMS-System] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/hrms_db?useSSL=false&serverTimezone=Asia/Kolkata&allowPublicKeyRetrieval=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.41
+	Default catalog/schema: hrms_db/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-08T17:23:20.989+05:30  INFO 6212 --- [HRMS-System] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-08T17:23:21.312+05:30  INFO 6212 --- [HRMS-System] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08T17:23:21.817+05:30  INFO 6212 --- [HRMS-System] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-08T17:23:27.523+05:30  WARN 6212 --- [HRMS-System] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-08T17:23:28.332+05:30 DEBUG 6212 --- [HRMS-System] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 163 mappings in 'requestMappingHandlerMapping'
+2026-05-08T17:23:28.429+05:30 DEBUG 6212 --- [HRMS-System] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2026-05-08T17:23:28.438+05:30  INFO 6212 --- [HRMS-System] [main] com.hrms.HrmsSystemApplicationTests      : Started HrmsSystemApplicationTests in 23.947 seconds (process running for 29.477)
+2026-05-08T17:23:29.746+05:30 DEBUG 6212 --- [HRMS-System] [SpringApplicationShutdownHook] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@537c8c7e, started on Fri May 08 17:23:05 IST 2026
+2026-05-08T17:23:29.754+05:30  INFO 6212 --- [HRMS-System] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08T17:23:29.759+05:30  INFO 6212 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-08T17:23:29.772+05:30  INFO 6212 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-08T17:23:51.982+05:30  INFO 7 --- [HRMS-System] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-08T17:23:51.995+05:30  INFO 7 --- [HRMS-System] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-05-08T17:23:52.010+05:30  INFO 7 --- [HRMS-System] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08T17:23:52.022+05:30  INFO 7 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-08T17:23:52.035+05:30  INFO 7 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-08T17:24:49.227+05:30  INFO 7 --- [HRMS-System] [main] com.hrms.HrmsSystemApplication           : Starting HrmsSystemApplication v0.0.1-SNAPSHOT using Java 21.0.11 with PID 7 (/app/app.jar started by root in /app)
+2026-05-08T17:24:49.239+05:30  INFO 7 --- [HRMS-System] [main] com.hrms.HrmsSystemApplication           : No active profile set, falling back to 1 default profile: "default"
+2026-05-08T17:24:51.605+05:30  INFO 7 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-08T17:24:51.608+05:30  INFO 7 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2026-05-08T17:24:51.694+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AdminRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:24:51.699+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AssetRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:24:51.703+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AttendanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:24:51.707+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.CompanyRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:24:51.713+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.EmployeeLeaveBalanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:24:51.717+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.EmployeeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:24:51.722+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.ExitRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:24:51.730+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.ExpenseRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:24:51.749+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveRequestRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:24:51.760+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveRuleRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:24:51.771+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveTypeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:24:51.774+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.OnboardingRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:24:51.780+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.PayrollRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:24:51.783+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.PromotionRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:24:51.786+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:24:51.788+05:30  INFO 7 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 164 ms. Found 0 JDBC repository interfaces.
+2026-05-08T17:24:51.813+05:30  INFO 7 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-08T17:24:51.816+05:30  INFO 7 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-08T17:24:51.928+05:30  INFO 7 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 102 ms. Found 15 JPA repository interfaces.
+2026-05-08T17:24:53.368+05:30  INFO 7 --- [HRMS-System] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8086 (http)
+2026-05-08T17:24:53.400+05:30  INFO 7 --- [HRMS-System] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-08T17:24:53.401+05:30  INFO 7 --- [HRMS-System] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-05-08T17:24:53.477+05:30  INFO 7 --- [HRMS-System] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 4006 ms
+2026-05-08T17:24:53.885+05:30  INFO 7 --- [HRMS-System] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-08T17:24:54.010+05:30  INFO 7 --- [HRMS-System] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-05-08T17:24:55.593+05:30  INFO 7 --- [HRMS-System] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-08T17:24:55.676+05:30  INFO 7 --- [HRMS-System] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-08T17:24:56.463+05:30  INFO 7 --- [HRMS-System] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3b576ee3
+2026-05-08T17:24:56.468+05:30  INFO 7 --- [HRMS-System] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-08T17:24:56.708+05:30  INFO 7 --- [HRMS-System] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://mysql:3306/hrms_db?useSSL=false&serverTimezone=Asia/Kolkata&allowPublicKeyRetrieval=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.45
+	Default catalog/schema: hrms_db/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-08T17:25:00.799+05:30  INFO 7 --- [HRMS-System] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-08T17:25:01.536+05:30  INFO 7 --- [HRMS-System] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08T17:25:01.853+05:30  INFO 7 --- [HRMS-System] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-08T17:25:07.489+05:30  INFO 7 --- [HRMS-System] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8086 (http) with context path '/'
+2026-05-08T17:25:07.527+05:30  WARN 7 --- [HRMS-System] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-08T17:25:08.356+05:30 DEBUG 7 --- [HRMS-System] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 163 mappings in 'requestMappingHandlerMapping'
+2026-05-08T17:25:08.471+05:30 DEBUG 7 --- [HRMS-System] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2026-05-08T17:25:08.498+05:30  INFO 7 --- [HRMS-System] [main] com.hrms.HrmsSystemApplication           : Started HrmsSystemApplication in 20.52 seconds (process running for 22.219)
+2026-05-08T17:28:46.581+05:30  INFO 7 --- [HRMS-System] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-08T17:28:46.588+05:30  INFO 7 --- [HRMS-System] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-05-08T17:28:46.596+05:30  INFO 7 --- [HRMS-System] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08T17:28:46.604+05:30  INFO 7 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-08T17:28:46.611+05:30  INFO 7 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-08T17:34:52.569+05:30  INFO 7 --- [HRMS-System] [main] com.hrms.HrmsSystemApplication           : Starting HrmsSystemApplication v0.0.1-SNAPSHOT using Java 21.0.11 with PID 7 (/app/app.jar started by root in /app)
+2026-05-08T17:34:52.577+05:30  INFO 7 --- [HRMS-System] [main] com.hrms.HrmsSystemApplication           : No active profile set, falling back to 1 default profile: "default"
+2026-05-08T17:34:54.052+05:30  INFO 7 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-08T17:34:54.055+05:30  INFO 7 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2026-05-08T17:34:54.109+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AdminRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:34:54.113+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AssetRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:34:54.116+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AttendanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:34:54.125+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.CompanyRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:34:54.134+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.EmployeeLeaveBalanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:34:54.141+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.EmployeeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:34:54.147+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.ExitRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:34:54.150+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.ExpenseRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:34:54.154+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveRequestRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:34:54.158+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveRuleRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:34:54.162+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveTypeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:34:54.166+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.OnboardingRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:34:54.174+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.PayrollRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:34:54.180+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.PromotionRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:34:54.183+05:30  INFO 7 --- [HRMS-System] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2026-05-08T17:34:54.186+05:30  INFO 7 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 120 ms. Found 0 JDBC repository interfaces.
+2026-05-08T17:34:54.215+05:30  INFO 7 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-08T17:34:54.220+05:30  INFO 7 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-08T17:34:54.341+05:30  INFO 7 --- [HRMS-System] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 106 ms. Found 15 JPA repository interfaces.
+2026-05-08T17:34:55.415+05:30  INFO 7 --- [HRMS-System] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8086 (http)
+2026-05-08T17:34:55.444+05:30  INFO 7 --- [HRMS-System] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-08T17:34:55.446+05:30  INFO 7 --- [HRMS-System] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-05-08T17:34:55.516+05:30  INFO 7 --- [HRMS-System] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 2801 ms
+2026-05-08T17:34:55.827+05:30  INFO 7 --- [HRMS-System] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-08T17:34:55.958+05:30  INFO 7 --- [HRMS-System] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-05-08T17:34:57.140+05:30  INFO 7 --- [HRMS-System] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-08T17:34:57.224+05:30  INFO 7 --- [HRMS-System] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-08T17:34:57.597+05:30  INFO 7 --- [HRMS-System] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3b576ee3
+2026-05-08T17:34:57.603+05:30  INFO 7 --- [HRMS-System] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-08T17:34:57.764+05:30  INFO 7 --- [HRMS-System] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://mysql:3306/hrms_db?useSSL=false&serverTimezone=Asia/Kolkata&allowPublicKeyRetrieval=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.45
+	Default catalog/schema: hrms_db/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-08T17:35:00.374+05:30  INFO 7 --- [HRMS-System] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-08T17:35:03.207+05:30  INFO 7 --- [HRMS-System] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08T17:35:03.329+05:30  INFO 7 --- [HRMS-System] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-08T17:35:06.688+05:30  INFO 7 --- [HRMS-System] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8086 (http) with context path '/'
+2026-05-08T17:35:06.712+05:30  WARN 7 --- [HRMS-System] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-08T17:35:07.212+05:30 DEBUG 7 --- [HRMS-System] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 163 mappings in 'requestMappingHandlerMapping'
+2026-05-08T17:35:07.283+05:30 DEBUG 7 --- [HRMS-System] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2026-05-08T17:35:07.309+05:30  INFO 7 --- [HRMS-System] [main] com.hrms.HrmsSystemApplication           : Started HrmsSystemApplication in 15.589 seconds (process running for 16.634)
+2026-05-08T17:36:54.711+05:30  INFO 7 --- [HRMS-System] [http-nio-8086-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-08T17:36:54.713+05:30  INFO 7 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-05-08T17:36:54.720+05:30 DEBUG 7 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2026-05-08T17:36:54.725+05:30 DEBUG 7 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2026-05-08T17:36:54.792+05:30 DEBUG 7 --- [HRMS-System] [http-nio-8086-exec-2] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 2 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-05-08T17:36:54.916+05:30 DEBUG 7 --- [HRMS-System] [http-nio-8086-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-05-08T17:36:54.927+05:30 DEBUG 7 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@1ed44b98
+2026-05-08T17:36:54.935+05:30 DEBUG 7 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@8176f34
+2026-05-08T17:36:54.936+05:30 DEBUG 7 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2026-05-08T17:36:54.937+05:30  INFO 7 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 223 ms
+2026-05-08T17:36:54.991+05:30  INFO 7 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.security.SecurityConfig         : SecurityConfig initialized
+2026-05-08T17:36:55.047+05:30  INFO 7 --- [HRMS-System] [http-nio-8086-exec-2] eAuthenticationProviderManagerConfigurer : Found 2 AuthenticationProvider beans, with names [adminAuthenticationProvider, employeeAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
+2026-05-08T17:36:55.048+05:30  WARN 7 --- [HRMS-System] [http-nio-8086-exec-2] r$InitializeUserDetailsManagerConfigurer : Found 2 UserDetailsService beans, with names [adminUserDetailsService, employeeUserDetailsService]. Global Authentication Manager will not use a UserDetailsService for username/password login. Consider publishing a single UserDetailsService bean.
+2026-05-08T17:36:55.347+05:30  INFO 7 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.security.SecurityConfig         : Configuring SecurityFilterChain
+2026-05-08T17:36:55.418+05:30  INFO 7 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.security.SecurityConfig         : SecurityFilterChain configured successfully
+2026-05-08T17:36:56.025+05:30  WARN 7 --- [HRMS-System] [http-nio-8086-exec-2] c.h.security.EmployeeUserDetailsService  : Employee not found with employeeId: EMP0003
+2026-05-08T17:36:56.027+05:30  WARN 7 --- [HRMS-System] [http-nio-8086-exec-2] c.hrms.security.JwtAuthenticationFilter  : Authentication failed for user EMP0003 on path /api/admin/bootstrap: Employee not found with employeeId: EMP0003
+
+org.springframework.security.core.userdetails.UsernameNotFoundException: Employee not found with employeeId: EMP0003
+	at com.hrms.security.EmployeeUserDetailsService.lambda$loadUserByUsername$0(EmployeeUserDetailsService.java:38) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/java.util.Optional.orElseThrow(Unknown Source) ~[na:na]
+	at com.hrms.security.EmployeeUserDetailsService.loadUserByUsername(EmployeeUserDetailsService.java:36) ~[!/:0.0.1-SNAPSHOT]
+	at com.hrms.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:121) ~[!/:0.0.1-SNAPSHOT]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar!/:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar!/:7.0.4]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110) ~[spring-security-web-7.0.4.jar!/:7.0.4]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96) ~[spring-security-web-7.0.4.jar!/:7.0.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar!/:7.0.4]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-7.0.6.jar!/:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar!/:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar!/:7.0.4]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-7.0.4.jar!/:7.0.4]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-7.0.4.jar!/:7.0.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar!/:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar!/:7.0.4]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-7.0.4.jar!/:7.0.4]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-7.0.4.jar!/:7.0.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar!/:7.0.4]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-7.0.4.jar!/:7.0.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar!/:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar!/:7.0.4]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-7.0.4.jar!/:7.0.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar!/:7.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.4.jar!/:7.0.4]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237) ~[spring-security-web-7.0.4.jar!/:7.0.4]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195) ~[spring-security-web-7.0.4.jar!/:7.0.4]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.6.jar!/:7.0.6]
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) ~[spring-web-7.0.6.jar!/:7.0.6]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.6.jar!/:7.0.6]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-7.0.6.jar!/:7.0.6]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317) ~[spring-security-config-7.0.4.jar!/:7.0.4]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355) ~[spring-web-7.0.6.jar!/:7.0.6]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272) ~[spring-web-7.0.6.jar!/:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar!/:na]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.6.jar!/:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar!/:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar!/:na]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.6.jar!/:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar!/:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar!/:na]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.6.jar!/:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar!/:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar!/:na]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.20.jar!/:na]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.20.jar!/:na]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.20.jar!/:na]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.20.jar!/:na]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.20.jar!/:na]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.20.jar!/:na]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.20.jar!/:na]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.20.jar!/:na]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.20.jar!/:na]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.20.jar!/:na]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779) ~[tomcat-embed-core-11.0.20.jar!/:na]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.20.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.20.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.20.jar!/:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.20.jar!/:na]
+	at java.base/java.lang.Thread.run(Unknown Source) ~[na:na]
+
+2026-05-08T17:36:56.043+05:30 DEBUG 7 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : POST "/api/admin/bootstrap", parameters={}
+2026-05-08T17:36:56.158+05:30 DEBUG 7 --- [HRMS-System] [http-nio-8086-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.AdminController#bootstrap(Map)
+2026-05-08T17:36:56.271+05:30 DEBUG 7 --- [HRMS-System] [http-nio-8086-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{mobile=8317289305, password=123456, firstName=Super, lastName=Admin}]
+2026-05-08T17:36:56.289+05:30  WARN 7 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.controller.AdminController      : Bootstrap endpoint called — checking if SUPER_ADMIN already exists
+2026-05-08T17:36:56.770+05:30  INFO 7 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.controller.AdminController      : Bootstrap complete — SUPER_ADMIN created with ID: ADM0107
+2026-05-08T17:36:56.781+05:30 DEBUG 7 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-08T17:36:56.783+05:30 DEBUG 7 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{message=SUPER_ADMIN created successfully. This endpoint is now permanently disabled., role=SUPER_AD (truncated)...]
+2026-05-08T17:36:56.833+05:30 DEBUG 7 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 201 CREATED
+2026-05-08T17:37:05.163+05:30  INFO 7 --- [HRMS-System] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-08T17:37:05.166+05:30  INFO 7 --- [HRMS-System] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-05-08T17:37:05.173+05:30  INFO 7 --- [HRMS-System] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08T17:37:05.177+05:30  INFO 7 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-08T17:37:05.183+05:30  INFO 7 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

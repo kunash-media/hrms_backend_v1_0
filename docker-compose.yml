@@ -14,11 +14,14 @@ services:
       - mysql_data:/var/lib/mysql
     command:
       - --default-time-zone=+05:30
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
       timeout: 20s
       retries: 10
       interval: 10s
+      start_period: 40s
     networks:
       - hrms-network
 
@@ -28,12 +31,13 @@ services:
     restart: unless-stopped
     ports:
       - "8086:8086"
+    env_file:
+      - .env
     environment:
-      DB_HOST: mysql
-      DB_NAME: hrms_db
-      DB_USER: root
-      DB_PASSWORD: root
-      JWT_SECRET: T/i2t8LGELjqArcF+AR/K7YYPY6u1IU1dl2wDDbpYUqznxVNq1m7KeBhy2WiEiQL
+      - DB_HOST=mysql
+      - DB_NAME=hrms_db
+      - DB_USER=root
+      - DB_PASSWORD=root
     depends_on:
       mysql:
         condition: service_healthy
@@ -41,10 +45,12 @@ services:
       - ./logs:/app/logs
     networks:
       - hrms-network
+    init: true
 
 networks:
   hrms-network:
     driver: bridge
+    name: hrms-network
 
 volumes:
   mysql_data:
