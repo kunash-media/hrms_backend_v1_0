@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -95,6 +94,16 @@ public class OnboardingController {
     // ✅ GET by Employee Prime ID
     @GetMapping("/get-by-employee/{employeePrimeId}")
     public ResponseEntity<Map<String, Object>> getOnboardingByEmployee(@PathVariable String employeePrimeId) {
+        OnboardingResponseDTO onboarding = onboardingService.getOnboardingByEmployeePrimeId(employeePrimeId);
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", true);
+        response.put("data", onboarding);
+        return ResponseEntity.ok(response);
+    }
+
+    // Add this endpoint after get-by-id
+    @GetMapping("/get-by-employee-prime-id/{employeePrimeId}")
+    public ResponseEntity<Map<String, Object>> getOnboardingByEmployeePrimeIdPath(@PathVariable String employeePrimeId) {
         OnboardingResponseDTO onboarding = onboardingService.getOnboardingByEmployeePrimeId(employeePrimeId);
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
@@ -189,6 +198,9 @@ public class OnboardingController {
             case "contract":
                 data = onboarding.getSignedContractData();
                 break;
+            case "profile":   // ✅ ADDED: Profile photo support
+                data = onboarding.getProfilePhotoData();
+                break;
             default:
                 return ResponseEntity.notFound().build();
         }
@@ -200,3 +212,4 @@ public class OnboardingController {
         return ResponseEntity.ok().body(data);
     }
 }
+

@@ -19,13 +19,13 @@ public class OnboardingEntity {
     private Long employeePrimeId;
 
     @Column(nullable = false)
-    private String status;  // PENDING, IN_PROGRESS, COMPLETED, REJECTED
+    private String status;
 
     private LocalDate joiningDate;
     private Integer progressPercentage;
 
     private Double offeredSalary;
-    private String offerLetterStatus;  // SENT, ACCEPTED, PENDING
+    private String offerLetterStatus;
     private LocalDate offerSentDate;
     private LocalDate offerAcceptedDate;
 
@@ -39,7 +39,54 @@ public class OnboardingEntity {
     @Column(columnDefinition = "TEXT")
     private String remarks;
 
-    // ✅ Documents (BLOB fields - Directly in Onboarding entity)
+    // ========== SECTION B: Editable Fields (Verification) ==========
+    private String personalEmail;
+    private String mobileNumber;
+    private String alternateNumber;
+
+    // Current Address
+    private String currentStreet;
+    private String currentCity;
+    private String currentState;
+    private String currentPincode;
+    private String currentCountry;
+
+    // Permanent Address
+    private String permanentStreet;
+    private String permanentCity;
+    private String permanentState;
+    private String permanentPincode;
+    private String permanentCountry;
+
+    private String maritalStatus;
+    private String bloodGroup;
+    private String linkedinProfile;
+
+    // ========== SECTION C: New Onboarding Fields ==========
+    private String fatherSpouseName;
+    private String emergencyName;
+    private String emergencyRelationship;
+    private String emergencyPhone;
+
+    private String bankName;
+    private String accountNumber;
+    private String ifscCode;
+
+    @Column(columnDefinition = "TEXT")
+    private String education;  // JSON string
+
+    @Column(columnDefinition = "TEXT")
+    private String workExperience;  // JSON string
+
+    @Column(columnDefinition = "TEXT")
+    private String family;  // JSON string
+
+    private Boolean isPhysicallyChallenged;
+    private String disabilityType;
+    private Integer disabilityPercentage;
+    private String certificateNumber;
+
+    // ========== SECTION D: Documents (BLOB fields) ==========
     @Lob
     @Column(columnDefinition = "LONGBLOB")
     private byte[] panDocumentData;
@@ -76,13 +123,18 @@ public class OnboardingEntity {
     @Column(columnDefinition = "LONGBLOB")
     private byte[] signedContractData;
 
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] profilePhotoData;
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    // Constructors
+    // ========== Constructors ==========
     public OnboardingEntity() {}
 
-    // Getters and Setters
+    // ========== Getters and Setters ==========
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -131,7 +183,99 @@ public class OnboardingEntity {
     public String getRemarks() { return remarks; }
     public void setRemarks(String remarks) { this.remarks = remarks; }
 
-    // Document Getters/Setters
+    // Section B
+    public String getPersonalEmail() { return personalEmail; }
+    public void setPersonalEmail(String personalEmail) { this.personalEmail = personalEmail; }
+
+    public String getMobileNumber() { return mobileNumber; }
+    public void setMobileNumber(String mobileNumber) { this.mobileNumber = mobileNumber; }
+
+    public String getAlternateNumber() { return alternateNumber; }
+    public void setAlternateNumber(String alternateNumber) { this.alternateNumber = alternateNumber; }
+
+    public String getCurrentStreet() { return currentStreet; }
+    public void setCurrentStreet(String currentStreet) { this.currentStreet = currentStreet; }
+
+    public String getCurrentCity() { return currentCity; }
+    public void setCurrentCity(String currentCity) { this.currentCity = currentCity; }
+
+    public String getCurrentState() { return currentState; }
+    public void setCurrentState(String currentState) { this.currentState = currentState; }
+
+    public String getCurrentPincode() { return currentPincode; }
+    public void setCurrentPincode(String currentPincode) { this.currentPincode = currentPincode; }
+
+    public String getCurrentCountry() { return currentCountry; }
+    public void setCurrentCountry(String currentCountry) { this.currentCountry = currentCountry; }
+
+    public String getPermanentStreet() { return permanentStreet; }
+    public void setPermanentStreet(String permanentStreet) { this.permanentStreet = permanentStreet; }
+
+    public String getPermanentCity() { return permanentCity; }
+    public void setPermanentCity(String permanentCity) { this.permanentCity = permanentCity; }
+
+    public String getPermanentState() { return permanentState; }
+    public void setPermanentState(String permanentState) { this.permanentState = permanentState; }
+
+    public String getPermanentPincode() { return permanentPincode; }
+    public void setPermanentPincode(String permanentPincode) { this.permanentPincode = permanentPincode; }
+
+    public String getPermanentCountry() { return permanentCountry; }
+    public void setPermanentCountry(String permanentCountry) { this.permanentCountry = permanentCountry; }
+
+    public String getMaritalStatus() { return maritalStatus; }
+    public void setMaritalStatus(String maritalStatus) { this.maritalStatus = maritalStatus; }
+
+    public String getBloodGroup() { return bloodGroup; }
+    public void setBloodGroup(String bloodGroup) { this.bloodGroup = bloodGroup; }
+
+    public String getLinkedinProfile() { return linkedinProfile; }
+    public void setLinkedinProfile(String linkedinProfile) { this.linkedinProfile = linkedinProfile; }
+
+    // Section C
+    public String getFatherSpouseName() { return fatherSpouseName; }
+    public void setFatherSpouseName(String fatherSpouseName) { this.fatherSpouseName = fatherSpouseName; }
+
+    public String getEmergencyName() { return emergencyName; }
+    public void setEmergencyName(String emergencyName) { this.emergencyName = emergencyName; }
+
+    public String getEmergencyRelationship() { return emergencyRelationship; }
+    public void setEmergencyRelationship(String emergencyRelationship) { this.emergencyRelationship = emergencyRelationship; }
+
+    public String getEmergencyPhone() { return emergencyPhone; }
+    public void setEmergencyPhone(String emergencyPhone) { this.emergencyPhone = emergencyPhone; }
+
+    public String getBankName() { return bankName; }
+    public void setBankName(String bankName) { this.bankName = bankName; }
+
+    public String getAccountNumber() { return accountNumber; }
+    public void setAccountNumber(String accountNumber) { this.accountNumber = accountNumber; }
+
+    public String getIfscCode() { return ifscCode; }
+    public void setIfscCode(String ifscCode) { this.ifscCode = ifscCode; }
+
+    public String getEducation() { return education; }
+    public void setEducation(String education) { this.education = education; }
+
+    public String getWorkExperience() { return workExperience; }
+    public void setWorkExperience(String workExperience) { this.workExperience = workExperience; }
+
+    public String getFamily() { return family; }
+    public void setFamily(String family) { this.family = family; }
+
+    public Boolean getIsPhysicallyChallenged() { return isPhysicallyChallenged; }
+    public void setIsPhysicallyChallenged(Boolean isPhysicallyChallenged) { this.isPhysicallyChallenged = isPhysicallyChallenged; }
+
+    public String getDisabilityType() { return disabilityType; }
+    public void setDisabilityType(String disabilityType) { this.disabilityType = disabilityType; }
+
+    public Integer getDisabilityPercentage() { return disabilityPercentage; }
+    public void setDisabilityPercentage(Integer disabilityPercentage) { this.disabilityPercentage = disabilityPercentage; }
+
+    public String getCertificateNumber() { return certificateNumber; }
+    public void setCertificateNumber(String certificateNumber) { this.certificateNumber = certificateNumber; }
+
+    // Section D - Document Data
     public byte[] getPanDocumentData() { return panDocumentData; }
     public void setPanDocumentData(byte[] panDocumentData) { this.panDocumentData = panDocumentData; }
 
@@ -159,6 +303,9 @@ public class OnboardingEntity {
     public byte[] getSignedContractData() { return signedContractData; }
     public void setSignedContractData(byte[] signedContractData) { this.signedContractData = signedContractData; }
 
+    public byte[] getProfilePhotoData() { return profilePhotoData; }
+    public void setProfilePhotoData(byte[] profilePhotoData) { this.profilePhotoData = profilePhotoData; }
+
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
@@ -172,6 +319,7 @@ public class OnboardingEntity {
         if (status == null) status = "PENDING";
         if (progressPercentage == null) progressPercentage = 0;
         if (offerLetterStatus == null) offerLetterStatus = "PENDING";
+        if (isPhysicallyChallenged == null) isPhysicallyChallenged = false;
     }
 
     @PreUpdate
@@ -179,9 +327,3 @@ public class OnboardingEntity {
         updatedAt = LocalDateTime.now();
     }
 }
-
-
-
-
-
-

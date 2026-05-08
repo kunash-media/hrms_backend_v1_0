@@ -1,6 +1,5 @@
 package com.hrms.service.serviceImpl;
 
-
 import com.hrms.dto.request.OnboardingRequestDTO;
 import com.hrms.dto.response.OnboardingResponseDTO;
 import com.hrms.entity.EmployeeEntity;
@@ -65,6 +64,7 @@ public class OnboardingServiceImpl implements OnboardingService {
 
         OnboardingEntity onboarding = new OnboardingEntity();
 
+        // Base fields
         onboarding.setOnboardingId(onboardingId);
         onboarding.setEmployeePrimeId(dto.getEmployeePrimeId());
         onboarding.setJoiningDate(dto.getJoiningDate());
@@ -75,7 +75,41 @@ public class OnboardingServiceImpl implements OnboardingService {
         onboarding.setStatus("PENDING");
         onboarding.setProgressPercentage(0);
 
-        // Save documents as BLOB
+        // ========== SECTION B: Editable Fields ==========
+        onboarding.setPersonalEmail(dto.getPersonalEmail());
+        onboarding.setMobileNumber(dto.getMobileNumber());
+        onboarding.setAlternateNumber(dto.getAlternateNumber());
+        onboarding.setCurrentStreet(dto.getCurrentStreet());
+        onboarding.setCurrentCity(dto.getCurrentCity());
+        onboarding.setCurrentState(dto.getCurrentState());
+        onboarding.setCurrentPincode(dto.getCurrentPincode());
+        onboarding.setCurrentCountry(dto.getCurrentCountry());
+        onboarding.setPermanentStreet(dto.getPermanentStreet());
+        onboarding.setPermanentCity(dto.getPermanentCity());
+        onboarding.setPermanentState(dto.getPermanentState());
+        onboarding.setPermanentPincode(dto.getPermanentPincode());
+        onboarding.setPermanentCountry(dto.getPermanentCountry());
+        onboarding.setMaritalStatus(dto.getMaritalStatus());
+        onboarding.setBloodGroup(dto.getBloodGroup());
+        onboarding.setLinkedinProfile(dto.getLinkedinProfile());
+
+        // ========== SECTION C: New Onboarding Fields ==========
+        onboarding.setFatherSpouseName(dto.getFatherSpouseName());
+        onboarding.setEmergencyName(dto.getEmergencyName());
+        onboarding.setEmergencyRelationship(dto.getEmergencyRelationship());
+        onboarding.setEmergencyPhone(dto.getEmergencyPhone());
+        onboarding.setBankName(dto.getBankName());
+        onboarding.setAccountNumber(dto.getAccountNumber());
+        onboarding.setIfscCode(dto.getIfscCode());
+        onboarding.setEducation(dto.getEducation());
+        onboarding.setWorkExperience(dto.getWorkExperience());
+        onboarding.setFamily(dto.getFamily());
+        onboarding.setIsPhysicallyChallenged(dto.getIsPhysicallyChallenged() != null ? dto.getIsPhysicallyChallenged() : false);
+        onboarding.setDisabilityType(dto.getDisabilityType());
+        onboarding.setDisabilityPercentage(dto.getDisabilityPercentage());
+        onboarding.setCertificateNumber(dto.getCertificateNumber());
+
+        // ========== SECTION D: Save documents as BLOB ==========
         onboarding.setPanDocumentData(convertToBytes(dto.getPanDocument()));
         onboarding.setAadhaarDocumentData(convertToBytes(dto.getAadhaarDocument()));
         onboarding.setDegreeDocumentData(convertToBytes(dto.getDegreeDocument()));
@@ -85,6 +119,7 @@ public class OnboardingServiceImpl implements OnboardingService {
         onboarding.setBankDocumentData(convertToBytes(dto.getBankDocument()));
         onboarding.setMedicalCertificateData(convertToBytes(dto.getMedicalCertificate()));
         onboarding.setSignedContractData(convertToBytes(dto.getSignedContract()));
+        onboarding.setProfilePhotoData(convertToBytes(dto.getProfilePhoto()));
 
         OnboardingEntity saved = onboardingRepository.save(onboarding);
         return convertToResponseDTO(saved, employee);
@@ -99,13 +134,48 @@ public class OnboardingServiceImpl implements OnboardingService {
         EmployeeEntity employee = employeeRepository.findByEmployeePrimeId(onboarding.getEmployeePrimeId())
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
 
+        // Update base fields if provided
         if (dto.getJoiningDate() != null) onboarding.setJoiningDate(dto.getJoiningDate());
         if (dto.getOfferedSalary() != null) onboarding.setOfferedSalary(dto.getOfferedSalary());
         if (dto.getAssignedHR() != null) onboarding.setAssignedHR(dto.getAssignedHR());
         if (dto.getAssignedManager() != null) onboarding.setAssignedManager(dto.getAssignedManager());
         if (dto.getRemarks() != null) onboarding.setRemarks(dto.getRemarks());
 
-        // Update documents if provided
+        // ========== SECTION B: Update Editable Fields ==========
+        if (dto.getPersonalEmail() != null) onboarding.setPersonalEmail(dto.getPersonalEmail());
+        if (dto.getMobileNumber() != null) onboarding.setMobileNumber(dto.getMobileNumber());
+        if (dto.getAlternateNumber() != null) onboarding.setAlternateNumber(dto.getAlternateNumber());
+        if (dto.getCurrentStreet() != null) onboarding.setCurrentStreet(dto.getCurrentStreet());
+        if (dto.getCurrentCity() != null) onboarding.setCurrentCity(dto.getCurrentCity());
+        if (dto.getCurrentState() != null) onboarding.setCurrentState(dto.getCurrentState());
+        if (dto.getCurrentPincode() != null) onboarding.setCurrentPincode(dto.getCurrentPincode());
+        if (dto.getCurrentCountry() != null) onboarding.setCurrentCountry(dto.getCurrentCountry());
+        if (dto.getPermanentStreet() != null) onboarding.setPermanentStreet(dto.getPermanentStreet());
+        if (dto.getPermanentCity() != null) onboarding.setPermanentCity(dto.getPermanentCity());
+        if (dto.getPermanentState() != null) onboarding.setPermanentState(dto.getPermanentState());
+        if (dto.getPermanentPincode() != null) onboarding.setPermanentPincode(dto.getPermanentPincode());
+        if (dto.getPermanentCountry() != null) onboarding.setPermanentCountry(dto.getPermanentCountry());
+        if (dto.getMaritalStatus() != null) onboarding.setMaritalStatus(dto.getMaritalStatus());
+        if (dto.getBloodGroup() != null) onboarding.setBloodGroup(dto.getBloodGroup());
+        if (dto.getLinkedinProfile() != null) onboarding.setLinkedinProfile(dto.getLinkedinProfile());
+
+        // ========== SECTION C: Update New Onboarding Fields ==========
+        if (dto.getFatherSpouseName() != null) onboarding.setFatherSpouseName(dto.getFatherSpouseName());
+        if (dto.getEmergencyName() != null) onboarding.setEmergencyName(dto.getEmergencyName());
+        if (dto.getEmergencyRelationship() != null) onboarding.setEmergencyRelationship(dto.getEmergencyRelationship());
+        if (dto.getEmergencyPhone() != null) onboarding.setEmergencyPhone(dto.getEmergencyPhone());
+        if (dto.getBankName() != null) onboarding.setBankName(dto.getBankName());
+        if (dto.getAccountNumber() != null) onboarding.setAccountNumber(dto.getAccountNumber());
+        if (dto.getIfscCode() != null) onboarding.setIfscCode(dto.getIfscCode());
+        if (dto.getEducation() != null) onboarding.setEducation(dto.getEducation());
+        if (dto.getWorkExperience() != null) onboarding.setWorkExperience(dto.getWorkExperience());
+        if (dto.getFamily() != null) onboarding.setFamily(dto.getFamily());
+        if (dto.getIsPhysicallyChallenged() != null) onboarding.setIsPhysicallyChallenged(dto.getIsPhysicallyChallenged());
+        if (dto.getDisabilityType() != null) onboarding.setDisabilityType(dto.getDisabilityType());
+        if (dto.getDisabilityPercentage() != null) onboarding.setDisabilityPercentage(dto.getDisabilityPercentage());
+        if (dto.getCertificateNumber() != null) onboarding.setCertificateNumber(dto.getCertificateNumber());
+
+        // ========== SECTION D: Update documents if provided ==========
         if (dto.getPanDocument() != null && !dto.getPanDocument().isEmpty())
             onboarding.setPanDocumentData(convertToBytes(dto.getPanDocument()));
         if (dto.getAadhaarDocument() != null && !dto.getAadhaarDocument().isEmpty())
@@ -124,6 +194,8 @@ public class OnboardingServiceImpl implements OnboardingService {
             onboarding.setMedicalCertificateData(convertToBytes(dto.getMedicalCertificate()));
         if (dto.getSignedContract() != null && !dto.getSignedContract().isEmpty())
             onboarding.setSignedContractData(convertToBytes(dto.getSignedContract()));
+        if (dto.getProfilePhoto() != null && !dto.getProfilePhoto().isEmpty())
+            onboarding.setProfilePhotoData(convertToBytes(dto.getProfilePhoto()));
 
         OnboardingEntity updated = onboardingRepository.save(onboarding);
         return convertToResponseDTO(updated, employee);
@@ -140,9 +212,7 @@ public class OnboardingServiceImpl implements OnboardingService {
 
     @Override
     public OnboardingResponseDTO getOnboardingByEmployeePrimeId(String employeePrimeId) {
-        // Convert String to Long
         Long primeId = Long.parseLong(employeePrimeId);
-
         OnboardingEntity onboarding = onboardingRepository.findByEmployeePrimeId(primeId)
                 .orElseThrow(() -> new RuntimeException("Onboarding not found for employee: " + employeePrimeId));
         EmployeeEntity employee = employeeRepository.findByEmployeePrimeId(primeId)
@@ -154,28 +224,13 @@ public class OnboardingServiceImpl implements OnboardingService {
     public Page<OnboardingResponseDTO> getAllOnboarding(Pageable pageable) {
         return onboardingRepository.findAll(pageable).map(onboarding -> {
             EmployeeEntity employee = null;
-
-            // ✅ ADD TRY-CATCH AND HANDLE STRING TO LONG CONVERSION
             try {
-                if(onboarding.getEmployeePrimeId() != null) {
-                    // Try both ways - first as Long, then as String
-                    if(onboarding.getEmployeePrimeId() instanceof Long) {
-                        employee = employeeRepository.findById(onboarding.getEmployeePrimeId()).orElse(null);
-                    } else {
-                        // If it's stored as String, try to parse
-                        String empId = String.valueOf(onboarding.getEmployeePrimeId());
-                        if(empId.matches("\\d+")) {
-                            employee = employeeRepository.findById(Long.parseLong(empId)).orElse(null);
-                        } else {
-                            // Try to find by employeeId (String)
-                            employee = employeeRepository.findByEmployeeId(empId).orElse(null);
-                        }
-                    }
+                if (onboarding.getEmployeePrimeId() != null) {
+                    employee = employeeRepository.findById(onboarding.getEmployeePrimeId()).orElse(null);
                 }
-            } catch(Exception e) {
+            } catch (Exception e) {
                 log.error("Error fetching employee for onboarding: " + onboarding.getId(), e);
             }
-
             return convertToResponseDTO(onboarding, employee);
         });
     }
@@ -222,9 +277,10 @@ public class OnboardingServiceImpl implements OnboardingService {
     private OnboardingResponseDTO convertToResponseDTO(OnboardingEntity onboarding, EmployeeEntity employee) {
         OnboardingResponseDTO dto = new OnboardingResponseDTO();
 
+        // Base fields
         dto.setId(onboarding.getId());
         dto.setOnboardingId(onboarding.getOnboardingId());
-        dto.setEmployeePrimeId(String.valueOf(onboarding.getEmployeePrimeId()));
+        dto.setEmployeePrimeId(onboarding.getEmployeePrimeId() != null ? String.valueOf(onboarding.getEmployeePrimeId()) : null);
         dto.setStatus(onboarding.getStatus());
         dto.setJoiningDate(onboarding.getJoiningDate());
         dto.setProgressPercentage(onboarding.getProgressPercentage());
@@ -236,24 +292,65 @@ public class OnboardingServiceImpl implements OnboardingService {
         dto.setCreatedAt(onboarding.getCreatedAt());
         dto.setUpdatedAt(onboarding.getUpdatedAt());
 
-        // Set employee details
+        // ========== SECTION A - Employee details ==========
         if (employee != null) {
-            dto.setEmployeeName(employee.getFirstName() + " " + employee.getLastName());
+            String firstName = employee.getFirstName() != null ? employee.getFirstName() : "";
+            String lastName = employee.getLastName() != null ? employee.getLastName() : "";
+            dto.setEmployeeName(firstName + " " + lastName);
             dto.setDepartment(employee.getDepartment());
             dto.setDesignation(employee.getDesignation());
+            dto.setWorkEmail(employee.getWorkEmail());
+            dto.setReportingManager(employee.getReportingManager());
         }
 
-        // Set document URLs
+        // ========== SECTION B - Editable Fields ==========
+        dto.setPersonalEmail(onboarding.getPersonalEmail());
+        dto.setMobileNumber(onboarding.getMobileNumber());
+        dto.setAlternateNumber(onboarding.getAlternateNumber());
+        dto.setCurrentStreet(onboarding.getCurrentStreet());
+        dto.setCurrentCity(onboarding.getCurrentCity());
+        dto.setCurrentState(onboarding.getCurrentState());
+        dto.setCurrentPincode(onboarding.getCurrentPincode());
+        dto.setCurrentCountry(onboarding.getCurrentCountry());
+        dto.setPermanentStreet(onboarding.getPermanentStreet());
+        dto.setPermanentCity(onboarding.getPermanentCity());
+        dto.setPermanentState(onboarding.getPermanentState());
+        dto.setPermanentPincode(onboarding.getPermanentPincode());
+        dto.setPermanentCountry(onboarding.getPermanentCountry());
+        dto.setMaritalStatus(onboarding.getMaritalStatus());
+        dto.setBloodGroup(onboarding.getBloodGroup());
+        dto.setLinkedinProfile(onboarding.getLinkedinProfile());
+
+        // ========== SECTION C - New Onboarding Fields ==========
+        dto.setFatherSpouseName(onboarding.getFatherSpouseName());
+        dto.setEmergencyName(onboarding.getEmergencyName());
+        dto.setEmergencyRelationship(onboarding.getEmergencyRelationship());
+        dto.setEmergencyPhone(onboarding.getEmergencyPhone());
+        dto.setBankName(onboarding.getBankName());
+        dto.setAccountNumber(onboarding.getAccountNumber());
+        dto.setIfscCode(onboarding.getIfscCode());
+        dto.setEducation(onboarding.getEducation());
+        dto.setWorkExperience(onboarding.getWorkExperience());
+        dto.setFamily(onboarding.getFamily());
+        dto.setIsPhysicallyChallenged(onboarding.getIsPhysicallyChallenged());
+        dto.setDisabilityType(onboarding.getDisabilityType());
+        dto.setDisabilityPercentage(onboarding.getDisabilityPercentage());
+        dto.setCertificateNumber(onboarding.getCertificateNumber());
+
+        // ========== SECTION D - Document URLs ==========
         String onboardingId = onboarding.getOnboardingId();
-        dto.setPanDocumentUrl(generateDocUrl(onboardingId, "pan"));
-        dto.setAadhaarDocumentUrl(generateDocUrl(onboardingId, "aadhaar"));
-        dto.setDegreeDocumentUrl(generateDocUrl(onboardingId, "degree"));
-        dto.setExperienceDocumentUrl(generateDocUrl(onboardingId, "experience"));
-        dto.setOfferLetterUrl(generateDocUrl(onboardingId, "offer"));
-        dto.setPassportPhotoUrl(generateDocUrl(onboardingId, "passport"));
-        dto.setBankDocumentUrl(generateDocUrl(onboardingId, "bank"));
-        dto.setMedicalCertificateUrl(generateDocUrl(onboardingId, "medical"));
-        dto.setSignedContractUrl(generateDocUrl(onboardingId, "contract"));
+        if (onboardingId != null && !onboardingId.isEmpty()) {
+            dto.setPanDocumentUrl(generateDocUrl(onboardingId, "pan"));
+            dto.setAadhaarDocumentUrl(generateDocUrl(onboardingId, "aadhaar"));
+            dto.setDegreeDocumentUrl(generateDocUrl(onboardingId, "degree"));
+            dto.setExperienceDocumentUrl(generateDocUrl(onboardingId, "experience"));
+            dto.setOfferLetterUrl(generateDocUrl(onboardingId, "offer"));
+            dto.setPassportPhotoUrl(generateDocUrl(onboardingId, "passport"));
+            dto.setBankDocumentUrl(generateDocUrl(onboardingId, "bank"));
+            dto.setMedicalCertificateUrl(generateDocUrl(onboardingId, "medical"));
+            dto.setSignedContractUrl(generateDocUrl(onboardingId, "contract"));
+            dto.setProfilePhotoUrl(generateDocUrl(onboardingId, "profile"));
+        }
 
         return dto;
     }
