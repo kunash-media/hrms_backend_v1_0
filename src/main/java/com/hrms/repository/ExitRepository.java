@@ -1,5 +1,6 @@
 package com.hrms.repository;
 
+import com.hrms.entity.EmployeeEntity;
 import com.hrms.entity.ExitEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -106,6 +107,13 @@ public interface ExitRepository extends JpaRepository<ExitEntity, Long> {
     @Query("SELECT e.employee.department, COUNT(e) FROM ExitEntity e GROUP BY e.employee.department")
     List<Object[]> getDepartmentWiseExitCount();
 
+    Optional<ExitEntity> findByEmployeeAndStatus(EmployeeEntity employee, String status);
+
+
+    // Add this method in ExitRepository interface
+    Optional<ExitEntity> findByEmployeeAndStatusIn(EmployeeEntity employee, List<String> statuses);
+
     @Query("SELECT MONTH(e.createdAt), COUNT(e) FROM ExitEntity e WHERE YEAR(e.createdAt) = YEAR(CURRENT_DATE) GROUP BY MONTH(e.createdAt)")
     List<Object[]> getMonthlyExitCount();
 }
+

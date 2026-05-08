@@ -14,12 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ExitServiceImpl implements ExitService {
@@ -69,11 +64,9 @@ public class ExitServiceImpl implements ExitService {
             return null;
         }
         try {
-            // Try to parse as Long (employeePrimeId)
             Long primeId = Long.parseLong(employeeId);
             return employeeRepository.findByEmployeePrimeId(primeId).orElse(null);
         } catch (NumberFormatException e) {
-            // Not a number, treat as employeeId (EMP001 format)
             return employeeRepository.findByEmployeeId(employeeId).orElse(null);
         }
     }
@@ -83,7 +76,6 @@ public class ExitServiceImpl implements ExitService {
         dto.setId(entity.getId());
         dto.setExitId(entity.getExitId());
 
-        // Get employee details from mapped EmployeeEntity
         if (entity.getEmployee() != null) {
             EmployeeEntity emp = entity.getEmployee();
             dto.setEmployeeId(String.valueOf(emp.getEmployeePrimeId()));
@@ -92,11 +84,6 @@ public class ExitServiceImpl implements ExitService {
             dto.setEmployeeName(empName.trim());
             dto.setDepartment(emp.getDepartment());
             dto.setDesignation(emp.getDesignation());
-        } else {
-            dto.setEmployeeId(null);
-            dto.setEmployeeName(null);
-            dto.setDepartment(null);
-            dto.setDesignation(null);
         }
 
         dto.setResignationDate(entity.getResignationDate());
@@ -151,9 +138,7 @@ public class ExitServiceImpl implements ExitService {
     @Transactional
     public ExitResponseDto createResignation(ExitRequestDto dto) {
         log.info("Creating resignation for employee: {}", dto.getEmployeeId());
-
         try {
-            // Fetch employee from database
             EmployeeEntity employee = findEmployeeById(dto.getEmployeeId());
             if (employee == null) {
                 return new ExitResponseDto(false, "Employee not found with ID: " + dto.getEmployeeId());
@@ -161,7 +146,7 @@ public class ExitServiceImpl implements ExitService {
 
             ExitEntity entity = new ExitEntity();
             entity.setExitId(generateExitId());
-            entity.setEmployee(employee);  // Set the actual Employee entity
+            entity.setEmployee(employee);
             entity.setResignationDate(dto.getResignationDate());
             entity.setLastWorkingDay(dto.getLastWorkingDay());
             entity.setReasonForLeaving(dto.getReasonForLeaving());
@@ -252,6 +237,35 @@ public class ExitServiceImpl implements ExitService {
     }
 
     @Override
+    public ExitResponseDto getResignationByEmployeeId(String employeeId) {
+        log.info("Fetching resignation for employeeId: {}", employeeId);
+        try {
+            EmployeeEntity employee = findEmployeeById(employeeId);
+            if (employee == null) {
+                return new ExitResponseDto(false, "Employee not found with ID: " + employeeId);
+            }
+
+            // Check for ALL active statuses
+            List<String> activeStatuses = Arrays.asList("PENDING", "APPROVED", "NOTICE_PERIOD", "HR_PROCESSING", "CLEARANCE_PENDING", "COMPLETED");
+
+            Optional<ExitEntity> resignationOpt = exitRepository.findByEmployeeAndStatusIn(employee, activeStatuses);
+
+            if (resignationOpt.isPresent()) {
+                ExitEntity entity = resignationOpt.get();
+                log.info("Found resignation for employee: {} with status: {}", employeeId, entity.getStatus());
+                return new ExitResponseDto(true, "Resignation found", convertToResponseDto(entity));
+            }
+
+            log.info("No resignation found for employeeId: {}", employeeId);
+            return new ExitResponseDto(false, "No resignation found for employee: " + employeeId);
+
+        } catch (Exception e) {
+            log.error("Error fetching resignation by employeeId: {}", e.getMessage());
+            return new ExitResponseDto(false, "Failed to fetch resignation: " + e.getMessage());
+        }
+    }
+
+    @Override
     public ExitResponseDto searchResignations(String search, Pageable pageable) {
         try {
             Page<ExitEntity> page = exitRepository.searchExits(search, pageable);
@@ -281,6 +295,104 @@ public class ExitServiceImpl implements ExitService {
             log.error("Error deleting resignation: {}", e.getMessage());
             return new ExitResponseDto(false, "Failed to delete: " + e.getMessage());
         }
+    }
+
+    // ========== NOTICE PERIOD & HR PROCESSING METHODS ==========
+
+    @Override
+    @Transactional
+    public ExitResponseDto updateNoticePeriodStatus(Long exitId, LocalDate noticeStartDate, LocalDate noticeEndDate) {
+        Optional<ExitEntity> optional = exitRepository.findById(exitId);
+        if (optional.isEmpty()) {
+            return new ExitResponseDto(false, "Resignation not found");
+        }
+
+        ExitEntity entity = optional.get();
+        entity.setStatus("NOTICE_PERIOD");
+        entity.setNoticeStartDate(noticeStartDate);
+        entity.setNoticeEndDate(noticeEndDate);
+        exitRepository.save(entity);
+
+        log.info("Notice period started for exitId: {} from {} to {}", exitId, noticeStartDate, noticeEndDate);
+        return new ExitResponseDto(true, "Notice period started successfully", convertToResponseDto(entity));
+    }
+
+    @Override
+    @Transactional
+    public ExitResponseDto startHRProcessing(Long exitId) {
+        Optional<ExitEntity> optional = exitRepository.findById(exitId);
+        if (optional.isEmpty()) {
+            return new ExitResponseDto(false, "Resignation not found");
+        }
+
+        ExitEntity entity = optional.get();
+        entity.setStatus("HR_PROCESSING");
+        entity.setHrProcessingStartDate(LocalDate.now());
+        exitRepository.save(entity);
+
+        return new ExitResponseDto(true, "HR processing started", convertToResponseDto(entity));
+    }
+
+    @Override
+    @Transactional
+    public ExitResponseDto completeHRProcessing(Long exitId) {
+        Optional<ExitEntity> optional = exitRepository.findById(exitId);
+        if (optional.isEmpty()) {
+            return new ExitResponseDto(false, "Resignation not found");
+        }
+
+        ExitEntity entity = optional.get();
+        entity.setStatus("CLEARANCE_PENDING");
+        entity.setHrProcessingEndDate(LocalDate.now());
+        exitRepository.save(entity);
+
+        return new ExitResponseDto(true, "HR processing completed, clearances pending", convertToResponseDto(entity));
+    }
+
+    @Override
+    public ExitResponseDto getExitTimeline(Long exitId) {
+        Optional<ExitEntity> optional = exitRepository.findById(exitId);
+        if (optional.isEmpty()) {
+            return new ExitResponseDto(false, "Resignation not found");
+        }
+
+        ExitEntity entity = optional.get();
+        Map<String, Object> timeline = new LinkedHashMap<>();
+
+        timeline.put("resignationSubmitted", Map.of(
+                "date", entity.getCreatedAt(),
+                "status", "COMPLETED",
+                "description", "Resignation submitted by employee"
+        ));
+
+        if (entity.getApprovedDate() != null) {
+            timeline.put("hrApproval", Map.of(
+                    "date", entity.getApprovedDate(),
+                    "status", "COMPLETED",
+                    "description", "HR approved resignation",
+                    "approvedBy", entity.getApprovedBy()
+            ));
+        }
+
+        if (entity.getNoticeStartDate() != null) {
+            timeline.put("noticePeriod", Map.of(
+                    "startDate", entity.getNoticeStartDate(),
+                    "endDate", entity.getNoticeEndDate(),
+                    "status", "IN_PROGRESS",
+                    "description", "Employee serving notice period"
+            ));
+        }
+
+        if (entity.getHrProcessingStartDate() != null) {
+            timeline.put("hrProcessing", Map.of(
+                    "startDate", entity.getHrProcessingStartDate(),
+                    "endDate", entity.getHrProcessingEndDate(),
+                    "status", entity.getHrProcessingEndDate() != null ? "COMPLETED" : "IN_PROGRESS",
+                    "description", "HR exit formalities and paperwork"
+            ));
+        }
+
+        return new ExitResponseDto(true, "Exit timeline", timeline);
     }
 
     // ========== CLEARANCE METHODS ==========
@@ -376,7 +488,7 @@ public class ExitServiceImpl implements ExitService {
                 (dto.getOtherDeductions() != null ? dto.getOtherDeductions() : 0);
 
         double netPayable = totalEarnings - totalDeductions;
-        String words = numberToWords((int) netPayable);
+        String words = numberToWords((int) Math.abs(netPayable));
 
         exitRepository.updateSettlement(exitId, dto.getBasicSalary(), dto.getLeaveEncashment(),
                 dto.getBonus(), dto.getAllowances(), totalEarnings, dto.getSalaryAdvance(),
@@ -470,7 +582,7 @@ public class ExitServiceImpl implements ExitService {
         interview.put("recommendToOthers", entity.getRecommendToOthers());
         interview.put("conductedBy", entity.getConductedBy());
         interview.put("interviewDate", entity.getInterviewDate());
-        interview.put("whatLikedMost", entity.getInterviewFeedback()); // Reuse feedback field
+        interview.put("whatLikedMost", entity.getInterviewFeedback());
         interview.put("whatNeedsImprovement", entity.getRemarks());
 
         return new ExitResponseDto(true, "Exit interview details", interview);
@@ -489,7 +601,7 @@ public class ExitServiceImpl implements ExitService {
             stats.put("departmentWise", exitRepository.getDepartmentWiseExitCount());
             stats.put("monthlyExits", exitRepository.getMonthlyExitCount());
 
-            long totalEmployees = 100; // TODO: Fetch from EmployeeRepository.count()
+            long totalEmployees = 100;
             long totalExits = exitRepository.countCompletedExitsThisYear();
             double attritionRate = totalEmployees > 0 ? (double) totalExits / totalEmployees * 100 : 0;
             stats.put("attritionRate", Math.round(attritionRate * 10) / 10.0);
@@ -500,5 +612,37 @@ public class ExitServiceImpl implements ExitService {
             return new ExitResponseDto(false, "Failed to fetch stats: " + e.getMessage());
         }
     }
-}
 
+    @Override
+    @Transactional
+    public ExitResponseDto startClearance(Long exitId) {
+        log.info("Starting clearance for exitId: {}", exitId);
+
+        try {
+            Optional<ExitEntity> optional = exitRepository.findById(exitId);
+            if (optional.isEmpty()) {
+                return new ExitResponseDto(false, "Resignation not found with id: " + exitId);
+            }
+
+            ExitEntity entity = optional.get();
+
+            // Only allow if status is CLEARANCE_PENDING
+            if (!"CLEARANCE_PENDING".equals(entity.getStatus())) {
+                return new ExitResponseDto(false, "Can only start clearance for CLEARANCE_PENDING status. Current status: " + entity.getStatus());
+            }
+
+            // Clearance process is handled by individual clearance updates
+            // This just adds a remark
+            String existingRemarks = entity.getRemarks() != null ? entity.getRemarks() : "";
+            entity.setRemarks(existingRemarks + "\nClearance process started on: " + LocalDate.now());
+            exitRepository.save(entity);
+
+            log.info("Clearance started for exitId: {}", exitId);
+            return new ExitResponseDto(true, "Clearance process started", convertToResponseDto(entity));
+
+        } catch (Exception e) {
+            log.error("Error starting clearance: {}", e.getMessage());
+            return new ExitResponseDto(false, "Failed to start clearance: " + e.getMessage());
+        }
+    }
+}

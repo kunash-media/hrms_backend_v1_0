@@ -4,6 +4,8 @@ import com.hrms.dto.request.ExitRequestDto;
 import com.hrms.dto.response.ExitResponseDto;
 import org.springframework.data.domain.Pageable;
 
+import java.time.LocalDate;
+
 public interface ExitService {
 
     // Resignation Methods
@@ -32,4 +34,15 @@ public interface ExitService {
 
     // Dashboard Methods
     ExitResponseDto getDashboardStats();
+    // Add this method in ExitService interface (after getResignationByExitId)
+    ExitResponseDto getResignationByEmployeeId(String employeeId);
+
+    // ExitService.java - Add these methods
+    ExitResponseDto updateNoticePeriodStatus(Long exitId, LocalDate noticeStartDate, LocalDate noticeEndDate);
+    ExitResponseDto startHRProcessing(Long exitId);
+    ExitResponseDto completeHRProcessing(Long exitId);
+    ExitResponseDto getExitTimeline(Long exitId);
+
+    // HR Processing Methods
+    ExitResponseDto startClearance(Long exitId);
 }

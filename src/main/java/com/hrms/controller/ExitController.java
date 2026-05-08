@@ -201,6 +201,36 @@ public class ExitController {
         return ResponseEntity.ok(response);
     }
 
+    // ========== HR PROCESSING APIs ==========
+
+    @PutMapping("/resignations/hr-processing/start/{exitId}")
+    public ResponseEntity<ExitResponseDto> startHRProcessing(@PathVariable Long exitId) {
+        ExitResponseDto response = exitService.startHRProcessing(exitId);
+        HttpStatus status = response.isSuccess() ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+        return new ResponseEntity<>(response, status);
+    }
+
+    @PutMapping("/resignations/hr-processing/complete/{exitId}")
+    public ResponseEntity<ExitResponseDto> completeHRProcessing(@PathVariable Long exitId) {
+        ExitResponseDto response = exitService.completeHRProcessing(exitId);
+        HttpStatus status = response.isSuccess() ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+        return new ResponseEntity<>(response, status);
+    }
+
+    @PutMapping("/resignations/clearance/start/{exitId}")
+    public ResponseEntity<ExitResponseDto> startClearance(@PathVariable Long exitId) {
+        // Note: This calls the same completeHRProcessing method or you can create a separate one
+        ExitResponseDto response = exitService.startClearance(exitId);
+        HttpStatus status = response.isSuccess() ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+        return new ResponseEntity<>(response, status);
+    }
+
+    // In ExitController.java
+    @GetMapping("/resignations/employee/{employeeId}")
+    public ResponseEntity<ExitResponseDto> getResignationByEmployeeId(@PathVariable String employeeId) {
+        ExitResponseDto response = exitService.getResignationByEmployeeId(employeeId);
+        return response.isSuccess() ? ResponseEntity.ok(response) : ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
     // ========== DASHBOARD APIs ==========
 
     @GetMapping("/dashboard/stats")

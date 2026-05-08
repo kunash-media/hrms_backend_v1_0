@@ -26,7 +26,7 @@ public class ExitEntity {
     @Column(name = "last_working_day")
     private LocalDate lastWorkingDay;
 
-    @Column(name = "reason_for_leaving")
+    @Column(name = "reason_for_leaving", columnDefinition = "TEXT")
     private String reasonForLeaving;
 
     private String status;
@@ -40,7 +40,21 @@ public class ExitEntity {
     @Column(columnDefinition = "TEXT")
     private String remarks;
 
-    // Clearance fields
+    // ========== NOTICE PERIOD FIELDS ==========
+    @Column(name = "notice_start_date")
+    private LocalDate noticeStartDate;
+
+    @Column(name = "notice_end_date")
+    private LocalDate noticeEndDate;
+
+    // ========== HR PROCESSING FIELDS ==========
+    @Column(name = "hr_processing_start_date")
+    private LocalDate hrProcessingStartDate;
+
+    @Column(name = "hr_processing_end_date")
+    private LocalDate hrProcessingEndDate;
+
+    // ========== CLEARANCE FIELDS ==========
     @Column(name = "it_clearance")
     private Boolean itClearance;
 
@@ -59,7 +73,7 @@ public class ExitEntity {
     @Column(name = "cleared_by")
     private String clearedBy;
 
-    // Settlement fields
+    // ========== SETTLEMENT FIELDS ==========
     @Column(name = "basic_salary")
     private Double basicSalary;
 
@@ -99,7 +113,7 @@ public class ExitEntity {
     @Column(name = "settlement_processed_by")
     private String settlementProcessedBy;
 
-    // Exit Interview fields
+    // ========== EXIT INTERVIEW FIELDS ==========
     @Column(name = "interview_feedback", columnDefinition = "TEXT")
     private String interviewFeedback;
 
@@ -114,12 +128,14 @@ public class ExitEntity {
     @Column(name = "interview_date")
     private LocalDateTime interviewDate;
 
+    // ========== TIMESTAMP FIELDS ==========
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    // ========== CONSTRUCTORS ==========
     public ExitEntity() {}
 
     @PrePersist
@@ -138,7 +154,7 @@ public class ExitEntity {
         updatedAt = LocalDateTime.now();
     }
 
-    // Getters and Setters
+    // ========== GETTERS AND SETTERS ==========
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -150,12 +166,14 @@ public class ExitEntity {
 
     // Helper methods for backward compatibility
     public Long getEmployeeId() { return employee != null ? employee.getEmployeePrimeId() : null; }
+
     public String getEmployeeName() {
         if (employee == null) return null;
         String name = employee.getFirstName() != null ? employee.getFirstName() : "";
         if (employee.getLastName() != null) name += " " + employee.getLastName();
         return name.trim();
     }
+
     public String getDepartment() { return employee != null ? employee.getDepartment() : null; }
     public String getDesignation() { return employee != null ? employee.getDesignation() : null; }
 
@@ -180,6 +198,21 @@ public class ExitEntity {
     public String getRemarks() { return remarks; }
     public void setRemarks(String remarks) { this.remarks = remarks; }
 
+    // Notice Period Getters/Setters
+    public LocalDate getNoticeStartDate() { return noticeStartDate; }
+    public void setNoticeStartDate(LocalDate noticeStartDate) { this.noticeStartDate = noticeStartDate; }
+
+    public LocalDate getNoticeEndDate() { return noticeEndDate; }
+    public void setNoticeEndDate(LocalDate noticeEndDate) { this.noticeEndDate = noticeEndDate; }
+
+    // HR Processing Getters/Setters
+    public LocalDate getHrProcessingStartDate() { return hrProcessingStartDate; }
+    public void setHrProcessingStartDate(LocalDate hrProcessingStartDate) { this.hrProcessingStartDate = hrProcessingStartDate; }
+
+    public LocalDate getHrProcessingEndDate() { return hrProcessingEndDate; }
+    public void setHrProcessingEndDate(LocalDate hrProcessingEndDate) { this.hrProcessingEndDate = hrProcessingEndDate; }
+
+    // Clearance Getters/Setters
     public Boolean getItClearance() { return itClearance; }
     public void setItClearance(Boolean itClearance) { this.itClearance = itClearance; }
 
@@ -198,6 +231,7 @@ public class ExitEntity {
     public String getClearedBy() { return clearedBy; }
     public void setClearedBy(String clearedBy) { this.clearedBy = clearedBy; }
 
+    // Settlement Getters/Setters
     public Double getBasicSalary() { return basicSalary; }
     public void setBasicSalary(Double basicSalary) { this.basicSalary = basicSalary; }
 
@@ -240,6 +274,7 @@ public class ExitEntity {
     public String getSettlementProcessedBy() { return settlementProcessedBy; }
     public void setSettlementProcessedBy(String settlementProcessedBy) { this.settlementProcessedBy = settlementProcessedBy; }
 
+    // Exit Interview Getters/Setters
     public String getInterviewFeedback() { return interviewFeedback; }
     public void setInterviewFeedback(String interviewFeedback) { this.interviewFeedback = interviewFeedback; }
 
@@ -255,6 +290,7 @@ public class ExitEntity {
     public LocalDateTime getInterviewDate() { return interviewDate; }
     public void setInterviewDate(LocalDateTime interviewDate) { this.interviewDate = interviewDate; }
 
+    // Timestamp Getters/Setters
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
