@@ -40,7 +40,7 @@ public class EmployeeController {
     }
 
 
-    // ✅ CREATE Employee
+    // CREATE Employee
     @PostMapping(value = "/create-employee", consumes = {"multipart/form-data"})
     public ResponseEntity<Map<String, Object>> createEmployee(
             @RequestPart("employee") String employeeJson,
@@ -80,7 +80,7 @@ public class EmployeeController {
 
 
 
-    // ✅ UPDATE Employee
+    // UPDATE Employee
     @PutMapping(value = "/update-employee/{employeePrimeId}", consumes = {"multipart/form-data"})
     public ResponseEntity<Map<String, Object>> updateEmployee(
             @PathVariable Long employeePrimeId,
@@ -118,7 +118,7 @@ public class EmployeeController {
         }
     }
 
-    // ✅ GET All Employees
+    // GET All Employees
     @GetMapping("/get-all-employees")
     public ResponseEntity<Map<String, Object>> getAllEmployees(
             @RequestParam(defaultValue = "0") int page,
@@ -144,7 +144,7 @@ public class EmployeeController {
         return ResponseEntity.ok(employees);
     }
 
-    // ✅ GET Employee by employeePrimeId
+    // GET Employee by employeePrimeId
     @GetMapping("/get-employee-by-employeePrimeId/{employeePrimeId}")
     public ResponseEntity<Map<String, Object>> getEmployeeById(@PathVariable Long employeePrimeId) {
         EmployeeResponseDTO employee = employeeService.getEmployeeById(employeePrimeId);
@@ -154,7 +154,7 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
 
-    // ✅ GET Employee by Employee Prime employeePrimeId (EMP001)
+    // GET Employee by Employee Prime employeePrimeId (EMP001)
     @GetMapping("/get-employee-by-employeeId/{employeeId}")
     public ResponseEntity<Map<String, Object>> getEmployeeByEmployeePrimeId(@PathVariable String employeeId) {
         EmployeeResponseDTO employee = employeeService.getEmployeeByEmployeePrimeId(employeeId);
@@ -164,7 +164,7 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
 
-    // ✅ GET Employee by Email
+    // GET Employee by Email
     @GetMapping("/get-employee-by-email/{email}")
     public ResponseEntity<Map<String, Object>> getEmployeeByEmail(@PathVariable String email) {
         EmployeeResponseDTO employee = employeeService.getEmployeeByEmail(email);
@@ -189,7 +189,7 @@ public class EmployeeController {
 //        return ResponseEntity.ok(response);
 //    }
 
-    // ✅ GET by Department
+    // GET by Department
     @GetMapping("/get-employees-by-department/{department}")
     public ResponseEntity<Map<String, Object>> getEmployeesByDepartment(
             @PathVariable String department,
@@ -203,7 +203,7 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
 
-    // ✅ GET by Status
+    // GET by Status
     @GetMapping("/get-employees-by-status/{status}")
     public ResponseEntity<Map<String, Object>> getEmployeesByStatus(
             @PathVariable String status,
@@ -217,7 +217,7 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
 
-    // ✅ UPDATE Status
+    // UPDATE Status
     @PatchMapping("/update-employee-status/{employeePrimeId}")
     public ResponseEntity<Map<String, Object>> updateEmployeeStatus(
             @PathVariable Long employeePrimeId,
@@ -231,7 +231,7 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
 
-    // ✅ DELETE Employee
+    // DELETE Employee
     @DeleteMapping("/delete-employee/{employeePrimeId}")
     public ResponseEntity<Map<String, Object>> deleteEmployee(@PathVariable Long employeePrimeId) {
         employeeService.deleteEmployee(employeePrimeId);
@@ -241,7 +241,7 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
 
-    // ✅ GET Total Count
+    // GET Total Count
     @GetMapping("/get-total-count")
     public ResponseEntity<Map<String, Object>> getTotalCount() {
         long count = employeeService.getTotalCount();
@@ -262,7 +262,7 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
 
-    // ✅ EXPORT Employees
+    //  EXPORT Employees
     @GetMapping("/export-employees")
     public ResponseEntity<Map<String, Object>> exportEmployees() {
         List<EmployeeResponseDTO> employees = employeeService.getAllEmployeesList();

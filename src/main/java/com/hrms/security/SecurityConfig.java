@@ -5,9 +5,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -15,7 +16,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -30,113 +30,129 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final AdminUserDetailsService adminUserDetailsService;
+    private final EmployeeUserDetailsService employeeUserDetailsService;
 
     public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter,
-                          AdminUserDetailsService adminUserDetailsService) {
+                          AdminUserDetailsService adminUserDetailsService,
+                          EmployeeUserDetailsService employeeUserDetailsService) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
         this.adminUserDetailsService = adminUserDetailsService;
-        logger.info("SecurityConfig bean initialized with JwtFilter and UserDetailsService");
+        this.employeeUserDetailsService = employeeUserDetailsService;
+        logger.info("SecurityConfig initialized");
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        logger.debug("BCryptPasswordEncoder bean created (default strength = 10)");
-        return encoder;
+        return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(adminUserDetailsService);
-        authProvider.setPasswordEncoder(passwordEncoder());
-        logger.debug("DaoAuthenticationProvider bean created with custom UserDetailsService");
-        return authProvider;
-    }
+    // ── Admin pipeline ───────────────────────────────────────────────────────
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        AuthenticationManager manager = config.getAuthenticationManager();
-        logger.debug("AuthenticationManager bean created from configuration");
+    public DaoAuthenticationProvider adminAuthenticationProvider() {
+        DaoAuthenticationProvider p = new DaoAuthenticationProvider(adminUserDetailsService);
+        p.setPasswordEncoder(passwordEncoder());
+        return p;
+    }
+
+    /**
+     * Admin AuthenticationManager built as a plain ProviderManager with NO parent.
+     *
+     * Root cause of the StackOverflowError we kept hitting:
+     * AuthenticationConfiguration.getAuthenticationManager() returns a ProviderManager
+     * whose parent is the DSL-built HttpSecurity manager. That DSL manager contains
+     * the same providers we registered via .authenticationProvider(). So calling
+     * authenticate() goes: our bean -> parent DSL manager -> delegates back to our bean
+     * -> repeat until stack blows.
+     *
+     * Fix: build both managers ourselves with new ProviderManager(providers).
+     * No AuthenticationConfiguration, no parent, no proxy loop.
+     */
+    @Bean
+    @Primary
+    public AuthenticationManager adminAuthenticationManager() {
+        ProviderManager manager = new ProviderManager(List.of(adminAuthenticationProvider()));
+        manager.setEraseCredentialsAfterAuthentication(false);
+        logger.debug("Admin AuthenticationManager (plain ProviderManager) created");
         return manager;
     }
 
-    // ── NEW: CORS registered inside Spring Security ──
-    // Spring Security intercepts OPTIONS preflight BEFORE Spring MVC,
-    // so CORS must live here — not just in CorsConfig.java (WebMvcConfigurer).
-    // You can now safely DELETE CorsConfig.java.
+    // ── Employee pipeline ────────────────────────────────────────────────────
+
+    @Bean
+    public DaoAuthenticationProvider employeeAuthenticationProvider() {
+        DaoAuthenticationProvider p = new DaoAuthenticationProvider(employeeUserDetailsService);
+        p.setPasswordEncoder(passwordEncoder());
+        return p;
+    }
+
+    @Bean("employeeAuthenticationManager")
+    public AuthenticationManager employeeAuthenticationManager() {
+        ProviderManager manager = new ProviderManager(List.of(employeeAuthenticationProvider()));
+        manager.setEraseCredentialsAfterAuthentication(false);
+        logger.debug("Employee AuthenticationManager (plain ProviderManager) created");
+        return manager;
+    }
+
+    // ── CORS ─────────────────────────────────────────────────────────────────
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-
         config.setAllowedOrigins(List.of(
-                "http://localhost:5500",
-                "http://127.0.0.1:5500",
-                "http://localhost:5501",
-                "http://127.0.0.1:5501",
-                "http://localhost:5502",
-                "http://127.0.0.1:5502",
+                "http://localhost:5500", "http://127.0.0.1:5500",
+                "http://localhost:5501", "http://127.0.0.1:5501",
+                "http://localhost:5502", "http://127.0.0.1:5502",
                 "http://localhost:3000",
                 "http://localhost:8080",
-                "http://localhost:8083",
-                "http://127.0.0.1:8083"
+                "http://localhost:8083", "http://127.0.0.1:8083"
         ));
-
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true);  // required — sends HttpOnly cookies cross-origin
+        config.setAllowCredentials(true);
         config.setMaxAge(3600L);
-
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);  // covers all paths
+        source.registerCorsConfiguration("/**", config);
         return source;
     }
 
+    // ── Security filter chain ─────────────────────────────────────────────────
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        logger.info("Configuring SecurityFilterChain - stateless JWT with cookie support");
+        logger.info("Configuring SecurityFilterChain");
 
         http
-                // ── NEW: wire CORS bean into Spring Security filter chain ──
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .csrf(csrf -> csrf.disable())
+                .headers(h -> h.frameOptions(f -> f.disable()))
 
-                // ── Uncomment for quick Apidog/Postman testing, comment for production ──
-                 .csrf(csrf -> csrf.disable())
-
-                // ✅ ADD THIS - Disable frame options for development
-                .headers(headers -> headers
-                        .frameOptions(frameOptions -> frameOptions.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/admin/bootstrap").permitAll()
+                        .requestMatchers("/api/admin/auth/**").permitAll()
+                        .requestMatchers("/api/admin/**").authenticated()
+                        .requestMatchers("/api/employee/auth/**").permitAll()
+                        .requestMatchers("/api/employee/**").authenticated()
+                        .anyRequest().permitAll()
                 )
 
-                .authorizeHttpRequests(auth -> {
-                    auth
-                            .requestMatchers("/api/admin/bootstrap").permitAll()
-                            .requestMatchers("/api/admin/auth/**").permitAll()
-                            .requestMatchers("/api/admin/**").authenticated()
-                            .anyRequest().permitAll();
+                .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
-                    logger.info("Authorization rules: /api/admin/auth/** → permitAll, " +
-                            "/api/admin/** → authenticated, others → permitAll");
-                })
+                .authenticationProvider(adminAuthenticationProvider())
+                .authenticationProvider(employeeAuthenticationProvider())
 
-                .sessionManagement(session -> {
-                    session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-                    logger.debug("Session management set to STATELESS");
-                })
-
-                .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         http.exceptionHandling(ex -> ex
-                .authenticationEntryPoint((request, response, authException) -> {
+                .authenticationEntryPoint((request, response, e) -> {
                     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                     response.setContentType("application/json");
                     response.getWriter().write("{\"error\":\"Unauthorized - Login required (JWT)\"}");
-                    logger.warn("Unauthorized access attempt - path: {}, message: {}",
-                            request.getRequestURI(), authException.getMessage());
+                    logger.warn("Unauthorized: {} — {}", request.getRequestURI(), e.getMessage());
                 })
         );
 
-        logger.info("SecurityFilterChain configuration completed successfully");
+        logger.info("SecurityFilterChain configured successfully");
         return http.build();
     }
 }

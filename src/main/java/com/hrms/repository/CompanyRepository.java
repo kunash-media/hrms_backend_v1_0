@@ -17,9 +17,11 @@ public interface CompanyRepository extends JpaRepository<CompanyEntity, Long> {
 
     boolean existsByEmail(String email);
 
+    // Fix: Use "CompanyEntity" instead of "Company"
     @Query("SELECT c FROM CompanyEntity c WHERE c.companyType = :type")
     List<CompanyEntity> findByCompanyType(@Param("type") String type);
 
+    // Fix: Use "CompanyEntity" instead of "Company"
     @Query("SELECT c FROM CompanyEntity c WHERE c.industryType = :industry")
     List<CompanyEntity> findByIndustryType(@Param("industry") String industry);
 }

@@ -5,9 +5,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "employee_leave_balance",
-        uniqueConstraints = @UniqueConstraint(
-                columnNames = {"emp_id", "leave_type", "year"}
-        ))
+        uniqueConstraints = @UniqueConstraint(columnNames = {"emp_id", "leave_type", "year"} ))
 public class EmployeeLeaveBalanceEntity {
 
     @Id

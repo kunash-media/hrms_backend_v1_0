@@ -22,6 +22,7 @@ public class EmployeeEntity {
     @Column(nullable = false)
     private String firstName;
     private String middleName;
+
     @Column(nullable = false)
     private String lastName;
     private String fullName;
@@ -97,7 +98,7 @@ public class EmployeeEntity {
     private Integer disabilityPercentage;
     private String certificateNumber;
 
-    // ✅ DOCUMENT URLS (String fields - store URLs)
+    // DOCUMENT URLS
     @Lob
     @Column(columnDefinition = "LONGBLOB")
     private byte[] aadhaarDocumentImage;
@@ -140,7 +141,6 @@ public class EmployeeEntity {
     @JsonIgnore
     private List<AttendanceEntity> attendanceRecords = new ArrayList<>();
 
-    // Getters and Setters
 
     public Long getEmployeePrimeId() {
         return employeePrimeId;
@@ -309,7 +309,6 @@ public class EmployeeEntity {
     public String getCertificateNumber() { return certificateNumber; }
     public void setCertificateNumber(String certificateNumber) { this.certificateNumber = certificateNumber; }
 
-    // ✅ Document URL Getters/Setters
 
 
     public byte[] getAadhaarDocumentImage() {

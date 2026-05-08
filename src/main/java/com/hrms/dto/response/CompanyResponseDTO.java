@@ -3,6 +3,7 @@ package com.hrms.dto.response;
 import java.time.LocalDateTime;
 
 public class CompanyResponseDTO {
+
     private Long id;
     private String companyName;
     private String gstNumber;
@@ -36,7 +37,6 @@ public class CompanyResponseDTO {
 
     public CompanyResponseDTO() {
     }
-
 
     public static class ApiResponse {
         private boolean success;
@@ -150,3 +150,4 @@ public class CompanyResponseDTO {
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 }
+
