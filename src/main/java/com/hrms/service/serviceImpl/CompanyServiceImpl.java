@@ -10,8 +10,6 @@ import com.hrms.service.CompanyService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
@@ -29,13 +27,9 @@ public class CompanyServiceImpl implements CompanyService {
         CompanyEntity CompanyEntity;
 
         if (request.getId() != null && request.getId() > 0) {
-            CompanyEntity = companyRepository.findById(request.getId()).orElse(new CompanyEntity());
-            // Preserve existing logo
-            CompanyEntity existing = companyRepository.findById(request.getId()).orElse(null);
-            if (existing != null && existing.getLogo() != null) {
-                CompanyEntity.setLogo(existing.getLogo());
-                CompanyEntity.setLogoContentType(existing.getLogoContentType());
-            }
+            CompanyEntity = companyRepository.findById(request.getId())
+                    .orElseThrow(() -> new RuntimeException("Company not found with id: " + request.getId()));
+            // Preserve existing logo — reuse already-fetched entity, no second DB call needed
         } else {
             CompanyEntity = new CompanyEntity();
         }
@@ -129,7 +123,7 @@ public class CompanyServiceImpl implements CompanyService {
 
         // Generate relative logo URL
         if (CompanyEntity.getLogo() != null && CompanyEntity.getLogo().length > 0) {
-            String logoUrl = "/api/CompanyEntity/logo/" + CompanyEntity.getId();
+            String logoUrl = "/api/company/logo/" + CompanyEntity.getId();
             response.setLogoUrl(logoUrl);
             response.setLogoContentType(CompanyEntity.getLogoContentType());
         }

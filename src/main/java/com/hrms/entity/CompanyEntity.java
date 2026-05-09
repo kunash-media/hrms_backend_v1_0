@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "companies_register")
+@Table(name = "companies")
 public class CompanyEntity {
 
     @Id
@@ -178,3 +178,4 @@ public class CompanyEntity {
         updatedAt = LocalDateTime.now();
     }
 }
+

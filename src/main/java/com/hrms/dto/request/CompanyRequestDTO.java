@@ -98,5 +98,5 @@ public class CompanyRequestDTO {
     public void setContactPersons(String contactPersons) { this.contactPersons = contactPersons; }
 
     public String getBankDetails() { return bankDetails; }
-    public void seatBankDetails(String bankDetails) { this.bankDetails = bankDetails; }
+    public void setBankDetails(String bankDetails) { this.bankDetails = bankDetails; }
 }

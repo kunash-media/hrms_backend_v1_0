@@ -30,7 +30,7 @@ public class CompanyController {
         this.objectMapper = objectMapper;
     }
 
-    @PostMapping("/profile")
+    @RequestMapping(value = "/profile", method = {RequestMethod.POST, RequestMethod.PATCH})
     public ResponseEntity<CompanyResponseDTO.ApiResponse> saveCompany(@RequestBody CompanyRequestDTO request) {
         try {
             System.out.println("=== SAVE COMPANY ===");
@@ -40,16 +40,10 @@ public class CompanyController {
             CompanyEntity company;
 
             if (request.getId() != null && request.getId() > 0) {
-                company = companyRepository.findById(request.getId()).orElse(new CompanyEntity());
+                company = companyRepository.findById(request.getId())
+                        .orElseThrow(() -> new RuntimeException("Company not found with id: " + request.getId()));
                 System.out.println("Updating existing company with ID: " + request.getId());
-
-                // Preserve existing logo if not uploading new
-                CompanyEntity existing = companyRepository.findById(request.getId()).orElse(null);
-                if (existing != null && existing.getLogo() != null) {
-                    company.setLogo(existing.getLogo());
-                    company.setLogoContentType(existing.getLogoContentType());
-                    System.out.println("Preserved existing logo, size: " + existing.getLogo().length);
-                }
+                System.out.println("Existing logo preserved: " + (company.getLogo() != null ? company.getLogo().length + " bytes" : "none"));
             } else {
                 company = new CompanyEntity();
                 System.out.println("Creating new company");

@@ -3,7 +3,6 @@ package com.hrms.dto.response;
 import java.time.LocalDateTime;
 
 public class CompanyResponseDTO {
-
     private Long id;
     private String companyName;
     private String gstNumber;
