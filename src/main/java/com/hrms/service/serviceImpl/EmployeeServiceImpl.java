@@ -2,12 +2,18 @@ package com.hrms.service.serviceImpl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hrms.config.BcryptEncoderConfig;
+import com.hrms.dto.request.DashboardDTO;
 import com.hrms.dto.request.EmployeeRequestDTO;
 import com.hrms.dto.request.RegisterEmployeeRequestDTO;
 import com.hrms.dto.response.*;
+import com.hrms.entity.AttendanceEntity;
 import com.hrms.entity.EmployeeEntity;
+import com.hrms.entity.EmployeeLeaveBalanceEntity;
+import com.hrms.repository.AttendanceRepository;
+import com.hrms.repository.EmployeeLeaveBalanceRepository;
 import com.hrms.repository.EmployeeRepository;
 import com.hrms.service.EmployeeService;
+import com.hrms.service.LeaveRequestService;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +23,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.List;
+import java.time.format.TextStyle;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,12 +34,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private static final Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
+    private final EmployeeLeaveBalanceRepository leaveBalanceRepository;
+
+    private final AttendanceRepository attendanceRepository;
     private final  EmployeeRepository employeeRepository;
     private final BcryptEncoderConfig passwordEncoder;
+    private final LeaveRequestService leaveRequestService;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository, BcryptEncoderConfig passwordEncoder) {
+    public EmployeeServiceImpl(EmployeeLeaveBalanceRepository leaveBalanceRepository, AttendanceRepository attendanceRepository, EmployeeRepository employeeRepository, BcryptEncoderConfig passwordEncoder, LeaveRequestService leaveRequestService) {
+        this.leaveBalanceRepository = leaveBalanceRepository;
+        this.attendanceRepository = attendanceRepository;
         this.employeeRepository = employeeRepository;
         this.passwordEncoder = passwordEncoder;
+        this.leaveRequestService = leaveRequestService;
     }
 
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -548,6 +563,104 @@ public class EmployeeServiceImpl implements EmployeeService {
                 saved.getStatus(),
                 saved.getDepartment(),
                 saved.getDesignation()
+        );
+    }
+
+
+    // ─────────────────────────────────────────────────────────────────────────
+    @Override
+    public DashboardDTO getDashboardData(Long employeePrimeId) {
+
+        LocalDate today = LocalDate.now();
+        int       year  = today.getYear();
+
+        // ── Resolve String employeeId from Long employeePrimeId ──────────────────
+        String empId = employeeRepository
+                .findByEmployeePrimeId(employeePrimeId)
+                .orElseThrow(() -> new RuntimeException(
+                        "Employee not found for id: " + employeePrimeId))
+                .getEmployeeId();
+
+        // ── 1. Today's stat card ──────────────────────────────────────────────────
+        Optional<AttendanceEntity> todayRecord =
+                attendanceRepository.findByEmployeeEmployeePrimeIdAndAttendanceDate(
+                        employeePrimeId, today);
+
+        String todayStatus = todayRecord
+                .map(AttendanceEntity::getStatus)
+                .orElse("Not Marked");
+
+        Double todayHours = todayRecord
+                .map(a -> a.getTotalHours() != null ? a.getTotalHours() : 0.0)
+                .orElse(0.0);
+
+        // ── 2. Leave balance — reuse existing LeaveRequestService logic ───────────
+        // getEmployeeBalance() already handles:
+        //   - applicable leave types per employee (incl. Maternity Leave eligibility)
+        //   - getOrCreateBalanceRecord (creates missing rows if needed)
+        //   - correct totalAllotted / totalUsed / totalRemaining computation
+        LeaveBalanceDTO leaveBalance = leaveRequestService.getEmployeeBalance(empId, year);
+
+        int totalAllotted  = leaveBalance.getTotalAllotted();
+        int totalUsed      = leaveBalance.getTotalUsed();
+        int totalRemaining = leaveBalance.getTotalRemaining();
+
+        // ── 3. Weekly chart (Mon → Sat of current week) ───────────────────────────
+        LocalDate weekStart = today.with(DayOfWeek.MONDAY);
+        LocalDate weekEnd   = weekStart.plusDays(5); // Saturday
+
+        List<AttendanceEntity> weekRecords =
+                attendanceRepository.findByEmployeeEmployeePrimeIdAndAttendanceDateBetween(
+                        employeePrimeId, weekStart, weekEnd);
+
+        Map<LocalDate, Double> weekMap = weekRecords.stream()
+                .collect(Collectors.toMap(
+                        AttendanceEntity::getAttendanceDate,
+                        a -> a.getTotalHours() != null ? a.getTotalHours() : 0.0,
+                        (a, b) -> a
+                ));
+
+        List<String> weeklyLabels = new ArrayList<>();
+        List<Double> weeklyHours  = new ArrayList<>();
+
+        for (int i = 0; i <= 5; i++) {
+            LocalDate day = weekStart.plusDays(i);
+            weeklyLabels.add(day.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.ENGLISH));
+            weeklyHours.add(weekMap.getOrDefault(day, 0.0));
+        }
+
+        // ── 4. Monthly chart (every day of current month) ─────────────────────────
+        List<AttendanceEntity> monthRecords =
+                attendanceRepository.findByEmployeeAndMonth(
+                        employeePrimeId, year, today.getMonthValue());
+
+        Map<Integer, Double> monthMap = monthRecords.stream()
+                .collect(Collectors.toMap(
+                        a -> a.getAttendanceDate().getDayOfMonth(),
+                        a -> a.getTotalHours() != null ? a.getTotalHours() : 0.0,
+                        (a, b) -> a
+                ));
+
+        int daysInMonth = today.lengthOfMonth();
+        List<String> monthlyLabels = new ArrayList<>();
+        List<Double> monthlyHours  = new ArrayList<>();
+
+        for (int d = 1; d <= daysInMonth; d++) {
+            monthlyLabels.add(String.valueOf(d));
+            monthlyHours.add(monthMap.getOrDefault(d, 0.0));
+        }
+
+        // ── 5. Assemble ───────────────────────────────────────────────────────────
+        return new DashboardDTO(
+                todayStatus,
+                todayHours,
+                totalAllotted,
+                totalUsed,
+                totalRemaining,
+                weeklyLabels,
+                weeklyHours,
+                monthlyLabels,
+                monthlyHours
         );
     }
 

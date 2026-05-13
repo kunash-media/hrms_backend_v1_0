@@ -34,8 +34,12 @@ public class PayrollRequestDTO {
     private Double allowances;
 
     // ── Deductions ────────────────────────────────────────────────────────
-    @Min(value = 0, message = "PF cannot be negative.")
-    private Double pf;
+    @Min(value = 0, message = "Employee PF cannot be negative.")
+    private Double employeePf;          // ← was: pf
+
+    @Min(value = 0, message = "Employer PF cannot be negative.")
+    private Double employerPf;          // ← NEW field
+
 
     @Min(value = 0, message = "ESI cannot be negative.")
     private Double esi;
@@ -71,8 +75,22 @@ public class PayrollRequestDTO {
     public Double getAllowances() { return allowances; }
     public void setAllowances(Double allowances) { this.allowances = allowances; }
 
-    public Double getPf() { return pf; }
-    public void setPf(Double pf) { this.pf = pf; }
+
+    public Double getEmployeePf() {
+        return employeePf;
+    }
+
+    public void setEmployeePf(Double employeePf) {
+        this.employeePf = employeePf;
+    }
+
+    public Double getEmployerPf() {
+        return employerPf;
+    }
+
+    public void setEmployerPf(Double employerPf) {
+        this.employerPf = employerPf;
+    }
 
     public Double getEsi() { return esi; }
     public void setEsi(Double esi) { this.esi = esi; }

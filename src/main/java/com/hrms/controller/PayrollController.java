@@ -10,6 +10,10 @@ import com.hrms.utils.ApiResponse;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -223,4 +227,16 @@ public class PayrollController {
         return ResponseEntity.ok(ApiResponse.success(
                 "Payroll record " + payrollId + " has been deleted successfully."));
     }
+
+
+    @GetMapping("/get-all-payroll")
+    public ResponseEntity<Page<PayrollResponseDTO>> getAllPayroll(
+            @PageableDefault(size = 20, sort = "createdAt", direction = Sort.Direction.DESC)
+            Pageable pageable) {
+
+        Page<PayrollResponseDTO> response = payrollService.getAllPayroll(pageable);
+        return ResponseEntity.ok(response);
+    }
+
+
 }

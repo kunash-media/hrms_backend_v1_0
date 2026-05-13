@@ -15,6 +15,10 @@ import java.util.Optional;
 @Repository
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> {
 
+
+
+    Optional<EmployeeEntity> findByWorkEmail(String workEmail);
+
     Optional<EmployeeEntity> findByEmployeeId(String employeeId);
 
     // ✅ Method 1: Find by employeePrimeId (Long/Primary Key)
@@ -31,17 +35,8 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
 
     Page<EmployeeEntity> findByStatus(String status, Pageable pageable);
 
-//    @Query("SELECT e FROM EmployeeEntity e WHERE " +
-//            "LOWER(e.firstName) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-//            "LOWER(e.lastName) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-//            "LOWER(e.personalEmail) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-//            "LOWER(e.employeePrimeId) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-//            "LOWER(e.department) LIKE LOWER(CONCAT('%', :search, '%'))")
-//    Page<EmployeeEntity> searchEmployees(@Param("search") String search, Pageable pageable);
-
 
     // fetch employee list for payroll
-
     @Query("""
     SELECT e FROM EmployeeEntity e
     WHERE UPPER(e.department) = UPPER(:department)
@@ -58,5 +53,4 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
     List<EmployeeEntity> findAllActive();
 
     boolean existsByEmployeeId(String employeeId);
-
 }

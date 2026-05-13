@@ -1,6 +1,7 @@
 package com.hrms.service;
 
 import com.hrms.dto.request.AttendanceRequest;
+import com.hrms.dto.request.DashboardDTO;
 import com.hrms.dto.response.AttendanceResponse;
 import org.springframework.data.domain.Page;
 
@@ -38,4 +39,5 @@ public interface AttendanceService {
     List<AttendanceResponse> getMonthlyAttendance(Long employeePrimeId, LocalDate month);
 
     Page<AttendanceResponse> getAllAttendanceByEmployeePrimeId(Long employeePrimeId, int page, int size, String sortBy, String sortDir);
+
 }

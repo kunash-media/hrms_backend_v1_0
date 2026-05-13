@@ -54,4 +54,26 @@ public interface AttendanceRepository extends JpaRepository<AttendanceEntity, Lo
 
     @Query("SELECT a FROM AttendanceEntity a WHERE a.attendanceDate BETWEEN :from AND :to")
     List<AttendanceEntity> findByDateRange(@Param("from") LocalDate from, @Param("to") LocalDate to);
+
+
+    /**
+     * Fetch a single day's record (used for today's stat card).
+     * Alias of the existing method — already present, nothing to add.
+     */
+    // findByEmployeeEmployeePrimeIdAndAttendanceDate  ← already exists ✓
+
+    /**
+     * Sum of totalHours for a date range (used if you ever want a quick scalar).
+     * Optional — service can sum in Java from the list query above.
+     */
+    @Query("""
+        SELECT COALESCE(SUM(a.totalHours), 0.0)
+        FROM AttendanceEntity a
+        WHERE a.employee.employeePrimeId = :employeePrimeId
+          AND a.attendanceDate BETWEEN :from AND :to
+        """)
+    Double sumHoursBetween(
+            @Param("employeePrimeId") Long employeePrimeId,
+            @Param("from") LocalDate from,
+            @Param("to")   LocalDate to);
 }

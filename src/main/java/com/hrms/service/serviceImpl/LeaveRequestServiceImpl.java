@@ -26,40 +26,29 @@ import java.util.stream.Collectors;
 @Service
 public class LeaveRequestServiceImpl implements LeaveRequestService {
 
-    @Autowired
-    private LeaveRequestRepository leaveRequestRepository;
+    private final LeaveRequestRepository leaveRequestRepository;
+    private final EmployeeRepository employeeRepository;
+    private final LeaveTypeRepository leaveTypeRepository;
+    private final LeaveRuleService leaveRuleService;
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
+    // Maternity Leave type name constant — single place to change if name ever differs
+    private static final String MATERNITY_LEAVE = "Maternity Leave";
 
-    @Autowired
-    private LeaveTypeRepository leaveTypeRepository;
 
-    @Autowired
-    private LeaveRuleService leaveRuleService;
+    private EmployeeLeaveBalanceRepository leaveBalanceRepository;
 
-    @Autowired
-    private EmployeeLeaveBalanceRepository leaveBalanceRepository; // ✅ NEW
+    public LeaveRequestServiceImpl(LeaveRequestRepository leaveRequestRepository, EmployeeRepository employeeRepository, LeaveTypeRepository leaveTypeRepository, LeaveRuleService leaveRuleService, EmployeeLeaveBalanceRepository leaveBalanceRepository) {
+        this.leaveRequestRepository = leaveRequestRepository;
+        this.employeeRepository = employeeRepository;
+        this.leaveTypeRepository = leaveTypeRepository;
+        this.leaveRuleService = leaveRuleService;
+        this.leaveBalanceRepository = leaveBalanceRepository;
+    }
+
 
 
     // ─────────────────────────────────────────────────────────────────
     // CREATE LEAVE REQUEST
-    //
-    // Rules:
-    //  1. All required fields must be non-null / non-blank.
-    //  2. Employee must exist in the employees table.
-    //  3. Leave type must be an active leave type.
-    //  4. numberOfDays must be >= 1.
-    //  5. fromDate cannot be in the past for pending requests.
-    //     Admin can bypass this by passing status = "approved".
-    //  6. Overlap check: employee cannot have another pending/approved
-    //     request that overlaps the same date window.
-    //  7. Balance check: if remaining < requested, still save but
-    //     append a warning in remarks so HR sees it on approval.
-    //  8. If status = "approved" (admin direct): set actionBy + actionDate
-    //     AND update balance table immediately.
-    //  9. Always resolve empName, dept, empType from DB (avoid spoofing).
-    // 10. toDate & description are optional — stored if provided.
     // ─────────────────────────────────────────────────────────────────
     @Override
     @Transactional
@@ -88,12 +77,21 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
         String resolvedType = (emp.getEmploymentType() != null && !emp.getEmploymentType().isBlank())
                 ? emp.getEmploymentType() : empType;
 
-        // Rule 3 – leave type must be active
-        boolean validLeaveType = leaveTypeRepository.findByIsActiveTrue()
-                .stream().anyMatch(lt -> lt.getName().equals(leaveType));
+        // Rule 3 – leave type must be active AND applicable for this employee
+        // ✅ findApplicableLeaveTypes filters Maternity Leave for non-eligible employees
+        boolean validLeaveType = leaveTypeRepository
+                .findApplicableLeaveTypes(empId)
+                .stream()
+                .anyMatch(lt -> lt.getName().equalsIgnoreCase(leaveType));
+
         if (!validLeaveType) {
+            // Specific error for Maternity Leave — better UX
+            if (MATERNITY_LEAVE.equalsIgnoreCase(leaveType)) {
+                throw new RuntimeException(
+                        "Maternity Leave is only applicable for married female employees.");
+            }
             throw new RuntimeException(
-                    "Leave type '" + leaveType + "' is not active or does not exist.");
+                    "Leave type '" + leaveType + "' is not active or not applicable for you.");
         }
 
         // Rule 4 – days must be >= 1
@@ -113,6 +111,7 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
         LocalDate newTo = (toDate != null) ? toDate : fromDate.plusDays(numberOfDays - 1);
         List<LeaveRequestEntity> activeRequests = leaveRequestRepository
                 .findByEmpIdAndStatusIn(empId, List.of("pending", "approved"));
+
         for (LeaveRequestEntity existing : activeRequests) {
             LocalDate exFrom = existing.getFromDate();
             LocalDate exTo   = (existing.getToDate() != null)
@@ -157,7 +156,6 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
             req.setActionBy("HR Admin");
             req.setActionDate(LocalDate.now());
             req.setRemarks(warningRemark != null ? warningRemark : "Added directly by admin.");
-
             // ✅ Balance table bhi update karo — admin directly approve kar raha hai
             updateLeaveBalance(balanceRecord, numberOfDays);
         } else {
@@ -174,7 +172,6 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
     // Filters : dept, search (name / empId)
     // Sorted  : oldest addedOn first (FIFO)
     // Enriched: balanceAllotted, balanceUsed, balanceRemaining, lowBalance
-    //           — READ FROM DB (employee_leave_balance table)
     // ─────────────────────────────────────────────────────────────────
     @Override
     public List<LeaveRequestResponseDTO> getPendingRequests(String dept, String search, int year) {
@@ -201,10 +198,6 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 
     // ─────────────────────────────────────────────────────────────────
     // GET HISTORY  (HR Dashboard – History Tab)
-    //
-    // Filters : status (all/approved/rejected/pending), year, search
-    // Sorted  : newest addedOn first
-    // Enriched: balance fields from DB
     // ─────────────────────────────────────────────────────────────────
     @Override
     public List<LeaveRequestResponseDTO> getHistory(String status, int year, String search) {
@@ -234,9 +227,6 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 
     // ─────────────────────────────────────────────────────────────────
     // GET REQUESTS BY EMPLOYEE  (Employee Dashboard)
-    //
-    // Returns all leave requests of one employee, newest first.
-    // Enriched: balance fields from DB
     // ─────────────────────────────────────────────────────────────────
     @Override
     public List<LeaveRequestResponseDTO> getByEmployee(String empId) {
@@ -257,15 +247,7 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 
 
     // ─────────────────────────────────────────────────────────────────
-    // APPROVE / REJECT  (HR Action – Pending Tab buttons)
-    //
-    // Rules:
-    //  1. Request must exist.
-    //  2. Must currently be "pending" — can't re-process.
-    //  3. action must be "approve" or "reject".
-    //  4. On approve → update employee_leave_balance table (used++, remaining--)
-    //  5. If balance insufficient → append warning in remarks.
-    //  6. Set actionBy, actionDate, status, remarks.
+    // APPROVE / REJECT  (HR Action – Pending Tab)
     // ─────────────────────────────────────────────────────────────────
     @Override
     @Transactional
@@ -289,13 +271,11 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
         boolean isApprove = "approve".equalsIgnoreCase(action);
 
         if (isApprove) {
-            // ✅ DB se balance record lo ya banao
             EmployeeLeaveBalanceEntity balanceRecord = getOrCreateBalanceRecord(
                     req.getEmpId(), req.getLeaveType(),
                     req.getFromDate().getYear(),
                     req.getEmpType(), req.getDepartment());
 
-            // Balance warning check
             if (balanceRecord.getRemaining() < req.getNumberOfDays()) {
                 String warn = "[Balance Warning: only " + balanceRecord.getRemaining()
                         + " day(s) remaining, approved " + req.getNumberOfDays() + "]";
@@ -303,7 +283,6 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
                         ? remarks + " " + warn : warn;
             }
 
-            // ✅ Balance table update karo — used badhao, remaining ghato
             updateLeaveBalance(balanceRecord, req.getNumberOfDays());
         }
 
@@ -313,13 +292,15 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
         req.setRemarks(remarks);
 
         LeaveRequestEntity saved = leaveRequestRepository.save(req);
-
         return buildEnrichedDTO(saved, saved.getFromDate().getYear());
     }
 
 
     // ─────────────────────────────────────────────────────────────────
     // BALANCE FOR ONE EMPLOYEE
+    //
+    // ✅ Uses findApplicableLeaveTypes(empId) so Maternity Leave
+    //    appears in balance only for eligible employees.
     // ─────────────────────────────────────────────────────────────────
     @Override
     public LeaveBalanceDTO getEmployeeBalance(String empId, int year) {
@@ -331,13 +312,15 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
         String empType = emp.getEmploymentType() != null ? emp.getEmploymentType() : "Regular";
         String dept    = emp.getDepartment()     != null ? emp.getDepartment()     : "All";
 
-        List<LeaveTypeEntity> activeTypes = leaveTypeRepository.findByIsActiveTrue();
+        // ✅ KEY CHANGE: findApplicableLeaveTypes instead of findByIsActiveTrue
+        // → Maternity Leave auto-excluded for non-eligible employees
+        List<LeaveTypeEntity> applicableTypes =
+                leaveTypeRepository.findApplicableLeaveTypes(empId);
 
         Map<String, LeaveBalanceDetailDTO> balances = new LinkedHashMap<>();
         int totalAllot = 0, totalUsed = 0;
 
-        for (LeaveTypeEntity lt : activeTypes) {
-            // ✅ DB se real balance lo
+        for (LeaveTypeEntity lt : applicableTypes) {
             EmployeeLeaveBalanceEntity b = getOrCreateBalanceRecord(
                     empId, lt.getName(), year, empType, dept);
 
@@ -383,6 +366,8 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
                     .collect(Collectors.toList());
         }
 
+        // Each employee gets their own applicable leave types
+        // → Married females will show Maternity Leave column, others won't
         return employees.stream()
                 .map(e -> getEmployeeBalance(e.getEmployeeId(), year))
                 .collect(Collectors.toList());
@@ -390,7 +375,7 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 
 
     // ─────────────────────────────────────────────────────────────────
-    // DASHBOARD STATS  (4 stat cards on Pending tab)
+    // DASHBOARD STATS
     // ─────────────────────────────────────────────────────────────────
     @Override
     public DashboardStatsDTO getDashboardStats() {
@@ -413,7 +398,7 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 
 
     // ─────────────────────────────────────────────────────────────────
-    // DEPT-WISE PIE CHART  (Balance Tab – department summary)
+    // DEPT-WISE PIE CHART
     // ─────────────────────────────────────────────────────────────────
     @Override
     public Map<String, Integer> getDeptWiseSummary() {
@@ -431,12 +416,10 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
     // ═════════════════════════════════════════════════════════════════
 
     // ─────────────────────────────────────────────────────────────────
-    // HELPER 1 — enriched DTO banao
-    // Balance DB se padhta hai — real-time accurate data
+    // HELPER 1 — enriched DTO banao (balance from DB)
     // ─────────────────────────────────────────────────────────────────
     private LeaveRequestResponseDTO buildEnrichedDTO(LeaveRequestEntity r, int year) {
 
-        // ✅ DB se balance record lo
         EmployeeLeaveBalanceEntity b = getOrCreateBalanceRecord(
                 r.getEmpId(), r.getLeaveType(), year,
                 r.getEmpType(), r.getDepartment());
@@ -449,12 +432,11 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
     }
 
     // ─────────────────────────────────────────────────────────────────
-    // HELPER 2 — balance record DB se lo, nahi hai toh banao
+    // HELPER 2 — DB se balance record lo, nahi hai toh banao
     //
-    // Pehli baar jab employee ka koi record nahi hota:
-    //  → leaveRuleService se allotted days lo
-    //  → used = 0, remaining = allotted
-    //  → save karo
+    // ✅ Maternity Leave ke liye: agar employee eligible nahi hai
+    //    aur somehow yahan pahunch gaya (direct API call) toh
+    //    0 allotted record return karo — block nahi karte history ke liye
     // ─────────────────────────────────────────────────────────────────
     private EmployeeLeaveBalanceEntity getOrCreateBalanceRecord(
             String empId, String leaveType, int year,
@@ -463,7 +445,17 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
         return leaveBalanceRepository
                 .findByEmpIdAndLeaveTypeAndYear(empId, leaveType, year)
                 .orElseGet(() -> {
-                    int allotted = leaveRuleService.getAllottedDays(empType, dept, leaveType);
+                    // ✅ Maternity Leave eligibility check before creating record
+                    // If not applicable → allotted = 0 (no balance created unnecessarily)
+                    boolean isMaternity = MATERNITY_LEAVE.equalsIgnoreCase(leaveType);
+                    boolean applicable  = !isMaternity ||
+                            leaveTypeRepository.findApplicableLeaveTypes(empId)
+                                    .stream()
+                                    .anyMatch(lt -> lt.getName().equalsIgnoreCase(leaveType));
+
+                    int allotted = applicable
+                            ? leaveRuleService.getAllottedDays(empType, dept, leaveType)
+                            : 0;
 
                     EmployeeLeaveBalanceEntity b = new EmployeeLeaveBalanceEntity();
                     b.setEmpId(empId);
@@ -471,17 +463,13 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
                     b.setYear(year);
                     b.setAllotted(allotted);
                     b.setUsed(0);
-                    b.setRemaining(allotted); // remaining = allotted jab used = 0
-
+                    b.setRemaining(allotted);
                     return leaveBalanceRepository.save(b);
                 });
     }
 
     // ─────────────────────────────────────────────────────────────────
     // HELPER 3 — balance update karo jab leave approve ho
-    //
-    //  used      = used + daysApproved
-    //  remaining = allotted - used  (auto via @PreUpdate)
     // ─────────────────────────────────────────────────────────────────
     private void updateLeaveBalance(EmployeeLeaveBalanceEntity balance, int daysApproved) {
         balance.setUsed(balance.getUsed() + daysApproved);

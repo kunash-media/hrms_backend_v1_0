@@ -62,9 +62,13 @@ public class PayrollEntity {
     private Double grossSalary;
 
     // ── Deductions ────────────────────────────────────────────────────────
+    /** employee Provident Fund deduction */
+    @Column(name = "employee_pf")
+    private Double employeePf;
+
     /** Provident Fund deduction */
-    @Column(name = "pf")
-    private Double pf;
+    @Column(name = "employer_pf")
+    private Double employerPf;
 
     /** Employee State Insurance deduction */
     @Column(name = "esi")
@@ -159,8 +163,22 @@ public class PayrollEntity {
     public Double getGrossSalary() { return grossSalary; }
     public void setGrossSalary(Double grossSalary) { this.grossSalary = grossSalary; }
 
-    public Double getPf() { return pf; }
-    public void setPf(Double pf) { this.pf = pf; }
+
+    public Double getEmployeePf() {
+        return employeePf;
+    }
+
+    public void setEmployeePf(Double employeePf) {
+        this.employeePf = employeePf;
+    }
+
+    public Double getEmployerPf() {
+        return employerPf;
+    }
+
+    public void setEmployerPf(Double employerPf) {
+        this.employerPf = employerPf;
+    }
 
     public Double getEsi() { return esi; }
     public void setEsi(Double esi) { this.esi = esi; }

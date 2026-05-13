@@ -1,5 +1,6 @@
 package com.hrms.service;
 
+import com.hrms.dto.request.DashboardDTO;
 import com.hrms.dto.request.EmployeeRequestDTO;
 import com.hrms.dto.request.RegisterEmployeeRequestDTO;
 import com.hrms.dto.response.*;
@@ -50,4 +51,6 @@ public interface EmployeeService {
     void updatePassword(String employeeId, String oldPassword, String newPassword);
 
     public RegisteredEmployeeResponseDTO registerEmployee(RegisterEmployeeRequestDTO dto);
+
+    DashboardDTO getDashboardData(Long employeePrimeId);
 }

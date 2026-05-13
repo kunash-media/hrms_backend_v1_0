@@ -1,216 +1,364 @@
-2026-05-09T00:14:37.670+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/get-employee-by-employeeId/EMP0002", parameters={}
-2026-05-09T00:14:37.687+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getEmployeeByEmployeePrimeId(String)
-2026-05-09T00:14:37.713+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-05-09T00:14:37.716+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{data=com.hrms.dto.response.EmployeeResponseDTO@6eb698a7, success=true}]
-2026-05-09T00:14:37.721+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2026-05-09T00:14:38.129+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-7] com.hrms.security.JwtUtil                : JWT token successfully validated for user: EMP0002
-2026-05-09T00:14:38.130+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-7] c.hrms.security.JwtAuthenticationFilter  : Successfully authenticated user: EMP0002 via JWT for path: /api/employees/EMP0002/profile-image
-2026-05-09T00:14:38.130+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/EMP0002/profile-image", parameters={}
-2026-05-09T00:14:38.143+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getProfilePhoto(String)
-2026-05-09T00:14:38.171+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:image/png' in response
-2026-05-09T00:14:38.188+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{ffd8ffe000104a46494600010101012c012c0000ffe100564578696600004d4d002a000000080004011a000500000001000 (truncated)...]
-2026-05-09T00:14:38.191+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2026-05-09T00:14:46.525+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/attendance/all-attendance-employee/1?page=0&size=10&sortBy=attendanceDate&sortDir=desc", parameters={masked}
-2026-05-09T00:14:46.548+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.AttendanceController#getAllAttendanceByEmployeePrimeId(Long, int, int, String, String)
-2026-05-09T00:14:46.558+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-8] c.hrms.controller.AttendanceController   : 📥 Getting all attendance for employee: 1, Page: 0, Size: 10, SortBy: attendanceDate, SortDir: desc
-2026-05-09T00:14:46.561+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-8] c.h.s.serviceImpl.AttendanceServiceImpl  : 🟢 Getting all attendance for employee: 1, Page: 0, Size: 10, SortBy: attendanceDate, SortDir: desc
-2026-05-09T00:14:46.615+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-8] c.h.s.serviceImpl.AttendanceServiceImpl  : ✅ Found 3 total attendance records for employee: 1 (Page 1/1)
-2026-05-09T00:14:46.654+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-8] c.hrms.controller.AttendanceController   : ✅ Returning page 1/1 with 3 records for employee: 1
-2026-05-09T00:14:46.656+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-05-09T00:14:46.657+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{isFirst=true, pageSize=10, totalPages=1, isLast=true, totalRecords=3, content=[com.hrms.dto.respons (truncated)...]
-2026-05-09T00:14:46.663+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2026-05-09T00:14:52.036+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/expenses/get-all-expenses", parameters={}
-2026-05-09T00:14:52.077+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExpenseController#getAllExpenses()
-2026-05-09T00:14:52.160+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-05-09T00:14:52.160+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[com.hrms.dto.response.ExpenseResponseDto@3d88aced]]
-2026-05-09T00:14:52.168+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2026-05-09T00:14:52.181+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/api/expenses/get-monthly-total/stats/monthly?month=5&year=2026", parameters={masked}
-2026-05-09T00:14:52.181+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExpenseController#getMonthlyTotal(Integer, Integer)
-2026-05-09T00:14:52.197+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-05-09T00:14:52.197+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [0.0]
-2026-05-09T00:14:52.201+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2026-05-09T00:14:54.959+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/leave/types", parameters={}
-2026-05-09T00:14:54.959+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.LeaveTypeController#getAllTypes()
-2026-05-09T00:14:54.968+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-05-09T00:14:54.968+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[com.hrms.dto.request.LeaveTypeDTO@9580d2e, com.hrms.dto.request.LeaveTypeDTO@3500b10c, com.hrms.dto (truncated)...]
-2026-05-09T00:14:54.972+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2026-05-09T00:14:55.063+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/leave/balance?empId=EMP0002&year=2026", parameters={masked}
-2026-05-09T00:14:55.066+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.LeaveRequestController#getBalance(String, int)
-2026-05-09T00:14:55.110+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-05-09T00:14:55.112+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.LeaveBalanceDTO@5ead7155]
-2026-05-09T00:14:55.121+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2026-05-09T00:14:55.127+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/leave/requests/employee/EMP0002", parameters={}
-2026-05-09T00:14:55.134+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.LeaveRequestController#getByEmployee(String)
-2026-05-09T00:14:55.160+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-05-09T00:14:55.160+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[com.hrms.dto.response.LeaveRequestResponseDTO@5c8c5d91]]
-2026-05-09T00:14:55.167+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2026-05-09T00:15:06.376+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
-2026-05-09T00:15:06.456+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
-2026-05-09T00:15:06.462+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-7] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
-2026-05-09T00:15:06.542+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-7] c.h.service.serviceImpl.ExitServiceImpl  : No resignation found for employeeId: EMP0002
-2026-05-09T00:15:06.546+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-05-09T00:15:06.546+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@e0b382b]
-2026-05-09T00:15:06.567+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
-2026-05-09T00:15:06.879+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
-2026-05-09T00:15:06.879+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
-2026-05-09T00:15:06.885+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-8] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
-2026-05-09T00:15:06.918+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-8] c.h.service.serviceImpl.ExitServiceImpl  : No resignation found for employeeId: EMP0002
-2026-05-09T00:15:06.919+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-05-09T00:15:06.919+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@423ea71c]
-2026-05-09T00:15:06.924+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
-2026-05-09T00:15:16.013+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
-2026-05-09T00:15:16.019+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
-2026-05-09T00:15:16.019+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-9] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
-2026-05-09T00:15:16.034+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-9] c.h.service.serviceImpl.ExitServiceImpl  : No resignation found for employeeId: EMP0002
-2026-05-09T00:15:16.034+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-05-09T00:15:16.034+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@260541cb]
-2026-05-09T00:15:16.034+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
-2026-05-09T00:15:16.526+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
-2026-05-09T00:15:16.530+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
-2026-05-09T00:15:16.530+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-10] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
-2026-05-09T00:15:16.556+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-10] c.h.service.serviceImpl.ExitServiceImpl  : No resignation found for employeeId: EMP0002
-2026-05-09T00:15:16.560+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-05-09T00:15:16.560+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@4cd0890]
-2026-05-09T00:15:16.560+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
-2026-05-09T00:15:20.520+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
-2026-05-09T00:15:20.522+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
-2026-05-09T00:15:20.524+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-1] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
-2026-05-09T00:15:20.555+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-1] c.h.service.serviceImpl.ExitServiceImpl  : No resignation found for employeeId: EMP0002
-2026-05-09T00:15:20.557+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-05-09T00:15:20.557+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@2c0a9e0f]
-2026-05-09T00:15:20.557+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
-2026-05-09T00:15:22.955+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/get-employee-by-employeeId/EMP0002", parameters={}
-2026-05-09T00:15:22.958+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getEmployeeByEmployeePrimeId(String)
-2026-05-09T00:15:22.969+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-05-09T00:15:22.970+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{data=com.hrms.dto.response.EmployeeResponseDTO@5f93c930, success=true}]
-2026-05-09T00:15:22.974+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2026-05-09T00:15:23.074+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-3] com.hrms.security.JwtUtil                : JWT token successfully validated for user: EMP0002
-2026-05-09T00:15:23.076+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-3] c.hrms.security.JwtAuthenticationFilter  : Successfully authenticated user: EMP0002 via JWT for path: /api/employees/EMP0002/profile-image
-2026-05-09T00:15:23.077+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/EMP0002/profile-image", parameters={}
-2026-05-09T00:15:23.079+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getProfilePhoto(String)
-2026-05-09T00:15:23.087+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:image/png' in response
-2026-05-09T00:15:23.095+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{ffd8ffe000104a46494600010101012c012c0000ffe100564578696600004d4d002a000000080004011a000500000001000 (truncated)...]
-2026-05-09T00:15:23.099+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2026-05-09T00:15:31.614+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/get-employee-by-employeeId/EMP0002", parameters={}
-2026-05-09T00:15:31.614+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getEmployeeByEmployeePrimeId(String)
-2026-05-09T00:15:31.626+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-05-09T00:15:31.626+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{data=com.hrms.dto.response.EmployeeResponseDTO@6a0d08eb, success=true}]
-2026-05-09T00:15:31.626+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2026-05-09T00:15:31.713+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-6] com.hrms.security.JwtUtil                : JWT token successfully validated for user: EMP0002
-2026-05-09T00:15:31.713+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-6] c.hrms.security.JwtAuthenticationFilter  : Successfully authenticated user: EMP0002 via JWT for path: /api/employees/EMP0002/profile-image
-2026-05-09T00:15:31.713+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/EMP0002/profile-image", parameters={}
-2026-05-09T00:15:31.720+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getProfilePhoto(String)
-2026-05-09T00:15:31.729+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:image/png' in response
-2026-05-09T00:15:31.729+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{ffd8ffe000104a46494600010101012c012c0000ffe100564578696600004d4d002a000000080004011a000500000001000 (truncated)...]
-2026-05-09T00:15:31.729+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2026-05-09T00:15:38.951+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/attendance/all-attendance-employee/1?page=0&size=10&sortBy=attendanceDate&sortDir=desc", parameters={masked}
-2026-05-09T00:15:38.958+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.AttendanceController#getAllAttendanceByEmployeePrimeId(Long, int, int, String, String)
-2026-05-09T00:15:38.959+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-5] c.hrms.controller.AttendanceController   : 📥 Getting all attendance for employee: 1, Page: 0, Size: 10, SortBy: attendanceDate, SortDir: desc
-2026-05-09T00:15:38.965+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-5] c.h.s.serviceImpl.AttendanceServiceImpl  : 🟢 Getting all attendance for employee: 1, Page: 0, Size: 10, SortBy: attendanceDate, SortDir: desc
-2026-05-09T00:15:39.005+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-5] c.h.s.serviceImpl.AttendanceServiceImpl  : ✅ Found 3 total attendance records for employee: 1 (Page 1/1)
-2026-05-09T00:15:39.046+05:30  INFO 27136 --- [HRMS-System] [http-nio-8086-exec-5] c.hrms.controller.AttendanceController   : ✅ Returning page 1/1 with 3 records for employee: 1
-2026-05-09T00:15:39.051+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-05-09T00:15:39.051+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{isFirst=true, pageSize=10, totalPages=1, isLast=true, totalRecords=3, content=[com.hrms.dto.respons (truncated)...]
-2026-05-09T00:15:39.054+05:30 DEBUG 27136 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2026-05-09T00:16:33.948+05:30  INFO 27136 --- [HRMS-System] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
-2026-05-09T00:16:33.959+05:30  INFO 27136 --- [HRMS-System] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
-2026-05-09T00:16:33.969+05:30  INFO 27136 --- [HRMS-System] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-05-09T00:16:33.976+05:30  INFO 27136 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2026-05-09T00:16:33.982+05:30  INFO 27136 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2026-05-09T10:14:13.444+05:30  INFO 16332 --- [HRMS-System] [restartedMain] com.hrms.HrmsSystemApplication           : Starting HrmsSystemApplication using Java 24.0.2 with PID 16332 (C:\HRMS_Project\hrms_backend_v1.0\target\classes started by admim in C:\HRMS_Project\hrms_backend_v1.0)
-2026-05-09T10:14:13.455+05:30  INFO 16332 --- [HRMS-System] [restartedMain] com.hrms.HrmsSystemApplication           : No active profile set, falling back to 1 default profile: "default"
-2026-05-09T10:14:13.607+05:30  INFO 16332 --- [HRMS-System] [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\admim\.m2\repository\io\github\cdimascio\java-dotenv\5.2.2\java-dotenv-5.2.2.jar referenced one or more files that do not exist: file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-1.4.0.jar,file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-common-1.4.0.jar,file:/C:/Users/admim/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/annotations-13.0.jar
-2026-05-09T10:14:13.607+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-05-09T10:14:13.608+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-05-09T10:14:21.197+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2026-05-09T10:14:21.203+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2026-05-09T10:14:21.350+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AdminRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2026-05-09T10:14:21.353+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AssetRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2026-05-09T10:14:21.359+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.AttendanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2026-05-09T10:14:21.363+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.CompanyRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2026-05-09T10:14:21.369+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.EmployeeLeaveBalanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2026-05-09T10:14:21.374+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.EmployeeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2026-05-09T10:14:21.379+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.ExitRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2026-05-09T10:14:21.382+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.ExpenseRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2026-05-09T10:14:21.386+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveRequestRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2026-05-09T10:14:21.390+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveRuleRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2026-05-09T10:14:21.396+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.LeaveTypeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2026-05-09T10:14:21.399+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.OnboardingRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2026-05-09T10:14:21.414+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.PayrollRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2026-05-09T10:14:21.418+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.PromotionRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2026-05-09T10:14:21.426+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.hrms.repository.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2026-05-09T10:14:21.429+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 210 ms. Found 0 JDBC repository interfaces.
-2026-05-09T10:14:21.517+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2026-05-09T10:14:21.520+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-05-09T10:14:21.824+05:30  INFO 16332 --- [HRMS-System] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 287 ms. Found 15 JPA repository interfaces.
-2026-05-09T10:14:24.993+05:30  INFO 16332 --- [HRMS-System] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8086 (http)
-2026-05-09T10:14:25.047+05:30  INFO 16332 --- [HRMS-System] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-05-09T10:14:25.048+05:30  INFO 16332 --- [HRMS-System] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
-2026-05-09T10:14:25.160+05:30  INFO 16332 --- [HRMS-System] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 11551 ms
-2026-05-09T10:14:25.819+05:30  INFO 16332 --- [HRMS-System] [restartedMain] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-05-09T10:14:26.018+05:30  INFO 16332 --- [HRMS-System] [restartedMain] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
-2026-05-09T10:14:27.789+05:30  INFO 16332 --- [HRMS-System] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-05-09T10:14:27.872+05:30  INFO 16332 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-05-09T10:14:28.512+05:30  INFO 16332 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@68193651
-2026-05-09T10:14:28.518+05:30  INFO 16332 --- [HRMS-System] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-05-09T10:14:28.835+05:30  INFO 16332 --- [HRMS-System] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [jdbc:mysql://localhost:3306/hrms_db?useSSL=false&serverTimezone=Asia/Kolkata&allowPublicKeyRetrieval=true]
-	Database driver: MySQL Connector/J
-	Database dialect: MySQLDialect
-	Database version: 8.0.41
-	Default catalog/schema: hrms_db/undefined
-	Autocommit mode: undefined/unknown
-	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
-	JDBC fetch size: none
-	Pool: DataSourceConnectionProvider
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-05-09T10:14:34.341+05:30  INFO 16332 --- [HRMS-System] [restartedMain] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-05-09T10:14:34.845+05:30  INFO 16332 --- [HRMS-System] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-05-09T10:14:35.133+05:30  INFO 16332 --- [HRMS-System] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-05-09T10:14:43.623+05:30  INFO 16332 --- [HRMS-System] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8086 (http) with context path '/'
-2026-05-09T10:14:43.659+05:30  WARN 16332 --- [HRMS-System] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-05-09T10:14:44.446+05:30 DEBUG 16332 --- [HRMS-System] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 164 mappings in 'requestMappingHandlerMapping'
-2026-05-09T10:14:44.535+05:30 DEBUG 16332 --- [HRMS-System] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2026-05-09T10:14:44.548+05:30  INFO 16332 --- [HRMS-System] [restartedMain] com.hrms.HrmsSystemApplication           : Started HrmsSystemApplication in 32.754 seconds (process running for 45.133)
-2026-05-09T10:15:44.771+05:30  INFO 16332 --- [HRMS-System] [http-nio-8086-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-05-09T10:15:44.772+05:30  INFO 16332 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-05-09T10:15:44.777+05:30 DEBUG 16332 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
-2026-05-09T10:15:44.782+05:30 DEBUG 16332 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
-2026-05-09T10:15:44.870+05:30 DEBUG 16332 --- [HRMS-System] [http-nio-8086-exec-1] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 2 RequestBodyAdvice, 1 ResponseBodyAdvice
-2026-05-09T10:15:44.982+05:30 DEBUG 16332 --- [HRMS-System] [http-nio-8086-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
-2026-05-09T10:15:44.994+05:30 DEBUG 16332 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@6efd59ce
-2026-05-09T10:15:45.001+05:30 DEBUG 16332 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@1b1fc3a9
-2026-05-09T10:15:45.002+05:30 DEBUG 16332 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
-2026-05-09T10:15:45.003+05:30  INFO 16332 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 231 ms
-2026-05-09T10:15:45.050+05:30  INFO 16332 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.security.SecurityConfig         : SecurityConfig initialized
-2026-05-09T10:15:45.102+05:30  INFO 16332 --- [HRMS-System] [http-nio-8086-exec-1] eAuthenticationProviderManagerConfigurer : Found 2 AuthenticationProvider beans, with names [adminAuthenticationProvider, employeeAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2026-05-09T10:15:45.104+05:30  WARN 16332 --- [HRMS-System] [http-nio-8086-exec-1] r$InitializeUserDetailsManagerConfigurer : Found 2 UserDetailsService beans, with names [adminUserDetailsService, employeeUserDetailsService]. Global Authentication Manager will not use a UserDetailsService for username/password login. Consider publishing a single UserDetailsService bean.
-2026-05-09T10:15:45.386+05:30  INFO 16332 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.security.SecurityConfig         : Configuring SecurityFilterChain
-2026-05-09T10:15:45.453+05:30  INFO 16332 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.security.SecurityConfig         : SecurityFilterChain configured successfully
-2026-05-09T10:15:46.484+05:30  INFO 16332 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.security.JwtUtil                : JWT token successfully validated for user: EMP0002
-2026-05-09T10:15:46.484+05:30  INFO 16332 --- [HRMS-System] [http-nio-8086-exec-4] com.hrms.security.JwtUtil                : JWT token successfully validated for user: EMP0002
-2026-05-09T10:15:46.488+05:30  INFO 16332 --- [HRMS-System] [http-nio-8086-exec-2] c.hrms.security.JwtAuthenticationFilter  : Successfully authenticated user: EMP0002 via JWT for path: /api/admin/get-all-admin
-2026-05-09T10:15:46.488+05:30  INFO 16332 --- [HRMS-System] [http-nio-8086-exec-4] c.hrms.security.JwtAuthenticationFilter  : Successfully authenticated user: EMP0002 via JWT for path: /api/admin/auth/login
-2026-05-09T10:15:46.497+05:30 DEBUG 16332 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/admin/get-all-admin", parameters={}
-2026-05-09T10:15:46.497+05:30 DEBUG 16332 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : POST "/api/admin/auth/login", parameters={}
-2026-05-09T10:15:46.593+05:30 DEBUG 16332 --- [HRMS-System] [http-nio-8086-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.AdminController#getAllAdmins()
-2026-05-09T10:15:46.601+05:30  INFO 16332 --- [HRMS-System] [http-nio-8086-exec-4] com.hrms.security.AuthController         : AuthController initialized
-2026-05-09T10:15:46.605+05:30 DEBUG 16332 --- [HRMS-System] [http-nio-8086-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.security.AuthController#login(Map, HttpServletResponse)
-2026-05-09T10:15:46.632+05:30  INFO 16332 --- [HRMS-System] [http-nio-8086-exec-2] com.hrms.controller.AdminController      : GET /api/admin → Fetching all admins
-2026-05-09T10:15:46.632+05:30  INFO 16332 --- [HRMS-System] [http-nio-8086-exec-2] c.h.s.serviceImpl.AdminServiceImpl       : Fetching all admins
-2026-05-09T10:15:46.732+05:30 DEBUG 16332 --- [HRMS-System] [http-nio-8086-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{mobile=8317289305, password=123456}]
-2026-05-09T10:15:46.756+05:30  INFO 16332 --- [HRMS-System] [http-nio-8086-exec-4] com.hrms.security.AuthController         : Login attempt for mobile: 8317289305
-2026-05-09T10:15:46.779+05:30 DEBUG 16332 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-05-09T10:15:46.781+05:30 DEBUG 16332 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[com.hrms.dto.response.AdminResponseDto@7f4dd89e]]
-2026-05-09T10:15:46.917+05:30 DEBUG 16332 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2026-05-09T10:15:47.208+05:30  INFO 16332 --- [HRMS-System] [http-nio-8086-exec-4] com.hrms.security.JwtUtil                : Generated access token for user: 8317289305 | expires at Sun May 10 10:15:47 IST 2026
-2026-05-09T10:15:47.211+05:30  INFO 16332 --- [HRMS-System] [http-nio-8086-exec-4] com.hrms.security.JwtUtil                : Generated refresh token for user: 8317289305 | expires at Sat May 16 10:15:47 IST 2026
-2026-05-09T10:15:47.240+05:30  INFO 16332 --- [HRMS-System] [http-nio-8086-exec-4] com.hrms.security.AuthController         : Login successful for mobile: 8317289305
-2026-05-09T10:15:47.241+05:30 DEBUG 16332 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-05-09T10:15:47.242+05:30 DEBUG 16332 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{firstName=Super, lastName=Admin, mobile=8317289305, adminId=ADM1574, role=SUPER_ADMIN, message=Logi (truncated)...]
-2026-05-09T10:15:47.258+05:30 DEBUG 16332 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2026-05-09T10:25:05.547+05:30  INFO 16332 --- [HRMS-System] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
-2026-05-09T10:25:05.580+05:30  INFO 16332 --- [HRMS-System] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
-2026-05-09T10:25:05.605+05:30  INFO 16332 --- [HRMS-System] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-05-09T10:25:05.615+05:30  INFO 16332 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-13T00:00:03.725+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/payroll-list?department=all", parameters={masked}
+2026-05-13T00:00:03.748+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getEmployeesForPayroll(String)
+2026-05-13T00:00:03.756+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-4] com.hrms.controller.EmployeeController   : [Employee][GET] Payroll list → dept=all
+2026-05-13T00:00:03.772+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-4] c.h.s.serviceImpl.EmployeeServiceImpl    : [Employee] Fetching employees for payroll dropdown → dept=all
+2026-05-13T00:00:03.822+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-4] c.h.s.serviceImpl.EmployeeServiceImpl    : [Employee] Found 3 active employee(s) for dept=all
+2026-05-13T00:00:03.842+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:00:03.843+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.utils.ApiResponse@2bac9195]
+2026-05-13T00:00:03.855+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:23:58.080+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/payroll/list?month=MAY&year=2026&department=all", parameters={masked}
+2026-05-13T00:23:58.082+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.PayrollController#getPayrollList(PayrollMonth, Integer, String)
+2026-05-13T00:23:58.082+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-7] com.hrms.controller.PayrollController    : [Payroll][GET] List payroll → month=MAY, year=2026, dept=all
+2026-05-13T00:23:58.106+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/payroll/summary?month=MAY&year=2026&department=all", parameters={masked}
+2026-05-13T00:23:58.106+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.PayrollController#getPayrollSummary(PayrollMonth, Integer, String)
+2026-05-13T00:23:58.106+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:23:58.106+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.utils.ApiResponse@4fe178e9]
+2026-05-13T00:23:58.116+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:23:58.106+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-10] com.hrms.controller.PayrollController    : [Payroll][GET] Summary → month=MAY, year=2026, dept=all
+2026-05-13T00:23:58.123+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:23:58.123+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.utils.ApiResponse@46ec6ab6]
+2026-05-13T00:23:58.131+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:24:07.437+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/payroll-list?department=all", parameters={masked}
+2026-05-13T00:24:07.441+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getEmployeesForPayroll(String)
+2026-05-13T00:24:07.441+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-9] com.hrms.controller.EmployeeController   : [Employee][GET] Payroll list → dept=all
+2026-05-13T00:24:07.445+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-9] c.h.s.serviceImpl.EmployeeServiceImpl    : [Employee] Fetching employees for payroll dropdown → dept=all
+2026-05-13T00:24:07.473+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-9] c.h.s.serviceImpl.EmployeeServiceImpl    : [Employee] Found 3 active employee(s) for dept=all
+2026-05-13T00:24:07.481+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:24:07.481+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.utils.ApiResponse@7662772e]
+2026-05-13T00:24:07.481+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:32:34.036+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/payroll/summary?month=MAY&year=2026&department=all", parameters={masked}
+2026-05-13T00:32:34.043+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.PayrollController#getPayrollSummary(PayrollMonth, Integer, String)
+2026-05-13T00:32:34.044+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/payroll/list?month=MAY&year=2026&department=all", parameters={masked}
+2026-05-13T00:32:34.046+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.PayrollController#getPayrollList(PayrollMonth, Integer, String)
+2026-05-13T00:32:34.046+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-4] com.hrms.controller.PayrollController    : [Payroll][GET] Summary → month=MAY, year=2026, dept=all
+2026-05-13T00:32:34.046+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.controller.PayrollController    : [Payroll][GET] List payroll → month=MAY, year=2026, dept=all
+2026-05-13T00:32:34.064+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:32:34.064+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.utils.ApiResponse@4aea5549]
+2026-05-13T00:32:34.066+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:32:34.068+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:32:34.069+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.utils.ApiResponse@25a053a1]
+2026-05-13T00:32:34.070+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:32:38.922+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/payroll/get-all-payroll?page=0&size=100", parameters={masked}
+2026-05-13T00:32:38.925+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.PayrollController#getAllPayroll(Pageable)
+2026-05-13T00:32:38.974+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:32:38.974+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [Page 1 of 1 containing com.hrms.dto.response.PayrollResponseDTO instances]
+2026-05-13T00:32:38.979+05:30  WARN 15288 --- [HRMS-System] [http-nio-8086-exec-5] ration$PageModule$WarningLoggingModifier : Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2026-05-13T00:32:39.004+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:32:40.656+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/payroll/summary?month=MAY&year=2026&department=all", parameters={masked}
+2026-05-13T00:32:40.656+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/payroll/list?month=MAY&year=2026&department=all", parameters={masked}
+2026-05-13T00:32:40.661+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.PayrollController#getPayrollSummary(PayrollMonth, Integer, String)
+2026-05-13T00:32:40.664+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.PayrollController#getPayrollList(PayrollMonth, Integer, String)
+2026-05-13T00:32:40.666+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-8] com.hrms.controller.PayrollController    : [Payroll][GET] Summary → month=MAY, year=2026, dept=all
+2026-05-13T00:32:40.667+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-6] com.hrms.controller.PayrollController    : [Payroll][GET] List payroll → month=MAY, year=2026, dept=all
+2026-05-13T00:32:40.689+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:32:40.689+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.utils.ApiResponse@4abbfb14]
+2026-05-13T00:32:40.699+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:32:40.708+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:32:40.708+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.utils.ApiResponse@5451ff18]
+2026-05-13T00:32:40.713+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:32:41.721+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/payroll-list?department=all", parameters={masked}
+2026-05-13T00:32:41.721+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getEmployeesForPayroll(String)
+2026-05-13T00:32:41.728+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-7] com.hrms.controller.EmployeeController   : [Employee][GET] Payroll list → dept=all
+2026-05-13T00:32:41.728+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-7] c.h.s.serviceImpl.EmployeeServiceImpl    : [Employee] Fetching employees for payroll dropdown → dept=all
+2026-05-13T00:32:41.747+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-7] c.h.s.serviceImpl.EmployeeServiceImpl    : [Employee] Found 3 active employee(s) for dept=all
+2026-05-13T00:32:41.753+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:32:41.753+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.utils.ApiResponse@7d7f168]
+2026-05-13T00:32:41.761+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:33:05.653+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/payroll/summary?month=MAY&year=2026&department=all", parameters={masked}
+2026-05-13T00:33:05.656+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.PayrollController#getPayrollSummary(PayrollMonth, Integer, String)
+2026-05-13T00:33:05.656+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/payroll/list?month=MAY&year=2026&department=all", parameters={masked}
+2026-05-13T00:33:05.657+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.PayrollController#getPayrollList(PayrollMonth, Integer, String)
+2026-05-13T00:33:05.657+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-10] com.hrms.controller.PayrollController    : [Payroll][GET] Summary → month=MAY, year=2026, dept=all
+2026-05-13T00:33:05.657+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-9] com.hrms.controller.PayrollController    : [Payroll][GET] List payroll → month=MAY, year=2026, dept=all
+2026-05-13T00:33:05.671+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:33:05.671+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.utils.ApiResponse@28e36827]
+2026-05-13T00:33:05.671+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:33:05.677+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:33:05.679+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.utils.ApiResponse@7deb3990]
+2026-05-13T00:33:05.679+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:33:31.772+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/payroll/list?month=JUNE&year=2026&department=all", parameters={masked}
+2026-05-13T00:33:31.772+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/payroll/summary?month=JUNE&year=2026&department=all", parameters={masked}
+2026-05-13T00:33:31.772+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.PayrollController#getPayrollSummary(PayrollMonth, Integer, String)
+2026-05-13T00:33:31.772+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.PayrollController#getPayrollList(PayrollMonth, Integer, String)
+2026-05-13T00:33:31.776+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.controller.PayrollController    : [Payroll][GET] Summary → month=JUNE, year=2026, dept=all
+2026-05-13T00:33:31.776+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-4] com.hrms.controller.PayrollController    : [Payroll][GET] List payroll → month=JUNE, year=2026, dept=all
+2026-05-13T00:33:31.789+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:33:31.789+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.utils.ApiResponse@20c1f940]
+2026-05-13T00:33:31.797+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:33:31.797+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:33:31.798+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.utils.ApiResponse@7f1f19df]
+2026-05-13T00:33:31.800+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:33:34.082+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/payroll/summary?month=JUNE&year=2026&department=Human%20Resources", parameters={masked}
+2026-05-13T00:33:34.082+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.PayrollController#getPayrollSummary(PayrollMonth, Integer, String)
+2026-05-13T00:33:34.082+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/payroll/list?month=JUNE&year=2026&department=Human%20Resources", parameters={masked}
+2026-05-13T00:33:34.082+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.PayrollController#getPayrollList(PayrollMonth, Integer, String)
+2026-05-13T00:33:34.086+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-6] com.hrms.controller.PayrollController    : [Payroll][GET] Summary → month=JUNE, year=2026, dept=Human Resources
+2026-05-13T00:33:34.086+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-7] com.hrms.controller.PayrollController    : [Payroll][GET] List payroll → month=JUNE, year=2026, dept=Human Resources
+2026-05-13T00:33:34.114+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:33:34.114+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.utils.ApiResponse@2ace0fe3]
+2026-05-13T00:33:34.114+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:33:34.122+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.utils.ApiResponse@32c3db52]
+2026-05-13T00:33:34.122+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:33:34.122+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:33:35.652+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/payroll-list?department=Human%20Resources", parameters={masked}
+2026-05-13T00:33:35.657+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getEmployeesForPayroll(String)
+2026-05-13T00:33:35.657+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-9] com.hrms.controller.EmployeeController   : [Employee][GET] Payroll list → dept=Human Resources
+2026-05-13T00:33:35.657+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-9] c.h.s.serviceImpl.EmployeeServiceImpl    : [Employee] Fetching employees for payroll dropdown → dept=Human Resources
+2026-05-13T00:33:35.683+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-9] c.h.s.serviceImpl.EmployeeServiceImpl    : [Employee] Found 1 active employee(s) for dept=Human Resources
+2026-05-13T00:33:35.690+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:33:35.690+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.utils.ApiResponse@21e69089]
+2026-05-13T00:33:35.698+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:33:49.002+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/dashboard/5", parameters={}
+2026-05-13T00:33:49.004+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getDashboard(Long)
+2026-05-13T00:33:49.047+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:33:49.055+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.request.DashboardDTO@5a80a17]
+2026-05-13T00:33:49.055+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:33:55.946+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/payroll/get-all-payroll?page=0&size=100", parameters={masked}
+2026-05-13T00:33:55.947+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.PayrollController#getAllPayroll(Pageable)
+2026-05-13T00:33:55.994+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:33:55.994+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [Page 1 of 1 containing com.hrms.dto.response.PayrollResponseDTO instances]
+2026-05-13T00:33:56.001+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:33:56.447+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/payroll/summary?month=MAY&year=2026&department=all", parameters={masked}
+2026-05-13T00:33:56.447+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.PayrollController#getPayrollSummary(PayrollMonth, Integer, String)
+2026-05-13T00:33:56.447+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/payroll/list?month=MAY&year=2026&department=all", parameters={masked}
+2026-05-13T00:33:56.447+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.PayrollController#getPayrollList(PayrollMonth, Integer, String)
+2026-05-13T00:33:56.447+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.controller.PayrollController    : [Payroll][GET] Summary → month=MAY, year=2026, dept=all
+2026-05-13T00:33:56.447+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-4] com.hrms.controller.PayrollController    : [Payroll][GET] List payroll → month=MAY, year=2026, dept=all
+2026-05-13T00:33:56.460+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:33:56.460+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.utils.ApiResponse@2ac7fac4]
+2026-05-13T00:33:56.465+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:33:56.469+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:33:56.471+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.utils.ApiResponse@16cb3d69]
+2026-05-13T00:33:56.471+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:34:00.350+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/get-all-employees?page=0&size=10", parameters={masked}
+2026-05-13T00:34:00.350+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getAllEmployees(int, int)
+2026-05-13T00:34:00.438+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:34:00.443+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{data=[com.hrms.dto.response.EmployeeResponseDTO@24d9e84c, com.hrms.dto.response.EmployeeResponseDTO (truncated)...]
+2026-05-13T00:34:00.449+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:34:00.627+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/all-employees", parameters={}
+2026-05-13T00:34:00.627+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getAllEmployees()
+2026-05-13T00:34:00.727+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:34:00.728+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[com.hrms.dto.response.EmployeeSummaryDTO@2395d307, com.hrms.dto.response.EmployeeSummaryDTO@1677af7 (truncated)...]
+2026-05-13T00:34:00.746+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:34:00.778+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/all-employees", parameters={}
+2026-05-13T00:34:00.779+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getAllEmployees()
+2026-05-13T00:34:00.832+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:34:00.832+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[com.hrms.dto.response.EmployeeSummaryDTO@326e300e, com.hrms.dto.response.EmployeeSummaryDTO@707d5c8 (truncated)...]
+2026-05-13T00:34:00.834+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:35:10.028+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/dashboard/5", parameters={}
+2026-05-13T00:35:10.033+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getDashboard(Long)
+2026-05-13T00:35:10.066+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:35:10.074+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.request.DashboardDTO@7342485c]
+2026-05-13T00:35:10.075+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:40:43.455+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/get-employee-by-employeePrimeId/7", parameters={}
+2026-05-13T00:40:43.457+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getEmployeeById(Long)
+2026-05-13T00:40:43.494+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:40:43.498+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{data=com.hrms.dto.response.EmployeeResponseDTO@62ffa498, success=true}]
+2026-05-13T00:40:43.498+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:40:56.740+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/dashboard/5", parameters={}
+2026-05-13T00:40:56.740+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getDashboard(Long)
+2026-05-13T00:40:56.780+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:40:56.788+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.request.DashboardDTO@6efcba6]
+2026-05-13T00:40:56.788+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:42:01.042+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/get-employee-by-employeeId/EMP0002", parameters={}
+2026-05-13T00:42:01.042+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getEmployeeByEmployeePrimeId(String)
+2026-05-13T00:42:01.053+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:42:01.053+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{data=com.hrms.dto.response.EmployeeResponseDTO@107133ba, success=true}]
+2026-05-13T00:42:01.058+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:42:01.113+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-4] com.hrms.security.JwtUtil                : JWT token successfully validated for user: EMP0002
+2026-05-13T00:42:01.113+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-4] c.hrms.security.JwtAuthenticationFilter  : Successfully authenticated user: EMP0002 via JWT for path: /api/employees/EMP0002/profile-image
+2026-05-13T00:42:01.113+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/EMP0002/profile-image", parameters={}
+2026-05-13T00:42:01.113+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getProfilePhoto(String)
+2026-05-13T00:42:01.119+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:image/png' in response
+2026-05-13T00:42:01.119+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{ffd8ffe000104a46494600010101012c012c0000ffe100564578696600004d4d002a000000080004011a000500000001000 (truncated)...]
+2026-05-13T00:42:01.127+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:42:03.484+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/expenses/get-all-expenses", parameters={}
+2026-05-13T00:42:03.484+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExpenseController#getAllExpenses()
+2026-05-13T00:42:03.598+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:42:03.598+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[com.hrms.dto.response.ExpenseResponseDto@35b9d71e]]
+2026-05-13T00:42:03.598+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:42:03.613+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/expenses/get-monthly-total/stats/monthly?month=5&year=2026", parameters={masked}
+2026-05-13T00:42:03.613+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExpenseController#getMonthlyTotal(Integer, Integer)
+2026-05-13T00:42:03.621+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:42:03.621+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [0.0]
+2026-05-13T00:42:03.628+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:42:04.647+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/attendance/all-attendance-employee/5?page=0&size=10&sortBy=attendanceDate&sortDir=desc", parameters={masked}
+2026-05-13T00:42:04.647+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.AttendanceController#getAllAttendanceByEmployeePrimeId(Long, int, int, String, String)
+2026-05-13T00:42:04.659+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-6] c.hrms.controller.AttendanceController   : 📥 Getting all attendance for employee: 5, Page: 0, Size: 10, SortBy: attendanceDate, SortDir: desc
+2026-05-13T00:42:04.661+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-6] c.h.s.serviceImpl.AttendanceServiceImpl  : 🟢 Getting all attendance for employee: 5, Page: 0, Size: 10, SortBy: attendanceDate, SortDir: desc
+2026-05-13T00:42:04.688+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-6] c.h.s.serviceImpl.AttendanceServiceImpl  : ✅ Found 0 total attendance records for employee: 5 (Page 1/0)
+2026-05-13T00:42:04.688+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-6] c.hrms.controller.AttendanceController   : ✅ Returning page 1/0 with 0 records for employee: 5
+2026-05-13T00:42:04.688+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:42:04.688+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{pageSize=10, totalPages=0, isLast=true, totalRecords=0, content=[], currentPage=0, isFirst=true}]
+2026-05-13T00:42:04.699+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:42:07.264+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/payroll/employee-payroll/EMP0002", parameters={}
+2026-05-13T00:42:07.265+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.PayrollController#getPayrollByEmployee(String)
+2026-05-13T00:42:07.268+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-7] com.hrms.controller.PayrollController    : [Payroll][GET] Payroll history → employeeId=EMP0002
+2026-05-13T00:42:07.286+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:42:07.286+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.utils.ApiResponse@66129461]
+2026-05-13T00:42:07.291+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:42:08.750+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
+2026-05-13T00:42:08.751+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
+2026-05-13T00:42:08.751+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-10] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
+2026-05-13T00:42:08.779+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-10] c.h.service.serviceImpl.ExitServiceImpl  : No resignation found for employeeId: EMP0002
+2026-05-13T00:42:08.782+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:42:08.782+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@3955960b]
+2026-05-13T00:42:08.786+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-05-13T00:42:09.259+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
+2026-05-13T00:42:09.263+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
+2026-05-13T00:42:09.263+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-9] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
+2026-05-13T00:42:09.287+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-9] c.h.service.serviceImpl.ExitServiceImpl  : No resignation found for employeeId: EMP0002
+2026-05-13T00:42:09.288+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:42:09.288+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@288b4887]
+2026-05-13T00:42:09.288+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-05-13T00:42:11.316+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/attendance/all-attendance-employee/5?page=0&size=10&sortBy=attendanceDate&sortDir=desc", parameters={masked}
+2026-05-13T00:42:11.316+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.AttendanceController#getAllAttendanceByEmployeePrimeId(Long, int, int, String, String)
+2026-05-13T00:42:11.320+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-2] c.hrms.controller.AttendanceController   : 📥 Getting all attendance for employee: 5, Page: 0, Size: 10, SortBy: attendanceDate, SortDir: desc
+2026-05-13T00:42:11.320+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-2] c.h.s.serviceImpl.AttendanceServiceImpl  : 🟢 Getting all attendance for employee: 5, Page: 0, Size: 10, SortBy: attendanceDate, SortDir: desc
+2026-05-13T00:42:11.344+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-2] c.h.s.serviceImpl.AttendanceServiceImpl  : ✅ Found 0 total attendance records for employee: 5 (Page 1/0)
+2026-05-13T00:42:11.344+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-2] c.hrms.controller.AttendanceController   : ✅ Returning page 1/0 with 0 records for employee: 5
+2026-05-13T00:42:11.348+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:42:11.348+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{pageSize=10, totalPages=0, isLast=true, totalRecords=0, content=[], currentPage=0, isFirst=true}]
+2026-05-13T00:42:11.352+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:42:12.286+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/get-employee-by-employeeId/EMP0002", parameters={}
+2026-05-13T00:42:12.286+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getEmployeeByEmployeePrimeId(String)
+2026-05-13T00:42:12.302+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:42:12.304+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{data=com.hrms.dto.response.EmployeeResponseDTO@4eb797e9, success=true}]
+2026-05-13T00:42:12.309+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:42:12.410+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.security.JwtUtil                : JWT token successfully validated for user: EMP0002
+2026-05-13T00:42:12.410+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-1] c.hrms.security.JwtAuthenticationFilter  : Successfully authenticated user: EMP0002 via JWT for path: /api/employees/EMP0002/profile-image
+2026-05-13T00:42:12.410+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/EMP0002/profile-image", parameters={}
+2026-05-13T00:42:12.415+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getProfilePhoto(String)
+2026-05-13T00:42:12.422+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:image/png' in response
+2026-05-13T00:42:12.423+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{ffd8ffe000104a46494600010101012c012c0000ffe100564578696600004d4d002a000000080004011a000500000001000 (truncated)...]
+2026-05-13T00:42:12.431+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:42:13.333+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/dashboard/5", parameters={}
+2026-05-13T00:42:13.333+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getDashboard(Long)
+2026-05-13T00:42:13.423+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:42:13.423+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.request.DashboardDTO@38b699e3]
+2026-05-13T00:42:13.423+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:42:21.752+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/attendance/all-attendance-employee/5?page=0&size=10&sortBy=attendanceDate&sortDir=desc", parameters={masked}
+2026-05-13T00:42:21.754+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.AttendanceController#getAllAttendanceByEmployeePrimeId(Long, int, int, String, String)
+2026-05-13T00:42:21.756+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-5] c.hrms.controller.AttendanceController   : 📥 Getting all attendance for employee: 5, Page: 0, Size: 10, SortBy: attendanceDate, SortDir: desc
+2026-05-13T00:42:21.757+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-5] c.h.s.serviceImpl.AttendanceServiceImpl  : 🟢 Getting all attendance for employee: 5, Page: 0, Size: 10, SortBy: attendanceDate, SortDir: desc
+2026-05-13T00:42:21.779+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-5] c.h.s.serviceImpl.AttendanceServiceImpl  : ✅ Found 0 total attendance records for employee: 5 (Page 1/0)
+2026-05-13T00:42:21.779+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-5] c.hrms.controller.AttendanceController   : ✅ Returning page 1/0 with 0 records for employee: 5
+2026-05-13T00:42:21.779+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:42:21.779+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{pageSize=10, totalPages=0, isLast=true, totalRecords=0, content=[], currentPage=0, isFirst=true}]
+2026-05-13T00:42:21.785+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:49:00.687+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/dashboard/5", parameters={}
+2026-05-13T00:49:00.687+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getDashboard(Long)
+2026-05-13T00:49:00.728+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:49:00.731+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.request.DashboardDTO@3f0bfc63]
+2026-05-13T00:49:00.732+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:49:03.697+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/get-employee-by-employeeId/EMP0002", parameters={}
+2026-05-13T00:49:03.700+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getEmployeeByEmployeePrimeId(String)
+2026-05-13T00:49:03.711+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:49:03.717+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{data=com.hrms.dto.response.EmployeeResponseDTO@6001e86f, success=true}]
+2026-05-13T00:49:03.720+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:49:03.824+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-9] com.hrms.security.JwtUtil                : JWT token successfully validated for user: EMP0002
+2026-05-13T00:49:03.825+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-9] c.hrms.security.JwtAuthenticationFilter  : Successfully authenticated user: EMP0002 via JWT for path: /api/employees/EMP0002/profile-image
+2026-05-13T00:49:03.825+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/EMP0002/profile-image", parameters={}
+2026-05-13T00:49:03.828+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getProfilePhoto(String)
+2026-05-13T00:49:03.833+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:image/png' in response
+2026-05-13T00:49:03.837+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{ffd8ffe000104a46494600010101012c012c0000ffe100564578696600004d4d002a000000080004011a000500000001000 (truncated)...]
+2026-05-13T00:49:03.839+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:49:49.299+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/dashboard/5", parameters={}
+2026-05-13T00:49:49.299+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getDashboard(Long)
+2026-05-13T00:49:49.334+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:49:49.334+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.request.DashboardDTO@ac6443f]
+2026-05-13T00:49:49.334+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:50:01.975+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/get-employee-by-employeeId/EMP0002", parameters={}
+2026-05-13T00:50:01.977+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getEmployeeByEmployeePrimeId(String)
+2026-05-13T00:50:01.986+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:50:01.986+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{data=com.hrms.dto.response.EmployeeResponseDTO@6598f645, success=true}]
+2026-05-13T00:50:01.995+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:50:02.091+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-1] com.hrms.security.JwtUtil                : JWT token successfully validated for user: EMP0002
+2026-05-13T00:50:02.091+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-1] c.hrms.security.JwtAuthenticationFilter  : Successfully authenticated user: EMP0002 via JWT for path: /api/employees/EMP0002/profile-image
+2026-05-13T00:50:02.091+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/EMP0002/profile-image", parameters={}
+2026-05-13T00:50:02.091+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getProfilePhoto(String)
+2026-05-13T00:50:02.098+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:image/png' in response
+2026-05-13T00:50:02.099+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{ffd8ffe000104a46494600010101012c012c0000ffe100564578696600004d4d002a000000080004011a000500000001000 (truncated)...]
+2026-05-13T00:50:02.102+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:50:07.601+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/attendance/all-attendance-employee/5?page=0&size=10&sortBy=attendanceDate&sortDir=desc", parameters={masked}
+2026-05-13T00:50:07.606+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.AttendanceController#getAllAttendanceByEmployeePrimeId(Long, int, int, String, String)
+2026-05-13T00:50:07.608+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-4] c.hrms.controller.AttendanceController   : 📥 Getting all attendance for employee: 5, Page: 0, Size: 10, SortBy: attendanceDate, SortDir: desc
+2026-05-13T00:50:07.608+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-4] c.h.s.serviceImpl.AttendanceServiceImpl  : 🟢 Getting all attendance for employee: 5, Page: 0, Size: 10, SortBy: attendanceDate, SortDir: desc
+2026-05-13T00:50:07.630+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-4] c.h.s.serviceImpl.AttendanceServiceImpl  : ✅ Found 0 total attendance records for employee: 5 (Page 1/0)
+2026-05-13T00:50:07.630+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-4] c.hrms.controller.AttendanceController   : ✅ Returning page 1/0 with 0 records for employee: 5
+2026-05-13T00:50:07.630+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:50:07.630+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{pageSize=10, totalPages=0, isLast=true, totalRecords=0, content=[], currentPage=0, isFirst=true}]
+2026-05-13T00:50:07.630+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:50:12.419+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/expenses/get-all-expenses", parameters={}
+2026-05-13T00:50:12.419+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExpenseController#getAllExpenses()
+2026-05-13T00:50:12.548+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:50:12.548+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[com.hrms.dto.response.ExpenseResponseDto@376f057f]]
+2026-05-13T00:50:12.548+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:50:12.560+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/expenses/get-monthly-total/stats/monthly?month=5&year=2026", parameters={masked}
+2026-05-13T00:50:12.561+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExpenseController#getMonthlyTotal(Integer, Integer)
+2026-05-13T00:50:12.568+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:50:12.568+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [0.0]
+2026-05-13T00:50:12.568+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:52:31.485+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/leave/types", parameters={}
+2026-05-13T00:52:31.485+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.LeaveTypeController#getAllTypes(String)
+2026-05-13T00:52:31.495+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:52:31.495+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[com.hrms.dto.request.LeaveTypeDTO@39275cfc, com.hrms.dto.request.LeaveTypeDTO@55ce2b5, com.hrms.dto (truncated)...]
+2026-05-13T00:52:31.495+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:52:31.527+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/leave/balance?empId=EMP0002&year=2026", parameters={masked}
+2026-05-13T00:52:31.527+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.LeaveRequestController#getBalance(String, int)
+2026-05-13T00:52:31.548+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:52:31.548+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.LeaveBalanceDTO@6a4311e0]
+2026-05-13T00:52:31.550+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:52:31.561+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/leave/requests/employee/EMP0002", parameters={}
+2026-05-13T00:52:31.563+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.LeaveRequestController#getByEmployee(String)
+2026-05-13T00:52:31.572+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:52:31.572+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[com.hrms.dto.response.LeaveRequestResponseDTO@2c58db7c]]
+2026-05-13T00:52:31.575+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:52:36.795+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/dashboard/5", parameters={}
+2026-05-13T00:52:36.795+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getDashboard(Long)
+2026-05-13T00:52:36.879+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:52:36.879+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.request.DashboardDTO@23d8f3be]
+2026-05-13T00:52:36.884+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:52:40.109+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
+2026-05-13T00:52:40.111+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
+2026-05-13T00:52:40.111+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-8] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
+2026-05-13T00:52:40.142+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-8] c.h.service.serviceImpl.ExitServiceImpl  : No resignation found for employeeId: EMP0002
+2026-05-13T00:52:40.142+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:52:40.142+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@443a9913]
+2026-05-13T00:52:40.149+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-05-13T00:52:40.609+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/exit/resignations/employee/EMP0002", parameters={}
+2026-05-13T00:52:40.609+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.ExitController#getResignationByEmployeeId(String)
+2026-05-13T00:52:40.609+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-6] c.h.service.serviceImpl.ExitServiceImpl  : Fetching resignation for employeeId: EMP0002
+2026-05-13T00:52:40.632+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-6] c.h.service.serviceImpl.ExitServiceImpl  : No resignation found for employeeId: EMP0002
+2026-05-13T00:52:40.632+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:52:40.632+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.response.ExitResponseDto@675326c5]
+2026-05-13T00:52:40.632+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-05-13T00:52:41.090+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/dashboard/5", parameters={}
+2026-05-13T00:52:41.098+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getDashboard(Long)
+2026-05-13T00:52:41.169+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:52:41.169+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.request.DashboardDTO@3b401434]
+2026-05-13T00:52:41.178+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:52:43.332+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/payroll/employee-payroll/EMP0002", parameters={}
+2026-05-13T00:52:43.333+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.PayrollController#getPayrollByEmployee(String)
+2026-05-13T00:52:43.333+05:30  INFO 15288 --- [HRMS-System] [http-nio-8086-exec-10] com.hrms.controller.PayrollController    : [Payroll][GET] Payroll history → employeeId=EMP0002
+2026-05-13T00:52:43.344+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:52:43.344+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.utils.ApiResponse@67eb6da1]
+2026-05-13T00:52:43.344+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:52:44.925+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/dashboard/5", parameters={}
+2026-05-13T00:52:44.926+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getDashboard(Long)
+2026-05-13T00:52:44.976+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:52:44.977+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.request.DashboardDTO@448feee9]
+2026-05-13T00:52:44.977+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T00:54:18.995+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/employees/dashboard/5", parameters={}
+2026-05-13T00:54:18.997+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hrms.controller.EmployeeController#getDashboard(Long)
+2026-05-13T00:54:19.033+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-05-13T00:54:19.033+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.hrms.dto.request.DashboardDTO@b3a2be1]
+2026-05-13T00:54:19.033+05:30 DEBUG 15288 --- [HRMS-System] [http-nio-8086-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-05-13T01:00:50.102+05:30  INFO 15288 --- [HRMS-System] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-13T01:00:50.127+05:30  INFO 15288 --- [HRMS-System] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-05-13T01:00:50.178+05:30  INFO 15288 --- [HRMS-System] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-13T01:00:50.186+05:30  INFO 15288 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-13T01:00:50.192+05:30  INFO 15288 --- [HRMS-System] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

@@ -2,10 +2,11 @@ package com.hrms.service;
 
 import com.hrms.dto.request.PayrollPatchDTO;
 import com.hrms.dto.request.PayrollRequestDTO;
-import com.hrms.dto.response.EmployeeForPayrollDTO;
 import com.hrms.dto.response.PayrollResponseDTO;
 import com.hrms.dto.response.PayrollSummaryDTO;
 import com.hrms.enum_status.PayrollMonth;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -13,12 +14,6 @@ public interface PayrollService {
 
     /**
      * Create a new payroll record (Initiate Pay Run).
-     *
-     * Business rules enforced:
-     * 1. Employee must exist and be ACTIVE.
-     * 2. No existing non-cancelled record for the same (employee, month, year).
-     * 3. grossSalary and netSalary are recomputed server-side.
-     *
      * @param dto      Validated request from the frontend form
      * @return         Persisted payroll record as response DTO
      */
@@ -70,4 +65,9 @@ public interface PayrollService {
      */
     PayrollSummaryDTO getPayrollSummary(PayrollMonth month, Integer year, String department);
 
+
+    /**
+     * Get all payroll records with pagination
+     */
+    Page<PayrollResponseDTO> getAllPayroll(Pageable pageable);
 }

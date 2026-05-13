@@ -1,6 +1,7 @@
 package com.hrms.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hrms.dto.request.DashboardDTO;
 import com.hrms.dto.request.EmployeeRequestDTO;
 import com.hrms.dto.request.RegisterEmployeeRequestDTO;
 import com.hrms.dto.response.*;
@@ -408,5 +409,22 @@ public class EmployeeController {
 
         RegisteredEmployeeResponseDTO response = employeeService.registerEmployee(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+
+    /**
+     * GET /api/dashboard/{employeePrimeId}
+     *
+     * Returns the full dashboard payload for the given employee.
+     *
+     * Path variable is the employee's primary key (Long) — the same
+     * value stored as hrms_employee_prime_id in localStorage on the frontend.
+     */
+    @GetMapping("/dashboard/{employeePrimeId}")
+    public ResponseEntity<DashboardDTO> getDashboard(
+            @PathVariable Long employeePrimeId) {
+
+        DashboardDTO dto = employeeService.getDashboardData(employeePrimeId);
+        return ResponseEntity.ok(dto);
     }
 }

@@ -3,6 +3,8 @@ package com.hrms.repository;
 import com.hrms.entity.PayrollEntity;
 import com.hrms.enum_status.PayrollMonth;
 import com.hrms.enum_status.PayrollStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -43,6 +45,10 @@ public interface PayrollRepository extends JpaRepository<PayrollEntity, Long> {
             PayrollMonth payrollMonth,
             Integer payrollYear
     );
+
+
+    //get all payroll of all employee
+    Page<PayrollEntity> findAll(Pageable pageable);
 
     // ── Single record lookup ──────────────────────────────────────────────
 

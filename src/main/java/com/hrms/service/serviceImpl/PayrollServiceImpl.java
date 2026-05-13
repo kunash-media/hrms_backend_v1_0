@@ -16,6 +16,8 @@ import com.hrms.repository.PayrollRepository;
 import com.hrms.service.PayrollService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -158,8 +160,14 @@ public class PayrollServiceImpl implements PayrollService {
                             "Cancel this record and create a new one for the correct employee.");
         }
 
-        applyEarningsAndDeductions(entity, dto.getBasicSalary(), dto.getHra(),
-                dto.getAllowances(), dto.getPf(), dto.getEsi(), dto.getTds());
+        applyEarningsAndDeductions(entity,
+                dto.getBasicSalary(), dto.getHra(),
+                dto.getAllowances(),
+                dto.getEmployeePf(),    // ← was: dto.getPf()
+                dto.getEmployerPf(),    // ← NEW
+                dto.getEsi(), dto.getTds());
+
+
         if (dto.getRemarks() != null) entity.setRemarks(dto.getRemarks());
 
         PayrollEntity saved = payrollRepository.save(entity);
@@ -179,11 +187,12 @@ public class PayrollServiceImpl implements PayrollService {
         PayrollEntity entity = findOrThrow(payrollId);
 
         boolean earningsChanged = dto.getBasicSalary() != null
-                || dto.getHra()         != null
-                || dto.getAllowances()   != null
-                || dto.getPf()          != null
-                || dto.getEsi()         != null
-                || dto.getTds()         != null;
+                || dto.getHra()           != null
+                || dto.getAllowances()    != null
+                || dto.getEmployeePf()    != null   // ← was: dto.getPf()
+                || dto.getEmployerPf()    != null   // ← NEW
+                || dto.getEsi()           != null
+                || dto.getTds()           != null;
 
         // Only enforce mutable check when earnings are being changed
         if (earningsChanged) {
@@ -199,16 +208,18 @@ public class PayrollServiceImpl implements PayrollService {
         }
 
         // Apply only provided (non-null) field values
-        double basic      = dto.getBasicSalary() != null ? dto.getBasicSalary() : entity.getBasicSalary();
-        double hra        = dto.getHra()          != null ? dto.getHra()         : orZero(entity.getHra());
-        double allowances = dto.getAllowances()    != null ? dto.getAllowances()   : orZero(entity.getAllowances());
-        double pf         = dto.getPf()            != null ? dto.getPf()           : orZero(entity.getPf());
+        double basic      = dto.getBasicSalary()  != null ? dto.getBasicSalary()  : entity.getBasicSalary();
+        double hra        = dto.getHra()           != null ? dto.getHra()          : orZero(entity.getHra());
+        double allowances = dto.getAllowances()     != null ? dto.getAllowances()    : orZero(entity.getAllowances());
+        double employeePf = dto.getEmployeePf()    != null ? dto.getEmployeePf()   : orZero(entity.getEmployeePf()); // ← was: dto.getPf() / entity.getPf()
+        double employerPf = dto.getEmployerPf()    != null ? dto.getEmployerPf()   : orZero(entity.getEmployerPf()); // ← NEW
         double esi        = dto.getEsi()           != null ? dto.getEsi()          : orZero(entity.getEsi());
         double tds        = dto.getTds()           != null ? dto.getTds()          : orZero(entity.getTds());
 
         if (earningsChanged) {
-            applyEarningsAndDeductions(entity, basic, hra, allowances, pf, esi, tds);
+            applyEarningsAndDeductions(entity, basic, hra, allowances, employeePf, employerPf, esi, tds);
         }
+
 
         if (dto.getRemarks() != null) {
             entity.setRemarks(dto.getRemarks());
@@ -309,7 +320,8 @@ public class PayrollServiceImpl implements PayrollService {
                 dto.getBasicSalary(),
                 dto.getHra(),
                 dto.getAllowances(),
-                dto.getPf(),
+                dto.getEmployeePf(),    // ← was: dto.getPf()
+                dto.getEmployerPf(),    // ← NEW
                 dto.getEsi(),
                 dto.getTds()
         );
@@ -324,18 +336,21 @@ public class PayrollServiceImpl implements PayrollService {
                                             Double basicSalary,
                                             Double hra,
                                             Double allowances,
-                                            Double pf,
+                                            Double employeePf,
+                                            Double employerPf,
                                             Double esi,
                                             Double tds) {
         double safeBasic      = orZero(basicSalary);
         double safeHra        = orZero(hra);
         double safeAllowances = orZero(allowances);
-        double safePf         = orZero(pf);
+        double safeEmployeePf = orZero(employeePf);
+        double safeEmployerPf = orZero(employerPf);
         double safeEsi        = orZero(esi);
         double safeTds        = orZero(tds);
 
         double gross      = safeBasic + safeHra + safeAllowances;
-        double deductions = safePf + safeEsi + safeTds;
+        // Note: employerPf is a company cost — excluded from employee deductions
+        double deductions = safeEmployeePf + safeEsi + safeTds;
         double net        = gross - deductions;
 
         if (net < 0) {
@@ -348,7 +363,8 @@ public class PayrollServiceImpl implements PayrollService {
         entity.setHra(safeHra);
         entity.setAllowances(safeAllowances);
         entity.setGrossSalary(gross);
-        entity.setPf(safePf);
+        entity.setEmployeePf(safeEmployeePf);
+        entity.setEmployerPf(safeEmployerPf);
         entity.setEsi(safeEsi);
         entity.setTds(safeTds);
         entity.setTotalDeductions(deductions);
@@ -356,6 +372,7 @@ public class PayrollServiceImpl implements PayrollService {
 
         log.debug("[Payroll] Computed → gross={}, deductions={}, net={}", gross, deductions, net);
     }
+
 
     /** Throw if the record is not in a mutable status. */
     private void assertMutable(PayrollEntity entity) {
@@ -416,11 +433,11 @@ public class PayrollServiceImpl implements PayrollService {
         dto.setGrossSalary(e.getGrossSalary());
 
         // Deductions
-        dto.setPf(e.getPf());
+        dto.setEmployeePf(e.getEmployeePf());   // ← was: dto.setPf(e.getPf())
+        dto.setEmployerPf(e.getEmployerPf());   // ← NEW
         dto.setEsi(e.getEsi());
         dto.setTds(e.getTds());
         dto.setTotalDeductions(e.getTotalDeductions());
-
         // Net
         dto.setNetSalary(e.getNetSalary());
 
@@ -441,5 +458,11 @@ public class PayrollServiceImpl implements PayrollService {
     /** Null-safe zero coercion for optional monetary fields. */
     private double orZero(Double value) {
         return value != null ? value : 0.0;
+    }
+
+    @Override
+    public Page<PayrollResponseDTO> getAllPayroll(Pageable pageable) {
+        Page<PayrollEntity> entityPage = payrollRepository.findAll(pageable);
+        return entityPage.map(this::toResponseDTO);
     }
 }
