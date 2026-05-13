@@ -13,32 +13,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * Global exception handler – converts all exceptions into consistent
- * ApiResponse envelopes so the frontend never receives raw 500 stack traces.
- *
- * Why this matters:
- * ─ Users see actionable, human-readable messages.
- * ─ No internal stack traces leak to the client (security).
- * ─ Every error is logged server-side for debugging.
- * ─ HTTP status codes are semantically correct.
- *
- * Handled exception hierarchy:
- * ┌──────────────────────────────────────────────┬───────┐
- * │ Exception                                    │ HTTP  │
- * ├──────────────────────────────────────────────┼───────┤
- * │ ResourceNotFoundException                    │  404  │
- * │ BadRequestException                          │  400  │
- * │ ConflictException                            │  409  │
- * │ MethodArgumentNotValidException (@Valid fail)│  400  │
- * │ MethodArgumentTypeMismatchException          │  400  │
- * │ MissingServletRequestParameterException      │  400  │
- * │ HttpMessageNotReadableException (bad JSON)   │  400  │
- * │ Exception (catch-all)                        │  500  │
- * └──────────────────────────────────────────────┴───────┘
- */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -76,10 +55,6 @@ public class GlobalExceptionHandler {
 
     // ── 400 – Bean Validation (@Valid) ────────────────────────────────────
 
-    /**
-     * Collects all field-level validation errors into a single readable message.
-     * Example: "Basic salary is required. | Payroll month is required."
-     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse<Void>> handleValidationErrors(
             MethodArgumentNotValidException ex) {
@@ -98,15 +73,12 @@ public class GlobalExceptionHandler {
 
     // ── 400 – Wrong enum / type in request param ──────────────────────────
 
-    /**
-     * Handles cases like passing "APIRL" instead of "APRIL" for PayrollMonth.
-     */
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<ApiResponse<Void>> handleTypeMismatch(
             MethodArgumentTypeMismatchException ex) {
 
-        String fieldName   = ex.getName();
-        String givenValue  = ex.getValue() != null ? ex.getValue().toString() : "null";
+        String fieldName    = ex.getName();
+        String givenValue   = ex.getValue() != null ? ex.getValue().toString() : "null";
         String expectedType = ex.getRequiredType() != null
                 ? ex.getRequiredType().getSimpleName() : "unknown";
 
@@ -150,13 +122,21 @@ public class GlobalExceptionHandler {
                                 "Please ensure the JSON is valid and all required fields are present."));
     }
 
-    // ── 500 – Catch-all ───────────────────────────────────────────────────
+    // ── 400 – RuntimeException (known business errors) ────────────────────
+    // MUST be above the Exception catch-all so Spring picks this first
 
-    /**
-     * Safety net for any unhandled exception.
-     * Logs full stack trace (for debugging) but returns only a generic message
-     * to the client (no internal details exposed).
-     */
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<Map<String, Object>> handleRuntimeException(RuntimeException ex) {
+        log.error("[GlobalExceptionHandler] RuntimeException: {}", ex.getMessage());
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("message", ex.getMessage());
+        body.put("success", false);
+        body.put("timestamp", LocalDateTime.now());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
+    // ── 500 – Catch-all (always keep this LAST) ───────────────────────────
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Void>> handleGeneral(Exception ex) {
         log.error("[GlobalExceptionHandler] Unexpected error: {}", ex.getMessage(), ex);

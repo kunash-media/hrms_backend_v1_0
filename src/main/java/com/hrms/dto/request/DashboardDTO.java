@@ -1,32 +1,40 @@
 package com.hrms.dto.request;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-/**
- * DashboardDTO — full payload for the dashboard page.
- *
- * Leave fields now mirror EmployeeLeaveBalanceEntity columns exactly:
- *   allotted  → total leave days given this year (sum across all leave types)
- *   used      → approved leaves taken
- *   remaining → allotted − used  (pre-computed by DB @PreUpdate)
- */
 public class DashboardDTO {
 
     // ── Stat Cards ─────────────────────────────────────────────────────────────
-    private String  todayStatus;    // "Present" | "Absent" | "Half Day" | "On Leave" | "Not Marked"
-    private Double  todayHours;     // e.g. 7.5
+    private String  todayStatus;
+    private Double  todayHours;
 
-    private int     leaveAllotted;  // total given  (was TOTAL_LEAVE_DAYS = 18 hardcode before)
-    private int     leaveUsed;      // leaves consumed
-    private int     leaveRemaining; // real remaining from DB
+    private int     leaveAllotted;
+    private int     leaveUsed;
+    private int     leaveRemaining;
 
     // ── Weekly line chart ──────────────────────────────────────────────────────
-    private List<String> weeklyLabels;  // ["Mon","Tue","Wed","Thu","Fri","Sat"]
+    private List<String> weeklyLabels;
     private List<Double> weeklyHours;
 
     // ── Monthly bar chart ──────────────────────────────────────────────────────
-    private List<String> monthlyLabels; // ["1","2",..."31"]
+    private List<String> monthlyLabels;
     private List<Double> monthlyHours;
+
+    // ✅ Helper method to round double to 1 decimal place
+    private Double roundToOneDecimal(Double value) {
+        if (value == null) return 0.0;
+        return Math.round(value * 10.0) / 10.0;
+    }
+
+    // ✅ Helper method to round all values in a list to 1 decimal place
+    private List<Double> roundList(List<Double> list) {
+        if (list == null) return new ArrayList<>();
+        return list.stream()
+                .map(this::roundToOneDecimal)
+                .collect(Collectors.toList());
+    }
 
     // ── Constructors ───────────────────────────────────────────────────────────
     public DashboardDTO() {}
@@ -54,30 +62,75 @@ public class DashboardDTO {
     }
 
     // ── Getters & Setters ──────────────────────────────────────────────────────
-    public String  getTodayStatus()                    { return todayStatus; }
-    public void    setTodayStatus(String v)            { this.todayStatus = v; }
+    public String getTodayStatus() {
+        return todayStatus;
+    }
 
-    public Double  getTodayHours()                     { return todayHours; }
-    public void    setTodayHours(Double v)             { this.todayHours = v; }
+    public void setTodayStatus(String v) {
+        this.todayStatus = v;
+    }
 
-    public int     getLeaveAllotted()                  { return leaveAllotted; }
-    public void    setLeaveAllotted(int v)             { this.leaveAllotted = v; }
+    public Double getTodayHours() {
+        return roundToOneDecimal(todayHours);
+    }
 
-    public int     getLeaveUsed()                      { return leaveUsed; }
-    public void    setLeaveUsed(int v)                 { this.leaveUsed = v; }
+    public void setTodayHours(Double v) {
+        this.todayHours = v;
+    }
 
-    public int     getLeaveRemaining()                 { return leaveRemaining; }
-    public void    setLeaveRemaining(int v)            { this.leaveRemaining = v; }
+    public int getLeaveAllotted() {
+        return leaveAllotted;
+    }
 
-    public List<String> getWeeklyLabels()              { return weeklyLabels; }
-    public void         setWeeklyLabels(List<String> v){ this.weeklyLabels = v; }
+    public void setLeaveAllotted(int v) {
+        this.leaveAllotted = v;
+    }
 
-    public List<Double> getWeeklyHours()               { return weeklyHours; }
-    public void         setWeeklyHours(List<Double> v) { this.weeklyHours = v; }
+    public int getLeaveUsed() {
+        return leaveUsed;
+    }
 
-    public List<String> getMonthlyLabels()               { return monthlyLabels; }
-    public void         setMonthlyLabels(List<String> v) { this.monthlyLabels = v; }
+    public void setLeaveUsed(int v) {
+        this.leaveUsed = v;
+    }
 
-    public List<Double> getMonthlyHours()                { return monthlyHours; }
-    public void         setMonthlyHours(List<Double> v)  { this.monthlyHours = v; }
+    public int getLeaveRemaining() {
+        return leaveRemaining;
+    }
+
+    public void setLeaveRemaining(int v) {
+        this.leaveRemaining = v;
+    }
+
+    public List<String> getWeeklyLabels() {
+        return weeklyLabels;
+    }
+
+    public void setWeeklyLabels(List<String> v) {
+        this.weeklyLabels = v;
+    }
+
+    public List<Double> getWeeklyHours() {
+        return roundList(weeklyHours);
+    }
+
+    public void setWeeklyHours(List<Double> v) {
+        this.weeklyHours = v;
+    }
+
+    public List<String> getMonthlyLabels() {
+        return monthlyLabels;
+    }
+
+    public void setMonthlyLabels(List<String> v) {
+        this.monthlyLabels = v;
+    }
+
+    public List<Double> getMonthlyHours() {
+        return roundList(monthlyHours);
+    }
+
+    public void setMonthlyHours(List<Double> v) {
+        this.monthlyHours = v;
+    }
 }
