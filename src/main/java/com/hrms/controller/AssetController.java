@@ -15,7 +15,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/assets")
-@CrossOrigin(origins = "*")
 public class AssetController {
 
     @Autowired
@@ -296,6 +295,40 @@ public class AssetController {
         return ResponseEntity.ok(response);
     }
 
+    @DeleteMapping("/maintenance/{assetId}")
+    public ResponseEntity<Map<String, Object>> deleteMaintenanceRecord(@PathVariable Long assetId) {
+        try {
+            AssetResponseDTO asset = assetService.deleteMaintenanceRecord(assetId);
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            response.put("message", "Maintenance record deleted successfully");
+            response.put("data", asset);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("message", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
+    @PatchMapping("/complete-maintenance/{assetId}")
+    public ResponseEntity<Map<String, Object>> completeMaintenance(@PathVariable Long assetId) {
+        try {
+            AssetResponseDTO asset = assetService.completeMaintenance(assetId);
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            response.put("message", "Maintenance completed, asset is now available");
+            response.put("data", asset);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("message", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
     @GetMapping("/filter-by-category/{category}")
     public ResponseEntity<Map<String, Object>> getAssetsByCategory(
             @PathVariable String category,
@@ -307,4 +340,6 @@ public class AssetController {
         response.put("data", assets.getContent());
         return ResponseEntity.ok(response);
     }
+
+
 }

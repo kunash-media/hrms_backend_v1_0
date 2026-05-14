@@ -15,7 +15,7 @@ public class ExitEntity {
     @Column(name = "exit_id", unique = true, nullable = false)
     private String exitId;
 
-    // ✅ MANY-TO-ONE MAPPING WITH EMPLOYEE
+    // MANY-TO-ONE MAPPING WITH EMPLOYEE
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", referencedColumnName = "employeePrimeId")
     private EmployeeEntity employee;
@@ -297,3 +297,4 @@ public class ExitEntity {
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 }
+

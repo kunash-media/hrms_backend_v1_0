@@ -522,6 +522,76 @@ public class AssetServiceImpl implements AssetService {
         return convertToResponseDTO(saved);
     }
 
+    @Override
+    @Transactional
+    public AssetResponseDTO deleteMaintenanceRecord(Long assetId) {
+        log.info("Deleting maintenance record for asset ID: {}", assetId);
+
+        AssetEntity asset = assetRepository.findById(assetId)
+                .orElseThrow(() -> new RuntimeException("Asset not found with id: " + assetId));
+
+        // Clear all maintenance fields
+        asset.setMaintenanceId(null);
+        asset.setMaintenanceType(null);
+        asset.setMaintenanceDate(null);
+        asset.setMaintenanceCost(null);
+        asset.setVendorName(null);
+        asset.setMaintenanceRemarks(null);
+        asset.setMaintenanceStatus(null);
+        asset.setNextMaintenanceDate(null);
+        asset.setPerformedBy(null);
+
+        // Set status back to AVAILABLE (or keep as is if assigned)
+        if ("MAINTENANCE".equals(asset.getStatus())) {
+            asset.setStatus("AVAILABLE");
+        }
+
+        asset.setUpdatedAt(LocalDateTime.now());
+
+        AssetEntity saved = assetRepository.save(asset);
+        log.info("Maintenance record deleted for asset {}", asset.getAssetId());
+
+        return convertToResponseDTO(saved);
+    }
+
+    @Override
+    @Transactional
+    public AssetResponseDTO completeMaintenance(Long assetId) {
+        log.info("Completing maintenance for asset ID: {}", assetId);
+
+        AssetEntity asset = assetRepository.findById(assetId)
+                .orElseThrow(() -> new RuntimeException("Asset not found with id: " + assetId));
+
+        // Clear ALL maintenance fields
+        asset.setMaintenanceId(null);
+        asset.setMaintenanceType(null);
+        asset.setMaintenanceDate(null);
+        asset.setNextMaintenanceDate(null);
+        asset.setMaintenanceCost(null);
+        asset.setVendorName(null);
+        asset.setMaintenanceRemarks(null);
+        asset.setMaintenanceStatus(null);
+        asset.setPerformedBy(null);
+
+        // Clear ALL assignment fields (using correct Entity field names)
+        asset.setAssignedToEmployee(null);           // EmployeeEntity object
+        asset.setAssignedDate(null);
+        asset.setExpectedReturnDate(null);
+        asset.setActualReturnDate(null);
+        asset.setConditionAtIssue(null);
+        asset.setConditionAtReturn(null);
+
+        // Set status to AVAILABLE
+        asset.setStatus("AVAILABLE");
+
+        asset.setUpdatedAt(LocalDateTime.now());
+
+        AssetEntity saved = assetRepository.save(asset);
+        log.info("Maintenance completed for asset {}, status set to AVAILABLE", asset.getAssetId());
+
+        return convertToResponseDTO(saved);
+    }
+
     // ========== DASHBOARD STATS ==========
 
     @Override
@@ -584,7 +654,5 @@ public class AssetServiceImpl implements AssetService {
             return 0L;
         }
     }
+
 }
-
-
-

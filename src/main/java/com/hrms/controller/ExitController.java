@@ -13,7 +13,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/exit")
-@CrossOrigin(origins = "*")
 public class ExitController {
 
     private final ExitService exitService;

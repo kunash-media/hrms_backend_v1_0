@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class OnboardingServiceImpl implements OnboardingService {
@@ -109,17 +110,11 @@ public class OnboardingServiceImpl implements OnboardingService {
         onboarding.setDisabilityPercentage(dto.getDisabilityPercentage());
         onboarding.setCertificateNumber(dto.getCertificateNumber());
 
-        // ========== SECTION D: Save documents as BLOB ==========
-        onboarding.setPanDocumentData(convertToBytes(dto.getPanDocument()));
+        // ========== SECTION D: Save documents as BLOB (Only 4 Documents) ==========
         onboarding.setAadhaarDocumentData(convertToBytes(dto.getAadhaarDocument()));
+        onboarding.setPanDocumentData(convertToBytes(dto.getPanDocument()));
         onboarding.setDegreeDocumentData(convertToBytes(dto.getDegreeDocument()));
         onboarding.setExperienceDocumentData(convertToBytes(dto.getExperienceDocument()));
-        onboarding.setOfferLetterDocumentData(convertToBytes(dto.getOfferLetter()));
-        onboarding.setPassportPhotoData(convertToBytes(dto.getPassportPhoto()));
-        onboarding.setBankDocumentData(convertToBytes(dto.getBankDocument()));
-        onboarding.setMedicalCertificateData(convertToBytes(dto.getMedicalCertificate()));
-        onboarding.setSignedContractData(convertToBytes(dto.getSignedContract()));
-        onboarding.setProfilePhotoData(convertToBytes(dto.getProfilePhoto()));
 
         OnboardingEntity saved = onboardingRepository.save(onboarding);
         return convertToResponseDTO(saved, employee);
@@ -175,27 +170,15 @@ public class OnboardingServiceImpl implements OnboardingService {
         if (dto.getDisabilityPercentage() != null) onboarding.setDisabilityPercentage(dto.getDisabilityPercentage());
         if (dto.getCertificateNumber() != null) onboarding.setCertificateNumber(dto.getCertificateNumber());
 
-        // ========== SECTION D: Update documents if provided ==========
-        if (dto.getPanDocument() != null && !dto.getPanDocument().isEmpty())
-            onboarding.setPanDocumentData(convertToBytes(dto.getPanDocument()));
+        // ========== SECTION D: Update documents if provided (Only 4 Documents) ==========
         if (dto.getAadhaarDocument() != null && !dto.getAadhaarDocument().isEmpty())
             onboarding.setAadhaarDocumentData(convertToBytes(dto.getAadhaarDocument()));
+        if (dto.getPanDocument() != null && !dto.getPanDocument().isEmpty())
+            onboarding.setPanDocumentData(convertToBytes(dto.getPanDocument()));
         if (dto.getDegreeDocument() != null && !dto.getDegreeDocument().isEmpty())
             onboarding.setDegreeDocumentData(convertToBytes(dto.getDegreeDocument()));
         if (dto.getExperienceDocument() != null && !dto.getExperienceDocument().isEmpty())
             onboarding.setExperienceDocumentData(convertToBytes(dto.getExperienceDocument()));
-        if (dto.getOfferLetter() != null && !dto.getOfferLetter().isEmpty())
-            onboarding.setOfferLetterDocumentData(convertToBytes(dto.getOfferLetter()));
-        if (dto.getPassportPhoto() != null && !dto.getPassportPhoto().isEmpty())
-            onboarding.setPassportPhotoData(convertToBytes(dto.getPassportPhoto()));
-        if (dto.getBankDocument() != null && !dto.getBankDocument().isEmpty())
-            onboarding.setBankDocumentData(convertToBytes(dto.getBankDocument()));
-        if (dto.getMedicalCertificate() != null && !dto.getMedicalCertificate().isEmpty())
-            onboarding.setMedicalCertificateData(convertToBytes(dto.getMedicalCertificate()));
-        if (dto.getSignedContract() != null && !dto.getSignedContract().isEmpty())
-            onboarding.setSignedContractData(convertToBytes(dto.getSignedContract()));
-        if (dto.getProfilePhoto() != null && !dto.getProfilePhoto().isEmpty())
-            onboarding.setProfilePhotoData(convertToBytes(dto.getProfilePhoto()));
 
         OnboardingEntity updated = onboardingRepository.save(onboarding);
         return convertToResponseDTO(updated, employee);
@@ -233,6 +216,32 @@ public class OnboardingServiceImpl implements OnboardingService {
             }
             return convertToResponseDTO(onboarding, employee);
         });
+    }
+
+    @Override
+    @Transactional
+    public void cleanupStaleOnboardingRecords() {
+        List<OnboardingEntity> allOnboardings = onboardingRepository.findAll();
+        int deletedCount = 0;
+
+        for (OnboardingEntity onboarding : allOnboardings) {
+            try {
+                if (onboarding.getEmployeePrimeId() != null) {
+                    boolean employeeExists = employeeRepository.findById(onboarding.getEmployeePrimeId()).isPresent();
+                    if (!employeeExists) {
+                        onboardingRepository.delete(onboarding);
+                        deletedCount++;
+                        log.info("Deleted stale onboarding record for employeePrimeId: " + onboarding.getEmployeePrimeId());
+                    }
+                }
+            } catch (Exception e) {
+                log.error("Error checking employee for onboarding: " + onboarding.getId(), e);
+            }
+        }
+
+        if (deletedCount > 0) {
+            log.info("Cleaned up " + deletedCount + " stale onboarding records");
+        }
     }
 
     @Override
@@ -337,21 +346,18 @@ public class OnboardingServiceImpl implements OnboardingService {
         dto.setDisabilityPercentage(onboarding.getDisabilityPercentage());
         dto.setCertificateNumber(onboarding.getCertificateNumber());
 
-        // ========== SECTION D - Document URLs ==========
-        String onboardingId = onboarding.getOnboardingId();
-        if (onboardingId != null && !onboardingId.isEmpty()) {
-            dto.setPanDocumentUrl(generateDocUrl(onboardingId, "pan"));
-            dto.setAadhaarDocumentUrl(generateDocUrl(onboardingId, "aadhaar"));
-            dto.setDegreeDocumentUrl(generateDocUrl(onboardingId, "degree"));
-            dto.setExperienceDocumentUrl(generateDocUrl(onboardingId, "experience"));
-            dto.setOfferLetterUrl(generateDocUrl(onboardingId, "offer"));
-            dto.setPassportPhotoUrl(generateDocUrl(onboardingId, "passport"));
-            dto.setBankDocumentUrl(generateDocUrl(onboardingId, "bank"));
-            dto.setMedicalCertificateUrl(generateDocUrl(onboardingId, "medical"));
-            dto.setSignedContractUrl(generateDocUrl(onboardingId, "contract"));
-            dto.setProfilePhotoUrl(generateDocUrl(onboardingId, "profile"));
-        }
+// ========== SECTION D - Document URLs (Only 4 Documents) ==========// In OnboardingServiceImpl.convertToResponseDTO() - fix the document URLs
+//String onboardingId = onboarding.getOnboardingId();
+//if (onboardingId != null && !onboardingId.isEmpty()) {
+//    // Remove the extra "/document" segment - just use onboardingId/docType
+//    dto.setAadhaarDocumentUrl("/" + onboardingId + "/aadhaar");
+//    dto.setPanDocumentUrl("/" + onboardingId + "/pan");
+//    dto.setDegreeDocumentUrl("/" + onboardingId + "/degree");
+//    dto.setExperienceDocumentUrl("/" + onboardingId + "/experience");
+//}
 
         return dto;
     }
 }
+
+

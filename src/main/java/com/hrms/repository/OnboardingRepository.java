@@ -18,4 +18,3 @@ public interface OnboardingRepository extends JpaRepository<OnboardingEntity, Lo
 
     Page<OnboardingEntity> findByEmployeePrimeIdContaining(String search, Pageable pageable);
 }
-

@@ -30,10 +30,14 @@ public interface AssetService {
     // Maintenance
     AssetResponseDTO addMaintenanceRecord(Long assetId, AssetRequestDTO dto);
     AssetResponseDTO updateMaintenanceStatus(Long maintenanceId, String status);
+    AssetResponseDTO deleteMaintenanceRecord(Long assetId);  // ✅ ADD THIS LINE
+    AssetResponseDTO completeMaintenance(Long assetId);  // ✅ ADD THIS LINE
+
 
     // Dashboard Stats
     Map<String, Long> getAssetStats();
     Map<String, Long> getCategoryStats();
+
 
     long getTotalCount();
 }

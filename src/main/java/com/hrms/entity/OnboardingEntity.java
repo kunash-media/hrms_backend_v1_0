@@ -86,14 +86,14 @@ public class OnboardingEntity {
     private Integer disabilityPercentage;
     private String certificateNumber;
 
-    // ========== SECTION D: Documents (BLOB fields) ==========
-    @Lob
-    @Column(columnDefinition = "LONGBLOB")
-    private byte[] panDocumentData;
-
+    // ========== SECTION D: Documents (BLOB fields - Only 4) ==========
     @Lob
     @Column(columnDefinition = "LONGBLOB")
     private byte[] aadhaarDocumentData;
+
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] panDocumentData;
 
     @Lob
     @Column(columnDefinition = "LONGBLOB")
@@ -102,30 +102,6 @@ public class OnboardingEntity {
     @Lob
     @Column(columnDefinition = "LONGBLOB")
     private byte[] experienceDocumentData;
-
-    @Lob
-    @Column(columnDefinition = "LONGBLOB")
-    private byte[] offerLetterDocumentData;
-
-    @Lob
-    @Column(columnDefinition = "LONGBLOB")
-    private byte[] passportPhotoData;
-
-    @Lob
-    @Column(columnDefinition = "LONGBLOB")
-    private byte[] bankDocumentData;
-
-    @Lob
-    @Column(columnDefinition = "LONGBLOB")
-    private byte[] medicalCertificateData;
-
-    @Lob
-    @Column(columnDefinition = "LONGBLOB")
-    private byte[] signedContractData;
-
-    @Lob
-    @Column(columnDefinition = "LONGBLOB")
-    private byte[] profilePhotoData;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -275,36 +251,18 @@ public class OnboardingEntity {
     public String getCertificateNumber() { return certificateNumber; }
     public void setCertificateNumber(String certificateNumber) { this.certificateNumber = certificateNumber; }
 
-    // Section D - Document Data
-    public byte[] getPanDocumentData() { return panDocumentData; }
-    public void setPanDocumentData(byte[] panDocumentData) { this.panDocumentData = panDocumentData; }
-
+    // Section D - Document Data (Only 4)
     public byte[] getAadhaarDocumentData() { return aadhaarDocumentData; }
     public void setAadhaarDocumentData(byte[] aadhaarDocumentData) { this.aadhaarDocumentData = aadhaarDocumentData; }
+
+    public byte[] getPanDocumentData() { return panDocumentData; }
+    public void setPanDocumentData(byte[] panDocumentData) { this.panDocumentData = panDocumentData; }
 
     public byte[] getDegreeDocumentData() { return degreeDocumentData; }
     public void setDegreeDocumentData(byte[] degreeDocumentData) { this.degreeDocumentData = degreeDocumentData; }
 
     public byte[] getExperienceDocumentData() { return experienceDocumentData; }
     public void setExperienceDocumentData(byte[] experienceDocumentData) { this.experienceDocumentData = experienceDocumentData; }
-
-    public byte[] getOfferLetterDocumentData() { return offerLetterDocumentData; }
-    public void setOfferLetterDocumentData(byte[] offerLetterDocumentData) { this.offerLetterDocumentData = offerLetterDocumentData; }
-
-    public byte[] getPassportPhotoData() { return passportPhotoData; }
-    public void setPassportPhotoData(byte[] passportPhotoData) { this.passportPhotoData = passportPhotoData; }
-
-    public byte[] getBankDocumentData() { return bankDocumentData; }
-    public void setBankDocumentData(byte[] bankDocumentData) { this.bankDocumentData = bankDocumentData; }
-
-    public byte[] getMedicalCertificateData() { return medicalCertificateData; }
-    public void setMedicalCertificateData(byte[] medicalCertificateData) { this.medicalCertificateData = medicalCertificateData; }
-
-    public byte[] getSignedContractData() { return signedContractData; }
-    public void setSignedContractData(byte[] signedContractData) { this.signedContractData = signedContractData; }
-
-    public byte[] getProfilePhotoData() { return profilePhotoData; }
-    public void setProfilePhotoData(byte[] profilePhotoData) { this.profilePhotoData = profilePhotoData; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }

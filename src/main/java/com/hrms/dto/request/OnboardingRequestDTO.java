@@ -55,17 +55,11 @@ public class OnboardingRequestDTO {
     private Integer disabilityPercentage;
     private String certificateNumber;
 
-    // ========== SECTION D: Document Uploads ==========
-    private MultipartFile panDocument;
+    // ========== SECTION D: Document Uploads (Only 4 Documents) ==========
     private MultipartFile aadhaarDocument;
+    private MultipartFile panDocument;
     private MultipartFile degreeDocument;
     private MultipartFile experienceDocument;
-    private MultipartFile offerLetter;
-    private MultipartFile passportPhoto;
-    private MultipartFile bankDocument;
-    private MultipartFile medicalCertificate;
-    private MultipartFile signedContract;
-    private MultipartFile profilePhoto;
 
     // ========== Constructors ==========
     public OnboardingRequestDTO() {}
@@ -183,34 +177,16 @@ public class OnboardingRequestDTO {
     public String getCertificateNumber() { return certificateNumber; }
     public void setCertificateNumber(String certificateNumber) { this.certificateNumber = certificateNumber; }
 
-    // Section D - Documents
-    public MultipartFile getPanDocument() { return panDocument; }
-    public void setPanDocument(MultipartFile panDocument) { this.panDocument = panDocument; }
-
+    // Section D - Documents (Only 4)
     public MultipartFile getAadhaarDocument() { return aadhaarDocument; }
     public void setAadhaarDocument(MultipartFile aadhaarDocument) { this.aadhaarDocument = aadhaarDocument; }
+
+    public MultipartFile getPanDocument() { return panDocument; }
+    public void setPanDocument(MultipartFile panDocument) { this.panDocument = panDocument; }
 
     public MultipartFile getDegreeDocument() { return degreeDocument; }
     public void setDegreeDocument(MultipartFile degreeDocument) { this.degreeDocument = degreeDocument; }
 
     public MultipartFile getExperienceDocument() { return experienceDocument; }
     public void setExperienceDocument(MultipartFile experienceDocument) { this.experienceDocument = experienceDocument; }
-
-    public MultipartFile getOfferLetter() { return offerLetter; }
-    public void setOfferLetter(MultipartFile offerLetter) { this.offerLetter = offerLetter; }
-
-    public MultipartFile getPassportPhoto() { return passportPhoto; }
-    public void setPassportPhoto(MultipartFile passportPhoto) { this.passportPhoto = passportPhoto; }
-
-    public MultipartFile getBankDocument() { return bankDocument; }
-    public void setBankDocument(MultipartFile bankDocument) { this.bankDocument = bankDocument; }
-
-    public MultipartFile getMedicalCertificate() { return medicalCertificate; }
-    public void setMedicalCertificate(MultipartFile medicalCertificate) { this.medicalCertificate = medicalCertificate; }
-
-    public MultipartFile getSignedContract() { return signedContract; }
-    public void setSignedContract(MultipartFile signedContract) { this.signedContract = signedContract; }
-
-    public MultipartFile getProfilePhoto() { return profilePhoto; }
-    public void setProfilePhoto(MultipartFile profilePhoto) { this.profilePhoto = profilePhoto; }
 }

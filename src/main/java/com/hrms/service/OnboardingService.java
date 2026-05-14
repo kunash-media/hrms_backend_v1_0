@@ -24,4 +24,6 @@ public interface OnboardingService {
     OnboardingResponseDTO updateStatus(Long id, String status);
 
     long getTotalCount();
+
+    void cleanupStaleOnboardingRecords();
 }

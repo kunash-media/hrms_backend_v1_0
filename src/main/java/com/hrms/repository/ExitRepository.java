@@ -116,4 +116,3 @@ public interface ExitRepository extends JpaRepository<ExitEntity, Long> {
     @Query("SELECT MONTH(e.createdAt), COUNT(e) FROM ExitEntity e WHERE YEAR(e.createdAt) = YEAR(CURRENT_DATE) GROUP BY MONTH(e.createdAt)")
     List<Object[]> getMonthlyExitCount();
 }
-

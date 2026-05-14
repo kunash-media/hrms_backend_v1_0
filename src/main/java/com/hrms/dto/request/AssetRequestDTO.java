@@ -1,6 +1,5 @@
 package com.hrms.dto.request;
 
-
 import java.time.LocalDate;
 
 public class AssetRequestDTO {
@@ -39,6 +38,7 @@ public class AssetRequestDTO {
     private String performedBy;
     private LocalDate nextMaintenanceDate;
     private String maintenanceRemarks;
+
 
     // Constructors
     public AssetRequestDTO() {}
@@ -127,4 +127,3 @@ public class AssetRequestDTO {
     public String getMaintenanceRemarks() { return maintenanceRemarks; }
     public void setMaintenanceRemarks(String maintenanceRemarks) { this.maintenanceRemarks = maintenanceRemarks; }
 }
-

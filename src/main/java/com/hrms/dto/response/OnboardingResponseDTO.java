@@ -24,32 +24,8 @@ public class OnboardingResponseDTO {
     private String employeeName;
     private String department;
     private String designation;
-    private String workEmail;           // ADD THIS
-    private String reportingManager;    // ADD THIS
-
-    public String getWorkEmail() {
-        return workEmail;
-    }
-
-    public void setWorkEmail(String workEmail) {
-        this.workEmail = workEmail;
-    }
-
-    public String getReportingManager() {
-        return reportingManager;
-    }
-
-    public void setReportingManager(String reportingManager) {
-        this.reportingManager = reportingManager;
-    }
-
-    public Boolean getPhysicallyChallenged() {
-        return isPhysicallyChallenged;
-    }
-
-    public void setPhysicallyChallenged(Boolean physicallyChallenged) {
-        isPhysicallyChallenged = physicallyChallenged;
-    }
+    private String workEmail;
+    private String reportingManager;
 
     // ========== SECTION B: Editable Fields (Verification) ==========
     private String personalEmail;
@@ -93,17 +69,11 @@ public class OnboardingResponseDTO {
     private Integer disabilityPercentage;
     private String certificateNumber;
 
-    // ========== SECTION D: Document URLs ==========
-    private String panDocumentUrl;
+    // ========== SECTION D: Document URLs (Only 4 Documents) ==========
     private String aadhaarDocumentUrl;
+    private String panDocumentUrl;
     private String degreeDocumentUrl;
     private String experienceDocumentUrl;
-    private String offerLetterUrl;
-    private String passportPhotoUrl;
-    private String bankDocumentUrl;
-    private String medicalCertificateUrl;
-    private String signedContractUrl;
-    private String profilePhotoUrl;
 
     // ========== Constructors ==========
     public OnboardingResponseDTO() {}
@@ -159,6 +129,12 @@ public class OnboardingResponseDTO {
 
     public String getDesignation() { return designation; }
     public void setDesignation(String designation) { this.designation = designation; }
+
+    public String getWorkEmail() { return workEmail; }
+    public void setWorkEmail(String workEmail) { this.workEmail = workEmail; }
+
+    public String getReportingManager() { return reportingManager; }
+    public void setReportingManager(String reportingManager) { this.reportingManager = reportingManager; }
 
     // Section B
     public String getPersonalEmail() { return personalEmail; }
@@ -252,34 +228,16 @@ public class OnboardingResponseDTO {
     public String getCertificateNumber() { return certificateNumber; }
     public void setCertificateNumber(String certificateNumber) { this.certificateNumber = certificateNumber; }
 
-    // Section D - Document URLs
-    public String getPanDocumentUrl() { return panDocumentUrl; }
-    public void setPanDocumentUrl(String panDocumentUrl) { this.panDocumentUrl = panDocumentUrl; }
-
+    // Section D - Document URLs (Only 4)
     public String getAadhaarDocumentUrl() { return aadhaarDocumentUrl; }
     public void setAadhaarDocumentUrl(String aadhaarDocumentUrl) { this.aadhaarDocumentUrl = aadhaarDocumentUrl; }
+
+    public String getPanDocumentUrl() { return panDocumentUrl; }
+    public void setPanDocumentUrl(String panDocumentUrl) { this.panDocumentUrl = panDocumentUrl; }
 
     public String getDegreeDocumentUrl() { return degreeDocumentUrl; }
     public void setDegreeDocumentUrl(String degreeDocumentUrl) { this.degreeDocumentUrl = degreeDocumentUrl; }
 
     public String getExperienceDocumentUrl() { return experienceDocumentUrl; }
     public void setExperienceDocumentUrl(String experienceDocumentUrl) { this.experienceDocumentUrl = experienceDocumentUrl; }
-
-    public String getOfferLetterUrl() { return offerLetterUrl; }
-    public void setOfferLetterUrl(String offerLetterUrl) { this.offerLetterUrl = offerLetterUrl; }
-
-    public String getPassportPhotoUrl() { return passportPhotoUrl; }
-    public void setPassportPhotoUrl(String passportPhotoUrl) { this.passportPhotoUrl = passportPhotoUrl; }
-
-    public String getBankDocumentUrl() { return bankDocumentUrl; }
-    public void setBankDocumentUrl(String bankDocumentUrl) { this.bankDocumentUrl = bankDocumentUrl; }
-
-    public String getMedicalCertificateUrl() { return medicalCertificateUrl; }
-    public void setMedicalCertificateUrl(String medicalCertificateUrl) { this.medicalCertificateUrl = medicalCertificateUrl; }
-
-    public String getSignedContractUrl() { return signedContractUrl; }
-    public void setSignedContractUrl(String signedContractUrl) { this.signedContractUrl = signedContractUrl; }
-
-    public String getProfilePhotoUrl() { return profilePhotoUrl; }
-    public void setProfilePhotoUrl(String profilePhotoUrl) { this.profilePhotoUrl = profilePhotoUrl; }
 }

@@ -1,6 +1,5 @@
 package com.hrms.repository;
 
-
 import com.hrms.entity.AssetEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,16 +18,23 @@ public interface AssetRepository extends JpaRepository<AssetEntity, Long> {
     Optional<AssetEntity> findBySerialNumber(String serialNumber);
 
     boolean existsBySerialNumber(String serialNumber);
+
     boolean existsByAssetId(String assetId);
 
     Page<AssetEntity> findByStatus(String status, Pageable pageable);
 
     Page<AssetEntity> findByCategory(String category, Pageable pageable);
 
+    // ✅ FIXED: Use assignedToEmployee IS NULL instead of assignedToEmployeeId
     List<AssetEntity> findByStatusAndAssignedToEmployeeIsNull(String status);
 
+    // ❌ DELETE THIS LINE:
+    // Page<AssetEntity> findByAssignedToEmployeeId(String employeeId, Pageable pageable);
+
+    // ✅ REPLACE WITH:
     Page<AssetEntity> findByAssignedToEmployee_EmployeePrimeId(Long employeePrimeId, Pageable pageable);
 
+    // ✅ OR for String employeeId (EMP001):
     Page<AssetEntity> findByAssignedToEmployee_EmployeeId(String employeeId, Pageable pageable);
 
     Page<AssetEntity> findByRequestStatus(String requestStatus, Pageable pageable);
@@ -59,3 +65,5 @@ public interface AssetRepository extends JpaRepository<AssetEntity, Long> {
     @Query("SELECT MAX(a.maintenanceId) FROM AssetEntity a WHERE a.maintenanceId LIKE 'MNT%'")
     String findMaxMaintenanceId();
 }
+
+
