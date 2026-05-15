@@ -27,4 +27,18 @@ public interface ExpenseRepository extends JpaRepository<ExpenseEntity, Long> {
 
     @Query("SELECT e.expenseType, SUM(e.amount) FROM ExpenseEntity e WHERE e.status = 'Approved' GROUP BY e.expenseType")
     List<Object[]> getExpenseSummaryByType();
+
+
+    /**
+     * Sum of approved expenses for an employee within a date range (pay month).
+     * Used exclusively by PayrollComputationService.
+     */
+    @Query("SELECT COALESCE(SUM(e.amount), 0) FROM ExpenseEntity e " +
+            "WHERE e.employee.employeePrimeId = :employeePrimeId " +
+            "AND e.status = 'Approved' " +
+            "AND e.expenseDate BETWEEN :startDate AND :endDate")
+    Double getTotalApprovedExpensesByEmployeeAndMonth(
+            @Param("employeePrimeId") Long employeePrimeId,
+            @Param("startDate") LocalDate startDate,
+            @Param("endDate")   LocalDate endDate);
 }

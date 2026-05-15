@@ -21,7 +21,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/leave/rules")
-@CrossOrigin(origins = "*")
 public class LeaveRuleController {
 
     @Autowired

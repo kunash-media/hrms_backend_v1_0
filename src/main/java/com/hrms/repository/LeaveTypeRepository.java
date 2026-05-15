@@ -19,6 +19,8 @@ public interface LeaveTypeRepository extends JpaRepository<LeaveTypeEntity, Long
     boolean existsByNameIgnoreCase(String name);
 
 
+    Optional<LeaveTypeEntity> findByNameIgnoreCase(String name);
+
     @Query(value = """
             SELECT lt.*
             FROM leave_types lt

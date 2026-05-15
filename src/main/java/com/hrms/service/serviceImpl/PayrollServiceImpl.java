@@ -13,6 +13,7 @@ import com.hrms.exceptions.ConflictException;
 import com.hrms.exceptions.ResourceNotFoundException;
 import com.hrms.repository.EmployeeRepository;
 import com.hrms.repository.PayrollRepository;
+import com.hrms.service.PayrollComputationService;
 import com.hrms.service.PayrollService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,17 @@ public class PayrollServiceImpl implements PayrollService {
 
     private static final Logger log = LoggerFactory.getLogger(PayrollServiceImpl.class);
 
+    private final PayrollRepository payrollRepository;
+    private final EmployeeRepository employeeRepository;
+    private final PayrollComputationService computationService;
+
+
+    public PayrollServiceImpl(PayrollComputationService computationService, PayrollRepository payrollRepository, EmployeeRepository employeeRepository) {
+        this.computationService = computationService;
+        this.payrollRepository = payrollRepository;
+        this.employeeRepository = employeeRepository;
+    }
+
     /** Statuses in which earnings fields can be modified. */
     private static final Set<PayrollStatus> MUTABLE_STATUSES =
             EnumSet.of(PayrollStatus.DRAFT, PayrollStatus.FAILED);
@@ -40,14 +52,6 @@ public class PayrollServiceImpl implements PayrollService {
     private static final Set<PayrollStatus> DELETABLE_STATUSES =
             EnumSet.of(PayrollStatus.DRAFT, PayrollStatus.CANCELLED);
 
-    private final PayrollRepository payrollRepository;
-    private final EmployeeRepository employeeRepository;
-
-    public PayrollServiceImpl(PayrollRepository payrollRepository,
-                              EmployeeRepository employeeRepository) {
-        this.payrollRepository  = payrollRepository;
-        this.employeeRepository = employeeRepository;
-    }
 
     // ─────────────────────────────────────────────────────────────────────
     // CREATE
@@ -78,6 +82,19 @@ public class PayrollServiceImpl implements PayrollService {
         // 3. Build entity with server-side computed amounts
         PayrollEntity entity = buildEntity(dto, employee);
         entity.setStatus(PayrollStatus.PROCESSING);
+
+        // ── ADD THIS BLOCK (5 lines) ─────────────────────────────────
+        // Enrich with attendance-based LOP, working days, expense reimbursement.
+        // This mutates entity.grossSalary and entity.netSalary in place.
+        computationService.enrichWithAttendanceAndExpense(
+                entity,
+                employee.getEmployeePrimeId(),   // Long PK for attendance query
+                dto.getEmployeeId(),              // business ID for expense/leave query
+                dto.getPayrollMonth(),
+                dto.getPayrollYear(),
+                dto.getBasicSalary()
+        );
+        // ── END ADD ──────────────────────────────────────────────────
 
         PayrollEntity saved = payrollRepository.save(entity);
 
@@ -440,6 +457,13 @@ public class PayrollServiceImpl implements PayrollService {
         dto.setTotalDeductions(e.getTotalDeductions());
         // Net
         dto.setNetSalary(e.getNetSalary());
+
+        // Attendance & expense enrichment fields
+        dto.setWorkingDaysInMonth(e.getWorkingDaysInMonth());
+        dto.setDaysWorked(e.getDaysWorked());
+        dto.setLopDays(e.getLopDays());
+        dto.setLopDeduction(e.getLopDeduction());
+        dto.setExpenseReimbursement(e.getExpenseReimbursement());
 
         // Employee snapshot (employee is eagerly loaded via JOIN FETCH in repo queries)
         EmployeeEntity emp = e.getEmployee();

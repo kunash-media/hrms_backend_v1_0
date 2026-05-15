@@ -17,6 +17,12 @@ public class LeaveTypeEntity {
     @Column(nullable = false)
     private Boolean isActive = true;
 
+
+    // ADD this field to LeaveTypeEntity — one new column
+    @Column(name = "is_paid", nullable = false)
+    private Boolean isPaid = true;  // true = Paid leave (CL, SL, EL)
+                                    // false = unpaid (LOP, LWP)
+
     private LocalDate createdAt;
 
     @PrePersist
@@ -35,4 +41,7 @@ public class LeaveTypeEntity {
 
     public LocalDate getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDate createdAt) { this.createdAt = createdAt; }
+
+    public Boolean getIsPaid() { return isPaid != null && isPaid; }
+    public void setIsPaid(Boolean isPaid) { this.isPaid = isPaid; }
 }

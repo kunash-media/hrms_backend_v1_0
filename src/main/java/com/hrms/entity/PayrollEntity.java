@@ -113,6 +113,33 @@ public class PayrollEntity {
     @Column(name = "initiated_by", length = 100)
     private String initiatedBy;
 
+
+    /** Calendar working days in the pay month (e.g. 26 for April 2025) */
+    @Column(name = "working_days_in_month")
+    private Integer workingDaysInMonth;
+
+    /** Days employee actually worked (present + paid leave) */
+    @Column(name = "days_worked")
+    private Integer daysWorked;
+
+    /** Unpaid leave / absent days — drives LOP deduction */
+    @Column(name = "lop_days")
+    private Integer lopDays;
+
+    /**
+     * Loss-of-Pay deduction = (basicSalary / workingDaysInMonth) × lopDays.
+     * Stored for audit; excluded from totalDeductions (kept separate line).
+     */
+    @Column(name = "lop_deduction")
+    private Double lopDeduction;
+
+    /**
+     * Sum of APPROVED expense claims for this employee in this pay month.
+     * Added to gross BEFORE net computation so it flows into the payslip.
+     */
+    @Column(name = "expense_reimbursement")
+    private Double expenseReimbursement;
+
     // ── Lifecycle callbacks ───────────────────────────────────────────────
     @PrePersist
     private void onPersist() {
@@ -206,4 +233,46 @@ public class PayrollEntity {
 
     public String getInitiatedBy() { return initiatedBy; }
     public void setInitiatedBy(String initiatedBy) { this.initiatedBy = initiatedBy; }
+
+
+    public Integer getWorkingDaysInMonth() {
+        return workingDaysInMonth;
+    }
+
+    public void setWorkingDaysInMonth(Integer workingDaysInMonth) {
+        this.workingDaysInMonth = workingDaysInMonth;
+    }
+
+    public Integer getDaysWorked() {
+        return daysWorked;
+    }
+
+    public void setDaysWorked(Integer daysWorked) {
+        this.daysWorked = daysWorked;
+    }
+
+    public Integer getLopDays() {
+        return lopDays;
+    }
+
+    public void setLopDays(Integer lopDays) {
+        this.lopDays = lopDays;
+    }
+
+
+    public Double getLopDeduction() {
+        return lopDeduction;
+    }
+
+    public void setLopDeduction(Double lopDeduction) {
+        this.lopDeduction = lopDeduction;
+    }
+
+    public Double getExpenseReimbursement() {
+        return expenseReimbursement;
+    }
+
+    public void setExpenseReimbursement(Double expenseReimbursement) {
+        this.expenseReimbursement = expenseReimbursement;
+    }
 }

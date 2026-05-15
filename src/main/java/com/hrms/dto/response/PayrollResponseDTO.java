@@ -43,6 +43,15 @@ public class PayrollResponseDTO {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+
+    // ADD after existing netSalary field — these map from PayrollEntity
+    private Integer workingDaysInMonth;
+    private Integer daysWorked;
+    private Integer lopDays;
+    private Double  lopDeduction;
+    private Double  expenseReimbursement;
+
+
     // ── Constructors ──────────────────────────────────────────────────────
     public PayrollResponseDTO() {}
 
@@ -122,4 +131,44 @@ public class PayrollResponseDTO {
 
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+
+    public Integer getWorkingDaysInMonth() {
+        return workingDaysInMonth;
+    }
+
+    public void setWorkingDaysInMonth(Integer workingDaysInMonth) {
+        this.workingDaysInMonth = workingDaysInMonth;
+    }
+
+    public Integer getDaysWorked() {
+        return daysWorked;
+    }
+
+    public void setDaysWorked(Integer daysWorked) {
+        this.daysWorked = daysWorked;
+    }
+
+    public Integer getLopDays() {
+        return lopDays;
+    }
+
+    public void setLopDays(Integer lopDays) {
+        this.lopDays = lopDays;
+    }
+
+    public Double getLopDeduction() {
+        return lopDeduction;
+    }
+
+    public void setLopDeduction(Double lopDeduction) {
+        this.lopDeduction = lopDeduction;
+    }
+
+    public Double getExpenseReimbursement() {
+        return expenseReimbursement;
+    }
+
+    public void setExpenseReimbursement(Double expenseReimbursement) {
+        this.expenseReimbursement = expenseReimbursement;
+    }
 }
