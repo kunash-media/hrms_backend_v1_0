@@ -6,6 +6,8 @@ import com.hrms.dto.request.RegisterEmployeeRequestDTO;
 import com.hrms.dto.response.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 public interface EmployeeService {
@@ -53,4 +55,14 @@ public interface EmployeeService {
     public RegisteredEmployeeResponseDTO registerEmployee(RegisterEmployeeRequestDTO dto);
 
     DashboardDTO getDashboardData(Long employeePrimeId);
+
+    /**
+     * Parses the uploaded Excel file, validates each row,
+     * skips duplicates / invalid rows with reasons, and batch-saves valid employees.
+     *
+     * @param file the uploaded .xlsx file
+     * @return BulkEmployeeResponse with upload/skip counts and skip reasons
+     */
+    BulkEmployeeResponse processBulkUpload(MultipartFile file);
+
 }

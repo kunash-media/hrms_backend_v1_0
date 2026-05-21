@@ -11,17 +11,28 @@ import java.util.Optional;
 @Repository
 public interface CompanyRepository extends JpaRepository<CompanyEntity, Long> {
 
+
     Optional<CompanyEntity> findByEmail(String email);
 
     Optional<CompanyEntity> findByCompanyName(String companyName);
 
     boolean existsByEmail(String email);
 
-    // Fix: Use "CompanyEntity" instead of "Company"
     @Query("SELECT c FROM CompanyEntity c WHERE c.companyType = :type")
     List<CompanyEntity> findByCompanyType(@Param("type") String type);
 
-    // Fix: Use "CompanyEntity" instead of "Company"
     @Query("SELECT c FROM CompanyEntity c WHERE c.industryType = :industry")
     List<CompanyEntity> findByIndustryType(@Param("industry") String industry);
+
+    @Query("SELECT c FROM CompanyEntity c WHERE LOWER(c.departmentsJson) LIKE LOWER(CONCAT('%', :department, '%'))")
+    List<CompanyEntity> findByDepartment(@Param("department") String department);
+
+    @Query("SELECT c FROM CompanyEntity c WHERE LOWER(c.designationsJson) LIKE LOWER(CONCAT('%', :designation, '%'))")
+    List<CompanyEntity> findByDesignation(@Param("designation") String designation);
+
+    @Query("SELECT c.departmentsJson FROM CompanyEntity c WHERE c.departmentsJson IS NOT NULL")
+    List<String> findAllDepartmentsJson();
+
+    @Query("SELECT c.designationsJson FROM CompanyEntity c WHERE c.designationsJson IS NOT NULL")
+    List<String> findAllDesignationsJson();
 }

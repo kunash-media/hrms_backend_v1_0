@@ -21,7 +21,7 @@ public class EmailServiceImpl implements EmailService {
     private String fromEmail;
 
     // ── Logo path inside src/main/resources ──────────────────────────────────
-    private static final String LOGO_PATH = "static/images/logo-siec.jpeg";
+    private static final String LOGO_PATH = "static/Images/logo-siec.jpeg";
 
     public EmailServiceImpl(JavaMailSender mailSender) {
         this.mailSender = mailSender;
@@ -151,6 +151,103 @@ public class EmailServiceImpl implements EmailService {
                 "  <div class='footer'>" +
                 "    <p>&copy; 2026 SIEC – Sustainable Integrated Environment Consultant." +
                 "       All rights reserved.</p>" +
+                "    <p>This is an automated email — please do not reply.</p>" +
+                "  </div>" +
+
+                "</div>" +
+                "</body>" +
+                "</html>";
+    }
+
+
+    @Override
+    public void sendEmployeeCredentials(String toEmail, String employeeId, String password) {
+        try {
+            MimeMessage mimeMessage = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+
+            helper.setFrom(fromEmail);
+            helper.setTo(toEmail);
+            helper.setSubject("Welcome to SIEC Employee Portal - Your Login Credentials");
+
+            helper.setText(buildWelcomeCredentialsTemplate(employeeId, password), true); // HTML
+
+            addLogoIfExists(helper);
+
+            mailSender.send(mimeMessage);
+            logger.info("Welcome credentials email sent successfully to: {}", toEmail);
+
+        } catch (MessagingException e) {
+            logger.error("Failed to send credentials email to {}: {}", toEmail, e.getMessage());
+            throw new RuntimeException("Failed to send credentials email: " + e.getMessage());
+        }
+    }
+
+    private String buildWelcomeCredentialsTemplate(String employeeId, String password) {
+        return "<!DOCTYPE html>" +
+                "<html>" +
+                "<head>" +
+                "<meta charset='UTF-8'>" +
+                "<meta name='viewport' content='width=device-width, initial-scale=1.0'>" +
+                "<title>Welcome to SIEC Employee Portal</title>" +
+                "<style>" +
+                "  body { margin:0; padding:0; font-family:'Segoe UI',Arial,sans-serif; background-color:#f0f4f8; }" +
+                "  .wrapper { max-width:600px; margin:40px auto; background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.10); }" +
+                "  .header { background:#ffffff; text-align:center; padding:30px 30px 22px; border-bottom:3px solid #4caf50; }" +
+                "  .header img { max-height:80px; max-width:260px; object-fit:contain; }" +
+                "  .header .fallback { font-size:22px; font-weight:700; color:#1a6b3c; display:none; }" +
+                "  .body { padding:38px 40px 28px; color:#333333; }" +
+                "  .body p { font-size:15px; line-height:1.75; margin:0 0 16px; }" +
+                "  .credential-box { background:#f8fafc; border:2px solid #4caf50; border-radius:10px; padding:20px; margin:25px 0; text-align:center; }" +
+                "  .label { font-size:14px; color:#555; margin-bottom:5px; }" +
+                "  .value { font-size:18px; font-weight:700; color:#1a6b3c; letter-spacing:1px; }" +
+                "  .portal-btn { display:inline-block; background:#4caf50; color:#ffffff; text-decoration:none; " +
+                "               padding:14px 28px; border-radius:8px; font-weight:600; margin:20px 0; font-size:16px; }" +
+                "  .notice { background:#fff8e1; border-left:4px solid #f59e0b; padding:14px 18px; border-radius:6px; margin:22px 0; font-size:14px; }" +
+                "  .footer { background:#f8fafc; text-align:center; padding:20px; font-size:12px; color:#999; border-top:1px solid #e5e7eb; }" +
+                "</style>" +
+                "</head>" +
+                "<body>" +
+                "<div class='wrapper'>" +
+
+                // Header with Logo
+                "  <div class='header'>" +
+                "    <img src='cid:siec-logo' alt='SIEC Logo'" +
+                "         onerror=\"this.style.display='none'; document.querySelector('.fallback').style.display='block';\" />" +
+                "    <div class='fallback'>SIEC HRMS</div>" +
+                "  </div>" +
+
+                "  <div class='body'>" +
+                "    <p>Hello,</p>" +
+                "    <p>Welcome to the <strong>SIEC Employee Portal</strong>! Your account has been successfully created.</p>" +
+
+                "    <div class='credential-box'>" +
+                "      <div class='label'>Employee ID</div>" +
+                "      <div class='value'>" + employeeId + "</div>" +
+                "      <br>" +
+                "      <div class='label'>Temporary Password</div>" +
+                "      <div class='value'>" + password + "</div>" +
+                "    </div>" +
+
+                "    <p style='text-align:center; margin:30px 0 20px 0;'>" +
+                "      <a href='https://employee.kunashshowcase.online/index.html' class='portal-btn' target='_blank'>" +
+                "        Visit Employee Portal Login" +
+                "      </a>" +
+                "    </p>" +
+
+                "    <p>You can now login using the credentials above.</p>" +
+                "    <p><strong>We strongly recommend changing your password after your first login for security.</strong></p>" +
+
+                "    <div class='notice'>" +
+                "      <strong>Important:</strong> Keep your credentials secure. Do not share your password with anyone." +
+                "    </div>" +
+
+                "    <p>Regards,<br><strong>SIEC Support Team</strong><br>" +
+                "    <span style='color:#888;font-size:13px;'>Sustainable Integrated Environment Consultant</span></p>" +
+                "  </div>" +
+
+                "  <div class='footer'>" +
+                "    <p>&copy; 2026 SIEC – Sustainable Integrated Environment Consultant. All rights reserved.</p>" +
                 "    <p>This is an automated email — please do not reply.</p>" +
                 "  </div>" +
 

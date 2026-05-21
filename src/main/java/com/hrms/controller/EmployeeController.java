@@ -427,4 +427,41 @@ public class EmployeeController {
         DashboardDTO dto = employeeService.getDashboardData(employeePrimeId);
         return ResponseEntity.ok(dto);
     }
+
+
+    /**
+     * POST /api/employees/bulk-employee
+     * Accepts an .xlsx file and bulk-inserts employees.
+     * Returns counts of uploaded vs skipped rows with skip reasons.
+     */
+    @PostMapping(value = "/bulk-employee", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<BulkEmployeeResponse> bulkUpload(
+            @RequestParam("file") MultipartFile file) {
+
+        if (file == null || file.isEmpty()) {
+            BulkEmployeeResponse err = new BulkEmployeeResponse();
+            err.setUploadedCount(0);
+            err.setSkippedCount(0);
+            err.getMessage();
+            err.setMessage("No file provided. Please attach a valid .xlsx file.");
+            return ResponseEntity.badRequest().body(err);
+        }
+
+        String filename = file.getOriginalFilename();
+        if (filename == null || (!filename.endsWith(".xlsx") && !filename.endsWith(".xls"))) {
+            BulkEmployeeResponse err = new BulkEmployeeResponse();
+            err.setMessage("Invalid file type. Only .xlsx or .xls files are accepted.");
+            return ResponseEntity.badRequest().body(err);
+        }
+
+        BulkEmployeeResponse response = employeeService.processBulkUpload(file);
+
+        // Return 207 Multi-Status when there are partial failures, 200 on full success
+        if (response.getSkippedCount() > 0 && response.getUploadedCount() > 0) {
+            return ResponseEntity.status(207).body(response);
+        } else if (response.getUploadedCount() == 0) {
+            return ResponseEntity.badRequest().body(response);
+        }
+        return ResponseEntity.ok(response);
+    }
 }

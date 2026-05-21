@@ -100,3 +100,4 @@ public class CompanyRequestDTO {
     public String getBankDetails() { return bankDetails; }
     public void setBankDetails(String bankDetails) { this.bankDetails = bankDetails; }
 }
+

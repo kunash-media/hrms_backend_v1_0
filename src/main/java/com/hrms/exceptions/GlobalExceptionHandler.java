@@ -12,8 +12,10 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -145,5 +147,39 @@ public class GlobalExceptionHandler {
                 .body(ApiResponse.failure(
                         "An unexpected error occurred while processing your request. " +
                                 "Our team has been notified. Please try again shortly."));
+    }
+
+
+    @ExceptionHandler(ResponseStatusException.class)
+    public ResponseEntity<Map<String, Object>> handleResponseStatusException(
+            ResponseStatusException ex
+    ) {
+        Map<String, Object> body = buildErrorBody(
+                ex.getStatusCode().value(),
+                ex.getReason() != null ? ex.getReason() : ex.getMessage()
+        );
+        return ResponseEntity.status(ex.getStatusCode()).body(body);
+    }
+
+    // REMOVED: Duplicate @ExceptionHandler(MethodArgumentNotValidException.class) method
+    // @ExceptionHandler(MethodArgumentNotValidException.class)
+    // public ResponseEntity<Map<String, Object>> handleValidationException(
+    //         MethodArgumentNotValidException ex
+    // ) { ... }
+
+    // Note: You already have a catch-all for Exception.class at line ~119
+    // The duplicate catch-all at line ~161 (after the removed method) should also be removed
+    // because you already have one at line ~119
+
+    // ─── Helper ─────────────────────────────────────────────────────────────
+    private Map<String, Object> buildErrorBody(int status, String message) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp", LocalDateTime.now().toString());
+        body.put("status", status);
+        body.put("error", HttpStatus.resolve(status) != null
+                ? HttpStatus.resolve(status).getReasonPhrase()
+                : "Error");
+        body.put("message", message);
+        return body;
     }
 }

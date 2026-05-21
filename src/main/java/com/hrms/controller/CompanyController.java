@@ -7,6 +7,7 @@ import com.hrms.dto.response.CompanyResponseDTO;
 
 import com.hrms.entity.CompanyEntity;
 import com.hrms.repository.CompanyRepository;
+import com.hrms.service.CompanyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -22,10 +25,13 @@ import java.util.stream.Collectors;
 public class CompanyController {
 
     private final CompanyRepository companyRepository;
+    private final CompanyService companyService;
     private final ObjectMapper objectMapper;
 
-    public CompanyController(CompanyRepository companyRepository, ObjectMapper objectMapper) {
+
+    public CompanyController(CompanyRepository companyRepository, CompanyService companyService, ObjectMapper objectMapper) {
         this.companyRepository = companyRepository;
+        this.companyService = companyService;
         this.objectMapper = objectMapper;
     }
 
@@ -223,6 +229,69 @@ public class CompanyController {
         }
     }
 
+
+    @GetMapping("/by-department")
+    public ResponseEntity<CompanyResponseDTO.ApiResponse> getCompaniesByDepartment(
+            @RequestParam String department) {
+        try {
+            List<CompanyResponseDTO> companies = companyService.getCompaniesByDepartment(department);
+            String message = companies.isEmpty()
+                    ? "No companies found with department: " + department
+                    : "Companies retrieved successfully";
+            return ResponseEntity.ok(CompanyResponseDTO.ApiResponse.success(message, companies));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(CompanyResponseDTO.ApiResponse.error(e.getMessage()));
+        }
+    }
+
+    @GetMapping("/by-designation")
+    public ResponseEntity<CompanyResponseDTO.ApiResponse> getCompaniesByDesignation(
+            @RequestParam String designation) {
+        try {
+            List<CompanyResponseDTO> companies = companyService.getCompaniesByDesignation(designation);
+            String message = companies.isEmpty()
+                    ? "No companies found with designation: " + designation
+                    : "Companies retrieved successfully";
+            return ResponseEntity.ok(CompanyResponseDTO.ApiResponse.success(message, companies));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(CompanyResponseDTO.ApiResponse.error(e.getMessage()));
+        }
+    }
+
+
+    @GetMapping("/departments")
+    public ResponseEntity<CompanyResponseDTO.ApiResponse> getAllDepartments() {
+        try {
+            List<String> departments = companyService.getAllDepartments();
+            Map<String, Object> result = new LinkedHashMap<>();
+            result.put("totalCount", departments.size());
+            result.put("departments", departments);
+            return ResponseEntity.ok(CompanyResponseDTO.ApiResponse.success(
+                    "Departments retrieved successfully", result));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(CompanyResponseDTO.ApiResponse.error(e.getMessage()));
+        }
+    }
+
+    @GetMapping("/designations")
+    public ResponseEntity<CompanyResponseDTO.ApiResponse> getAllDesignations() {
+        try {
+            List<String> designations = companyService.getAllDesignations();
+            Map<String, Object> result = new LinkedHashMap<>();
+            result.put("totalCount", designations.size());
+            result.put("designations", designations);
+            return ResponseEntity.ok(CompanyResponseDTO.ApiResponse.success(
+                    "Designations retrieved successfully", result));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(CompanyResponseDTO.ApiResponse.error(e.getMessage()));
+        }
+    }
+
+
     private CompanyResponseDTO convertToResponse(CompanyEntity company) {
         CompanyResponseDTO response = new CompanyResponseDTO();
         response.setId(company.getId());
@@ -261,3 +330,4 @@ public class CompanyController {
         return response;
     }
 }
+

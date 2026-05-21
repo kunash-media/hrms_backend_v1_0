@@ -2,6 +2,7 @@ package com.hrms.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 @Entity
 @Table(name = "companies")
@@ -178,4 +179,5 @@ public class CompanyEntity {
         updatedAt = LocalDateTime.now();
     }
 }
+
 

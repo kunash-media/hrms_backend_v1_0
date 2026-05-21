@@ -4,7 +4,8 @@ public class RegisterEmployeeRequestDTO {
 
     private String firstName;
     private String lastName;
-    private String password;
+    private String personalEmail;
+//    private String password;
     private String department;
     private String designation;
 
@@ -26,12 +27,21 @@ public class RegisterEmployeeRequestDTO {
         this.lastName = lastName;
     }
 
-    public String getPassword() {
-        return password;
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
+
+
+    public String getPersonalEmail() {
+        return personalEmail;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPersonalEmail(String personalEmail) {
+        this.personalEmail = personalEmail;
     }
 
     public String getDepartment() {
