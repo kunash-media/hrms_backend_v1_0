@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,4 +71,31 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
     List<EmployeeEntity> findAllActive();
 
     boolean existsByEmployeeId(String employeeId);
+
+
+
+// Total active workforce count
+long countByStatus(String status);          // countByStatus("ACTIVE")
+
+// Department distribution — distinct departments + headcount, no duplicates
+@Query("""
+    SELECT e.department, COUNT(e)
+    FROM EmployeeEntity e
+    WHERE e.department IS NOT NULL
+      AND (e.status IS NULL OR UPPER(e.status) = 'ACTIVE')
+    GROUP BY e.department
+    ORDER BY COUNT(e) DESC
+    """)
+List<Object[]> countActiveByDepartment();
+
+// Recent new hires (last 7 days) for Recent Activity feed
+@Query("""
+    SELECT e
+    FROM EmployeeEntity e
+    WHERE e.createdAt >= :since
+    ORDER BY e.createdAt DESC
+    """)
+List<EmployeeEntity> findRecentHires(@Param("since") LocalDate since);
+
+
 }

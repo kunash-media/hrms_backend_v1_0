@@ -76,4 +76,22 @@ public interface AttendanceRepository extends JpaRepository<AttendanceEntity, Lo
             @Param("employeePrimeId") Long employeePrimeId,
             @Param("from") LocalDate from,
             @Param("to")   LocalDate to);
+
+
+    // Present count for today  (status = 'Present')
+    @Query("SELECT COUNT(a) FROM AttendanceEntity a WHERE a.attendanceDate = :date AND UPPER(a.status) = 'PRESENT'")
+    long countPresentOnDate(@Param("date") LocalDate date);
+
+    // On-leave count today — employees with an APPROVED leave that covers today
+    // Note: lives in LeaveRequestRepository (see below)
+
+    // Attendance chart — per-day present & absent between two dates
+    // Returns rows: [attendanceDate (LocalDate), status (String), count (Long)]
+    @Query("""
+        SELECT a.attendanceDate, a.status, COUNT(a)
+        FROM AttendanceEntity a
+        WHERE a.attendanceDate BETWEEN :from AND :to
+        GROUP BY a.attendanceDate, a.status
+        ORDER BY a.attendanceDate ASC """)
+    List<Object[]> countByDateAndStatus(@Param("from") LocalDate from, @Param("to") LocalDate to);
 }

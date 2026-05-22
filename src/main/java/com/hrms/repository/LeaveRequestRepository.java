@@ -1,6 +1,7 @@
 package com.hrms.repository;
 
 import com.hrms.entity.LeaveRequestEntity;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -60,4 +61,37 @@ public interface LeaveRequestRepository extends JpaRepository<LeaveRequestEntity
     int sumApprovedDaysInRange(
             @Param("from") LocalDate from,
             @Param("to") LocalDate to);
+
+
+    // Employees on approved leave TODAY
+    @Query("""
+    SELECT COUNT(DISTINCT lr.empId)
+    FROM LeaveRequestEntity lr
+    WHERE UPPER(lr.status) = 'APPROVED'
+      AND :today BETWEEN lr.fromDate AND lr.toDate
+    """)
+    long countEmployeesOnLeaveToday(@Param("today") LocalDate today);
+
+    // Pending leave requests (limit 5, newest first) — for Pending Approvals widget
+    @Query("""
+        SELECT lr
+        FROM LeaveRequestEntity lr
+        WHERE UPPER(lr.status) = 'PENDING'
+        ORDER BY lr.addedOn DESC
+        """)
+    List<LeaveRequestEntity> findTopPendingLeaves(Pageable pageable);
+    // Usage: findTopPendingLeaves(PageRequest.of(0, 5))
+
+    // Recent approved leaves (last 7 days) — for Recent Activity widget
+    @Query("""
+    SELECT lr
+    FROM LeaveRequestEntity lr
+    WHERE UPPER(lr.status) = 'APPROVED'
+      AND lr.actionDate >= :since
+    ORDER BY lr.actionDate DESC
+    """)
+    List<LeaveRequestEntity> findRecentApprovedLeaves(@Param("since") LocalDate since);
+
+    // Count all pending leaves (for stats badge)
+    long countByStatus(String status);
 }

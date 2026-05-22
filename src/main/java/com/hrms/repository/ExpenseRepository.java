@@ -1,6 +1,7 @@
 package com.hrms.repository;
 
 import com.hrms.entity.ExpenseEntity;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -41,4 +42,18 @@ public interface ExpenseRepository extends JpaRepository<ExpenseEntity, Long> {
             @Param("employeePrimeId") Long employeePrimeId,
             @Param("startDate") LocalDate startDate,
             @Param("endDate")   LocalDate endDate);
+
+
+    // Pending expense approvals (limit 5, newest first) — for Pending Approvals widget
+    @Query("""
+        SELECT e
+        FROM ExpenseEntity e
+        WHERE UPPER(e.status) = 'PENDING'
+        ORDER BY e.submittedDate DESC
+        """)
+    List<ExpenseEntity> findTopPendingExpenses(Pageable pageable);
+    // Usage: findTopPendingExpenses(PageRequest.of(0, 5))
+
+    // Count all pending expenses
+    long countByStatus(String status);
 }
