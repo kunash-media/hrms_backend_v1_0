@@ -14,6 +14,9 @@ public class AttendanceSummaryDTO {
     private double    latePct;
     private double    leavePct;
 
+    private long wfh;
+    private double wfhPct;
+
     public String getDate() {
         return date;
     }
@@ -109,4 +112,9 @@ public class AttendanceSummaryDTO {
     public void setLeavePct(double leavePct) {
         this.leavePct = leavePct;
     }
+
+    public long getWfh() { return wfh; }
+    public void setWfh(long wfh) { this.wfh = wfh; }
+    public double getWfhPct() { return wfhPct; }
+    public void setWfhPct(double wfhPct) { this.wfhPct = wfhPct; }
 }

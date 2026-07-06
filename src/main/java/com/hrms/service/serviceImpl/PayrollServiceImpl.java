@@ -52,6 +52,25 @@ public class PayrollServiceImpl implements PayrollService {
     private static final Set<PayrollStatus> DELETABLE_STATUSES =
             EnumSet.of(PayrollStatus.DRAFT, PayrollStatus.CANCELLED);
 
+    // ── Indian payroll breakdown constants ──────────────────────────────────
+    /** Fixed Professional Tax statutory deduction. */
+    private static final double PT_FIXED_AMOUNT = 200.0;
+
+    /** ESIC employee-contribution rate, applied only when basicPay is below the threshold. */
+    private static final double ESIC_RATE = 0.0075;
+
+    /** ESIC eligibility threshold — basicPay strictly below this attracts ESIC. */
+    private static final double ESIC_THRESHOLD = 21000.0;
+
+    /** Basic component as a percentage of Basic Pay (the HR-entered anchor figure). */
+    private static final double BASIC_COMPONENT_RATE = 0.60;
+
+    /** HRA as a percentage of the basic component. */
+    private static final double HRA_RATE_OF_BASIC = 0.40;
+
+    /** DA as a percentage of the basic component. */
+    private static final double DA_RATE_OF_BASIC = 0.15;
+
 
     // ─────────────────────────────────────────────────────────────────────
     // CREATE
@@ -86,13 +105,26 @@ public class PayrollServiceImpl implements PayrollService {
         // ── ADD THIS BLOCK (5 lines) ─────────────────────────────────
         // Enrich with attendance-based LOP, working days, expense reimbursement.
         // This mutates entity.grossSalary and entity.netSalary in place.
+//        computationService.enrichWithAttendanceAndExpense(
+//                entity,
+//                employee.getEmployeePrimeId(),   // Long PK for attendance query
+//                dto.getEmployeeId(),              // business ID for expense/leave query
+//                dto.getPayrollMonth(),
+//                dto.getPayrollYear(),
+//                dto.getBasicSalary()
+//        );
+
         computationService.enrichWithAttendanceAndExpense(
                 entity,
-                employee.getEmployeePrimeId(),   // Long PK for attendance query
-                dto.getEmployeeId(),              // business ID for expense/leave query
+                employee.getEmployeePrimeId(),
+                dto.getEmployeeId(),
                 dto.getPayrollMonth(),
                 dto.getPayrollYear(),
-                dto.getBasicSalary()
+                dto.getBasicSalary(),
+                dto.getWorkingDaysInMonth(),
+                dto.getDaysWorked(),
+                dto.getLopDays(),
+                dto.getExpenseReimbursement()
         );
         // ── END ADD ──────────────────────────────────────────────────
 
@@ -178,12 +210,9 @@ public class PayrollServiceImpl implements PayrollService {
         }
 
         applyEarningsAndDeductions(entity,
-                dto.getBasicSalary(), dto.getHra(),
-                dto.getAllowances(),
-                dto.getEmployeePf(),    // ← was: dto.getPf()
-                dto.getEmployerPf(),    // ← NEW
-                dto.getEsi(), dto.getTds());
-
+                dto.getBasicSalary(),
+                dto.getEmployeePf(),
+                dto.getEmployerPf());
 
         if (dto.getRemarks() != null) entity.setRemarks(dto.getRemarks());
 
@@ -203,13 +232,12 @@ public class PayrollServiceImpl implements PayrollService {
 
         PayrollEntity entity = findOrThrow(payrollId);
 
+        // hra/da/specialAllowance/esi/pt are all derived or fixed-constant now —
+        // only basicSalary (the Basic Pay anchor) and the two PF fields are
+        // genuinely independent inputs that should trigger a recompute.
         boolean earningsChanged = dto.getBasicSalary() != null
-                || dto.getHra()           != null
-                || dto.getAllowances()    != null
-                || dto.getEmployeePf()    != null   // ← was: dto.getPf()
-                || dto.getEmployerPf()    != null   // ← NEW
-                || dto.getEsi()           != null
-                || dto.getTds()           != null;
+                || dto.getEmployeePf() != null
+                || dto.getEmployerPf() != null;
 
         // Only enforce mutable check when earnings are being changed
         if (earningsChanged) {
@@ -224,19 +252,20 @@ public class PayrollServiceImpl implements PayrollService {
                     payrollId, entity.getStatus(), dto.getStatus());
         }
 
-        // Apply only provided (non-null) field values
-        double basic      = dto.getBasicSalary()  != null ? dto.getBasicSalary()  : entity.getBasicSalary();
-        double hra        = dto.getHra()           != null ? dto.getHra()          : orZero(entity.getHra());
-        double allowances = dto.getAllowances()     != null ? dto.getAllowances()    : orZero(entity.getAllowances());
-        double employeePf = dto.getEmployeePf()    != null ? dto.getEmployeePf()   : orZero(entity.getEmployeePf()); // ← was: dto.getPf() / entity.getPf()
-        double employerPf = dto.getEmployerPf()    != null ? dto.getEmployerPf()   : orZero(entity.getEmployerPf()); // ← NEW
-        double esi        = dto.getEsi()           != null ? dto.getEsi()          : orZero(entity.getEsi());
-        double tds        = dto.getTds()           != null ? dto.getTds()          : orZero(entity.getTds());
+        // Apply only provided (non-null) field values.
+        // NOTE: entity.getBasicSalary() stores the derived 60% BASIC COMPONENT,
+        // not the original Basic Pay anchor (e). When basicSalary isn't explicitly
+        // patched, we must reconstruct the anchor by reversing that 60% split —
+        // this is an exact inverse (component / 0.60), no rounding involved.
+        double basicPayAnchor = dto.getBasicSalary() != null
+                ? dto.getBasicSalary()
+                : reconstructBasicPayFromComponent(entity.getBasicSalary());
+        double employeePf = dto.getEmployeePf() != null ? dto.getEmployeePf() : orZero(entity.getEmployeePf());
+        double employerPf = dto.getEmployerPf() != null ? dto.getEmployerPf() : orZero(entity.getEmployerPf());
 
         if (earningsChanged) {
-            applyEarningsAndDeductions(entity, basic, hra, allowances, employeePf, employerPf, esi, tds);
+            applyEarningsAndDeductions(entity, basicPayAnchor, employeePf, employerPf);
         }
-
 
         if (dto.getRemarks() != null) {
             entity.setRemarks(dto.getRemarks());
@@ -335,39 +364,55 @@ public class PayrollServiceImpl implements PayrollService {
         applyEarningsAndDeductions(
                 entity,
                 dto.getBasicSalary(),
-                dto.getHra(),
-                dto.getAllowances(),
-                dto.getEmployeePf(),    // ← was: dto.getPf()
-                dto.getEmployerPf(),    // ← NEW
-                dto.getEsi(),
-                dto.getTds()
+                dto.getEmployeePf(),
+                dto.getEmployerPf()
         );
         return entity;
     }
 
     /**
      * Core salary computation – single source of truth.
-     * Always called server-side; client-provided grossSalary / netSalary are ignored.
+     * basicPay (the HR-entered "basicSalary") is the anchor figure, e.g. 30000.
+     * All other earnings components are derived from it so they always
+     * reconcile back to basicPay exactly:
+     *
+     *   basicComponent   = basicPay * 60%
+     *   hra              = basicComponent * 40%
+     *   da               = basicComponent * 15%
+     *   specialAllowance = basicPay - (basicComponent + hra + da)   [plug value]
+     *   grossSalary      = basicComponent + hra + da + specialAllowance  (== basicPay)
+     *
+     *   esi              = basicPay < 21000 ? basicPay * 0.75% : 0   [rule-computed]
+     *   pt               = 200 (fixed statutory constant)
+     *   employeePf       = HR-entered fixed value
+     *   employerPf       = HR-entered fixed value (company cost — excluded from deductions)
+     *
+     *   totalDeductions  = employeePf + pt + esi
+     *   netSalary        = grossSalary - totalDeductions
+     *   ctc              = basicPay + employerPf + esi
+     *
+     * No rounding is applied anywhere — every step is an exact multiplication
+     * or addition/subtraction of the inputs.
      */
     private void applyEarningsAndDeductions(PayrollEntity entity,
-                                            Double basicSalary,
-                                            Double hra,
-                                            Double allowances,
+                                            Double basicPay,
                                             Double employeePf,
-                                            Double employerPf,
-                                            Double esi,
-                                            Double tds) {
-        double safeBasic      = orZero(basicSalary);
-        double safeHra        = orZero(hra);
-        double safeAllowances = orZero(allowances);
+                                            Double employerPf) {
+        double safeBasicPay   = orZero(basicPay);
         double safeEmployeePf = orZero(employeePf);
         double safeEmployerPf = orZero(employerPf);
-        double safeEsi        = orZero(esi);
-        double safeTds        = orZero(tds);
 
-        double gross      = safeBasic + safeHra + safeAllowances;
-        // Note: employerPf is a company cost — excluded from employee deductions
-        double deductions = safeEmployeePf + safeEsi + safeTds;
+        double basicComponent   = safeBasicPay * BASIC_COMPONENT_RATE;
+        double hra               = basicComponent * HRA_RATE_OF_BASIC;
+        double da                 = basicComponent * DA_RATE_OF_BASIC;
+        double specialAllowance   = safeBasicPay - (basicComponent + hra + da);
+
+        double esi = safeBasicPay < ESIC_THRESHOLD ? safeBasicPay * ESIC_RATE : 0.0;
+        double pt  = PT_FIXED_AMOUNT;
+
+        double gross      = basicComponent + hra + da + specialAllowance; // reconciles exactly to safeBasicPay
+        // employerPf is a company cost — excluded from employee-side deductions
+        double deductions = safeEmployeePf + pt + esi;
         double net        = gross - deductions;
 
         if (net < 0) {
@@ -376,20 +421,25 @@ public class PayrollServiceImpl implements PayrollService {
                             "Please review the deduction values before proceeding.", deductions, gross));
         }
 
-        entity.setBasicSalary(safeBasic);
-        entity.setHra(safeHra);
-        entity.setAllowances(safeAllowances);
+        double ctc = safeBasicPay + safeEmployerPf + esi;
+
+        entity.setBasicSalary(basicComponent);
+        entity.setHra(hra);
+        entity.setDa(da);
+        entity.setSpecialAllowance(specialAllowance);
         entity.setGrossSalary(gross);
         entity.setEmployeePf(safeEmployeePf);
         entity.setEmployerPf(safeEmployerPf);
-        entity.setEsi(safeEsi);
-        entity.setTds(safeTds);
+        entity.setEsi(esi);
+        entity.setPt(pt);
         entity.setTotalDeductions(deductions);
         entity.setNetSalary(net);
+        entity.setCtc(ctc);
 
-        log.debug("[Payroll] Computed → gross={}, deductions={}, net={}", gross, deductions, net);
+        log.debug("[Payroll] Computed → basicPay={}, basic={}, hra={}, da={}, specialAllowance={}, " +
+                        "gross={}, esi={}, pt={}, deductions={}, net={}, ctc={}",
+                safeBasicPay, basicComponent, hra, da, specialAllowance, gross, esi, pt, deductions, net, ctc);
     }
-
 
     /** Throw if the record is not in a mutable status. */
     private void assertMutable(PayrollEntity entity) {
@@ -446,17 +496,22 @@ public class PayrollServiceImpl implements PayrollService {
         // Earnings
         dto.setBasicSalary(e.getBasicSalary());
         dto.setHra(e.getHra());
-        dto.setAllowances(e.getAllowances());
+        dto.setDa(e.getDa());
+        dto.setSpecialAllowance(e.getSpecialAllowance());
         dto.setGrossSalary(e.getGrossSalary());
 
         // Deductions
-        dto.setEmployeePf(e.getEmployeePf());   // ← was: dto.setPf(e.getPf())
-        dto.setEmployerPf(e.getEmployerPf());   // ← NEW
+        dto.setEmployeePf(e.getEmployeePf());
+        dto.setEmployerPf(e.getEmployerPf());
         dto.setEsi(e.getEsi());
-        dto.setTds(e.getTds());
+        dto.setPt(e.getPt());
         dto.setTotalDeductions(e.getTotalDeductions());
+
         // Net
         dto.setNetSalary(e.getNetSalary());
+
+        // Cost to Company
+        dto.setCtc(e.getCtc());
 
         // Attendance & expense enrichment fields
         dto.setWorkingDaysInMonth(e.getWorkingDaysInMonth());
@@ -482,6 +537,17 @@ public class PayrollServiceImpl implements PayrollService {
     /** Null-safe zero coercion for optional monetary fields. */
     private double orZero(Double value) {
         return value != null ? value : 0.0;
+    }
+
+    /**
+     * Reverses the 60% basic-component split to recover the original Basic Pay
+     * anchor (e). Exact inverse of: basicComponent = basicPay * BASIC_COMPONENT_RATE.
+     * Used by patchPayroll() when basicSalary itself isn't part of the patch but
+     * employeePf/employerPf need a recompute against the unchanged Basic Pay.
+     */
+    private double reconstructBasicPayFromComponent(Double storedBasicComponent) {
+        double component = orZero(storedBasicComponent);
+        return component / BASIC_COMPONENT_RATE;
     }
 
     @Override

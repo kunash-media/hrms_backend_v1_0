@@ -1,17 +1,24 @@
 package com.hrms.controller;
 
 import com.hrms.dto.request.ExpenseRequestDto;
+import com.hrms.dto.response.ExpenseApprovedResponseDto;
 import com.hrms.dto.response.ExpenseResponseDto;
 import com.hrms.entity.ExpenseEntity;
 import com.hrms.service.ExpenseService;
+import com.hrms.service.serviceImpl.PayrollServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @RestController
@@ -23,6 +30,9 @@ public class ExpenseController {
 
     @Autowired
     private com.hrms.repository.ExpenseRepository expenseRepository;
+
+    private static final Logger log = LoggerFactory.getLogger(ExpenseController.class);
+
 
     // ✅ CREATE EXPENSE - FIXED (removed consumes attribute)
     @PostMapping("/create-expense")
@@ -197,5 +207,47 @@ public class ExpenseController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"receipt_" + id + "_" + index + "\"")
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(receiptData);
+    }
+
+    /**
+     * Get approved expenses for an employee by month
+     * Returns only expenses with submitted date on or before 26th of the month
+     * Includes totalExpenseAmount as root level field
+     */
+    @GetMapping("/get-approved-expense")
+    public ResponseEntity<?> getApprovedExpenses(
+            @RequestParam Long employeePrimeId,
+            @RequestParam(required = false) Integer month,
+            @RequestParam(required = false) Integer year) {
+
+        log.info("Received request for approved expenses - employeePrimeId: {}, month: {}, year: {}",
+                employeePrimeId, month, year);
+
+        try {
+            // If month/year not provided, use current month/year
+            ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Asia/Kolkata"));
+            if (month == null) month = now.getMonthValue();
+            if (year == null) year = now.getYear();
+
+            // Validate month range
+            if (month < 1 || month > 12) {
+                log.warn("Invalid month value: {}", month);
+                return ResponseEntity.badRequest()
+                        .body("Month must be between 1 and 12");
+            }
+
+            ExpenseApprovedResponseDto response = expenseService
+                    .getApprovedExpenses(employeePrimeId, month, year);
+
+            log.info("Successfully fetched {} approved expenses for employee: {} with total: {}",
+                    response.getExpenses().size(), employeePrimeId, response.getTotalExpenseAmount());
+
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+            log.error("Error fetching approved expenses for employee: {}", employeePrimeId, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error fetching approved expenses: " + e.getMessage());
+        }
     }
 }

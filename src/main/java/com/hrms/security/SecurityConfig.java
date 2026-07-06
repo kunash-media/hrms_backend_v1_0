@@ -1,5 +1,6 @@
 package com.hrms.security;
 
+import com.hrms.config.BcryptEncoderConfig;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,6 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -32,6 +32,7 @@ public class SecurityConfig {
     private final AdminUserDetailsService adminUserDetailsService;
     private final EmployeeUserDetailsService employeeUserDetailsService;
 
+
     public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter,
                           AdminUserDetailsService adminUserDetailsService,
                           EmployeeUserDetailsService employeeUserDetailsService) {
@@ -41,10 +42,17 @@ public class SecurityConfig {
         logger.info("SecurityConfig initialized");
     }
 
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BcryptEncoderConfig();
     }
+
+
 
     // ── Admin pipeline ───────────────────────────────────────────────────────
 
@@ -100,7 +108,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(
-                "http://localhost:5500", "http://127.0.0.1:5500",
+                "https://hrms.siecwater.com","https://employee.siecwater.com", "http://localhost:5500", "http://127.0.0.1:5500",
                 "http://localhost:5501", "http://127.0.0.1:5501",
                 "http://localhost:5502", "http://127.0.0.1:5502",
                 "http://localhost:3000",

@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.io.InputStream;
@@ -95,8 +96,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         // Generate Employee Prime employeePrimeId
-        long count = employeeRepository.count() + 1;
-        String employeeId = String.format("EMP%04d", count);
+//        long count = employeeRepository.count() + 1;
+
+        // Auto-generate employeeId based on max existing series number
+        int nextSeq = employeeRepository.findTopEmployeeIdBySeries()
+                .map(id -> Integer.parseInt(id.substring(7)) + 1)
+                .orElse(1);
+
+        String employeeId = String.format("EMPSIEC%02d", nextSeq);
 
         EmployeeEntity employee = new EmployeeEntity();
 
@@ -143,7 +150,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setBasicSalary(dto.getBasicSalary());
         employee.setShift(dto.getShift());
         employee.setCostCentre(dto.getCostCentre());
-        employee.setStatus("Active");
+        employee.setStatus("ACTIVE");
         employee.setProfileStatus(dto.getProfileStatus());
 
         // Bank Details
@@ -210,8 +217,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setGender(dto.getGender());
         employee.setMaritalStatus(dto.getMaritalStatus());
         employee.setBloodGroup(dto.getBloodGroup());
-        employee.setPanNumber(dto.getPanNumber());
-        employee.setAadhaarNumber(dto.getAadhaarNumber());
+
+//        employee.setPanNumber(dto.getPanNumber());
+//        employee.setAadhaarNumber(dto.getAadhaarNumber());
+
+        // WITH these:
+        employee.setAadhaarNumber(StringUtils.hasText(dto.getAadhaarNumber()) ? dto.getAadhaarNumber() : null);
+        employee.setPanNumber(StringUtils.hasText(dto.getPanNumber()) ? dto.getPanNumber() : null);
+
         employee.setNationality(dto.getNationality());
         employee.setReligion(dto.getReligion());
         employee.setLinkedinProfile(dto.getLinkedinProfile());
@@ -236,8 +249,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setBankName(dto.getBankName());
         employee.setAccountNumber(dto.getAccountNumber());
         employee.setIfscCode(dto.getIfscCode());
+
         employee.setPersonalEmail(dto.getPersonalEmail());
-        employee.setWorkEmail(dto.getWorkEmail());
+
+
+//        employee.setWorkEmail(dto.getWorkEmail());
+        employee.setWorkEmail(StringUtils.hasText(dto.getWorkEmail()) ? dto.getWorkEmail() : null);
+
         employee.setMobileNumber(dto.getMobileNumber());
         employee.setAlternateNumber(dto.getAlternateNumber());
         employee.setCurrentStreet(dto.getCurrentStreet());
@@ -581,9 +599,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public RegisteredEmployeeResponseDTO registerEmployee(RegisterEmployeeRequestDTO dto) {
 
+        // ADD THIS CHECK
+        if (employeeRepository.existsByPersonalEmail(dto.getPersonalEmail())) {
+            throw new RuntimeException("Email already exists: " + dto.getPersonalEmail());
+        }
+
         // Auto-generate employeeId
-        long count = employeeRepository.count();
-        String employeeId = String.format("EMP%04d", count + 1);
+        // long count = employeeRepository.count();
+
+        // Auto-generate employeeId based on max existing series number
+        int nextSeq = employeeRepository.findTopEmployeeIdBySeries()
+                .map(id -> Integer.parseInt(id.substring(7)) + 1)
+                .orElse(1);
+
+        String employeeId = String.format("EMPSIEC%02d", nextSeq);
 
         // Generate random password (8 chars: letters + numbers + special char)
         String rawPassword = generateRandomPassword(8);
@@ -597,6 +626,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setPassword(passwordEncoder.encode(rawPassword));   // Save encoded password
         employee.setPersonalEmail(dto.getPersonalEmail());           // ← NEW
         employee.setProfileStatus("INCOMPLETE");
+        employee.setStatus("ACTIVE");
         employee.setCreatedAt(LocalDate.now());
         employee.setUpdatedAt(LocalDate.now());
         employee.setDepartment(dto.getDepartment());
@@ -627,39 +657,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         );
     }
 
-//    public RegisteredEmployeeResponseDTO registerEmployee(RegisterEmployeeRequestDTO dto) {
-//
-//        // Auto-generate employeeId like EMP0001, EMP0002...
-//        long count = employeeRepository.count();
-//
-//        String employeeId = String.format("EMP%04d", count + 1);
-//
-//
-//        EmployeeEntity employee = new EmployeeEntity();
-//
-//        employee.setEmployeeId(employeeId);
-//        employee.setFirstName(dto.getFirstName());
-//        employee.setLastName(dto.getLastName());
-//        employee.setFullName(dto.getFirstName() + " " + dto.getLastName());
-//        employee.setPassword(passwordEncoder.encode(dto.getPassword()));
-//        employee.setProfileStatus("INCOMPLETE");
-//        employee.setCreatedAt(LocalDate.now());
-//        employee.setUpdatedAt(LocalDate.now());
-//        employee.setDepartment(dto.getDepartment());
-//        employee.setDesignation(dto.getDesignation());
-//
-//        EmployeeEntity saved = employeeRepository.save(employee);
-//
-//        return new RegisteredEmployeeResponseDTO(
-//                saved.getEmployeePrimeId(),
-//                saved.getEmployeeId(),
-//                saved.getFirstName(),
-//                saved.getLastName(),
-//                saved.getStatus(),
-//                saved.getDepartment(),
-//                saved.getDesignation()
-//        );
-//    }
+
 
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -852,8 +850,14 @@ public class EmployeeServiceImpl implements EmployeeService {
             Set<String> existingEmployeeIds = employeeRepository.findAllEmployeeIds()
                     .stream().collect(Collectors.toSet());
 
+
             // Base count: next ID = currentCount + 1, incremented per valid row
-            long employeeIdCounter = employeeRepository.count() + 1;
+//            long employeeIdCounter = employeeRepository.count() + 1;
+
+            // Base: next ID = (max existing series number) + 1, incremented per valid row
+            long employeeIdCounter = employeeRepository.findTopEmployeeIdBySeries()
+                    .map(id -> Long.parseLong(id.substring(7)) + 1)
+                    .orElse(1L);
 
             Set<String> batchPersonalEmails = new HashSet<>();
             Set<String> batchWorkEmails = new HashSet<>();
@@ -959,7 +963,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 // Handles gaps in existing IDs (e.g. EMP0003 deleted → skip it).
                 String generatedEmployeeId;
                 do {
-                    generatedEmployeeId = String.format("EMP%04d", employeeIdCounter++);
+                    generatedEmployeeId = String.format("EMPSIEC%02d", employeeIdCounter++);
                 } while (existingEmployeeIds.contains(generatedEmployeeId));
                 existingEmployeeIds.add(generatedEmployeeId); // reserve within this batch
 

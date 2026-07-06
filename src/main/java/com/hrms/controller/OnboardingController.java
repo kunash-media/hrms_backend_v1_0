@@ -2,7 +2,9 @@ package com.hrms.controller;
 
 import com.hrms.dto.request.OnboardingRequestDTO;
 import com.hrms.dto.response.OnboardingResponseDTO;
+import com.hrms.entity.EmployeeEntity;
 import com.hrms.entity.OnboardingEntity;
+import com.hrms.repository.EmployeeRepository;
 import com.hrms.repository.OnboardingRepository;
 import com.hrms.service.OnboardingService;
 import org.slf4j.Logger;
@@ -16,8 +18,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import java.util.HashMap;
-import java.util.Map;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/onboarding")
@@ -31,6 +34,9 @@ public class OnboardingController {
 
     @Autowired
     private OnboardingRepository onboardingRepository;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     // ✅ CREATE Onboarding
     @PostMapping(value = "/create", consumes = {"multipart/form-data"})
@@ -253,6 +259,41 @@ public class OnboardingController {
         }
 
         return "application/octet-stream";
+    }
+
+    @GetMapping("/diagnose")
+    public ResponseEntity<Map<String, Object>> diagnoseOnboardingSync() {
+        List<EmployeeEntity> allEmployees = employeeRepository.findAll();
+        List<OnboardingEntity> allOnboardings = onboardingRepository.findAll();
+
+        Set<Long> employeeIds = allEmployees.stream()
+                .map(EmployeeEntity::getEmployeePrimeId)
+                .collect(Collectors.toSet());
+
+        Set<Long> onboardingEmployeeIds = allOnboardings.stream()
+                .map(OnboardingEntity::getEmployeePrimeId)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+
+        // Employees with NO onboarding row at all
+        List<Long> employeesMissingOnboarding = allEmployees.stream()
+                .map(EmployeeEntity::getEmployeePrimeId)
+                .filter(id -> !onboardingEmployeeIds.contains(id))
+                .collect(Collectors.toList());
+
+        // Onboarding rows pointing to employeePrimeId that no longer exists
+        List<Long> onboardingOrphans = allOnboardings.stream()
+                .map(OnboardingEntity::getEmployeePrimeId)
+                .filter(Objects::nonNull)
+                .filter(id -> !employeeIds.contains(id))
+                .collect(Collectors.toList());
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("totalEmployees", allEmployees.size());
+        result.put("totalOnboardingRecords", allOnboardings.size());
+        result.put("employeesMissingOnboarding", employeesMissingOnboarding);
+        result.put("onboardingOrphans", onboardingOrphans);
+        return ResponseEntity.ok(result);
     }
 }
 

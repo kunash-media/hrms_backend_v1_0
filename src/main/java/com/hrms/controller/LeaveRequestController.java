@@ -57,7 +57,6 @@ public class LeaveRequestController {
     }
 
 
-
     @PostMapping("/requests")
     public ResponseEntity<?> createRequest(@RequestBody LeaveRequestCreateDTO dto) {
         try {

@@ -25,6 +25,7 @@ public class PayrollResponseDTO {
     // ── Earnings ──────────────────────────────────────────────────────────
     private Double basicSalary;
     private Double hra;
+    private Double da;
     private Double allowances;
     private Double grossSalary;
 
@@ -32,11 +33,15 @@ public class PayrollResponseDTO {
     private Double employeePf;          // ← was: pf
     private Double employerPf;
     private Double esi;
-    private Double tds;
+//    private Double tds;
+    private Double pt;
     private Double totalDeductions;
 
     // ── Net ───────────────────────────────────────────────────────────────
     private Double netSalary;
+
+    // ── Cost to Company ───────────────────────────────────────────────────
+    private Double ctc;
 
     // ── Audit ─────────────────────────────────────────────────────────────
     private String initiatedBy;
@@ -51,6 +56,8 @@ public class PayrollResponseDTO {
     private Double  lopDeduction;
     private Double  expenseReimbursement;
 
+
+    private Double specialAllowance;
 
     // ── Constructors ──────────────────────────────────────────────────────
     public PayrollResponseDTO() {}
@@ -114,8 +121,8 @@ public class PayrollResponseDTO {
     public Double getEsi() { return esi; }
     public void setEsi(Double esi) { this.esi = esi; }
 
-    public Double getTds() { return tds; }
-    public void setTds(Double tds) { this.tds = tds; }
+//    public Double getTds() { return tds; }
+//    public void setTds(Double tds) { this.tds = tds; }
 
     public Double getTotalDeductions() { return totalDeductions; }
     public void setTotalDeductions(Double totalDeductions) { this.totalDeductions = totalDeductions; }
@@ -170,5 +177,37 @@ public class PayrollResponseDTO {
 
     public void setExpenseReimbursement(Double expenseReimbursement) {
         this.expenseReimbursement = expenseReimbursement;
+    }
+
+    public Double getDa() {
+        return da;
+    }
+
+    public void setDa(Double da) {
+        this.da = da;
+    }
+
+    public Double getPt() {
+        return pt;
+    }
+
+    public void setPt(Double pt) {
+        this.pt = pt;
+    }
+
+    public Double getCtc() {
+        return ctc;
+    }
+
+    public void setCtc(Double ctc) {
+        this.ctc = ctc;
+    }
+
+    public Double getSpecialAllowance() {
+        return specialAllowance;
+    }
+
+    public void setSpecialAllowance(Double specialAllowance) {
+        this.specialAllowance = specialAllowance;
     }
 }

@@ -51,6 +51,8 @@ public class AdminDashboardDTO {
         private long onLeave;                 // COUNT leave_requests WHERE status='approved' AND today BETWEEN fromDate AND toDate
         private long pendingApprovalCount;    // total count across leave+expense+onboarding pending
 
+        private long wfhToday;
+
         public StatsDTO() {}
 
         public long getTotalWorkforce() { return totalWorkforce; }
@@ -67,6 +69,14 @@ public class AdminDashboardDTO {
 
         public long getPendingApprovalCount() { return pendingApprovalCount; }
         public void setPendingApprovalCount(long pendingApprovalCount) { this.pendingApprovalCount = pendingApprovalCount; }
+
+        public long getWfhToday() {
+            return wfhToday;
+        }
+
+        public void setWfhToday(long wfhToday) {
+            this.wfhToday = wfhToday;
+        }
     }
 
 

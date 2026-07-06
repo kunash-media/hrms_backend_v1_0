@@ -41,20 +41,33 @@ public class PayrollEntity {
     private Integer payrollYear;
 
     // ── Earnings ──────────────────────────────────────────────────────────
-    /** Core component – mandatory field */
+    /**
+     * Basic Pay (the anchor figure HR enters, e.g. 30000).
+     * Internally split into basic(60%)/hra(40% of basic)/da(15% of basic)/specialAllowance(plug).
+     * Stored value here is actually the DERIVED 60% basic component after computation —
+     * see PayrollServiceImpl.applyEarningsAndDeductions for the full split.
+     */
     @Column(name = "basic_salary", nullable = false)
     private Double basicSalary;
 
-    /** House Rent Allowance – nullable; some employees may not be eligible */
+    /** House Rent Allowance = basicComponent * 40% */
     @Column(name = "hra")
     private Double hra;
 
-    /** Other allowances (transport, meal, etc.) */
+    /** Dearness Allowance = basicComponent * 15% */
+    @Column(name = "da")
+    private Double da;
+
+    /** Other allowances (legacy field — superseded by specialAllowance for new records) */
     @Column(name = "allowances")
     private Double allowances;
 
+    /** Special Allowance — plug value: basicPay - (basicComponent + hra + da) */
+    @Column(name = "special_allowance")
+    private Double specialAllowance;
+
     /**
-     * Gross Salary = basicSalary + hra + allowances.
+     * Gross Salary = basicComponent + hra + da + specialAllowance (reconciles exactly to basicPay).
      * Stored redundantly for fast reporting queries without re-computation.
      * Always recalculated by the service before persist.
      */
@@ -70,16 +83,16 @@ public class PayrollEntity {
     @Column(name = "employer_pf")
     private Double employerPf;
 
-    /** Employee State Insurance deduction */
+    /** Employee State Insurance deduction — computed: basicPay < 21000 ? basicPay * 0.75% : 0 */
     @Column(name = "esi")
     private Double esi;
 
-    /** Tax Deducted at Source */
-    @Column(name = "tds")
-    private Double tds;
+    /** Professional Tax — fixed statutory deduction (currently ₹200) */
+    @Column(name = "pt")
+    private Double pt;
 
     /**
-     * Total Deductions = pf + esi + tds.
+     * Total Deductions = employeePf + pt + esi.
      * Stored for fast summary queries.
      */
     @Column(name = "total_deductions")
@@ -140,6 +153,13 @@ public class PayrollEntity {
     @Column(name = "expense_reimbursement")
     private Double expenseReimbursement;
 
+    /**
+     * Cost to Company = basicPay + employerPf + esic.
+     * Independent of LOP/attendance — represents annual cost structure, not actual payout.
+     */
+    @Column(name = "ctc")
+    private Double ctc;
+
     // ── Lifecycle callbacks ───────────────────────────────────────────────
     @PrePersist
     private void onPersist() {
@@ -159,8 +179,6 @@ public class PayrollEntity {
     public PayrollEntity() {}
 
     // ── Getters & Setters ─────────────────────────────────────────────────
-
-
     public Long getPayrollId() {
         return payrollId;
     }
@@ -184,12 +202,17 @@ public class PayrollEntity {
     public Double getHra() { return hra; }
     public void setHra(Double hra) { this.hra = hra; }
 
+    public Double getDa() { return da; }
+    public void setDa(Double da) { this.da = da; }
+
     public Double getAllowances() { return allowances; }
     public void setAllowances(Double allowances) { this.allowances = allowances; }
 
+    public Double getSpecialAllowance() { return specialAllowance; }
+    public void setSpecialAllowance(Double specialAllowance) { this.specialAllowance = specialAllowance; }
+
     public Double getGrossSalary() { return grossSalary; }
     public void setGrossSalary(Double grossSalary) { this.grossSalary = grossSalary; }
-
 
     public Double getEmployeePf() {
         return employeePf;
@@ -210,8 +233,8 @@ public class PayrollEntity {
     public Double getEsi() { return esi; }
     public void setEsi(Double esi) { this.esi = esi; }
 
-    public Double getTds() { return tds; }
-    public void setTds(Double tds) { this.tds = tds; }
+    public Double getPt() { return pt; }
+    public void setPt(Double pt) { this.pt = pt; }
 
     public Double getTotalDeductions() { return totalDeductions; }
     public void setTotalDeductions(Double totalDeductions) { this.totalDeductions = totalDeductions; }
@@ -233,7 +256,6 @@ public class PayrollEntity {
 
     public String getInitiatedBy() { return initiatedBy; }
     public void setInitiatedBy(String initiatedBy) { this.initiatedBy = initiatedBy; }
-
 
     public Integer getWorkingDaysInMonth() {
         return workingDaysInMonth;
@@ -259,7 +281,6 @@ public class PayrollEntity {
         this.lopDays = lopDays;
     }
 
-
     public Double getLopDeduction() {
         return lopDeduction;
     }
@@ -274,5 +295,13 @@ public class PayrollEntity {
 
     public void setExpenseReimbursement(Double expenseReimbursement) {
         this.expenseReimbursement = expenseReimbursement;
+    }
+
+    public Double getCtc() {
+        return ctc;
+    }
+
+    public void setCtc(Double ctc) {
+        this.ctc = ctc;
     }
 }

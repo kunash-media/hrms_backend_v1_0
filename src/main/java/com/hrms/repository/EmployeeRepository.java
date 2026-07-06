@@ -98,4 +98,6 @@ List<Object[]> countActiveByDepartment();
 List<EmployeeEntity> findRecentHires(@Param("since") LocalDate since);
 
 
+    @Query(value = "SELECT employee_id FROM employees WHERE employee_id REGEXP '^EMPSIEC[0-9]+$' ORDER BY CAST(SUBSTRING(employee_id, 8) AS UNSIGNED) DESC LIMIT 1", nativeQuery = true)
+    Optional<String> findTopEmployeeIdBySeries();
 }

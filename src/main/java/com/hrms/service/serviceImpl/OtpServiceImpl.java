@@ -1,5 +1,6 @@
 package com.hrms.service.serviceImpl;
 
+import com.hrms.config.BcryptEncoderConfig;
 import com.hrms.entity.EmployeeEntity;
 import com.hrms.entity.OtpEntity;
 import com.hrms.enum_status.OtpPurpose;
@@ -10,7 +11,6 @@ import com.hrms.service.OtpService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.security.SecureRandom;
@@ -26,12 +26,12 @@ public class OtpServiceImpl implements OtpService {
     private final EmployeeRepository employeeRepository;
     private final OtpRepository      otpRepository;
     private final EmailService        emailService;
-    private final BCryptPasswordEncoder passwordEncoder;
+    private final BcryptEncoderConfig passwordEncoder;
 
     public OtpServiceImpl(EmployeeRepository employeeRepository,
                           OtpRepository otpRepository,
                           EmailService emailService,
-                          BCryptPasswordEncoder passwordEncoder) {
+                          BcryptEncoderConfig passwordEncoder) {
         this.employeeRepository = employeeRepository;
         this.otpRepository      = otpRepository;
         this.emailService       = emailService;

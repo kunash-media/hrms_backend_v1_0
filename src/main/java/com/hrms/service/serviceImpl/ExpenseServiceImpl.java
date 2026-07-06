@@ -1,18 +1,23 @@
 package com.hrms.service.serviceImpl;
 
 import com.hrms.dto.request.ExpenseRequestDto;
+import com.hrms.dto.response.ExpenseApprovedResponseDto;
 import com.hrms.dto.response.ExpenseResponseDto;
 import com.hrms.entity.EmployeeEntity;
 import com.hrms.entity.ExpenseEntity;
 import com.hrms.repository.EmployeeRepository;
 import com.hrms.repository.ExpenseRepository;
 import com.hrms.service.ExpenseService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,10 +32,14 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    private static final Logger log = LoggerFactory.getLogger(ExpenseServiceImpl.class);
+
+
 
     private String generateClaimId() {
-        Long count = expenseRepository.count() + 1;
-        return "EXP-" + String.format("%03d", count);
+        Long maxSuffix = expenseRepository.findMaxClaimSuffix();
+        long next = (maxSuffix != null ? maxSuffix : 0) + 1;
+        return "EXP-" + String.format("%03d", next);
     }
 
 
@@ -275,5 +284,57 @@ public class ExpenseServiceImpl implements ExpenseService {
         }
 
         return entity.getReceipts().get(receiptIndex);
+    }
+
+    @Override
+    public ExpenseApprovedResponseDto getApprovedExpenses(Long employeePrimeId, Integer month, Integer year) {
+        log.info("Fetching approved expenses for employeeId: {}, month: {}, year: {}", employeePrimeId, month, year);
+
+        // Get current date in IST
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Asia/Kolkata"));
+        int currentMonth = now.getMonthValue();
+        int currentYear = now.getYear();
+
+        // If month/year not provided, use current month/year
+        if (month == null) {
+            month = currentMonth;
+        }
+        if (year == null) {
+            year = currentYear;
+        }
+
+        log.debug("Using month: {}, year: {} for query", month, year);
+
+        // Fetch approved expenses list
+        List<ExpenseEntity> expenses = expenseRepository
+                .findApprovedExpensesByEmployeeAndMonth(employeePrimeId, month, year);
+
+        // Fetch total approved amount for the month
+        Double totalAmount = expenseRepository
+                .getTotalApprovedAmountByEmployeeAndMonth(employeePrimeId, month, year);
+
+        log.debug("Found {} approved expenses with total amount: {}", expenses.size(), totalAmount);
+
+        // Convert to DTO list
+        List<ExpenseApprovedResponseDto.ExpenseDetailDto> expenseDtos = expenses.stream()
+                .map(this::convertToDetailDto)
+                .collect(Collectors.toList());
+
+        // Return response with total and list
+        return new ExpenseApprovedResponseDto(totalAmount, expenseDtos);
+    }
+
+    private ExpenseApprovedResponseDto.ExpenseDetailDto convertToDetailDto(ExpenseEntity entity) {
+        return new ExpenseApprovedResponseDto.ExpenseDetailDto(
+                entity.getId(),
+                entity.getClaimId(),
+                entity.getEmployee().getEmployeePrimeId(),
+                entity.getEmployee().getFirstName() + " " + entity.getEmployee().getLastName(),
+                entity.getExpenseType(),
+                entity.getExpenseDate(),
+                entity.getAmount(),
+                entity.getStatus(),
+                entity.getSubmittedDate()
+        );
     }
 }

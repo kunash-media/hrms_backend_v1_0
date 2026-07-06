@@ -2,12 +2,14 @@ package com.hrms.service.serviceImpl;
 
 import com.hrms.entity.LeaveRuleEntity;
 import com.hrms.entity.LeaveTypeEntity;
+import com.hrms.repository.CompanyRepository;
 import com.hrms.repository.LeaveRuleRepository;
 import com.hrms.repository.LeaveTypeRepository;
 import com.hrms.service.LeaveRuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tools.jackson.databind.ObjectMapper;
 
 import java.util.*;
 
@@ -20,9 +22,15 @@ public class LeaveRuleServiceImpl implements LeaveRuleService {
     @Autowired
     private LeaveTypeRepository leaveTypeRepository;
 
-    private static final List<String> VALID_EMP_TYPES  = List.of("Regular", "Intern", "Contract");
-    private static final List<String> VALID_DEPARTMENTS = List.of(
-            "All", "IT", "HR", "Sales", "Finance", "Operations", "Marketing");
+    @Autowired
+    private CompanyRepository companyRepository;
+
+
+    private static final List<String> VALID_EMP_TYPES =
+            List.of("Full-Time", "Part-Time", "Contract", "Intern");
+
+//    private static final List<String> VALID_DEPARTMENTS = List.of(
+//            "All", "IT", "HR", "Sales", "Finance", "Operations", "Marketing");
 
     // ─────────────────────────────────────────────────────────────────
     // GET ALL RULES GROUPED by (empType, dept)
@@ -35,7 +43,13 @@ public class LeaveRuleServiceImpl implements LeaveRuleService {
 
         List<LeaveRuleEntity> allRules = leaveRuleRepository.findAll();
 
-        allRules.sort(Comparator.comparingInt(r -> VALID_EMP_TYPES.indexOf(r.getEmployeeType())));
+//        allRules.sort(Comparator.comparingInt(r -> VALID_EMP_TYPES.indexOf(r.getEmployeeType())));
+
+
+        allRules.sort(Comparator.comparingInt(r -> {
+            int i = VALID_EMP_TYPES.indexOf(r.getEmployeeType());
+            return i == -1 ? Integer.MAX_VALUE : i;
+        }));
 
         Map<String, Map<String, Integer>> grouped = new LinkedHashMap<>();
         for (LeaveRuleEntity r : allRules) {
@@ -56,6 +70,35 @@ public class LeaveRuleServiceImpl implements LeaveRuleService {
         return result;
     }
 
+    // ADD this method anywhere inside LeaveRuleServiceImpl —
+// after deleteRule() is a clean spot
+
+    private List<String> getValidDepartments() {
+        List<String> result = new ArrayList<>();
+        result.add("All");
+        try {
+            List<String> jsonList = companyRepository.findAllDepartmentsJson();
+            ObjectMapper mapper = new ObjectMapper();
+            Set<String> seen = new LinkedHashSet<>();
+
+            for (String json : jsonList) {
+                if (json == null || json.isBlank()) continue;
+                // Each entry is: [{"departmentName":"IT","headOfDepartment":"..."}]
+                List<Map<String, Object>> depts = mapper.readValue(json,
+                        mapper.getTypeFactory().constructCollectionType(List.class, Map.class));
+                for (Map<String, Object> dept : depts) {
+                    Object name = dept.get("departmentName");
+                    if (name != null && !name.toString().isBlank()) {
+                        seen.add(name.toString().trim());
+                    }
+                }
+            }
+            result.addAll(seen);
+        } catch (Exception e) {
+            // soft fail
+        }
+        return result;
+    }
     // ─────────────────────────────────────────────────────────────────
     // SAVE / UPSERT RULE
     //
@@ -71,12 +114,21 @@ public class LeaveRuleServiceImpl implements LeaveRuleService {
     @Transactional
     public void saveRule(String employeeType, String department, Map<String, Integer> allotments) {
 
+//        if (!VALID_EMP_TYPES.contains(employeeType)) {
+//            throw new RuntimeException("Invalid employeeType: '" + employeeType + "'. Must be one of: " + VALID_EMP_TYPES);
+//        }
+//        if (!VALID_DEPARTMENTS.contains(department)) {
+//            throw new RuntimeException("Invalid department: '" + department + "'. Must be one of: " + VALID_DEPARTMENTS);
+//        }
+
         if (!VALID_EMP_TYPES.contains(employeeType)) {
             throw new RuntimeException("Invalid employeeType: '" + employeeType + "'. Must be one of: " + VALID_EMP_TYPES);
         }
-        if (!VALID_DEPARTMENTS.contains(department)) {
-            throw new RuntimeException("Invalid department: '" + department + "'. Must be one of: " + VALID_DEPARTMENTS);
+        List<String> validDepts = getValidDepartments();
+        if (!validDepts.contains(department)) {
+            throw new RuntimeException("Invalid department: '" + department + "'. Must be one of: " + validDepts);
         }
+
         if (allotments == null || allotments.isEmpty()) {
             throw new RuntimeException("Allotments map cannot be empty.");
         }
@@ -133,12 +185,21 @@ public class LeaveRuleServiceImpl implements LeaveRuleService {
     @Override
     public int getAllottedDays(String employeeType, String department, String leaveType) {
 
+        // 1. Try exact match
         Optional<LeaveRuleEntity> specific = leaveRuleRepository
                 .findByEmployeeTypeAndDepartmentAndLeaveTypeName(employeeType, department, leaveType);
         if (specific.isPresent()) return specific.get().getDaysAllotted();
 
+        // 2. Fallback to "All" department
         Optional<LeaveRuleEntity> fallback = leaveRuleRepository
                 .findByEmployeeTypeAndDepartmentAndLeaveTypeName(employeeType, "All", leaveType);
-        return fallback.map(LeaveRuleEntity::getDaysAllotted).orElse(0);
+        if (fallback.isPresent()) return fallback.get().getDaysAllotted();
+
+        // ADD: 3. Log when nothing found — helps debug
+        System.out.println("[RULE MISS] No rule for empType=" + employeeType
+                + " dept=" + department + " leaveType=" + leaveType);
+        return 0;
     }
+
+
 }

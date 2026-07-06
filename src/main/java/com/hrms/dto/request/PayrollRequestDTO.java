@@ -27,31 +27,59 @@ public class PayrollRequestDTO {
     private Double basicSalary;
 
     /** Optional – 0 or null treated as zero during computation. */
-    @Min(value = 0, message = "HRA cannot be negative.")
-    private Double hra;
-
-    @Min(value = 0, message = "Allowances cannot be negative.")
-    private Double allowances;
+//    @Min(value = 0, message = "HRA cannot be negative.")
+//    private Double hra;
+//    @Min(value = 0, message = "Allowances cannot be negative.")
+//    private Double allowances;
 
     // ── Deductions ────────────────────────────────────────────────────────
+//    @Min(value = 0, message = "Employee PF cannot be negative.")
+//    private Double employeePf;          // ← was: pf
+//    @Min(value = 0, message = "Employer PF cannot be negative.")
+//    private Double employerPf;          // ← NEW field
+//    @Min(value = 0, message = "ESI cannot be negative.")
+//    private Double esi;
+//    @Min(value = 0, message = "TDS cannot be negative.")
+//    private Double tds;
+
+
+    // hra, da, allowances are SERVER-DERIVED from basicSalary — not accepted from client.
+    // esi is SERVER-COMPUTED based on the ESIC threshold rule — not accepted from client.
+    // pt is a fixed statutory constant — not accepted from client.
+
+    // ── Deductions (HR-entered fixed values) ────────────────────────────────
     @Min(value = 0, message = "Employee PF cannot be negative.")
-    private Double employeePf;          // ← was: pf
+    private Double employeePf;
 
     @Min(value = 0, message = "Employer PF cannot be negative.")
-    private Double employerPf;          // ← NEW field
+    private Double employerPf;
 
 
-    @Min(value = 0, message = "ESI cannot be negative.")
-    private Double esi;
-
-    @Min(value = 0, message = "TDS cannot be negative.")
-    private Double tds;
 
     /** Optional remarks / notes from HR at time of initiation. */
     private String remarks;
 
     /** Captured from authenticated principal at controller level; not from request body. */
     private String initiatedBy;
+
+
+    // ── Attendance / Expense Overrides (optional — HR manual adjustment) ───
+// When null, service falls back to existing auto-fetch-from-attendance/expense logic.
+// When provided, these values are used as-is and LOP/net/gross are recalculated from them.
+
+    @Min(value = 0, message = "Working days cannot be negative.")
+    private Integer workingDaysInMonth;
+
+    @Min(value = 0, message = "Days worked cannot be negative.")
+    private Integer daysWorked;
+
+    @Min(value = 0, message = "LOP days cannot be negative.")
+    private Integer lopDays;
+
+    @Min(value = 0, message = "Expense reimbursement cannot be negative.")
+    private Double expenseReimbursement;
+
+// getters/setters for the above four
 
     // ── Constructors ──────────────────────────────────────────────────────
     public PayrollRequestDTO() {}
@@ -69,11 +97,11 @@ public class PayrollRequestDTO {
     public Double getBasicSalary() { return basicSalary; }
     public void setBasicSalary(Double basicSalary) { this.basicSalary = basicSalary; }
 
-    public Double getHra() { return hra; }
-    public void setHra(Double hra) { this.hra = hra; }
-
-    public Double getAllowances() { return allowances; }
-    public void setAllowances(Double allowances) { this.allowances = allowances; }
+//    public Double getHra() { return hra; }
+//    public void setHra(Double hra) { this.hra = hra; }
+//
+//    public Double getAllowances() { return allowances; }
+//    public void setAllowances(Double allowances) { this.allowances = allowances; }
 
 
     public Double getEmployeePf() {
@@ -92,15 +120,47 @@ public class PayrollRequestDTO {
         this.employerPf = employerPf;
     }
 
-    public Double getEsi() { return esi; }
-    public void setEsi(Double esi) { this.esi = esi; }
-
-    public Double getTds() { return tds; }
-    public void setTds(Double tds) { this.tds = tds; }
+//    public Double getEsi() { return esi; }
+//    public void setEsi(Double esi) { this.esi = esi; }
+//
+//    public Double getTds() { return tds; }
+//    public void setTds(Double tds) { this.tds = tds; }
 
     public String getRemarks() { return remarks; }
     public void setRemarks(String remarks) { this.remarks = remarks; }
 
     public String getInitiatedBy() { return initiatedBy; }
     public void setInitiatedBy(String initiatedBy) { this.initiatedBy = initiatedBy; }
+
+    public Integer getWorkingDaysInMonth() {
+        return workingDaysInMonth;
+    }
+
+    public void setWorkingDaysInMonth(Integer workingDaysInMonth) {
+        this.workingDaysInMonth = workingDaysInMonth;
+    }
+
+    public Integer getDaysWorked() {
+        return daysWorked;
+    }
+
+    public void setDaysWorked(Integer daysWorked) {
+        this.daysWorked = daysWorked;
+    }
+
+    public Integer getLopDays() {
+        return lopDays;
+    }
+
+    public void setLopDays(Integer lopDays) {
+        this.lopDays = lopDays;
+    }
+
+    public Double getExpenseReimbursement() {
+        return expenseReimbursement;
+    }
+
+    public void setExpenseReimbursement(Double expenseReimbursement) {
+        this.expenseReimbursement = expenseReimbursement;
+    }
 }

@@ -74,8 +74,10 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
                 ? emp.getFullName() : empName;
         String resolvedDept = (emp.getDepartment() != null && !emp.getDepartment().isBlank())
                 ? emp.getDepartment() : department;
+
         String resolvedType = (emp.getEmploymentType() != null && !emp.getEmploymentType().isBlank())
-                ? emp.getEmploymentType() : empType;
+                ? emp.getEmploymentType().trim() : "Full-Time";
+
 
         // Rule 3 – leave type must be active AND applicable for this employee
         // ✅ findApplicableLeaveTypes filters Maternity Leave for non-eligible employees
@@ -309,8 +311,10 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
                 .orElseThrow(() -> new RuntimeException(
                         "Employee '" + empId + "' not found."));
 
-        String empType = emp.getEmploymentType() != null ? emp.getEmploymentType() : "Regular";
-        String dept    = emp.getDepartment()     != null ? emp.getDepartment()     : "All";
+        String empType = (emp.getEmploymentType() != null && !emp.getEmploymentType().isBlank())
+                ? emp.getEmploymentType().trim() : "Full-Time";
+        String dept    = (emp.getDepartment() != null && !emp.getDepartment().isBlank())
+                ? emp.getDepartment().trim() : "All";
 
         // ✅ KEY CHANGE: findApplicableLeaveTypes instead of findByIsActiveTrue
         // → Maternity Leave auto-excluded for non-eligible employees
@@ -445,8 +449,12 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
         return leaveBalanceRepository
                 .findByEmpIdAndLeaveTypeAndYear(empId, leaveType, year)
                 .orElseGet(() -> {
-                    // ✅ Maternity Leave eligibility check before creating record
-                    // If not applicable → allotted = 0 (no balance created unnecessarily)
+                    // Defensive: blank empType/dept from old data → safe fallback
+                    String safeEmpType = (empType != null && !empType.isBlank())
+                            ? empType.trim() : "Full-Time";
+                    String safeDept    = (dept != null && !dept.isBlank())
+                            ? dept.trim() : "All";
+
                     boolean isMaternity = MATERNITY_LEAVE.equalsIgnoreCase(leaveType);
                     boolean applicable  = !isMaternity ||
                             leaveTypeRepository.findApplicableLeaveTypes(empId)
@@ -454,7 +462,7 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
                                     .anyMatch(lt -> lt.getName().equalsIgnoreCase(leaveType));
 
                     int allotted = applicable
-                            ? leaveRuleService.getAllottedDays(empType, dept, leaveType)
+                            ? leaveRuleService.getAllottedDays(safeEmpType, safeDept, leaveType)
                             : 0;
 
                     EmployeeLeaveBalanceEntity b = new EmployeeLeaveBalanceEntity();
@@ -467,6 +475,7 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
                     return leaveBalanceRepository.save(b);
                 });
     }
+
 
     // ─────────────────────────────────────────────────────────────────
     // HELPER 3 — balance update karo jab leave approve ho

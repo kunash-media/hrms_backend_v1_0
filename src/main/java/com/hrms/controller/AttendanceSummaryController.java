@@ -37,17 +37,24 @@ public class AttendanceSummaryController {
         rows.forEach(r -> counts.put(((String)r[0]).toLowerCase(), (Long)r[1]));
 
         long present  = counts.getOrDefault("present",    0L);
+        long wfh = counts.getOrDefault("wfh", 0L);
         long absent   = counts.getOrDefault("absent",     0L);
         long late     = counts.getOrDefault("late",       0L);
         long onLeave  = counts.getOrDefault("leave",      0L);
         long halfDay  = counts.getOrDefault("half_day",   0L);
         long notMarked= counts.getOrDefault("not_marked", 0L);
-        long total    = Math.max(totalEmp, present + absent + late + onLeave + halfDay + notMarked);
+
+//        long total    = Math.max(totalEmp, present + absent + late + onLeave + halfDay + notMarked);
+        long total = Math.max(totalEmp, present + absent + late + onLeave + halfDay + notMarked + wfh); // wfh add kiya total mein
+
 
         AttendanceSummaryDTO dto = new AttendanceSummaryDTO();
         dto.setDate(date.toString());
         dto.setTotalEmployees(total);
         dto.setPresent(present);
+        dto.setWfh(wfh);
+        dto.setWfhPct(total > 0 ? (wfh * 100.0 / total) : 0);
+
         dto.setAbsent(absent);
         dto.setLate(late);
         dto.setOnLeave(onLeave);

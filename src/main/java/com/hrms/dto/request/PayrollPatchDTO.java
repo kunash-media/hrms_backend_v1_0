@@ -11,11 +11,11 @@ public class PayrollPatchDTO {
     @Positive(message = "Basic salary must be a positive value.")
     private Double basicSalary;
 
-    @Min(value = 0, message = "HRA cannot be negative.")
-    private Double hra;
-
-    @Min(value = 0, message = "Allowances cannot be negative.")
-    private Double allowances;
+//    @Min(value = 0, message = "HRA cannot be negative.")
+//    private Double hra;
+//
+//    @Min(value = 0, message = "Allowances cannot be negative.")
+//    private Double allowances;
 
     // ── Deductions ────────────────────────────────────────────────────────
     @Min(value = 0, message = "Employee PF cannot be negative.")
@@ -24,11 +24,11 @@ public class PayrollPatchDTO {
     @Min(value = 0, message = "Employer PF cannot be negative.")
     private Double employerPf;
 
-    @Min(value = 0, message = "ESI cannot be negative.")
-    private Double esi;
-
-    @Min(value = 0, message = "TDS cannot be negative.")
-    private Double tds;
+//    @Min(value = 0, message = "ESI cannot be negative.")
+//    private Double esi;
+//
+//    @Min(value = 0, message = "TDS cannot be negative.")
+//    private Double tds;
 
     // ── State & Notes ─────────────────────────────────────────────────────
     private PayrollStatus status;
@@ -41,11 +41,11 @@ public class PayrollPatchDTO {
     public Double getBasicSalary() { return basicSalary; }
     public void setBasicSalary(Double basicSalary) { this.basicSalary = basicSalary; }
 
-    public Double getHra() { return hra; }
-    public void setHra(Double hra) { this.hra = hra; }
-
-    public Double getAllowances() { return allowances; }
-    public void setAllowances(Double allowances) { this.allowances = allowances; }
+//    public Double getHra() { return hra; }
+//    public void setHra(Double hra) { this.hra = hra; }
+//
+//    public Double getAllowances() { return allowances; }
+//    public void setAllowances(Double allowances) { this.allowances = allowances; }
 
 
     public Double getEmployeePf() {
@@ -64,11 +64,11 @@ public class PayrollPatchDTO {
         this.employerPf = employerPf;
     }
 
-    public Double getEsi() { return esi; }
-    public void setEsi(Double esi) { this.esi = esi; }
-
-    public Double getTds() { return tds; }
-    public void setTds(Double tds) { this.tds = tds; }
+//    public Double getEsi() { return esi; }
+//    public void setEsi(Double esi) { this.esi = esi; }
+//
+//    public Double getTds() { return tds; }
+//    public void setTds(Double tds) { this.tds = tds; }
 
     public PayrollStatus getStatus() { return status; }
     public void setStatus(PayrollStatus status) { this.status = status; }

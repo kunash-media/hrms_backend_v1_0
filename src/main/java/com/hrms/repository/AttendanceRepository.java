@@ -94,4 +94,6 @@ public interface AttendanceRepository extends JpaRepository<AttendanceEntity, Lo
         GROUP BY a.attendanceDate, a.status
         ORDER BY a.attendanceDate ASC """)
     List<Object[]> countByDateAndStatus(@Param("from") LocalDate from, @Param("to") LocalDate to);
+
+    long countByAttendanceDateAndStatusIgnoreCase(LocalDate attendanceDate, String status);
 }

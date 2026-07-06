@@ -20,13 +20,17 @@ import org.springframework.web.bind.annotation.*;
 import java.time.Duration;
 import java.util.Map;
 
+import com.hrms.entity.EmployeeEntity;        // ? ADD THIS IMPORT
+import com.hrms.repository.EmployeeRepository; // ? ADD THIS IMPORT
+import com.hrms.config.BcryptEncoderConfig;
+
 /**
- * Employee authentication controller — mirrors AuthController exactly.
+ * Employee authentication controller â€” mirrors AuthController exactly.
  *
  * Endpoints:
- *   POST /api/employee/auth/login    → sets employee_token + employee_refresh_token cookies
- *   POST /api/employee/auth/refresh  → rotates employee_token cookie
- *   POST /api/employee/auth/logout   → clears both cookies
+ *   POST /api/employee/auth/login    â†’ sets employee_token + employee_refresh_token cookies
+ *   POST /api/employee/auth/refresh  â†’ rotates employee_token cookie
+ *   POST /api/employee/auth/logout   â†’ clears both cookies
  *
  * Uses a SEPARATE AuthenticationManager bean (employeeAuthenticationManager) so that
  * admin and employee authentication pipelines are completely isolated.
@@ -53,18 +57,27 @@ public class EmployeeAuthController {
     @Value("${app.cookie.secure:false}")
     private boolean cookieSecure;
 
+    private final EmployeeRepository employeeRepository;  // ? ADD THIS
+    private final BcryptEncoderConfig passwordEncoder;    // ? ADD THIS
+
     public EmployeeAuthController(
             @Qualifier("employeeAuthenticationManager") AuthenticationManager employeeAuthenticationManager,
             JwtUtil jwtUtil,
-            EmployeeUserDetailsService employeeUserDetailsService) {
+            EmployeeUserDetailsService employeeUserDetailsService,
+            EmployeeRepository employeeRepository,        // ? ADD THIS
+            BcryptEncoderConfig passwordEncoder) {        // ? ADD THIS
 
         this.employeeAuthenticationManager = employeeAuthenticationManager;
         this.jwtUtil = jwtUtil;
         this.employeeUserDetailsService = employeeUserDetailsService;
+        this.employeeRepository = employeeRepository;    // ? ADD THIS
+        this.passwordEncoder = passwordEncoder;          // ? ADD THIS
+
         logger.info("EmployeeAuthController initialized");
     }
 
-    // ── Cookie helpers (identical policy to AuthController) ─────────────────
+
+    // â”€â”€ Cookie helpers (identical policy to AuthController) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private ResponseCookie buildCookie(String name, String value, String path, long maxAgeMs) {
         return ResponseCookie.from(name, value)
@@ -86,7 +99,7 @@ public class EmployeeAuthController {
                 .build();
     }
 
-    // ── POST /api/employee/auth/login ────────────────────────────────────────
+    // â”€â”€ POST /api/employee/auth/login â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> request,
@@ -96,6 +109,23 @@ public class EmployeeAuthController {
         String password   = request.get("password");
 
         logger.info("Employee login attempt for employeeId: {}", employeeId);
+
+        // --  DEBUG BLOCK --
+        try {
+            EmployeeEntity employee = employeeRepository.findByEmployeeId(employeeId).orElse(null);
+            if (employee != null) {
+                boolean matches = passwordEncoder.matches(password, employee.getPassword());
+                logger.info("DEBUG - Password match result: {}", matches);
+                logger.info("DEBUG - Stored hash: {}", employee.getPassword());
+                logger.info("DEBUG - Input password: {}", password);
+            } else {
+                logger.info("DEBUG - Employee not found: {}", employeeId);
+            }
+        } catch (Exception e) {
+            logger.error("DEBUG - Error checking password", e);
+        }
+
+       //---- end debug----//
 
         if (employeeId == null || employeeId.trim().isEmpty()) {
             logger.warn("Employee login attempt with missing employeeId");
@@ -146,7 +176,7 @@ public class EmployeeAuthController {
         }
     }
 
-    // ── POST /api/employee/auth/refresh ──────────────────────────────────────
+    // â”€â”€ POST /api/employee/auth/refresh â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     @PostMapping("/refresh")
     public ResponseEntity<?> refresh(HttpServletRequest request,
@@ -192,7 +222,7 @@ public class EmployeeAuthController {
         }
     }
 
-    // ── POST /api/employee/auth/logout ───────────────────────────────────────
+    // â”€â”€ POST /api/employee/auth/logout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpServletResponse response) {

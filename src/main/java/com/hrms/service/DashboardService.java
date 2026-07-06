@@ -43,6 +43,8 @@ public class DashboardService {
         long totalActive  = employeeRepo.countByStatus("ACTIVE");
         long presentToday = attendanceRepo.countPresentOnDate(today);
         long onLeaveToday = leaveRepo.countEmployeesOnLeaveToday(today);
+        long wfhToday     = attendanceRepo.countByAttendanceDateAndStatusIgnoreCase(today, "WFH");  // NEW
+
 
         long pendingLeaveCount    = leaveRepo.countByStatus("pending");
         long pendingExpenseCount  = expenseRepo.countByStatus("Pending");
@@ -68,6 +70,9 @@ public class DashboardService {
         stats.setAttendanceRate(totalActive == 0 ? 0
                 : Math.round((presentToday * 1000.0 / totalActive)) / 10.0); // 1 decimal
         stats.setOnLeave(onLeaveToday);
+        stats.setWfhToday(wfhToday);   // NEW
+
+
         stats.setPendingApprovalCount(totalPending);
 
         List<AdminDashboardDTO.DepartmentDistributionDTO> deptDist = deptCounts.stream()
