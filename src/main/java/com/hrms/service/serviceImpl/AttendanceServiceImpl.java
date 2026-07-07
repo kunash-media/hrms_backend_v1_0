@@ -360,8 +360,18 @@ public class AttendanceServiceImpl implements AttendanceService {
             int checkOutMinutes = attendance.getCheckOutTime().getHour() * 60 + attendance.getCheckOutTime().getMinute();
 
             double totalMinutes = checkOutMinutes - checkInMinutes;
-            double hours = totalMinutes / 60.0;
 
+            // ── FIX: overnight shift guard ──
+            // If checkout time-of-day is numerically "before" checkin, it means
+            // the employee checked out on the NEXT calendar day (e.g. 8 AM -> 6 AM).
+            // Add 24 hours (1440 min) worth of minutes to correct the duration.
+            if (totalMinutes < 0) {
+                totalMinutes += 24 * 60;
+                logger.debug("🌙 Overnight shift detected for attendance ID {} — adjusted by +24h",
+                        attendance.getAttendanceId());
+            }
+
+            double hours = totalMinutes / 60.0;
             attendance.setTotalHours(hours);
             logger.debug("⏱️ Calculated total hours: {}", hours);
         }
