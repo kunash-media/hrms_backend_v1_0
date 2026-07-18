@@ -1,5 +1,7 @@
 package com.hrms.dto.response;
 
+import java.time.LocalDate;
+
 public class EmployeeSummaryDTO {
 
     private Long employeePrimeId;
@@ -8,11 +10,14 @@ public class EmployeeSummaryDTO {
     private String lastName;
     private String department;
     private String gender;
+    private String employmentType;
+    private LocalDate joiningDate;
 
     // Constructor
     public EmployeeSummaryDTO(){}
 
-    public EmployeeSummaryDTO(Long employeePrimeId, String employeeId, String firstName, String lastName, String department, String gender) {
+    public EmployeeSummaryDTO(Long employeePrimeId, String employeeId, String firstName,
+                              String lastName, String department, String gender) {
         this.employeePrimeId = employeePrimeId;
         this.employeeId = employeeId;
         this.firstName = firstName;
@@ -29,7 +34,6 @@ public class EmployeeSummaryDTO {
         this.employeePrimeId = employeePrimeId;
     }
 
-    // Getters and Setters
     public String getFirstName() {
         return firstName;
     }
@@ -68,5 +72,21 @@ public class EmployeeSummaryDTO {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getEmploymentType() {
+        return employmentType;
+    }
+
+    public void setEmploymentType(String employmentType) {
+        this.employmentType = employmentType;
+    }
+
+    public LocalDate getJoiningDate() {
+        return joiningDate;
+    }
+
+    public void setJoiningDate(LocalDate joiningDate) {
+        this.joiningDate = joiningDate;
     }
 }

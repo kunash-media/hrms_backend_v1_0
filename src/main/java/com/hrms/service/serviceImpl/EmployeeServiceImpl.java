@@ -218,9 +218,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setMaritalStatus(dto.getMaritalStatus());
         employee.setBloodGroup(dto.getBloodGroup());
 
-//        employee.setPanNumber(dto.getPanNumber());
-//        employee.setAadhaarNumber(dto.getAadhaarNumber());
-
         // WITH these:
         employee.setAadhaarNumber(StringUtils.hasText(dto.getAadhaarNumber()) ? dto.getAadhaarNumber() : null);
         employee.setPanNumber(StringUtils.hasText(dto.getPanNumber()) ? dto.getPanNumber() : null);
@@ -253,7 +250,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setPersonalEmail(dto.getPersonalEmail());
 
 
-//        employee.setWorkEmail(dto.getWorkEmail());
         employee.setWorkEmail(StringUtils.hasText(dto.getWorkEmail()) ? dto.getWorkEmail() : null);
 
         employee.setMobileNumber(dto.getMobileNumber());
@@ -274,6 +270,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setEducation(dto.getEducation());
         employee.setFamily(dto.getFamily());
         employee.setWorkExperience(dto.getWorkExperience());
+
+        employee.setStatus(dto.getStatus());
 
         //profile status
         employee.setProfileStatus(dto.getProfileStatus());
@@ -497,6 +495,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         dto.setLastName(employee.getLastName());
         dto.setDepartment(employee.getDepartment());
         dto.setGender(employee.getGender());
+        dto.setEmploymentType(employee.getEmploymentType());
+        dto.setJoiningDate(employee.getJoiningDate());
         return dto;
     }
 

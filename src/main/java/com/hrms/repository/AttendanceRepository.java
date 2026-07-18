@@ -96,4 +96,6 @@ public interface AttendanceRepository extends JpaRepository<AttendanceEntity, Lo
     List<Object[]> countByDateAndStatus(@Param("from") LocalDate from, @Param("to") LocalDate to);
 
     long countByAttendanceDateAndStatusIgnoreCase(LocalDate attendanceDate, String status);
+
+    List<AttendanceEntity> findByAttendanceDateAndCheckOutTimeIsNull(LocalDate attendanceDate);
 }

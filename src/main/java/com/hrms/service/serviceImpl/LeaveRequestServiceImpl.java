@@ -129,8 +129,12 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
         }
 
         // Rule 7 – balance check from DB (warn only, do not block)
+//        EmployeeLeaveBalanceEntity balanceRecord = getOrCreateBalanceRecord(
+//                empId, leaveType, fromDate.getYear(), resolvedType, resolvedDept);
+
         EmployeeLeaveBalanceEntity balanceRecord = getOrCreateBalanceRecord(
-                empId, leaveType, fromDate.getYear(), resolvedType, resolvedDept);
+                empId, leaveType, fromDate.getYear());
+
         int remaining = balanceRecord.getRemaining();
         String warningRemark = null;
         if (remaining < numberOfDays) {
@@ -248,6 +252,8 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
     }
 
 
+
+
     // ─────────────────────────────────────────────────────────────────
     // APPROVE / REJECT  (HR Action – Pending Tab)
     // ─────────────────────────────────────────────────────────────────
@@ -260,9 +266,17 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
                 .orElseThrow(() -> new RuntimeException(
                         "Leave request not found with id: " + requestId));
 
-        if (!"pending".equals(req.getStatus())) {
-            throw new RuntimeException("Request is already '" + req.getStatus()
-                    + "'. Only pending requests can be actioned.");
+        String currentStatus = req.getStatus();
+
+        // Allow: pending -> approved/rejected (original flow)
+        //        approved -> rejected (HR cancels an already-approved leave)
+        //        rejected -> approved (HR reverses a rejection)
+        // Block: re-applying the same status (no-op / accidental double click)
+        if (!"pending".equals(currentStatus)
+                && !"approved".equals(currentStatus)
+                && !"rejected".equals(currentStatus)) {
+            throw new RuntimeException("Request has status '" + currentStatus
+                    + "' and cannot be actioned.");
         }
 
         if (!"approve".equalsIgnoreCase(action) && !"reject".equalsIgnoreCase(action)) {
@@ -270,25 +284,38 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
                     "Invalid action '" + action + "'. Use 'approve' or 'reject'.");
         }
 
-        boolean isApprove = "approve".equalsIgnoreCase(action);
+        boolean isApprove  = "approve".equalsIgnoreCase(action);
+        String  newStatus  = isApprove ? "approved" : "rejected";
 
-        if (isApprove) {
-            EmployeeLeaveBalanceEntity balanceRecord = getOrCreateBalanceRecord(
-                    req.getEmpId(), req.getLeaveType(),
-                    req.getFromDate().getYear(),
-                    req.getEmpType(), req.getDepartment());
+        if (newStatus.equals(currentStatus)) {
+            throw new RuntimeException("Request is already '" + currentStatus + "'.");
+        }
 
+//        EmployeeLeaveBalanceEntity balanceRecord = getOrCreateBalanceRecord(
+//                req.getEmpId(), req.getLeaveType(),
+//                req.getFromDate().getYear(),
+//                req.getEmpType(), req.getDepartment());
+
+        EmployeeLeaveBalanceEntity balanceRecord = getOrCreateBalanceRecord(
+                req.getEmpId(), req.getLeaveType(),
+                req.getFromDate().getYear());
+
+        if ("approved".equals(currentStatus) && "rejected".equals(newStatus)) {
+            // Cancelling an approved leave -> give the days back
+            reverseLeaveBalance(balanceRecord, req.getNumberOfDays());
+        } else if (!"approved".equals(currentStatus) && isApprove) {
+            // pending -> approved, or rejected -> approved -> deduct days
             if (balanceRecord.getRemaining() < req.getNumberOfDays()) {
                 String warn = "[Balance Warning: only " + balanceRecord.getRemaining()
                         + " day(s) remaining, approved " + req.getNumberOfDays() + "]";
                 remarks = (remarks != null && !remarks.isBlank())
                         ? remarks + " " + warn : warn;
             }
-
             updateLeaveBalance(balanceRecord, req.getNumberOfDays());
         }
+        // pending -> rejected: no balance was ever deducted, nothing to adjust
 
-        req.setStatus(isApprove ? "approved" : "rejected");
+        req.setStatus(newStatus);
         req.setActionBy(actionBy != null && !actionBy.isBlank() ? actionBy : "HR Admin");
         req.setActionDate(LocalDate.now());
         req.setRemarks(remarks);
@@ -296,7 +323,6 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
         LeaveRequestEntity saved = leaveRequestRepository.save(req);
         return buildEnrichedDTO(saved, saved.getFromDate().getYear());
     }
-
 
     // ─────────────────────────────────────────────────────────────────
     // BALANCE FOR ONE EMPLOYEE
@@ -325,8 +351,11 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
         int totalAllot = 0, totalUsed = 0;
 
         for (LeaveTypeEntity lt : applicableTypes) {
+//            EmployeeLeaveBalanceEntity b = getOrCreateBalanceRecord(
+//                    empId, lt.getName(), year, empType, dept);
+
             EmployeeLeaveBalanceEntity b = getOrCreateBalanceRecord(
-                    empId, lt.getName(), year, empType, dept);
+                    empId, lt.getName(), year);
 
             balances.put(lt.getName(),
                     new LeaveBalanceDetailDTO(b.getAllotted(), b.getUsed()));
@@ -422,17 +451,58 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
     // ─────────────────────────────────────────────────────────────────
     // HELPER 1 — enriched DTO banao (balance from DB)
     // ─────────────────────────────────────────────────────────────────
+//    private LeaveRequestResponseDTO buildEnrichedDTO(LeaveRequestEntity r, int year) {
+//
+////        EmployeeLeaveBalanceEntity b = getOrCreateBalanceRecord(
+////                r.getEmpId(), r.getLeaveType(), year,
+////                r.getEmpType(), r.getDepartment());
+//
+//
+//        EmployeeLeaveBalanceEntity b = getOrCreateBalanceRecord(
+//                r.getEmpId(), r.getLeaveType(), year);
+//
+//        LeaveRequestResponseDTO dto = LeaveRequestResponseDTO.from(r, b.getRemaining());
+//        dto.setBalanceAllotted(b.getAllotted());
+//        dto.setBalanceUsed(b.getUsed());
+//        dto.setLowBalance(b.getRemaining() < r.getNumberOfDays());
+//        return dto;
+//    }
+
     private LeaveRequestResponseDTO buildEnrichedDTO(LeaveRequestEntity r, int year) {
 
         EmployeeLeaveBalanceEntity b = getOrCreateBalanceRecord(
-                r.getEmpId(), r.getLeaveType(), year,
-                r.getEmpType(), r.getDepartment());
+                r.getEmpId(), r.getLeaveType(), year);
 
         LeaveRequestResponseDTO dto = LeaveRequestResponseDTO.from(r, b.getRemaining());
         dto.setBalanceAllotted(b.getAllotted());
         dto.setBalanceUsed(b.getUsed());
         dto.setLowBalance(b.getRemaining() < r.getNumberOfDays());
+
+        // For PENDING requests, the "Insufficient balance" warning is advisory
+        // and depends on current balance — recompute it fresh instead of trusting
+        // text frozen at submission time (rules/employee type may have changed since).
+        // Approved/Rejected remarks are historical audit trail and stay untouched.
+        if ("pending".equals(r.getStatus())) {
+            String humanRemark = stripStaleWarning(r.getRemarks());
+            if (b.getRemaining() < r.getNumberOfDays()) {
+                String warn = "WARNING: Insufficient balance — remaining=" + b.getRemaining()
+                        + ", requested=" + r.getNumberOfDays();
+                dto.setRemarks(humanRemark != null && !humanRemark.isBlank()
+                        ? humanRemark + " " + warn : warn);
+            } else {
+                dto.setRemarks(humanRemark);
+            }
+        }
+
         return dto;
+    }
+
+    // Removes any previously-embedded stale "WARNING: Insufficient balance..." text
+    // from a remarks string, keeping only what the human actually typed.
+    private String stripStaleWarning(String remarks) {
+        if (remarks == null) return null;
+        String cleaned = remarks.replaceAll("WARNING: Insufficient balance.*?requested=\\d+", "").trim();
+        return cleaned.isBlank() ? null : cleaned;
     }
 
     // ─────────────────────────────────────────────────────────────────
@@ -442,38 +512,84 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
     //    aur somehow yahan pahunch gaya (direct API call) toh
     //    0 allotted record return karo — block nahi karte history ke liye
     // ─────────────────────────────────────────────────────────────────
+//    private EmployeeLeaveBalanceEntity getOrCreateBalanceRecord(
+//            String empId, String leaveType, int year,
+//            String empType, String dept) {
+//
+//        return leaveBalanceRepository
+//                .findByEmpIdAndLeaveTypeAndYear(empId, leaveType, year)
+//                .orElseGet(() -> {
+//                    // Defensive: blank empType/dept from old data → safe fallback
+//                    String safeEmpType = (empType != null && !empType.isBlank())
+//                            ? empType.trim() : "Full-Time";
+//                    String safeDept    = (dept != null && !dept.isBlank())
+//                            ? dept.trim() : "All";
+//
+//                    boolean isMaternity = MATERNITY_LEAVE.equalsIgnoreCase(leaveType);
+//                    boolean applicable  = !isMaternity ||
+//                            leaveTypeRepository.findApplicableLeaveTypes(empId)
+//                                    .stream()
+//                                    .anyMatch(lt -> lt.getName().equalsIgnoreCase(leaveType));
+//
+//                    int allotted = applicable
+//                            ? leaveRuleService.getAllottedDays(safeEmpType, safeDept, leaveType)
+//                            : 0;
+//
+//                    EmployeeLeaveBalanceEntity b = new EmployeeLeaveBalanceEntity();
+//                    b.setEmpId(empId);
+//                    b.setLeaveType(leaveType);
+//                    b.setYear(year);
+//                    b.setAllotted(allotted);
+//                    b.setUsed(0);
+//                    b.setRemaining(allotted);
+//                    return leaveBalanceRepository.save(b);
+//                });
+//    }
+
     private EmployeeLeaveBalanceEntity getOrCreateBalanceRecord(
-            String empId, String leaveType, int year,
-            String empType, String dept) {
+            String empId, String leaveType, int year) {
 
-        return leaveBalanceRepository
-                .findByEmpIdAndLeaveTypeAndYear(empId, leaveType, year)
-                .orElseGet(() -> {
-                    // Defensive: blank empType/dept from old data → safe fallback
-                    String safeEmpType = (empType != null && !empType.isBlank())
-                            ? empType.trim() : "Full-Time";
-                    String safeDept    = (dept != null && !dept.isBlank())
-                            ? dept.trim() : "All";
+        // ALWAYS resolve empType/dept from the Employee table — the single
+        // source of truth. Never trust a snapshot stored on a leave request;
+        // those go stale the moment HR changes an employee's type/department.
+        EmployeeEntity emp = employeeRepository.findByEmployeeId(empId)
+                .orElseThrow(() -> new RuntimeException("Employee '" + empId + "' not found."));
 
-                    boolean isMaternity = MATERNITY_LEAVE.equalsIgnoreCase(leaveType);
-                    boolean applicable  = !isMaternity ||
-                            leaveTypeRepository.findApplicableLeaveTypes(empId)
-                                    .stream()
-                                    .anyMatch(lt -> lt.getName().equalsIgnoreCase(leaveType));
+        String safeEmpType = (emp.getEmploymentType() != null && !emp.getEmploymentType().isBlank())
+                ? emp.getEmploymentType().trim() : "Full-Time";
+        String safeDept = (emp.getDepartment() != null && !emp.getDepartment().isBlank())
+                ? emp.getDepartment().trim() : "All";
 
-                    int allotted = applicable
-                            ? leaveRuleService.getAllottedDays(safeEmpType, safeDept, leaveType)
-                            : 0;
+        boolean isMaternity = MATERNITY_LEAVE.equalsIgnoreCase(leaveType);
+        boolean applicable  = !isMaternity ||
+                leaveTypeRepository.findApplicableLeaveTypes(empId)
+                        .stream()
+                        .anyMatch(lt -> lt.getName().equalsIgnoreCase(leaveType));
 
-                    EmployeeLeaveBalanceEntity b = new EmployeeLeaveBalanceEntity();
-                    b.setEmpId(empId);
-                    b.setLeaveType(leaveType);
-                    b.setYear(year);
-                    b.setAllotted(allotted);
-                    b.setUsed(0);
-                    b.setRemaining(allotted);
-                    return leaveBalanceRepository.save(b);
-                });
+        int currentRuleAllotment = applicable
+                ? leaveRuleService.getAllottedDays(safeEmpType, safeDept, leaveType)
+                : 0;
+
+        Optional<EmployeeLeaveBalanceEntity> existing =
+                leaveBalanceRepository.findByEmpIdAndLeaveTypeAndYear(empId, leaveType, year);
+
+        if (existing.isPresent()) {
+            EmployeeLeaveBalanceEntity b = existing.get();
+            if (b.getAllotted() != currentRuleAllotment) {
+                b.setAllotted(currentRuleAllotment);
+                b = leaveBalanceRepository.save(b);
+            }
+            return b;
+        }
+
+        EmployeeLeaveBalanceEntity b = new EmployeeLeaveBalanceEntity();
+        b.setEmpId(empId);
+        b.setLeaveType(leaveType);
+        b.setYear(year);
+        b.setAllotted(currentRuleAllotment);
+        b.setUsed(0);
+        b.setRemaining(currentRuleAllotment);
+        return leaveBalanceRepository.save(b);
     }
 
 
@@ -482,6 +598,16 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
     // ─────────────────────────────────────────────────────────────────
     private void updateLeaveBalance(EmployeeLeaveBalanceEntity balance, int daysApproved) {
         balance.setUsed(balance.getUsed() + daysApproved);
+        // remaining @PreUpdate mein auto-calculate hoga
+        leaveBalanceRepository.save(balance);
+    }
+
+    // ─────────────────────────────────────────────────────────────────
+    // HELPER 4 — balance restore karo jab approved leave cancel/reject ho
+    // ─────────────────────────────────────────────────────────────────
+    private void reverseLeaveBalance(EmployeeLeaveBalanceEntity balance, int daysToRestore) {
+        int newUsed = Math.max(0, balance.getUsed() - daysToRestore);
+        balance.setUsed(newUsed);
         // remaining @PreUpdate mein auto-calculate hoga
         leaveBalanceRepository.save(balance);
     }

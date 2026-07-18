@@ -85,6 +85,8 @@ public class EmployeeRequestDTO {
     private MultipartFile offerLetter;
     private MultipartFile profilePhoto;
 
+    private String status;
+
     // Constructor
     public EmployeeRequestDTO() {}
 
@@ -281,5 +283,21 @@ public class EmployeeRequestDTO {
 
     public void setProfileStatus(String profileStatus) {
         ProfileStatus = profileStatus;
+    }
+
+    public Boolean getPhysicallyChallenged() {
+        return isPhysicallyChallenged;
+    }
+
+    public void setPhysicallyChallenged(Boolean physicallyChallenged) {
+        isPhysicallyChallenged = physicallyChallenged;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
