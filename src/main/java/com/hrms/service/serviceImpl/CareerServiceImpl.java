@@ -18,7 +18,7 @@ public class CareerServiceImpl implements CareerService {
     private JobOpeningRepository jobOpeningRepository;
 
     @Autowired
-    private CareerRepository.ApplicationRepository applicationRepository;
+    private ApplicationRepository applicationRepository;
 
     @Autowired
     private ReferralRepository referralRepository;
