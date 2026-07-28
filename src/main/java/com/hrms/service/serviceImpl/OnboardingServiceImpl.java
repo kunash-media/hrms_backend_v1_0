@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class OnboardingServiceImpl implements OnboardingService {
@@ -59,9 +60,9 @@ public class OnboardingServiceImpl implements OnboardingService {
             throw new RuntimeException("Onboarding already exists for employee: " + dto.getEmployeePrimeId());
         }
 
-        // Generate Onboarding ID
-        long count = onboardingRepository.count() + 1;
-        String onboardingId = String.format("ONB%03d", count);
+        // Generate Onboarding ID (based on max existing suffix, not row count —
+        // count() breaks after cleanup-stale deletes rows, causing ID collisions)
+        String onboardingId = generateNextOnboardingId();
 
         OnboardingEntity onboarding = new OnboardingEntity();
 
@@ -118,6 +119,25 @@ public class OnboardingServiceImpl implements OnboardingService {
 
         OnboardingEntity saved = onboardingRepository.save(onboarding);
         return convertToResponseDTO(saved, employee);
+    }
+
+    /**
+     * Generates the next onboardingId as ONB### based on the highest numeric
+     * suffix currently persisted — NOT onboardingRepository.count(). Using
+     * count() breaks as soon as any rows are deleted (e.g. via cleanup-stale),
+     * because count() drops but old IDs remain, causing duplicate-key collisions
+     * on every subsequent insert within the same batch (since count() also
+     * doesn't advance on a rolled-back failed insert).
+     */
+    private String generateNextOnboardingId() {
+        int max = onboardingRepository.findAll().stream()
+                .map(OnboardingEntity::getOnboardingId)
+                .filter(java.util.Objects::nonNull)
+                .filter(id -> id.matches("ONB\\d+"))
+                .mapToInt(id -> Integer.parseInt(id.substring(3)))
+                .max()
+                .orElse(0);
+        return String.format("ONB%03d", max + 1);
     }
 
     @Override
