@@ -79,8 +79,6 @@ public class EmployeeController {
     }
 
 
-
-
     // UPDATE Employee
     @PutMapping(value = "/update-employee/{employeePrimeId}", consumes = {"multipart/form-data"})
     public ResponseEntity<Map<String, Object>> updateEmployee(
